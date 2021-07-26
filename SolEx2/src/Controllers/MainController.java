@@ -64,7 +64,7 @@ public class MainController extends ControllerWrapper{
     }	
     
     public void signIn(ActionEvent e) throws Exception {
-    	AnchorPane loginForm = FXMLLoader.load(getClass().getResource(("SignIn.fxml")));
+    	AnchorPane loginForm = FXMLLoader.load(getClass().getResource(("/View/SignIn.fxml")));
         mainScreen.getChildren().setAll(loginForm);
     	/*FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
 		AnchorPane pane = loader.load();
