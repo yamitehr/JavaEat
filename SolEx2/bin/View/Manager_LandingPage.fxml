@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManagerLandingPageController">
+   <children>
+      <Button fx:id="customersBtn" layoutX="80.0" layoutY="85.0" mnemonicParsing="false" onAction="#moveToManagerCustomerScene" prefHeight="26.0" prefWidth="143.0" text="Customers" />
+      <Label layoutX="74.0" layoutY="40.0" text="Welcome back manager ..." />
+      <Button layoutX="292.0" layoutY="85.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="143.0" text="Cooks" />
+      <Button layoutX="80.0" layoutY="142.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="143.0" text="Delivery People" />
+      <Button layoutX="292.0" layoutY="142.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="143.0" text="Deliveries" />
+      <Button layoutX="80.0" layoutY="200.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="143.0" text="Dishes" />
+      <Button layoutX="292.0" layoutY="200.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="143.0" text="Components" />
+   </children>
+</AnchorPane>
