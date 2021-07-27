@@ -7,8 +7,10 @@ import java.util.Date;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import Exceptions.InvalidPersonInputException;
+import Model.Cook;
 import Model.Customer;
 import Model.Restaurant;
+import Utils.Expertise;
 import Utils.Gender;
 import Utils.Neighberhood;
 import javafx.collections.FXCollections;
@@ -24,10 +26,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class AddCustomerController extends ControllerWrapper{
+public class AddCookController extends ControllerWrapper{
 	@FXML
-	private ComboBox<String> neighberhoodsBox;
-
+	private ComboBox<String> expertiseBox;
 	@FXML
 	private TextField first_Name;
 	@FXML
@@ -37,9 +38,7 @@ public class AddCustomerController extends ControllerWrapper{
 	@FXML
 	private DatePicker date;
 	@FXML
-	private CheckBox isLactose;
-	@FXML
-	private CheckBox isGluten;
+	private CheckBox isChef;
 	@FXML
 	private Text messageToUser;
 	
@@ -50,23 +49,23 @@ public class AddCustomerController extends ControllerWrapper{
     }
 	
 	private void init() {
-		neighberhoodsBox.getItems().clear();
+		expertiseBox.getItems().clear();
 		
-		ArrayList<String> neighberhoodNames = new ArrayList<String>();
+		ArrayList<String> expertiseNames = new ArrayList<String>();
 		
-		for(Neighberhood n : Neighberhood.values()) {
-			neighberhoodNames.add(n.toString());
+		for(Expertise expert : Expertise.values()) {
+			expertiseNames.add(expert.toString());
 		}
 		
-		neighberhoodsBox.getItems().addAll(FXCollections.observableArrayList(neighberhoodNames));
+		expertiseBox.getItems().addAll(FXCollections.observableArrayList(expertiseNames));
 	}
 	
-	public void moveToManagerCustomerScene(ActionEvent e) {
-		moveToScene("/View/Manager_Customer.fxml", (Stage)first_Name.getScene().getWindow());
+	public void moveToManagerCooksScene(ActionEvent e) {
+		moveToScene("/View/Manager_Cooks.fxml", (Stage)first_Name.getScene().getWindow());
 	}
 	
-	//Adds the customer to the restaurant
-	public void addCustomer(ActionEvent e) {
+	//Adds the cook to the restaurant
+	public void addCook(ActionEvent e) {
 		
 		try {
 			
@@ -105,35 +104,32 @@ public class AddCustomerController extends ControllerWrapper{
 			}
 			
 			//get Neighborhood
-			Neighberhood neighberhood = null;
-	
-			for(Neighberhood n : Neighberhood.values()) {
-				if(n.name().equals(neighberhoodsBox.getValue())) {
-					neighberhood = n;
+			Expertise expertise = null;
+			for(Expertise expert : Expertise.values()) {
+				if(expert.name().equals(expertiseBox.getValue())) {
+					expertise = expert;
 				}
 			}
-			if(neighberhood == null) {
+			if(expertise == null) {
 				throw new InvalidPersonInputException("Please select Neighborhood");
 			}
 	
-			boolean isSensitiveToLactose = isLactose.isSelected();
-			boolean isSensitiveToGluten = isGluten.isSelected();
+			boolean isChefChoice = isChef.isSelected();
 			///
 			
-			Customer newCustomer = new Customer(firstName, lastName, birthDate, gender, 
-											neighberhood, isSensitiveToLactose, isSensitiveToGluten, "", "");
+			Cook newCook = new Cook(firstName, lastName, birthDate, gender, 
+											expertise, isChefChoice);
 			
 			//add customer to the restaurant
-			if(Restaurant.getInstance().addCustomer(newCustomer)) {
+			if(Restaurant.getInstance().addCook(newCook)) {
 				messageToUser.setFill(Color.BLUE);
-				messageToUser.setText("Customer added successfully");
+				messageToUser.setText("Cook added successfully");
 				first_Name.clear();
 				last_Name.clear();
 				Gender_group.getSelectedToggle().setSelected(false);
-				neighberhoodsBox.getSelectionModel().clearSelection();
+				expertiseBox.getSelectionModel().clearSelection();
 				date.setValue(null);
-				isLactose.setSelected(false);
-				isGluten.setSelected(false);
+				isChef.setSelected(false);
 			}else {
 				messageToUser.setFill(Color.RED);
 				messageToUser.setText("an error has accured please try again");

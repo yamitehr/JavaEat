@@ -311,6 +311,11 @@ public class Restaurant {
 	public boolean removeCustomer(Customer cust) {
 		if(cust == null || !getCustomers().containsKey(cust.getId()))
 			return false;
+		if(blackList.contains(cust)) {
+			if(!blackList.remove(cust)){
+				return false;
+			}
+		}
 		return getCustomers().remove(cust.getId())!=null;
 	}
 

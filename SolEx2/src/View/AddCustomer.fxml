@@ -33,5 +33,6 @@
       <Button layoutX="74.0" layoutY="319.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" text="Add Customer" />
       <Button layoutX="74.0" layoutY="21.0" mnemonicParsing="false" onAction="#moveToManagerCustomerScene" text="Back" />
       <Text fx:id="messageToUser" layoutX="72.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+      <RadioButton layoutX="380.0" layoutY="191.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group" />
    </children>
 </AnchorPane>

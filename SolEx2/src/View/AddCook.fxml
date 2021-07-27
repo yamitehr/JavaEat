@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCookController">
    <children>
       <Label layoutX="72.0" layoutY="66.0" text="First Name" />
       <Label layoutX="72.0" layoutY="104.0" text="Last Name" />
@@ -20,18 +20,18 @@
       <RadioButton layoutX="220.0" layoutY="191.0" mnemonicParsing="false" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="Gender_group" />
-         </toggleGroup></RadioButton>
+         </toggleGroup>
+      </RadioButton>
       <TextField fx:id="first_Name" layoutX="220.0" layoutY="62.0" />
       <TextField fx:id="last_Name" layoutX="220.0" layoutY="100.0" />
       <DatePicker fx:id="date" layoutX="220.0" layoutY="142.0" />
       <RadioButton layoutX="300.0" layoutY="191.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group" />
-      <Label layoutX="72.0" layoutY="227.0" text="Neighberhood" />
-      <Label layoutX="72.0" layoutY="259.0" text="Sensitivities" />
-      <CheckBox fx:id="isGluten" layoutX="219.0" layoutY="259.0" mnemonicParsing="false" text="Gluten" />
-      <CheckBox fx:id="isLactose" layoutX="300.0" layoutY="259.0" mnemonicParsing="false" text="Lactose" />
-      <ComboBox fx:id="neighberhoodsBox" layoutX="219.0" layoutY="223.0" prefWidth="150.0" />
-      <Button layoutX="74.0" layoutY="319.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" text="Add Customer" />
-      <Button layoutX="74.0" layoutY="21.0" mnemonicParsing="false" onAction="#moveToManagerCustomerScene" text="Back" />
+      <Label layoutX="72.0" layoutY="227.0" text="Expertise" />
+      <Label layoutX="72.0" layoutY="259.0" text="is Chef" />
+      <CheckBox fx:id="isChef" layoutX="219.0" layoutY="259.0" mnemonicParsing="false" text="Yes" />
+      <ComboBox fx:id="expertiseBox" layoutX="219.0" layoutY="223.0" prefWidth="150.0" />
+      <Button layoutX="74.0" layoutY="319.0" mnemonicParsing="false" onAction="#addCook" prefHeight="26.0" prefWidth="109.0" text="Add Cook" />
+      <Button layoutX="74.0" layoutY="21.0" mnemonicParsing="false" onAction="#moveToManagerCooksScene" text="Back" />
       <Text fx:id="messageToUser" layoutX="72.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
       <RadioButton layoutX="380.0" layoutY="191.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group" />
    </children>
