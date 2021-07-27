@@ -11,11 +11,17 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	@FXML
 	private Button cooksBtn;
 	
+	@FXML
+	private Button componentsBtn;
+	
 	public void moveToManagerCustomerScene(ActionEvent e) {
 		moveToScene("/View/Manager_Customer.fxml", (Stage)customersBtn.getScene().getWindow());
 	}
 	
 	public void moveToManagerCooksScene(ActionEvent e) {
 		moveToScene("/View/Manager_Cooks.fxml", (Stage)cooksBtn.getScene().getWindow());
+	}
+	public void moveToManagerComponentsScene(ActionEvent e) {
+		moveToScene("/View/Manager_Components.fxml", (Stage)componentsBtn.getScene().getWindow());
 	}
 }
