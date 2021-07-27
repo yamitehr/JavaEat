@@ -92,7 +92,7 @@ public class SignInController {
 		alert.setHeaderText("Welcome " + firstName.getText() + ". \n Please log in to continue.");
 		alert.showAndWait();
 		
-		AnchorPane loginForm = FXMLLoader.load(getClass().getResource(("Login.fxml")));
+		AnchorPane loginForm = FXMLLoader.load(getClass().getResource(("/View/Login.fxml")));
         mainScreen.getChildren().setAll(loginForm);
 		/*FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
 		AnchorPane pane = loader.load();

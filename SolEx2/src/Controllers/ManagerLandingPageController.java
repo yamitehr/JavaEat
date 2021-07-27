@@ -9,7 +9,14 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	@FXML
 	private Button customersBtn;
 	
+	@FXML
+	private Button componentsBtn;
+	
 	public void moveToManagerCustomerScene(ActionEvent e) {
 		moveToScene("/View/Manager_Customer.fxml", (Stage)customersBtn.getScene().getWindow());
+	}
+	
+	public void moveToManagerComponentsScene(ActionEvent e) {
+		moveToScene("/View/Manager_Components.fxml", (Stage)componentsBtn.getScene().getWindow());
 	}
 }
