@@ -3,6 +3,7 @@ package Controllers;
 import java.util.stream.Collectors;
 
 import Model.Component;
+import Model.Customer;
 import Model.Restaurant;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -75,20 +76,36 @@ public class ManagerComponentsController extends ControllerWrapper {
 	
 	public void updateComponentDetailsFields() {
 		Component selectedComponent = allComponents.getSelectionModel().getSelectedItem();
+		if(selectedComponent != null) {
+			componentNameField.setText(selectedComponent.getComponentName());
+			priceField.setText(String.valueOf(selectedComponent.getPrice()));
 		
-		componentNameField.setText(selectedComponent.getComponentName());
-		priceField.setText(String.valueOf(selectedComponent.getPrice()));
-		
-		String sensitivities = "";
-		if (selectedComponent.isHasGluten()) {
-			sensitivities += "Gluten";
-			if (selectedComponent.isHasLactose()) {
-				sensitivities += ", Lactose";
+			String sensitivities = "";
+			if (selectedComponent.isHasGluten()) {
+				sensitivities += "Gluten";
+				if (selectedComponent.isHasLactose()) {
+					sensitivities += ", Lactose";
+				}
+			} else if (selectedComponent.isHasLactose()) {
+				sensitivities += "Lactose";
 			}
-		} else if (selectedComponent.isHasLactose()) {
-			sensitivities += "Lactose";
+			sensitivitiesField.setText(sensitivities);
+		} else if(selectedComponent == null) {
+			componentNameField.setText("");
+			priceField.setText("");
+			sensitivitiesField.setText("");
+		}	
+	}
+	
+	public void removeComponent(ActionEvent e) {
+		Component selectedComponent = allComponents.getSelectionModel().getSelectedItem();
+		if(selectedComponent !=  null) {
+			Restaurant.getInstance().removeComponent(selectedComponent);
+			//update the list after removal
+			allComponents.getItems().clear();
+			allComponents.getItems().addAll(FXCollections.observableArrayList(
+			Restaurant.getInstance().getComponenets().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		}
-		sensitivitiesField.setText(sensitivities);
 	}
 
 

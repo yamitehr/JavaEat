@@ -14,6 +14,9 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	@FXML
 	private Button componentsBtn;
 	
+	@FXML
+	private Button dishesBtn;
+	
 	public void moveToManagerCustomerScene(ActionEvent e) {
 		moveToScene("/View/Manager_Customer.fxml", (Stage)customersBtn.getScene().getWindow());
 	}
@@ -23,5 +26,9 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	}
 	public void moveToManagerComponentsScene(ActionEvent e) {
 		moveToScene("/View/Manager_Components.fxml", (Stage)componentsBtn.getScene().getWindow());
+	}
+	
+	public void moveToManagerDishesScene(ActionEvent e) {
+		moveToScene("/View/Manager_Dish.fxml", (Stage)dishesBtn.getScene().getWindow());
 	}
 }
