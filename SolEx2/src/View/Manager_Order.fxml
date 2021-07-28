@@ -15,7 +15,7 @@
             <ListView fx:id="allOrders" layoutX="25.0" layoutY="73.0" prefHeight="269.0" prefWidth="174.0" />
             <Label layoutX="25.0" layoutY="46.0" text="List of orders" />
             <Button fx:id="addOrderBtn" layoutX="25.0" layoutY="348.0" mnemonicParsing="false" onAction="#MoveToAddDishScene" text="Add new order" />
-            <Button layoutX="131.0" layoutY="348.0" mnemonicParsing="false" onAction="#removeDish" text="Remove" />
+            <Button layoutX="131.0" layoutY="348.0" mnemonicParsing="false" onAction="#removeOrder" text="Remove" />
             <Button fx:id="backBtn" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#moveToManagerLandingPageScene" text="Back" />
             <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Details" />
             <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:" />

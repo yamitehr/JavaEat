@@ -212,10 +212,8 @@ public class Restaurant implements Serializable{
 			}
 			return getOrders().put(order.getId(), order) == null;
 		}catch(SensitiveException e) {
-			Utils.MyFileLogWriter.println(e.getMessage());
 			return false;
 		}catch(IllegalCustomerException e) {
-			Utils.MyFileLogWriter.println(e.getMessage());
 			return false;
 		}
 	}
@@ -374,7 +372,8 @@ public class Restaurant implements Serializable{
 			}
 			else {
 				ExpressDelivery ed = (ExpressDelivery) order.getDelivery();
-				ed.setOrder(null);
+				if(ed != null)
+					ed.setOrder(null);
 				return true;
 			}
 		}

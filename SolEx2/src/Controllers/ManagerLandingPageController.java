@@ -20,6 +20,8 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	private Button deliveryPersonBtn;
 	@FXML
 	private Button deliveryAreaBtn;
+	@FXML
+	private Button deliveriesBtn;
 	
 	@FXML
 	private Button ordersBtn;
@@ -48,5 +50,8 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	
 	public void moveToManagerOrdersScene(ActionEvent e) {
 		moveToScene("/View/Manager_Order.fxml", (Stage)ordersBtn.getScene().getWindow());
+	}
+	public void moveToManagerDeliveriesScene(ActionEvent e) {
+		moveToScene("/View/Manager_Delivery.fxml", (Stage)deliveriesBtn.getScene().getWindow());
 	}
 }

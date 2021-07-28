@@ -98,9 +98,9 @@ public class ManagerDishController extends ControllerWrapper {
 	}
 	
 	public void removeDish(ActionEvent e) {
-		Dish selectedComponent = allDishes.getSelectionModel().getSelectedItem();
-		if(selectedComponent !=  null) {
-			Restaurant.getInstance().removeDish(selectedComponent);
+		Dish selectedDish = allDishes.getSelectionModel().getSelectedItem();
+		if(selectedDish !=  null) {
+			Restaurant.getInstance().removeDish(selectedDish);
 			//update the list after removal
 			allDishes.getItems().clear();
 			allDishes.getItems().addAll(FXCollections.observableArrayList(

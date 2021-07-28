@@ -95,5 +95,5 @@ public class AddDishController extends ControllerWrapper {
 			messageToUser.setText("an error has accured please try again");
 		}
 	}
-	}
+}
 

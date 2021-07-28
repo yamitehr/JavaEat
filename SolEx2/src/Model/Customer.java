@@ -86,7 +86,6 @@ public class Customer extends Person{
 
 	@Override
 	public String toString() {
-		return super.toString()+" Customer [isSensitiveToLactose=" + isSensitiveToLactose + ", isSensitiveToGluten=" + isSensitiveToGluten
-				+ "]";
+		return super.toString();
 	}
 }
