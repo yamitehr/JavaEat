@@ -79,13 +79,25 @@ public class ManagerOrdersController extends ControllerWrapper {
 		if(selectedOrder != null) {
 			customerField.setText(selectedOrder.getCustomer().toString());
 			dishesField.setText(selectedOrder.getDishes().toString());
-			deliveryField.setText(selectedOrder.getDelivery().toString());
+			if(selectedOrder.getDelivery() != null)
+				deliveryField.setText(selectedOrder.getDelivery().toString());
 			
 		//clean the text fields if there is no selection
 		} else if(selectedOrder == null) {
 			customerField.setText("");
 			dishesField.setText("");
 			deliveryField.setText("");
+		}
+	}
+	
+	public void removeOrder(ActionEvent e) {
+		Order selectedOrder = allOrders.getSelectionModel().getSelectedItem();
+		if(selectedOrder !=  null) {
+			Restaurant.getInstance().removeOrder(selectedOrder);
+			//update the list after removal
+			allOrders.getItems().clear();
+			allOrders.getItems().addAll(FXCollections.observableArrayList(
+			Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
 		}
 	}
 }
