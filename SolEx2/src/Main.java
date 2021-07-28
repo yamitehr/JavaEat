@@ -17,7 +17,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/View/decoration.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Login");
+			primaryStage.setTitle("JavaEat");
 			primaryStage.setResizable(false);
 			primaryStage.centerOnScreen();
 			primaryStage.show();

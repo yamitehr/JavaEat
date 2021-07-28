@@ -119,7 +119,7 @@ public class Dish {
 			price += c.getPrice();
 		}
 		price = price*3;
-		MyFileLogWriter.println(this+" Price is "+price);
+		//MyFileLogWriter.println(this+" Price is "+price);
 		return price;
 	}
 	

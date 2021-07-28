@@ -2,6 +2,7 @@ package Controllers;
 
 import java.util.stream.Collectors;
 
+import Model.Component;
 import Model.Dish;
 import Model.Restaurant;
 import javafx.beans.value.ChangeListener;
@@ -95,5 +96,16 @@ public class ManagerDishController extends ControllerWrapper {
 			priceField.setText("");
 		}
 	}
-
+	
+	public void removeDish(ActionEvent e) {
+		Dish selectedComponent = allDishes.getSelectionModel().getSelectedItem();
+		if(selectedComponent !=  null) {
+			Restaurant.getInstance().removeDish(selectedComponent);
+			//update the list after removal
+			allDishes.getItems().clear();
+			allDishes.getItems().addAll(FXCollections.observableArrayList(
+			Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
+		}
+	}
 }
+

@@ -7,15 +7,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controllers.ManagerDishController">
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManagerDishController">
    <children>
       <Pane layoutX="3.0" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0">
          <children>
             <ListView fx:id="allDishes" layoutX="25.0" layoutY="73.0" prefHeight="269.0" prefWidth="174.0" />
             <Label layoutX="25.0" layoutY="46.0" text="List of dishes" />
             <Button fx:id="addDishBtn" layoutX="25.0" layoutY="348.0" mnemonicParsing="false" onAction="#MoveToAddDishScene" text="Add new dish" />
-            <Button layoutX="131.0" layoutY="348.0" mnemonicParsing="false" text="Remove" />
+            <Button layoutX="131.0" layoutY="348.0" mnemonicParsing="false" onAction="#removeDish" text="Remove" />
             <Button fx:id="backBtn" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#moveToManagerLandingPageScene" text="Back" />
             <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dish Details" />
             <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dish Name:" />

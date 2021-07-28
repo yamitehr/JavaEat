@@ -97,7 +97,7 @@ public class Component implements Comparable<Component>{
 	
 	@Override
 	public String toString() {
-		return "Component [id=" + id + ", componentName=" + componentName + ", price=" + price + "]";
+		return componentName;
 	}
 
 

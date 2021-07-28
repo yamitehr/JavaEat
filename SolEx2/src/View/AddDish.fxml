@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controllers.AddDishController">
+   <children>
+      <AnchorPane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="72.0" layoutY="66.0" text="Dish Name" />
+            <TextField fx:id="dish_Name" layoutX="220.0" layoutY="62.0" />
+            <Label layoutX="72.0" layoutY="98.0" text="Dish Type" />
+            <Button layoutX="60.0" layoutY="315.0" mnemonicParsing="false" onAction="#addDish" prefHeight="26.0" prefWidth="109.0" text="Add Dish" />
+            <Button layoutX="74.0" layoutY="21.0" mnemonicParsing="false" onAction="#moveToManagerDishScene" text="Back" />
+            <Text fx:id="messageToUser" layoutX="60.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+            <Label layoutX="72.0" layoutY="131.0" text="Time To Make:" />
+            <TextField fx:id="timeToMake" layoutX="220.0" layoutY="127.0" />
+            <ComboBox fx:id="typesBox" layoutX="219.0" layoutY="94.0" prefWidth="150.0" />
+            <ListView fx:id="componentsList" layoutX="220.0" layoutY="159.0" prefHeight="156.0" prefWidth="150.0" />
+            <Label layoutX="72.0" layoutY="159.0" text="Components:" />
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
-

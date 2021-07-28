@@ -1,7 +1,6 @@
 package Controllers;
 
 import Exceptions.InvalidInputException;
-import Exceptions.InvalidPersonInputException;
 import Model.Component;
 import Model.Restaurant;
 import javafx.event.ActionEvent;
@@ -42,7 +41,7 @@ public class AddComponentController extends ControllerWrapper {
 				throw new InvalidInputException("Please fill component price");
 			}
 			else
-				priceOfComp = Double.valueOf(price.getText());
+				priceOfComp = Double.parseDouble(price.getText());
 			boolean isHasLactose = isLactose.isSelected();
 			boolean isHasGluten = isGluten.isSelected();
 			///		
@@ -52,6 +51,7 @@ public class AddComponentController extends ControllerWrapper {
 				messageToUser.setFill(Color.BLUE);
 				messageToUser.setText("Component added successfully");
 				component_Name.clear();
+				price.clear();
 				isLactose.setSelected(false);
 				isGluten.setSelected(false);
 			}else {
@@ -61,6 +61,9 @@ public class AddComponentController extends ControllerWrapper {
 		}catch(InvalidInputException inputE) {
 			messageToUser.setFill(Color.RED);
 			messageToUser.setText(inputE.getMessage());
+		}catch(NumberFormatException ne) {
+			messageToUser.setFill(Color.RED);
+			messageToUser.setText("Wrong Input!");
 		}catch(Exception ex) {
 			messageToUser.setFill(Color.RED);
 			messageToUser.setText("an error has accured please try again");

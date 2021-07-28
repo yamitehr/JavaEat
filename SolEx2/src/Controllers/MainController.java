@@ -4,13 +4,9 @@ import Model.Customer;
 import Model.Restaurant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainController extends ControllerWrapper{
@@ -35,7 +31,9 @@ public class MainController extends ControllerWrapper{
     private TextField txtPassword;
     
     @FXML
-	private AnchorPane mainScreen;
+	private Button loginBtn;
+    @FXML
+    private Button signInBtn;
     
     public void login(ActionEvent e) throws Exception {
     	boolean isExist = false;
@@ -50,13 +48,14 @@ public class MainController extends ControllerWrapper{
     		if(txtUserName.getText().equals(cust.getUserName()) &&
     				txtPassword.getText().equals(cust.getPassword())) {
     				nowLogin = cust;
-    				Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerMenu.fxml"));
-    				Scene scene = new Scene(root);
-    				Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-    				stage.setScene(scene);
-    				stage.centerOnScreen();
-    				stage.setTitle("Menu");
-    				stage.show();
+//    				Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerMenu.fxml"));
+//    				Scene scene = new Scene(root);
+//    				Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+//    				stage.setScene(scene);
+//    				stage.centerOnScreen();
+//    				stage.setTitle("Menu");
+//    				stage.show();
+    				moveToScene("/view/CustomerMenu.fxml", (Stage)loginBtn.getScene().getWindow());
     		}
     	}
     	if(!isExist)
@@ -64,8 +63,7 @@ public class MainController extends ControllerWrapper{
     }	
     
     public void signIn(ActionEvent e) throws Exception {
-    	AnchorPane loginForm = FXMLLoader.load(getClass().getResource(("/View/SignIn.fxml")));
-        mainScreen.getChildren().setAll(loginForm);
+        moveToScene("/View/SignIn.fxml", (Stage)signInBtn.getScene().getWindow());
     	/*FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
 		AnchorPane pane = loader.load();
 		mainScreen.getChildren().removeAll(mainScreen.getChildren());
