@@ -19,7 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ManagerCooksController extends ControllerWrapper {
+public class ManagerCookController extends ControllerWrapper {
 	@FXML
 	private Button addCookBtn;
 	@FXML

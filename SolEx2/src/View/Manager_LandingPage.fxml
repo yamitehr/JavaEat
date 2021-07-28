@@ -9,9 +9,10 @@
       <Button fx:id="customersBtn" layoutX="80.0" layoutY="85.0" mnemonicParsing="false" onAction="#moveToManagerCustomerScene" prefHeight="26.0" prefWidth="143.0" text="Customers" />
       <Label layoutX="74.0" layoutY="40.0" text="Welcome back manager ..." />
       <Button fx:id="cooksBtn" layoutX="292.0" layoutY="85.0" mnemonicParsing="false" onAction="#moveToManagerCooksScene" prefHeight="26.0" prefWidth="143.0" text="Cooks" />
-      <Button layoutX="80.0" layoutY="142.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="143.0" text="Delivery People" />
+      <Button fx:id="deliveryPersonBtn" layoutX="80.0" layoutY="142.0" mnemonicParsing="false" onAction="#moveToManagerDeliveryPersonScene" prefHeight="26.0" prefWidth="143.0" text="Delivery People" />
       <Button layoutX="292.0" layoutY="142.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="143.0" text="Deliveries" />
       <Button fx:id="dishesBtn" layoutX="80.0" layoutY="200.0" mnemonicParsing="false" onAction="#moveToManagerDishesScene" prefHeight="26.0" prefWidth="143.0" text="Dishes" />
       <Button fx:id="componentsBtn" layoutX="292.0" layoutY="200.0" mnemonicParsing="false" onAction="#moveToManagerComponentsScene" prefHeight="26.0" prefWidth="143.0" text="Components" />
+      <Button fx:id="deliveryAreaBtn" layoutX="80.0" layoutY="252.0" mnemonicParsing="false" onAction="#moveToManagerDeliveryAreaScene" prefHeight="26.0" prefWidth="143.0" text="Delivery Area" />
    </children>
 </AnchorPane>
