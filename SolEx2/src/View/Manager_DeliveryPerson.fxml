@@ -25,5 +25,6 @@
       <Text fx:id="genderField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
       <Text layoutX="207.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle:" wrappingWidth="70.36376953125" />
       <Text fx:id="vehicleField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+      <Text fx:id="deliveryAreaField" fill="#c88021" layoutX="300.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
    </children>
 </Pane>

@@ -81,15 +81,14 @@ public class ManagerDeliveryPersonController extends ControllerWrapper {
 	
 	public void updateCustomerDetailsFields() {
 		DeliveryPerson selectedDeliveryPerson = allDeliveryPeople.getSelectionModel().getSelectedItem();
-		// fill text fields with values about the selected customer on the list
+		// fill text fields with values about the selected delivery person on the list
 		if(selectedDeliveryPerson != null) {
 			firstNameField.setText(selectedDeliveryPerson.getFirstName());
 			lastNameField.setText(selectedDeliveryPerson.getLastName());
 			dobField.setText(selectedDeliveryPerson.getBirthDay().toString());
 			vehicleField.setText(selectedDeliveryPerson.getVehicle().name());
 			genderField.setText(selectedDeliveryPerson.getGender().name());
-			
-		//TODO: add delivery area
+			deliveryAreaField.setText(selectedDeliveryPerson.getArea().getAreaName());
 			
 		//clean the text fields if there is no selection
 		} else if(selectedDeliveryPerson == null) {

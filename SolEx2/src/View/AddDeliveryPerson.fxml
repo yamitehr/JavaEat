@@ -32,6 +32,6 @@
       <Text fx:id="messageToUser" layoutX="72.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
       <RadioButton layoutX="380.0" layoutY="191.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group" />
       <Label layoutX="72.0" layoutY="263.0" text="Delivery Area" />
-      <ComboBox fx:id="vehicleBox1" layoutX="219.0" layoutY="259.0" prefWidth="150.0" />
+      <ComboBox fx:id="deliveryAreaBox" layoutX="219.0" layoutY="259.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

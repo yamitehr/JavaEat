@@ -2,27 +2,23 @@ package Controllers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
-
-import javax.print.attribute.standard.DateTimeAtCompleted;
+import java.util.stream.Collectors;
 
 import Exceptions.InvalidPersonInputException;
 import Model.Cook;
-import Model.Customer;
 import Model.DeliveryArea;
 import Model.DeliveryPerson;
 import Model.Restaurant;
-import Utils.Expertise;
 import Utils.Gender;
 import Utils.Neighberhood;
 import Utils.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -42,7 +38,7 @@ public class AddDeliveryPersonController extends ControllerWrapper{
 	@FXML
 	private DatePicker date;
 	@FXML
-	private ComboBox<String> deliveryAreaBox;
+	private ComboBox<DeliveryArea> deliveryAreaBox;
 	@FXML
 	private Text messageToUser;
 	
@@ -53,6 +49,7 @@ public class AddDeliveryPersonController extends ControllerWrapper{
     }
 	
 	private void init() {
+		//add vehicle list
 		vehicleBox.getItems().clear();
 		
 		ArrayList<String> vehicleNames = new ArrayList<String>();
@@ -62,6 +59,25 @@ public class AddDeliveryPersonController extends ControllerWrapper{
 		}
 		
 		vehicleBox.getItems().addAll(FXCollections.observableArrayList(vehicleNames));
+		
+		//add areas list
+		//Set the cell factory to show the delivery areas
+			deliveryAreaBox.setCellFactory(param -> new ListCell<DeliveryArea>() {
+				    @Override
+				    protected void updateItem(DeliveryArea item, boolean empty) {
+				        super.updateItem(item, empty);
+
+				        if (empty || item == null) {
+				            setText(null);
+				        } else {
+				            setText(item.getAreaName() + " (id= " + item.getId() + ")");
+				        }
+				    }
+				});
+						
+			//Add all areas
+			deliveryAreaBox.getItems().addAll(FXCollections.observableArrayList(
+					Restaurant.getInstance().getAreas().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 	}
 
 	public void moveToManagerDeliveryPersonScene(ActionEvent e) {
@@ -115,21 +131,22 @@ public class AddDeliveryPersonController extends ControllerWrapper{
 				}
 			}
 			if(vehicle == null) {
-				throw new InvalidPersonInputException("Please select Neighborhood");
+				throw new InvalidPersonInputException("Please select Vehicle");
 			}
 	
-			//TODO: add delivery area
-			HashSet<Neighberhood> neighberhoods = new HashSet<Neighberhood>();
-			DeliveryArea deliveryArea = new DeliveryArea("areaName", neighberhoods, 5);
+			DeliveryArea selectedDeliveryArea = deliveryAreaBox.getSelectionModel().getSelectedItem();
+			if(selectedDeliveryArea == null) {
+				throw new InvalidPersonInputException("Please select Delivery Area");
+			}
 			
 			
 			///
 			
 			DeliveryPerson newDeliveryPerson = new DeliveryPerson(firstName, lastName, birthDate, gender, 
-											vehicle, deliveryArea);
+											vehicle, selectedDeliveryArea);
 			
 			//add deliveryPerson to the restaurant
-			if(Restaurant.getInstance().addDeliveryPerson(newDeliveryPerson, deliveryArea)) {
+			if(Restaurant.getInstance().addDeliveryPerson(newDeliveryPerson, selectedDeliveryArea)) {
 				messageToUser.setFill(Color.BLUE);
 				messageToUser.setText("Cook added successfully");
 				first_Name.clear();
