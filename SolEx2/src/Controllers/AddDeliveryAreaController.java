@@ -6,6 +6,8 @@ import java.util.HashSet;
 import Model.DeliveryArea;
 import Model.Restaurant;
 import Utils.Neighberhood;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -33,6 +35,7 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 	@FXML
     public void initialize() {
 		generateNeighborhoodGrid();
+		addDeliveryTimeEventListener();
     }
 	
 	private void generateNeighborhoodGrid() {
@@ -64,9 +67,20 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 		neighberhood_pane.getChildren().add(grid);
 	}
 	
-	//TODO: finish
 	public void addDeliveryTimeEventListener() {
-		deliveryTime.addEventHandler(null, null);
+		deliveryTime.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		    	if (newValue != "") {
+			    	try {
+						Integer.parseInt(newValue);
+					} catch(NumberFormatException nfe) {
+						deliveryTime.setText(oldValue);
+					}	
+		    	}
+		    }
+		});
 	}
 	
 	public void addDeliveryArea(ActionEvent e) {
