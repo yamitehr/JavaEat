@@ -14,5 +14,6 @@
       <Button fx:id="dishesBtn" layoutX="80.0" layoutY="200.0" mnemonicParsing="false" onAction="#moveToManagerDishesScene" prefHeight="26.0" prefWidth="143.0" text="Dishes" />
       <Button fx:id="componentsBtn" layoutX="292.0" layoutY="200.0" mnemonicParsing="false" onAction="#moveToManagerComponentsScene" prefHeight="26.0" prefWidth="143.0" text="Components" />
       <Button fx:id="deliveryAreaBtn" layoutX="80.0" layoutY="252.0" mnemonicParsing="false" onAction="#moveToManagerDeliveryAreaScene" prefHeight="26.0" prefWidth="143.0" text="Delivery Area" />
+      <Button fx:id="ordersBtn" layoutX="292.0" layoutY="253.0" mnemonicParsing="false" onAction="#moveToManagerOrdersScene" prefHeight="26.0" prefWidth="143.0" text="Orders" />
    </children>
 </AnchorPane>

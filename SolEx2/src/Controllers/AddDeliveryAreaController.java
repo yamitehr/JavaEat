@@ -32,10 +32,10 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 	
 	@FXML
     public void initialize() {
-		init();
+		generateNeighborhoodGrid();
     }
 	
-	private void init() {
+	private void generateNeighborhoodGrid() {
 		neighberhoodList = new ArrayList<Pair<CheckBox, Neighberhood>>();
 		GridPane grid = new GridPane();
 		grid.setBorder(new Border(new BorderStroke(Color.BLACK, 
@@ -64,6 +64,10 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 		neighberhood_pane.getChildren().add(grid);
 	}
 	
+	public void addDeliveryTimeEventListener() {
+		deliveryTime.addEventHandler(null, null);
+	}
+	
 	public void addDeliveryArea(ActionEvent e) {
 		
 		//Get selected neighborhoods
@@ -86,4 +90,6 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 	public void moveToManagerDeliveryAreaScene(ActionEvent e) {
 		
 	}
+	
+	
 }
