@@ -1,6 +1,12 @@
 package Model;
 
-public class Component implements Comparable<Component>{
+import java.io.Serializable;
+
+public class Component implements Comparable<Component>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int idCounter = 1;
 	private Integer id;
 	private String componentName;

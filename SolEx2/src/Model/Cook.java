@@ -6,6 +6,10 @@ import Utils.Expertise;
 import Utils.Gender;
 
 public class Cook extends Person{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int idCounter = 1;
 	private Expertise expert;
 	private boolean isChef;

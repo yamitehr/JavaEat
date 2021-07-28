@@ -1,12 +1,17 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import Utils.MyFileLogWriter;
 
-public class Order implements Comparable<Order>{
+public class Order implements Comparable<Order>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int idCounter = 1;
 	private Integer id;
 	private Customer customer;

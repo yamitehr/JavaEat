@@ -7,6 +7,10 @@ import Utils.Neighberhood;
 
 public class Customer extends Person{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int idCounter = 1;
 	private Neighberhood neighberhood;
 	private boolean isSensitiveToLactose;

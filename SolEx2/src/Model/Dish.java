@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,8 +8,12 @@ import java.util.List;
 import Utils.DishType;
 import Utils.MyFileLogWriter;
 
-public class Dish {
+public class Dish implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int idCounter = 1;
 	private int id;
 	private String dishName;

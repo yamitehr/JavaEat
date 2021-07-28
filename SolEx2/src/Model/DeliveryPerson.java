@@ -6,6 +6,10 @@ import Utils.Gender;
 import Utils.Vehicle;
 
 public class DeliveryPerson extends Person {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int idCounter = 1;
 	private Vehicle vehicle;
 	private DeliveryArea area;

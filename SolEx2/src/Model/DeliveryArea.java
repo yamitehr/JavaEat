@@ -1,12 +1,17 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import Utils.Neighberhood;
 
-public class DeliveryArea {
+public class DeliveryArea implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int idCounter = 1;
 	private int id;
 	private String areaName;
