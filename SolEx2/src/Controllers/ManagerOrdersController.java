@@ -75,21 +75,17 @@ public class ManagerOrdersController extends ControllerWrapper {
 	
 	public void updateOrderDetailsFields() {
 		Order selectedOrder = allOrders.getSelectionModel().getSelectedItem();
-		// fill text fields with values about the selected customer on the list
+		// fill text fields with values about the selected order on the list
 		if(selectedOrder != null) {
 			customerField.setText(selectedOrder.getCustomer().toString());
 			dishesField.setText(selectedOrder.getDishes().toString());
-			componentField.setText(selectedDish.getComponenets().toString());
-			timeToMakeField.setText(String.valueOf(selectedDish.getTimeToMake()));
-			priceField.setText(String.valueOf(selectedDish.getPrice()));
+			deliveryField.setText(selectedOrder.getDelivery().toString());
 			
 		//clean the text fields if there is no selection
-		} else if(selectedDish == null) {
-			DishNameField.setText("");
-			dishTypeField.setText("");
-			componentField.setText("");
-			timeToMakeField.setText("");
-			priceField.setText("");
+		} else if(selectedOrder == null) {
+			customerField.setText("");
+			dishesField.setText("");
+			deliveryField.setText("");
 		}
 	}
 }

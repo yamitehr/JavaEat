@@ -21,13 +21,9 @@
             <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:" />
             <Text layoutX="206.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dishes:" />
             <Text layoutX="207.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery:" />
-            <Text layoutX="207.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time To Make:" />
             <Text fx:id="customerField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <Text fx:id="dishesField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <Text fx:id="deliveryField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-            <Text fx:id="timeToMakeField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <Text layoutX="207.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" wrappingWidth="70.36376953125" />
-            <Text fx:id="priceField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
          </children>
       </Pane>
    </children>
