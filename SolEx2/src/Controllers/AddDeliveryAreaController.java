@@ -3,6 +3,7 @@ package Controllers;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import Exceptions.InvalidPersonInputException;
 import Model.DeliveryArea;
 import Model.Restaurant;
 import Utils.Neighberhood;
@@ -20,6 +21,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Pair;
 
 public class AddDeliveryAreaController extends ControllerWrapper{
@@ -31,6 +33,9 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 	private TextField deliveryTime;
 	
 	private ArrayList<Pair<CheckBox, Neighberhood>> neighberhoodList;
+	@FXML
+	private Text messageToUser;
+	
 	
 	@FXML
     public void initialize() {
@@ -84,26 +89,61 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 	}
 	
 	public void addDeliveryArea(ActionEvent e) {
-		
+		//TODO: add validations. clear fields.
 		//Get selected neighborhoods
-		HashSet<Neighberhood> selectedNeighberhoods = new HashSet<Neighberhood>();
-		for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
-			CheckBox cb = cbp.getKey();
-			if (cb.isSelected()) {
-				selectedNeighberhoods.add(cbp.getValue());
+		try {
+			
+			String daName = deliveryAreaName.getText();
+			if(daName.isEmpty()) {
+				throw new InvalidPersonInputException("Please fill Area Name");
 			}
 			
+			HashSet<Neighberhood> selectedNeighberhoods = new HashSet<Neighberhood>();
+			for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
+				CheckBox cb = cbp.getKey();
+				if (cb.isSelected()) {
+					selectedNeighberhoods.add(cbp.getValue());
+				}
+			}
+			
+			if(selectedNeighberhoods.isEmpty()) {
+				throw new InvalidPersonInputException("Please select Neighberhoods");
+			}
+			
+			int daTime = 0;
+			try {
+				daTime = Integer.parseInt(deliveryTime.getText()); 
+			} catch(Exception exc) {
+				throw new InvalidPersonInputException("Please fill Devliery Time");
+			}
+			
+			DeliveryArea da = new DeliveryArea(daName, selectedNeighberhoods, daTime);
+			//Add delivery area to the restaurant and clear fields
+			if(Restaurant.getInstance().addDeliveryArea(da)) {
+				messageToUser.setFill(Color.BLUE);
+				messageToUser.setText("Cook added successfully");
+				deliveryAreaName.clear();
+				deliveryTime.clear();
+				for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
+					CheckBox cb = cbp.getKey();
+					cb.setSelected(false);
+				}
+			} else {
+				messageToUser.setFill(Color.RED);
+				messageToUser.setText("an error has accured please try again");
+			}
+		} catch(InvalidPersonInputException ipe) {
+			messageToUser.setFill(Color.RED);
+			messageToUser.setText(ipe.getMessage());
+		} catch(Exception exc) {
+			messageToUser.setFill(Color.RED);
+			messageToUser.setText("an error has accured please try again");
 		}
 		
-		//Create delivery area
-		String daName = deliveryAreaName.getText();
-		int daTime = Integer.parseInt(deliveryTime.getText()); 
-		DeliveryArea da = new DeliveryArea(daName, selectedNeighberhoods, daTime);
-		Restaurant.getInstance().addDeliveryArea(da);
 	}
 	
 	public void moveToManagerDeliveryAreaScene(ActionEvent e) {
-		
+		//TODO:
 	}
 	
 	

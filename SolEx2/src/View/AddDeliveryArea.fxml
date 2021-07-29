@@ -15,8 +15,8 @@
       <Label layoutX="72.0" layoutY="97.0" text="Neighberhoods" />
       <Button layoutX="74.0" layoutY="319.0" mnemonicParsing="false" onAction="#addDeliveryArea" prefHeight="26.0" prefWidth="134.0" text="Add Delivery Area" />
       <Button layoutX="74.0" layoutY="21.0" mnemonicParsing="false" onAction="#moveToManagerDeliveryAreaScene" text="Back" />
-      <Text fx:id="messageToUser" layoutX="72.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
       <Label layoutX="72.0" layoutY="276.0" prefHeight="17.0" prefWidth="85.0" text="Delivery Time" />
       <Pane fx:id="neighberhood_pane" layoutX="176.0" layoutY="100.0" prefHeight="166.0" prefWidth="406.0" />
+      <Text fx:id="messageToUser" layoutX="74.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="421.21630859375" />
    </children>
 </AnchorPane>
