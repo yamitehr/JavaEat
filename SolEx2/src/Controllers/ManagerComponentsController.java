@@ -1,9 +1,7 @@
 package Controllers;
 
 import java.util.stream.Collectors;
-
 import Model.Component;
-import Model.Customer;
 import Model.Restaurant;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controllers.ManagerDeliveryController">
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManagerDeliveryController">
    <children>
       <Pane layoutX="23.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0">
          <children>
@@ -27,8 +26,10 @@
             <Button fx:id="addExpressDeliveryBtn" layoutX="25.0" layoutY="384.0" mnemonicParsing="false" onAction="#MoveToAddExpressDeliveryScene" text="Add new Express Delivery" />
             <Text layoutX="252.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Date:" />
             <Text fx:id="dateField" layoutX="347.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
-            <Text layoutX="252.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders:" />
+            <Text fx:id="orderTitle" layoutX="252.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
             <Text fx:id="ordersField" layoutX="347.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+            <Text fx:id="postageTitle" layoutX="251.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
+            <Text fx:id="postagerField" layoutX="347.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
          </children>
       </Pane>
    </children>

@@ -3,7 +3,7 @@ package Controllers;
 import java.util.stream.Collectors;
 
 import Model.Delivery;
-import Model.Order;
+import Model.ExpressDelivery;
 import Model.RegularDelivery;
 import Model.Restaurant;
 import javafx.beans.value.ChangeListener;
@@ -36,6 +36,12 @@ public class ManagerDeliveryController extends ControllerWrapper {
 	private Text dateField;
 	@FXML
 	private Text ordersField;
+	@FXML 
+	private Text orderTitle;
+	@FXML
+	private Text postageTitle;
+	@FXML
+	private Text postageField;
 	
 	@FXML
     public void initialize() {
@@ -95,9 +101,14 @@ public class ManagerDeliveryController extends ControllerWrapper {
 			isDeliveredField.setText(isDelivered);
 			dateField.setText(selectedDelivery.getDeliveredDate().toString());
 			if(selectedDelivery instanceof RegularDelivery) {
+				orderTitle.setText("Orders:");
 				ordersField.setText(((RegularDelivery) selectedDelivery).getOrders().toString());
 			}
-			else {
+			else { //Express Delivery
+				orderTitle.setText("Order:");
+				ordersField.setText(((ExpressDelivery) selectedDelivery).getOrder().toString());
+				postageTitle.setText("Postage:");
+				postageField.setText(String.valueOf(((ExpressDelivery) selectedDelivery).getPostage()));
 				
 			}
 			

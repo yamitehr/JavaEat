@@ -1,16 +1,13 @@
 package Controllers;
 
 import java.util.ArrayList;
-
 import Exceptions.InvalidInputException;
-import Exceptions.SensitiveException;
 import Model.Component;
 import Model.Customer;
 import Model.Delivery;
 import Model.Dish;
 import Model.Order;
 import Model.Restaurant;
-import Utils.DishType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -86,7 +83,7 @@ public class AddOrderController extends ControllerWrapper {
 	
 			Restaurant.getInstance().addOrder(newOrder); 
 			messageToUser.setFill(Color.BLUE);
-			messageToUser.setText("Dish added successfully");
+			messageToUser.setText("Order added successfully");
 			customerBox.getSelectionModel().clearSelection();
 			deliveryBox.getSelectionModel().clearSelection();
 		}catch(InvalidInputException inputE) {
