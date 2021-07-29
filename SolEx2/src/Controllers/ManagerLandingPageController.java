@@ -1,26 +1,32 @@
 package Controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import Utils.Expertise;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class ManagerLandingPageController extends ControllerWrapper {
 	@FXML
 	private Button customersBtn;
 	@FXML
-	private Button cooksBtn;
+	private Button allEmployeesBtn;
 	
 	@FXML
 	private Button componentsBtn;
 	
 	@FXML
-	private Button dishesBtn;
+	private Button foodItemsBtn;
 	@FXML
 	private Button deliveryPersonBtn;
 	@FXML
@@ -28,13 +34,17 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	@FXML
 	private Button deliveriesBtn;
 	@FXML
-	private Button addDishBtn;
+	private Button addFoodbtn;
 	@FXML
-	private Button addCookBtn;
+	private Button addEmployeeBtn;
 	@FXML
-	private Button addOrderBtn;
+	private Button addOrderAndDeliveryBtn;
 	@FXML
 	private Button addCustomerBtn;
+	@FXML
+	private Button statisticsBtn;
+	@FXML
+	private Button dashboardBtn;
 	@FXML
 	private AnchorPane toReplacePane;
 	@FXML
@@ -43,7 +53,26 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	private Label messageLbl;
 	
 	@FXML
-	private Button ordersBtn;
+	private Button ordersAndDeliveriesBtn;
+	
+	@FXML
+    public void initialize() {
+		init();
+    }
+	
+	private void init() {
+		dashboardBtn.setAlignment(Pos.BASELINE_LEFT);
+		addFoodbtn.setAlignment(Pos.BASELINE_LEFT);
+		foodItemsBtn.setAlignment(Pos.BASELINE_LEFT);
+		addEmployeeBtn.setAlignment(Pos.BASELINE_LEFT);
+		allEmployeesBtn.setAlignment(Pos.BASELINE_LEFT);
+		addOrderAndDeliveryBtn.setAlignment(Pos.BASELINE_LEFT);
+		ordersAndDeliveriesBtn.setAlignment(Pos.BASELINE_LEFT);
+		addCustomerBtn.setAlignment(Pos.BASELINE_LEFT);
+		customersBtn.setAlignment(Pos.BASELINE_LEFT);
+		statisticsBtn.setAlignment(Pos.BASELINE_LEFT);
+		
+	}
 	
 	public void moveToManagerCustomerScene(ActionEvent e) throws Exception {
 		messageLbl.setText("All Customers");
