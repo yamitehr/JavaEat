@@ -1,8 +1,6 @@
 package Controllers;
 
 import java.util.stream.Collectors;
-
-import Model.Component;
 import Model.Dish;
 import Model.Restaurant;
 import javafx.beans.value.ChangeListener;

@@ -95,7 +95,7 @@ public class Order implements Comparable<Order>, Serializable{
 	
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", customer=" + customer + "]";
+		return id + " " + customer;
 	}
 	
 	// methods
