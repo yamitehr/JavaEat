@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class AddComponentController extends ControllerWrapper {
+public class AddComponentController_DELETE extends ControllerWrapper {
 	
 	@FXML
 	private TextField component_Name;

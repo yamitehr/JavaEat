@@ -14,7 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ManagerComponentsController extends ControllerWrapper {
+public class ManagerComponentsController_DELETE extends ControllerWrapper {
 	
 	@FXML
 	private Button addComponentBtn;
