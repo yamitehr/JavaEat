@@ -2,18 +2,85 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManagerLandingPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManagerLandingPageController">
    <children>
-      <Button fx:id="customersBtn" layoutX="80.0" layoutY="85.0" mnemonicParsing="false" onAction="#moveToManagerCustomerScene" prefHeight="26.0" prefWidth="143.0" text="Customers" />
-      <Label layoutX="74.0" layoutY="40.0" text="Welcome back manager ..." />
-      <Button fx:id="cooksBtn" layoutX="292.0" layoutY="85.0" mnemonicParsing="false" onAction="#moveToManagerCooksScene" prefHeight="26.0" prefWidth="143.0" text="Cooks" />
-      <Button fx:id="deliveryPersonBtn" layoutX="80.0" layoutY="142.0" mnemonicParsing="false" onAction="#moveToManagerDeliveryPersonScene" prefHeight="26.0" prefWidth="143.0" text="Delivery People" />
-      <Button fx:id="deliveriesBtn" layoutX="292.0" layoutY="142.0" mnemonicParsing="false" onAction="#moveToManagerDeliveriesScene" prefHeight="26.0" prefWidth="143.0" text="Deliveries" />
-      <Button fx:id="dishesBtn" layoutX="80.0" layoutY="200.0" mnemonicParsing="false" onAction="#moveToManagerDishesScene" prefHeight="26.0" prefWidth="143.0" text="Dishes" />
-      <Button fx:id="componentsBtn" layoutX="292.0" layoutY="200.0" mnemonicParsing="false" onAction="#moveToManagerComponentsScene" prefHeight="26.0" prefWidth="143.0" text="Components" />
-      <Button fx:id="deliveryAreaBtn" layoutX="80.0" layoutY="252.0" mnemonicParsing="false" onAction="#moveToManagerDeliveryAreaScene" prefHeight="26.0" prefWidth="143.0" text="Delivery Area" />
-      <Button fx:id="ordersBtn" layoutX="292.0" layoutY="253.0" mnemonicParsing="false" onAction="#moveToManagerOrdersScene" prefHeight="26.0" prefWidth="143.0" text="Orders" />
+      <AnchorPane prefHeight="770.0" prefWidth="343.0" style="-fx-background-color: PeachPuff;">
+         <children>
+            <ImageView fitHeight="170.0" fitWidth="340.0" layoutX="-11.0" layoutY="-15.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../../שולחן%20העבודה/לימודים/סמסטר%20ב/תכנות%20מונחה%20עצמים/JavaEat.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="1.0" layoutY="144.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Dashbored">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="addDishBtn" layoutX="1.0" layoutY="204.0" mnemonicParsing="false" onAction="#MoveToAddDishScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Add Food">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="dishesBtn" layoutX="1.0" layoutY="258.0" mnemonicParsing="false" onAction="#moveToManagerDishesScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Food Items">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="addCookBtn" layoutY="312.0" mnemonicParsing="false" onAction="#MoveToAddCookScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Add Employee">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="cooksBtn" layoutY="368.0" mnemonicParsing="false" onAction="#moveToManagerCooksScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="All Employees">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="addOrderBtn" layoutY="422.0" mnemonicParsing="false" onAction="#MoveToAddOrderScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Add Order &amp; Delivery">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="ordersBtn" layoutY="476.0" mnemonicParsing="false" onAction="#moveToManagerOrdersScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="All Orders &amp; Delivery">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="addCustomerBtn" layoutY="532.0" mnemonicParsing="false" onAction="#MoveToAddCustomerScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Add Customer">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="customersBtn" layoutY="591.0" mnemonicParsing="false" onAction="#moveToManagerCustomerScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="All Customers">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutY="648.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Statistics">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="deliveriesBtn" layoutX="14.0" layoutY="709.0" mnemonicParsing="false" onAction="#moveToManagerDeliveriesScene" prefHeight="26.0" prefWidth="143.0" text="Deliveries" />
+            <Button fx:id="componentsBtn" layoutX="170.0" layoutY="709.0" mnemonicParsing="false" onAction="#moveToManagerComponentsScene" prefHeight="26.0" prefWidth="143.0" text="Components" />
+            <Button fx:id="deliveryPersonBtn" layoutX="14.0" layoutY="730.0" mnemonicParsing="false" onAction="#moveToManagerDeliveryPersonScene" prefHeight="26.0" prefWidth="143.0" text="Delivery People" />
+            <Button fx:id="deliveryAreaBtn" layoutX="170.0" layoutY="730.0" mnemonicParsing="false" onAction="#moveToManagerDeliveryAreaScene" prefHeight="26.0" prefWidth="143.0" text="Delivery Area" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="messagePane" layoutX="335.0" prefHeight="54.0" prefWidth="1095.0" style="-fx-background-color: PeachPuff;">
+         <children>
+            <Label fx:id="messageLbl" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="398.0" text="Welcome back manager ...">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="toReplacePane" layoutX="340.0" layoutY="54.0" prefHeight="717.0" prefWidth="1095.0" />
    </children>
 </AnchorPane>

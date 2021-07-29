@@ -63,7 +63,7 @@ public class ManagerOrdersController extends ControllerWrapper {
 			});
 	}
 	
-	public void MoveToAddDishScene(ActionEvent e) {
+	public void MoveToAddOrderScene(ActionEvent e) {
 		moveToScene("/View/AddOrder.fxml", (Stage)addOrderBtn.getScene().getWindow());
 	}
 	
