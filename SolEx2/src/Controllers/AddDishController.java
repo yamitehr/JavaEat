@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -31,6 +32,17 @@ public class AddDishController extends ControllerWrapper {
 	@FXML
 	private Text messageToUser;
 	
+	
+	//components
+	@FXML
+	private TextField component_Name;
+	@FXML
+	private TextField price;
+	@FXML
+	private CheckBox isLactose;
+	@FXML
+	private CheckBox isGluten;
+	
 	@FXML
     public void initialize() {
 		init();
@@ -46,9 +58,9 @@ public class AddDishController extends ControllerWrapper {
 		componentsList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
 	
-	public void moveToManagerDishScene(ActionEvent e) {
+	/*public void moveToManagerDishScene(ActionEvent e) {
 		moveToScene("/View/Manager_Dish.fxml", (Stage)dish_Name.getScene().getWindow());
-	}
+	}*/
 	
 	public void addDish(ActionEvent e) {
 		try {
@@ -80,6 +92,46 @@ public class AddDishController extends ControllerWrapper {
 				dish_Name.clear();
 				timeToMake.clear();
 				typesBox.getSelectionModel().clearSelection();
+			}else {
+				messageToUser.setFill(Color.RED);
+				messageToUser.setText("an error has accured, please try again.");
+			}
+		}catch(InvalidInputException inputE) {
+			messageToUser.setFill(Color.RED);
+			messageToUser.setText(inputE.getMessage());
+		}catch(NumberFormatException ne) {
+			messageToUser.setFill(Color.RED);
+			messageToUser.setText("Wrong Input!");
+		}catch(Exception ex) {
+			messageToUser.setFill(Color.RED);
+			messageToUser.setText("an error has accured please try again");
+		}
+	}
+	
+	public void addComponent(ActionEvent e) {
+		try {
+			String componentName = component_Name.getText();
+			if(componentName.isEmpty()) {
+				throw new InvalidInputException("Please fill component name");
+			}
+			double priceOfComp;
+			if(price.getText().isEmpty()) {
+				throw new InvalidInputException("Please fill component price");
+			}
+			else
+				priceOfComp = Double.parseDouble(price.getText());
+			boolean isHasLactose = isLactose.isSelected();
+			boolean isHasGluten = isGluten.isSelected();
+			///		
+			Component newComponent = new Component(componentName, isHasLactose, isHasGluten, priceOfComp);
+		
+			if(Restaurant.getInstance().addComponent(newComponent)) {
+				messageToUser.setFill(Color.BLUE);
+				messageToUser.setText("Component added successfully");
+				component_Name.clear();
+				price.clear();
+				isLactose.setSelected(false);
+				isGluten.setSelected(false);
 			}else {
 				messageToUser.setFill(Color.RED);
 				messageToUser.setText("an error has accured, please try again.");

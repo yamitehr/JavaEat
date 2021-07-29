@@ -7,14 +7,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controllers.ManagerOrdersController">
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManagerOrdersController">
    <children>
       <Pane layoutX="13.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0">
          <children>
             <ListView fx:id="allOrders" layoutX="25.0" layoutY="73.0" prefHeight="269.0" prefWidth="174.0" />
             <Label layoutX="25.0" layoutY="46.0" text="List of orders" />
-            <Button fx:id="addOrderBtn" layoutX="25.0" layoutY="348.0" mnemonicParsing="false" onAction="#MoveToAddDishScene" text="Add new order" />
+            <Button fx:id="addOrderBtn" layoutX="25.0" layoutY="348.0" mnemonicParsing="false" onAction="#MoveToAddOrderScene" text="Add new order" />
             <Button layoutX="131.0" layoutY="348.0" mnemonicParsing="false" onAction="#removeOrder" text="Remove" />
             <Button fx:id="backBtn" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#moveToManagerLandingPageScene" text="Back" />
             <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Details" />

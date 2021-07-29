@@ -15,7 +15,8 @@ public class ControllerWrapper {
 		
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource(fxmlName));
-	        primaryStage.setScene(new Scene(root, width, height));
+	        //primaryStage.setScene(new Scene(root, width, height));
+			primaryStage.setScene(new Scene(root, width, height));
 	        primaryStage.centerOnScreen();
 		} catch (IOException e1) {
 			e1.printStackTrace();
