@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import Controllers.Consts;
 import Model.Restaurant;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -25,7 +26,7 @@ public class Main extends Application {
 		readRestaurant();
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, Consts.defaultWidth, Consts.defaultHeight);
 		scene.getStylesheets().add(getClass().getResource("/View/decoration.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("JavaEat");
