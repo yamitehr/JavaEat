@@ -48,4 +48,10 @@ public class DeliveryPerson extends Person {
 		return super.toString()+" DeliveryPerson [vehicle=" + vehicle + "]";
 	}
 
+	protected Object readResolve() {
+		if (this.id == idCounter) {
+			idCounter = this.id + 1;
+		}
+	    return this;
+	}
 }

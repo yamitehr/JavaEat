@@ -98,5 +98,11 @@ public abstract class Delivery implements Serializable{
 		return "Delivery [id=" + id + ", deliveryPerson=" + deliveryPerson + ", area=" + area + ", isDelivered="
 				+ isDelivered + "]";
 	}
-
+	
+	protected Object readResolve() {
+		if (this.id == idCounter) {
+			idCounter = this.id + 1;
+		}
+	    return this;
+	}
 }

@@ -138,4 +138,10 @@ public class Order implements Comparable<Order>, Serializable{
 		return this.id.compareTo(o.getId());
 	}
 
+	protected Object readResolve() {
+		if (this.id == idCounter) {
+			idCounter = this.id + 1;
+		}
+	    return this;
+	}
 }

@@ -127,4 +127,11 @@ public class DeliveryArea implements Serializable{
 	public boolean removeNeighberhood(Neighberhood neighberhood) {
 		return neighberhoods.remove(neighberhood);
 	}
+
+	protected Object readResolve() {
+		if (this.id == idCounter) {
+			idCounter = this.id + 1;
+		}
+	    return this;
+	}
 }

@@ -54,4 +54,11 @@ public class Cook extends Person{
 	public String toString() {
 		return super.toString()+" Cook [expert=" + expert + "]";
 	}
+
+	protected Object readResolve() {
+		if (this.id == idCounter) {
+			idCounter = this.id + 1;
+		}
+	    return this;
+	}
 }

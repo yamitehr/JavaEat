@@ -113,4 +113,11 @@ public class Component implements Comparable<Component>, Serializable{
 			return this.price.compareTo(o.getPrice());
 		return this.id.compareTo(o.getId());
 	}
+	
+	protected Object readResolve() {
+		if (this.id == idCounter) {
+			idCounter = this.id + 1;
+		}
+	    return this;
+	}
 }

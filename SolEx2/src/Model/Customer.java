@@ -88,4 +88,11 @@ public class Customer extends Person{
 	public String toString() {
 		return super.toString();
 	}
+	
+	protected Object readResolve() {
+		if (this.id == idCounter) {
+			idCounter = this.id + 1;
+		}
+	    return this;
+	}
 }

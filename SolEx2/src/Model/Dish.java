@@ -134,4 +134,12 @@ public class Dish implements Serializable{
 	public boolean removeComponent(Component c) {
 		return this.componenets.remove(c);
 	}
+	
+
+	protected Object readResolve() {
+		if (this.id == idCounter) {
+			idCounter = this.id + 1;
+		}
+	    return this;
+	}
 }
