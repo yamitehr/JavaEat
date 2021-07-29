@@ -22,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 public class AddDeliveryAreaController extends ControllerWrapper{
@@ -89,8 +90,6 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 	}
 	
 	public void addDeliveryArea(ActionEvent e) {
-		//TODO: add validations. clear fields.
-		//Get selected neighborhoods
 		try {
 			
 			String daName = deliveryAreaName.getText();
@@ -143,7 +142,7 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 	}
 	
 	public void moveToManagerDeliveryAreaScene(ActionEvent e) {
-		//TODO:
+		moveToScene("/View/Manager_DeliveryArea.fxml", (Stage)deliveryAreaName.getScene().getWindow());
 	}
 	
 	

@@ -45,7 +45,7 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	}
 	
 	public void moveToManagerDeliveryAreaScene(ActionEvent e) {
-		moveToScene("/View/AddDeliveryArea.fxml", (Stage)deliveryAreaBtn.getScene().getWindow());
+		moveToScene("/View/Manager_DeliveryArea.fxml", (Stage)deliveryAreaBtn.getScene().getWindow());
 	}
 	
 	public void moveToManagerOrdersScene(ActionEvent e) {
