@@ -1,9 +1,13 @@
 .menuItem {
    -fx-border-color: black;
    -fx-border-radius: 20px;
+   
 }
 
 .descLabel{
 	
 	-fx-padding: 0 0 0 15px;
+	-fx-font-family: Sans Sharif;
+    -fx-font-weight: Bold;
+    
 }

@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerLandingPageController">
@@ -22,7 +23,7 @@
                </font>
                <graphic>
                 <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../icons/users-solid.png" />
+                  <Image url="@../../icons/list-ul-solid.png" />
          	   </ImageView>
             </graphic>
             </Button>
@@ -32,7 +33,7 @@
                </font>
                <graphic>
 	                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-	                  <Image url="@../../icons/users-solid.png" />
+	                  <Image url="@../../icons/history-solid.png" />
 	         	   </ImageView>
             	</graphic>
             </Button>
@@ -42,7 +43,7 @@
                </font>
                <graphic>
 	                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-	                  <Image url="@../../icons/users-solid.png" />
+	                  <Image url="@../../icons/shopping-cart-solid-2.png" />
 	         	   </ImageView>
             	</graphic>
             </Button>
@@ -53,7 +54,7 @@
                </font>
                <graphic>
 	                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-	                  <Image url="@../../icons/users-solid.png" />
+	                  <Image url="@../../icons/book-reader-solid.png" />
 	         	   </ImageView>
             	</graphic>
             </Button>
@@ -63,7 +64,7 @@
                </font>
                <graphic>
 	                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-	                  <Image url="@../../icons/users-solid.png" />
+	                  <Image url="@../../icons/plus-square-solid.png" />
 	         	   </ImageView>
             	</graphic>
             </Button>
@@ -73,7 +74,7 @@
                </font>
                <graphic>
 	                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-	                  <Image url="@../../icons/users-solid.png" />
+	                  <Image url="@../../icons/address-card-solid.png" />
 	         	   </ImageView>
             	</graphic>
             </Button>
@@ -89,6 +90,9 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="toReplacePane" layoutX="340.0" layoutY="54.0" prefHeight="717.0" prefWidth="1095.0" />
+      <AnchorPane fx:id="toReplacePane" layoutX="340.0" layoutY="54.0" prefHeight="717.0" prefWidth="1095.0">
+         <children>
+            <MediaView fx:id="restaurantVideo" fitHeight="715.0" fitWidth="1100.0" layoutX="6.0" layoutY="1.0" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>
