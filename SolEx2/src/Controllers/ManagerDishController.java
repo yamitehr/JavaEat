@@ -55,7 +55,7 @@ public class ManagerDishController extends ControllerWrapper {
     }
 	
 	private void initDish() {
-		////////All cooks list view
+		////////All dishes list view
 		//Set the listview cell factory to show the right cook name
 		allDishes.setCellFactory(param -> new ListCell<Dish>() {
 		    @Override
@@ -84,7 +84,7 @@ public class ManagerDishController extends ControllerWrapper {
 	}
 	
 	private void initComp() {
-		//Set the listview cell factory to show the right customer name
+		//Set the listview cell factory to show the right component name
 		allComponents.setCellFactory(param -> new ListCell<Component>() {
 		    @Override
 		    protected void updateItem(Component item, boolean empty) {

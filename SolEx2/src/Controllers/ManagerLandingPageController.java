@@ -1,10 +1,6 @@
 package Controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import Utils.Expertise;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class ManagerLandingPageController extends ControllerWrapper {
@@ -48,8 +43,6 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	@FXML
 	private AnchorPane toReplacePane;
 	@FXML
-	private AnchorPane messagePane;
-	@FXML
 	private Label messageLbl;
 	
 	@FXML
@@ -83,7 +76,7 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	}
 	
 	public void moveToManagerCooksScene(ActionEvent e) throws Exception {
-		messageLbl.setText("All Employee");
+		messageLbl.setText("All Employees");
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Manager_Cooks.fxml"));
 		AnchorPane pane = loader.load();
 		toReplacePane.getChildren().removeAll(toReplacePane.getChildren());

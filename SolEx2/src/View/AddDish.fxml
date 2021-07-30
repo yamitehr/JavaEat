@@ -24,9 +24,8 @@
                               <Label layoutX="72.0" layoutY="66.0" text="Dish Name" />
                               <TextField fx:id="dish_Name" layoutX="220.0" layoutY="62.0" />
                               <Label layoutX="72.0" layoutY="98.0" text="Dish Type" />
-                              <Button layoutX="60.0" layoutY="315.0" mnemonicParsing="false" onAction="#addDish" prefHeight="26.0" prefWidth="109.0" text="Add Dish" />
-                              <Button layoutX="74.0" layoutY="21.0" mnemonicParsing="false" text="Back" />
-                              <Text fx:id="messageToUser" layoutX="60.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+                              <Button layoutX="56.0" layoutY="325.0" mnemonicParsing="false" onAction="#addDish" prefHeight="26.0" prefWidth="109.0" text="Add Dish" />
+                              <Text fx:id="messageToUserDish" layoutX="57.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                               <Label layoutX="72.0" layoutY="131.0" text="Time To Make:" />
                               <TextField fx:id="timeToMake" layoutX="220.0" layoutY="127.0" />
                               <ComboBox fx:id="typesBox" layoutX="219.0" layoutY="94.0" prefWidth="150.0" />
@@ -50,8 +49,7 @@
                               <CheckBox fx:id="isGluten" layoutX="220.0" layoutY="98.0" mnemonicParsing="false" text="Gluten" />
                               <CheckBox fx:id="isLactose" layoutX="307.0" layoutY="98.0" mnemonicParsing="false" text="Lactose" />
                               <Button layoutX="74.0" layoutY="200.0" mnemonicParsing="false" onAction="#addComponent" prefHeight="26.0" prefWidth="109.0" text="Add Component" />
-                              <Button layoutX="74.0" layoutY="21.0" mnemonicParsing="false" text="Back" />
-                              <Text fx:id="messageToUser1" layoutX="45.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+                              <Text fx:id="messageToUserComp" layoutX="45.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                               <Label layoutX="81.0" layoutY="131.0" text="Price" />
                               <TextField fx:id="price" layoutX="220.0" layoutY="127.0" />
                            </children>

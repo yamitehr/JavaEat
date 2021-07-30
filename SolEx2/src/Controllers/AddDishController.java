@@ -30,7 +30,9 @@ public class AddDishController extends ControllerWrapper {
 	@FXML
 	private ListView<Component> componentsList;
 	@FXML
-	private Text messageToUser;
+	private Text messageToUserDish;
+	@FXML
+	private Text messageToUserComp;
 	
 	
 	//components
@@ -87,24 +89,24 @@ public class AddDishController extends ControllerWrapper {
 			///		
 		
 			if(Restaurant.getInstance().addDish(newDish)) {
-				messageToUser.setFill(Color.BLUE);
-				messageToUser.setText("Dish added successfully");
+				messageToUserDish.setFill(Color.BLUE);
+				messageToUserDish.setText("Dish added successfully");
 				dish_Name.clear();
 				timeToMake.clear();
 				typesBox.getSelectionModel().clearSelection();
 			}else {
-				messageToUser.setFill(Color.RED);
-				messageToUser.setText("an error has accured, please try again.");
+				messageToUserDish.setFill(Color.RED);
+				messageToUserDish.setText("an error has accured, please try again.");
 			}
 		}catch(InvalidInputException inputE) {
-			messageToUser.setFill(Color.RED);
-			messageToUser.setText(inputE.getMessage());
+			messageToUserDish.setFill(Color.RED);
+			messageToUserDish.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
-			messageToUser.setFill(Color.RED);
-			messageToUser.setText("Wrong Input!");
+			messageToUserDish.setFill(Color.RED);
+			messageToUserDish.setText("Wrong Input!");
 		}catch(Exception ex) {
-			messageToUser.setFill(Color.RED);
-			messageToUser.setText("an error has accured please try again");
+			messageToUserDish.setFill(Color.RED);
+			messageToUserDish.setText("an error has accured please try again");
 		}
 	}
 	
@@ -126,25 +128,25 @@ public class AddDishController extends ControllerWrapper {
 			Component newComponent = new Component(componentName, isHasLactose, isHasGluten, priceOfComp);
 		
 			if(Restaurant.getInstance().addComponent(newComponent)) {
-				messageToUser.setFill(Color.BLUE);
-				messageToUser.setText("Component added successfully");
+				messageToUserComp.setFill(Color.BLUE);
+				messageToUserComp.setText("Component added successfully");
 				component_Name.clear();
 				price.clear();
 				isLactose.setSelected(false);
 				isGluten.setSelected(false);
 			}else {
-				messageToUser.setFill(Color.RED);
-				messageToUser.setText("an error has accured, please try again.");
+				messageToUserComp.setFill(Color.RED);
+				messageToUserComp.setText("an error has accured, please try again.");
 			}
 		}catch(InvalidInputException inputE) {
-			messageToUser.setFill(Color.RED);
-			messageToUser.setText(inputE.getMessage());
+			messageToUserComp.setFill(Color.RED);
+			messageToUserComp.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
-			messageToUser.setFill(Color.RED);
-			messageToUser.setText("Wrong Input!");
+			messageToUserComp.setFill(Color.RED);
+			messageToUserComp.setText("Wrong Input!");
 		}catch(Exception ex) {
-			messageToUser.setFill(Color.RED);
-			messageToUser.setText("an error has accured please try again");
+			messageToUserComp.setFill(Color.RED);
+			messageToUserComp.setText("an error has accured please try again");
 		}
 	}
 }
