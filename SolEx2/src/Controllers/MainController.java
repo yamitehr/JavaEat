@@ -2,6 +2,7 @@ package Controllers;
 
 import Model.Customer;
 import Model.Restaurant;
+import Model.State;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,15 +12,6 @@ import javafx.stage.Stage;
 
 public class MainController extends ControllerWrapper{
 	public static Restaurant rest = Restaurant.getInstance();
-	private static Customer nowLogin;
-	
-    public static Customer getNowLogin() {
-		return nowLogin;
-	}
-
-	public static void setNowLogin(Customer nowLogin) {
-		MainController.nowLogin = nowLogin;
-	}
 
 	@FXML
     private Label lblStatus;
@@ -37,7 +29,6 @@ public class MainController extends ControllerWrapper{
     
     public void login(ActionEvent e) throws Exception {
     	boolean isExist = false;
-    	
     	if(txtUserName.getText().equals("manager") && txtPassword.getText().equals("manager")) {
     		moveToScene("/View/Manager_LandingPage.fxml", (Stage)txtUserName.getScene().getWindow());
     		lblStatus.setText("Welcome manager");
@@ -47,7 +38,7 @@ public class MainController extends ControllerWrapper{
     	for(Customer cust: rest.getCustomers().values()) {
     		if(txtUserName.getText().equals(cust.getUserName()) &&
     				txtPassword.getText().equals(cust.getPassword())) {
-    				nowLogin = cust;
+    				State.setCurrentCustomer(cust);
 //    				Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerMenu.fxml"));
 //    				Scene scene = new Scene(root);
 //    				Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
