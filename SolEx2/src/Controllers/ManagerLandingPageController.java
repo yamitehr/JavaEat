@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -47,6 +48,12 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	
 	@FXML
 	private Button ordersAndDeliveriesBtn;
+	@FXML
+	private Button logOutBtn;
+	@FXML
+	private ImageView icon;
+	
+	private Image image;
 	
 	@FXML
     public void initialize() {
@@ -56,13 +63,9 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	private void init() {
 		dashboardBtn.setAlignment(Pos.BASELINE_LEFT);
 		addFoodbtn.setAlignment(Pos.BASELINE_LEFT);
-		foodItemsBtn.setAlignment(Pos.BASELINE_LEFT);
 		addEmployeeBtn.setAlignment(Pos.BASELINE_LEFT);
-		allEmployeesBtn.setAlignment(Pos.BASELINE_LEFT);
 		addOrderAndDeliveryBtn.setAlignment(Pos.BASELINE_LEFT);
-		ordersAndDeliveriesBtn.setAlignment(Pos.BASELINE_LEFT);
 		addCustomerBtn.setAlignment(Pos.BASELINE_LEFT);
-		customersBtn.setAlignment(Pos.BASELINE_LEFT);
 		statisticsBtn.setAlignment(Pos.BASELINE_LEFT);
 		
 	}
@@ -104,7 +107,7 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	
 	public void moveToManagerOrdersScene(ActionEvent e) throws Exception {
 		messageLbl.setText("All Order & Delivery");
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Manager_Cooks.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Manager_Order.fxml"));
 		AnchorPane pane = loader.load();
 		toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
 		toReplacePane.getChildren().add(pane);
@@ -113,12 +116,10 @@ public class ManagerLandingPageController extends ControllerWrapper {
 		moveToScene("/View/Manager_Delivery.fxml", (Stage)deliveriesBtn.getScene().getWindow());
 	}
 	
-	
-	
-	
-	
 	public void MoveToAddDishScene(ActionEvent e) throws IOException {
-		messageLbl.setText("Add Food");
+		messageLbl.setText("Food Items");
+		image = new Image("file:///C:/Users/li493/OneDrive/מסמכים/JavaEat/SolEx2/icons/utensils-solid.png");
+		icon.setImage(image);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddDish.fxml"));
 		AnchorPane pane = loader.load();
 		toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
@@ -126,7 +127,9 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	}
 	
 	public void MoveToAddCookScene(ActionEvent e) throws Exception {
-		messageLbl.setText("Add Employee");
+		messageLbl.setText("Employees");
+		image = new Image("file:///C:/Users/li493/OneDrive/מסמכים/JavaEat/SolEx2/icons/users-solid.png");
+		icon.setImage(image);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddCook.fxml"));
 		AnchorPane pane = loader.load();
 		toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
@@ -134,7 +137,9 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	}
 	
 	public void MoveToAddOrderScene(ActionEvent e) throws Exception {
-		messageLbl.setText("Add Order & Delivery");
+		messageLbl.setText("Orders & Deliveries");
+		image = new Image("file:///C:/Users/li493/OneDrive/מסמכים/JavaEat/SolEx2/icons/truck-solid.png");
+		icon.setImage(image);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddOrder.fxml"));
 		AnchorPane pane = loader.load();
 		toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
@@ -142,10 +147,16 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	}
 	
 	public void MoveToAddCustomerScene(ActionEvent e) throws Exception {
-		messageLbl.setText("Add Customer");
+		messageLbl.setText("Customers");
+		image = new Image("file:///C:/Users/li493/OneDrive/מסמכים/JavaEat/SolEx2/icons/users-solid.png");
+		icon.setImage(image);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddCustomer.fxml"));
 		AnchorPane pane = loader.load();
 		toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
 		toReplacePane.getChildren().add(pane);
+	}
+	
+	public void MoveToLoginScene(ActionEvent e) {
+		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow());
 	}
 }

@@ -1,12 +1,8 @@
 package Controllers;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
-
 import Model.Customer;
 import Model.Restaurant;
-import Utils.Neighberhood;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,7 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ManagerCustomerController extends ControllerWrapper {
+public class ManagerCustomerController_DELETE extends ControllerWrapper {
 	@FXML
 	private Button addCustomerBtn;
 	@FXML

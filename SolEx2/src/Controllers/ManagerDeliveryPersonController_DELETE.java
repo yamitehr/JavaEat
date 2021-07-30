@@ -16,7 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ManagerDeliveryPersonController extends ControllerWrapper {
+public class ManagerDeliveryPersonController_DELETE extends ControllerWrapper {
 	@FXML
 	private Button addDeliveryPersonBtn;
 	@FXML
@@ -75,9 +75,9 @@ public class ManagerDeliveryPersonController extends ControllerWrapper {
 		moveToScene("/View/AddDeliveryPerson.fxml", (Stage)addDeliveryPersonBtn.getScene().getWindow());
 	}
 	
-	public void moveToManagerLandingPageScene(ActionEvent e) {
+	/*public void moveToManagerLandingPageScene(ActionEvent e) {
 		moveToScene("/View/Manager_LandingPage.fxml", (Stage)addDeliveryPersonBtn.getScene().getWindow());
-	}
+	}*/
 	
 	public void updateCustomerDetailsFields() {
 		DeliveryPerson selectedDeliveryPerson = allDeliveryPeople.getSelectionModel().getSelectedItem();
@@ -111,4 +111,6 @@ public class ManagerDeliveryPersonController extends ControllerWrapper {
 					Restaurant.getInstance().getDeliveryPersons().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		}
 	}
+	
+	
 }

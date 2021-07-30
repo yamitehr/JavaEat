@@ -11,12 +11,12 @@
    <children>
       <AnchorPane prefHeight="770.0" prefWidth="343.0" style="-fx-background-color: PeachPuff;">
          <children>
-            <ImageView fitHeight="170.0" fitWidth="340.0" layoutX="-11.0" layoutY="-15.0" pickOnBounds="true">
+            <ImageView fitHeight="409.0" fitWidth="353.0" layoutX="-4.0" layoutY="-83.0" pickOnBounds="true">
                <image>
                   <Image url="@../../../../../שולחן%20העבודה/לימודים/סמסטר%20ב/תכנות%20מונחה%20עצמים/JavaEat.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardBtn" layoutX="3.0" layoutY="124.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Dashboard">
+            <Button fx:id="dashboardBtn" layoutX="3.0" layoutY="223.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Dashboard">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -26,17 +26,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="addFoodbtn" layoutX="3.0" layoutY="187.0" mnemonicParsing="false" onAction="#MoveToAddDishScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Add Food">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <graphic>
-                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../icons/plus-square-solid.png" />
-         	   </ImageView>
-            </graphic>
-            </Button>
-            <Button fx:id="foodItemsBtn" layoutX="3.0" layoutY="250.0" mnemonicParsing="false" onAction="#moveToManagerDishesScene" prefHeight="47.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Food Items" wrapText="true">
+            <Button fx:id="addFoodbtn" layoutX="3.0" layoutY="294.0" mnemonicParsing="false" onAction="#MoveToAddDishScene" prefHeight="47.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Food Items" wrapText="true">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -46,17 +36,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="addEmployeeBtn" layoutX="3.0" layoutY="313.0" mnemonicParsing="false" onAction="#MoveToAddCookScene" prefHeight="54.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Add Employee">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <graphic>
-                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../icons/user-plus-solid.png" />
-         	   </ImageView>
-            </graphic>
-            </Button>
-            <Button fx:id="allEmployeesBtn" layoutX="3.0" layoutY="376.0" mnemonicParsing="false" onAction="#moveToManagerCooksScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="All Employees">
+            <Button fx:id="addEmployeeBtn" layoutX="3.0" layoutY="364.0" mnemonicParsing="false" onAction="#MoveToAddCookScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Employees">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -66,17 +46,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="addOrderAndDeliveryBtn" layoutX="3.0" layoutY="439.0" mnemonicParsing="false" onAction="#MoveToAddOrderScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Add Order &amp; Delivery">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <graphic>
-                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../icons/plus-square-solid.png" />
-         	   </ImageView>
-            </graphic>
-            </Button>
-            <Button fx:id="ordersAndDeliveriesBtn" layoutX="3.0" layoutY="502.0" mnemonicParsing="false" onAction="#moveToManagerOrdersScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="All Orders &amp; Delivery">
+            <Button fx:id="addOrderAndDeliveryBtn" layoutX="3.0" layoutY="434.0" mnemonicParsing="false" onAction="#MoveToAddOrderScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Orders &amp; Deliveries">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -86,17 +56,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="addCustomerBtn" layoutX="3.0" layoutY="565.0" mnemonicParsing="false" onAction="#MoveToAddCustomerScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Add Customer">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <graphic>
-                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../icons/user-plus-solid.png" />
-         	   </ImageView>
-            </graphic>
-            </Button>
-            <Button fx:id="customersBtn" layoutX="3.0" layoutY="628.0" mnemonicParsing="false" onAction="#moveToManagerCustomerScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="All Customers">
+            <Button fx:id="addCustomerBtn" layoutX="3.0" layoutY="504.0" mnemonicParsing="false" onAction="#MoveToAddCustomerScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Customers">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -106,7 +66,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="statisticsBtn" layoutX="3.0" layoutY="691.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Statistics">
+            <Button fx:id="statisticsBtn" layoutX="3.0" layoutY="575.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Statistics">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -125,13 +85,28 @@
 
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="messagePane" layoutX="335.0" prefHeight="54.0" prefWidth="1095.0" style="-fx-background-color: PeachPuff;">
+      <AnchorPane fx:id="messagePane" layoutX="335.0" prefHeight="74.0" prefWidth="1095.0" style="-fx-background-color: PeachPuff;">
          <children>
-            <Label fx:id="messageLbl" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="398.0" text="Welcome back manager ...">
+            <Label fx:id="messageLbl" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="398.0" text="Welcome, Manger">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+            <Button fx:id="logOutBtn" layoutX="888.0" layoutY="13.0" mnemonicParsing="false" onAction="#MoveToLoginScene" prefHeight="47.0" prefWidth="193.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Log Out">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="27.0" fitWidth="31.0" layoutX="911.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/sign-in-alt-solid.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="icon" fitHeight="37.0" fitWidth="36.0" layoutX="91.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/users-solid.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="toReplacePane" layoutX="340.0" layoutY="54.0" prefHeight="717.0" prefWidth="1095.0" />

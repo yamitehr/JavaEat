@@ -1,21 +1,29 @@
 package Controllers;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import Exceptions.InvalidInputException;
 import Model.Component;
 import Model.Dish;
 import Model.Restaurant;
 import Utils.DishType;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -34,6 +42,9 @@ public class AddDishController extends ControllerWrapper {
 	@FXML
 	private Text messageToUserComp;
 	
+	@FXML
+	private ListView<Dish> allDishes;
+	
 	
 	//components
 	@FXML
@@ -44,6 +55,37 @@ public class AddDishController extends ControllerWrapper {
 	private CheckBox isLactose;
 	@FXML
 	private CheckBox isGluten;
+	@FXML
+	private Button addComponentBtn;
+
+	@FXML
+	private ListView<Component> allComponents;
+	@FXML
+	private Text componentNameField;
+	@FXML
+	private Text priceCompField;
+	@FXML
+	private Text sensitivitiesField;	
+	@FXML
+	private AnchorPane toReplacePane;
+	
+	
+	//to check
+	@FXML
+	private Button addDishBtn;
+	@FXML
+	private Button backBtn;
+	@FXML
+	private Text DishNameField;
+	@FXML
+	private Text dishTypeField;
+	@FXML
+	private Text componentField;
+	@FXML
+	private Text timeToMakeField;
+	@FXML
+	private Text priceField;
+
 	
 	@FXML
     public void initialize() {
@@ -58,6 +100,95 @@ public class AddDishController extends ControllerWrapper {
 		ObservableList<Component> components = FXCollections.observableArrayList(Restaurant.getInstance().getComponenets().values());
 		componentsList.setItems(components);
 		componentsList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
+		
+		
+		////////All dishes list view
+		//Set the listview cell factory to show the right cook name
+		allDishes.setCellFactory(param -> new ListCell<Dish>() {
+		    @Override
+		    protected void updateItem(Dish item, boolean empty) {
+		        super.updateItem(item, empty);
+
+		        if (empty || item == null) {
+		            setText(null);
+		        } else {
+		            setText(item.getDishName());
+		        }
+		    }
+		});
+		
+		//Event listener for listview
+				allDishes.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Dish>() {
+				    @Override
+				    public void changed(ObservableValue<? extends Dish> observable, Dish oldValue, Dish newValue) {
+				    	updateDishDetailsFields();
+				    }
+				});
+				
+		//Add all dishes
+		allDishes.getItems().addAll(FXCollections.observableArrayList(
+				Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
+		
+		//Set the listview cell factory to show the right component name
+				allComponents.setCellFactory(param -> new ListCell<Component>() {
+				    @Override
+				    protected void updateItem(Component item, boolean empty) {
+				        super.updateItem(item, empty);
+
+				        if (empty || item == null) {
+				            setText(null);
+				        } else {
+				            setText(item.getComponentName());
+				        }
+				    }
+				});
+						
+				//Add all components
+				allComponents.getItems().addAll(FXCollections.observableArrayList(
+						Restaurant.getInstance().getComponenets().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
+				
+				//Event listener for listview
+				allComponents.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Component>() {
+				    @Override
+				    public void changed(ObservableValue<? extends Component> observable, Component oldValue, Component newValue) {
+				    	updateComponentDetailsFields();
+				    }
+				});
+	}
+	
+	
+	
+	public void updateDishDetailsFields() {
+		Dish selectedDish = allDishes.getSelectionModel().getSelectedItem();
+		// fill text fields with values about the selected customer on the list
+		if(selectedDish != null) {
+			DishNameField.setText(selectedDish.getDishName());
+			dishTypeField.setText(selectedDish.getType().name());
+			componentField.setText(selectedDish.getComponenets().toString());
+			timeToMakeField.setText(String.valueOf(selectedDish.getTimeToMake()));
+			priceField.setText(String.valueOf(selectedDish.getPrice()));
+			
+			
+		//clean the text fields if there is no selection
+		} else if(selectedDish == null) {
+			DishNameField.setText("");
+			dishTypeField.setText("");
+			componentField.setText("");
+			timeToMakeField.setText("");
+			priceField.setText("");
+		}
+	}
+	
+	public void removeDish(ActionEvent e) {
+		Dish selectedDish = allDishes.getSelectionModel().getSelectedItem();
+		if(selectedDish !=  null) {
+			Restaurant.getInstance().removeDish(selectedDish);
+			//update the list after removal
+			allDishes.getItems().clear();
+			allDishes.getItems().addAll(FXCollections.observableArrayList(
+			Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
+		}
 	}
 	
 	/*public void moveToManagerDishScene(ActionEvent e) {
@@ -94,6 +225,9 @@ public class AddDishController extends ControllerWrapper {
 				dish_Name.clear();
 				timeToMake.clear();
 				typesBox.getSelectionModel().clearSelection();
+				allDishes.getItems().clear();
+				allDishes.getItems().addAll(FXCollections.observableArrayList(
+				Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 			}else {
 				messageToUserDish.setFill(Color.RED);
 				messageToUserDish.setText("an error has accured, please try again.");
@@ -108,6 +242,29 @@ public class AddDishController extends ControllerWrapper {
 			messageToUserDish.setFill(Color.RED);
 			messageToUserDish.setText("an error has accured please try again");
 		}
+	}
+	
+	public void updateComponentDetailsFields() {
+		Component selectedComponent = allComponents.getSelectionModel().getSelectedItem();
+		if(selectedComponent != null) {
+			componentNameField.setText(selectedComponent.getComponentName());
+			priceCompField.setText(String.valueOf(selectedComponent.getPrice()));
+		
+			String sensitivities = "";
+			if (selectedComponent.isHasGluten()) {
+				sensitivities += "Gluten";
+				if (selectedComponent.isHasLactose()) {
+					sensitivities += ", Lactose";
+				}
+			} else if (selectedComponent.isHasLactose()) {
+				sensitivities += "Lactose";
+			}
+			sensitivitiesField.setText(sensitivities);
+		} else if(selectedComponent == null) {
+			componentNameField.setText("");
+			priceCompField.setText("");
+			sensitivitiesField.setText("");
+		}	
 	}
 	
 	public void addComponent(ActionEvent e) {
@@ -134,6 +291,9 @@ public class AddDishController extends ControllerWrapper {
 				price.clear();
 				isLactose.setSelected(false);
 				isGluten.setSelected(false);
+				allComponents.getItems().clear();
+				allComponents.getItems().addAll(FXCollections.observableArrayList(
+				Restaurant.getInstance().getComponenets().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			}else {
 				messageToUserComp.setFill(Color.RED);
 				messageToUserComp.setText("an error has accured, please try again.");
@@ -149,5 +309,18 @@ public class AddDishController extends ControllerWrapper {
 			messageToUserComp.setText("an error has accured please try again");
 		}
 	}
+	
+	public void removeComponent(ActionEvent e) {
+		Component selectedComponent = allComponents.getSelectionModel().getSelectedItem();
+		if(selectedComponent !=  null) {
+			Restaurant.getInstance().removeComponent(selectedComponent);
+			//update the list after removal
+			allComponents.getItems().clear();
+			allComponents.getItems().addAll(FXCollections.observableArrayList(
+			Restaurant.getInstance().getComponenets().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
+		}
+	}
+	
+	
 }
 

@@ -5,34 +5,75 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCustomerController">
    <children>
       <Label layoutX="72.0" layoutY="66.0" text="First Name" />
-      <Label layoutX="72.0" layoutY="104.0" text="Last Name" />
-      <Label layoutX="72.0" layoutY="146.0" text="Date Of Birth" />
-      <Label layoutX="72.0" layoutY="191.0" text="Gender" />
-      <RadioButton layoutX="220.0" layoutY="191.0" mnemonicParsing="false" text="Male">
+      <Label layoutX="359.0" layoutY="66.0" text="Last Name" />
+      <Label layoutX="68.0" layoutY="105.0" text="Date Of Birth" />
+      <Label layoutX="361.0" layoutY="105.0" text="Gender" />
+      <RadioButton layoutX="434.0" layoutY="105.0" mnemonicParsing="false" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="Gender_group" />
-         </toggleGroup></RadioButton>
-      <TextField fx:id="first_Name" layoutX="220.0" layoutY="62.0" />
-      <TextField fx:id="last_Name" layoutX="220.0" layoutY="100.0" />
-      <DatePicker fx:id="date" layoutX="220.0" layoutY="142.0" />
-      <RadioButton layoutX="300.0" layoutY="191.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group" />
-      <Label layoutX="72.0" layoutY="227.0" text="Neighberhood" />
-      <Label layoutX="72.0" layoutY="259.0" text="Sensitivities" />
-      <CheckBox fx:id="isGluten" layoutX="219.0" layoutY="259.0" mnemonicParsing="false" text="Gluten" />
-      <CheckBox fx:id="isLactose" layoutX="300.0" layoutY="259.0" mnemonicParsing="false" text="Lactose" />
-      <ComboBox fx:id="neighberhoodsBox" layoutX="219.0" layoutY="223.0" prefWidth="150.0" />
-      <Button layoutX="74.0" layoutY="319.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" text="Add Customer" />
-      <Button layoutX="74.0" layoutY="21.0" mnemonicParsing="false" onAction="#moveToManagerCustomerScene" text="Back" />
-      <Text fx:id="messageToUser" layoutX="72.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-      <RadioButton layoutX="380.0" layoutY="191.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group" />
+         </toggleGroup>
+         <effect>
+            <SepiaTone level="0.25" />
+         </effect></RadioButton>
+      <TextField fx:id="first_Name" layoutX="173.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
+      <TextField fx:id="last_Name" layoutX="434.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
+      <DatePicker fx:id="date" layoutX="173.0" layoutY="101.0" styleClass="textFields" stylesheets="@decoration.css" />
+      <RadioButton layoutX="489.0" layoutY="105.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group">
+         <effect>
+            <SepiaTone level="0.25" />
+         </effect></RadioButton>
+      <Label layoutX="64.0" layoutY="147.0" text="Neighberhood" />
+      <Label layoutX="350.0" layoutY="147.0" text="Sensitivities" />
+      <CheckBox fx:id="isGluten" layoutX="430.0" layoutY="147.0" mnemonicParsing="false" text="Gluten">
+         <effect>
+            <SepiaTone level="0.25" />
+         </effect></CheckBox>
+      <CheckBox fx:id="isLactose" layoutX="495.0" layoutY="147.0" mnemonicParsing="false" text="Lactose">
+         <effect>
+            <SepiaTone level="0.25" />
+         </effect></CheckBox>
+      <ComboBox fx:id="neighberhoodsBox" layoutX="173.0" layoutY="143.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+      <Button layoutX="689.0" layoutY="113.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Customer" />
+      <Text fx:id="messageToUser" layoutX="607.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+      <RadioButton layoutX="556.0" layoutY="105.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group">
+         <effect>
+            <SepiaTone level="0.25" />
+         </effect></RadioButton>
+      <Pane layoutX="224.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="906.0">
+         <children>
+            <ListView fx:id="allCustomers" layoutX="25.0" layoutY="73.0" prefHeight="269.0" prefWidth="174.0" style="-fx-border-color: PeachPuff;" />
+            <Label layoutX="25.0" layoutY="46.0" text="List of customers" />
+            <Button fx:id="removeCustomerBtn" layoutX="25.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeCustomer" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+            <Button layoutX="93.0" layoutY="358.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
+            <Label layoutX="422.0" layoutY="46.0" text="Black list" />
+            <ListView fx:id="blackList" layoutX="422.0" layoutY="73.0" prefHeight="211.0" prefWidth="156.0" style="-fx-border-color: PeachPuff;" />
+            <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Details" />
+            <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First  Name:" />
+            <Text layoutX="206.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
+            <Text layoutX="207.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" />
+            <Text layoutX="207.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Neighberhood:" />
+            <Text layoutX="207.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" />
+            <Text layoutX="208.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sensitivities:" />
+            <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+            <Text fx:id="lastNameField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+            <Text fx:id="dobField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+            <Text fx:id="neighberhoodField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+            <Text fx:id="genderField" fill="#c88021" layoutX="253.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+            <Text fx:id="sensitivitiesField" fill="#c88021" layoutX="285.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+            <Button layoutX="53.0" layoutY="390.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
