@@ -46,7 +46,7 @@ public class MainController extends ControllerWrapper{
 //    				stage.centerOnScreen();
 //    				stage.setTitle("Menu");
 //    				stage.show();
-    				moveToScene("/view/CustomerMenu.fxml", (Stage)loginBtn.getScene().getWindow());
+    				moveToScene("/view/CustomerLandingPage.fxml", (Stage)loginBtn.getScene().getWindow());
     		}
     	}
     	if(!isExist)

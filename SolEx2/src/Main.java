@@ -25,7 +25,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		readRestaurant();
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/View/Manager_LandingPage.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
 		Scene scene = new Scene(root, Consts.defaultWidth, Consts.defaultHeight);
 		scene.getStylesheets().add(getClass().getResource("/View/decoration.css").toExternalForm());
 		primaryStage.setScene(scene);
