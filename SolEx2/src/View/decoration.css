@@ -41,3 +41,18 @@
     -fx-text-fill: black;
    
 }
+
+.textFields {
+    -fx-background-color: White;
+  	 -fx-border-color: transparent transparent PeachPuff;
+}
+
+.addBtns {
+	-fx-background-color: White;
+	-fx-border-color: PeachPuff;
+}
+
+.comboBox {
+	-fx-border-color: PeachPuff;
+	-fx-background-color: White;
+}

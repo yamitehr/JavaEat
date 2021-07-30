@@ -9,81 +9,103 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddOrderController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1275.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddOrderController">
    <children>
-      <TabPane layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="719.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1235.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Order">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="708.0">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1235.0">
                            <children>
                               <Label layoutX="72.0" layoutY="66.0" text="Customer:" />
-                              <Label layoutX="72.0" layoutY="98.0" text="Delivery:" />
-                              <Button layoutX="60.0" layoutY="315.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="26.0" prefWidth="109.0" text="Add Order" />
-                              <Text fx:id="messageToUserOrder" layoutX="60.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-                              <ComboBox fx:id="deliveryBox" layoutX="219.0" layoutY="94.0" prefWidth="150.0" />
-                              <ListView fx:id="dishesList" layoutX="219.0" layoutY="131.0" prefHeight="156.0" prefWidth="150.0" />
-                              <Label layoutX="72.0" layoutY="131.0" text="Dishes:" />
-                              <ComboBox fx:id="customerBox" layoutX="219.0" layoutY="62.0" prefWidth="150.0" />
+                              <Label layoutX="361.0" layoutY="66.0" text="Delivery:" />
+                              <Button layoutX="640.0" layoutY="90.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Order" />
+                              <Text fx:id="messageToUserOrder" layoutX="587.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+                              <ComboBox fx:id="deliveryBox" layoutX="436.0" layoutY="62.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                              <ListView fx:id="dishesList" layoutX="347.0" layoutY="103.0" prefHeight="156.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
+                              <Label layoutX="281.0" layoutY="103.0" text="Dishes:" />
+                              <ComboBox fx:id="customerBox" layoutX="169.0" layoutY="62.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                              <Pane layoutX="542.0" layoutY="259.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="654.0">
+                                 <children>
+                                    <ListView fx:id="allOrders" layoutY="73.0" prefHeight="269.0" prefWidth="199.0" style="-fx-border-color: PeachPuff;" />
+                                    <Label layoutX="25.0" layoutY="46.0" text="List of orders" />
+                                    <Button layoutX="14.0" layoutY="349.0" mnemonicParsing="false" onAction="#removeOrder" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+                                    <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Details" />
+                                    <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:" />
+                                    <Text layoutX="206.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dishes:" />
+                                    <Text layoutX="207.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery:" />
+                                    <Text fx:id="customerField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                                    <Text fx:id="dishesField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                                    <Text fx:id="deliveryField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+                                    <Button layoutX="94.0" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                                 </children>
+                              </Pane>
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Regular Delivery">
+            <Tab text="Delivery">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="600.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="719.0" prefWidth="1241.0">
                      <children>
-                        <AnchorPane prefHeight="371.0" prefWidth="640.0">
+                        <AnchorPane prefHeight="723.0" prefWidth="1246.0">
                            <children>
-                              <AnchorPane layoutY="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="640.0">
+                              <AnchorPane fx:id="regularPane" layoutX="-11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="1122.0">
                                  <children>
                                     <Label layoutX="72.0" layoutY="66.0" text="Delivery Person:" />
-                                    <Label layoutX="72.0" layoutY="98.0" text="Delivery Area:" />
-                                    <Button layoutX="60.0" layoutY="405.0" mnemonicParsing="false" onAction="#addRegularDelivery" prefHeight="26.0" prefWidth="134.0" text="Add Regular Delivery" />
-                                    <Text fx:id="messageToUserRegular" layoutX="57.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-                                    <ComboBox fx:id="deliveryAreaBox" layoutX="219.0" layoutY="94.0" prefWidth="150.0" />
-                                    <ListView fx:id="ordersList" layoutX="213.0" layoutY="208.0" prefHeight="156.0" prefWidth="150.0" />
-                                    <Label layoutX="76.0" layoutY="208.0" prefHeight="18.0" prefWidth="51.0" text="Orders:" />
-                                    <ComboBox fx:id="DeliveryPersonBox" layoutX="219.0" layoutY="62.0" prefWidth="150.0" />
-                                    <CheckBox fx:id="yesChoice" layoutX="233.0" layoutY="134.0" mnemonicParsing="false" text="Yes" />
-                                    <Label layoutX="76.0" layoutY="134.0" prefHeight="18.0" prefWidth="85.0" text="Is Delivered?" />
-                                    <Label layoutX="71.0" layoutY="173.0" prefHeight="18.0" prefWidth="85.0" text="Delivery Date:" />
-                                    <DatePicker fx:id="deliveryDate" layoutX="213.0" layoutY="169.0" />
+                                    <Label layoutX="387.0" layoutY="66.0" text="Delivery Area:" />
+                                    <Button fx:id="addRegularBtn" layoutX="685.0" layoutY="96.0" mnemonicParsing="false" onAction="#addRegularDelivery" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Regular Delivery" />
+                                    <Text fx:id="messageToUserRegular" layoutX="657.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+                                    <ComboBox fx:id="deliveryAreaBox" layoutX="474.0" layoutY="62.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                                    <ListView fx:id="ordersList" layoutX="127.0" layoutY="135.0" prefHeight="156.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
+                                    <Label layoutX="72.0" layoutY="135.0" prefHeight="18.0" prefWidth="51.0" text="Orders:" />
+                                    <ComboBox fx:id="DeliveryPersonBox" layoutX="219.0" layoutY="62.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
+                                    <CheckBox fx:id="yesChoice" layoutX="226.0" layoutY="101.0" mnemonicParsing="false" text="Yes">
+                                       <effect>
+                                          <SepiaTone level="0.25" />
+                                       </effect></CheckBox>
+                                    <Label layoutX="72.0" layoutY="100.0" prefHeight="18.0" prefWidth="85.0" text="Is Delivered?" />
+                                    <Label layoutX="381.0" layoutY="101.0" prefHeight="18.0" prefWidth="85.0" text="Delivery Date:" />
+                                    <DatePicker fx:id="deliveryDate" layoutX="474.0" layoutY="97.0" styleClass="textFields" stylesheets="@decoration.css" />
+                                    <ComboBox fx:id="orderBox" layoutX="151.0" layoutY="132.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                                    <Label fx:id="postageLbl" layoutX="390.0" layoutY="135.0" prefHeight="18.0" prefWidth="51.0" text="Postage:" />
+                                    <TextField fx:id="postageField" layoutX="475.0" layoutY="132.0" styleClass="textFields" stylesheets="@decoration.css" />
+                                    <Button fx:id="addExpressBtn" layoutX="685.0" layoutY="97.0" mnemonicParsing="false" onAction="#addExpressDelivery" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Express Delivery" />
+                                    <Pane layoutX="490.0" layoutY="197.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="707.0">
+                                       <children>
+                                          <ListView fx:id="allDeliveries" layoutX="3.0" layoutY="73.0" prefHeight="269.0" prefWidth="239.0" style="-fx-border-color: PeachPuff;" />
+                                          <Label layoutX="25.0" layoutY="46.0" text="List of Deliveries" />
+                                          <Button layoutX="39.0" layoutY="352.0" mnemonicParsing="false" onAction="#removeDelivery" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+                                          <Text layoutX="259.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Details" />
+                                          <Text layoutX="253.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Person:" wrappingWidth="93.71044921875" />
+                                          <Text layoutX="253.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Area:" />
+                                          <Text layoutX="255.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Is Delivered?" />
+                                          <Text fx:id="deliveryPersonField" fill="#c88021" layoutX="347.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                                          <Text fx:id="deliveryAreaField" fill="#c88021" layoutX="347.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                                          <Text fx:id="isDeliveredField" fill="#c88021" layoutX="347.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+                                          <Text layoutX="252.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Date:" />
+                                          <Text fx:id="dateField" layoutX="347.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
+                                          <Text fx:id="orderTitle" layoutX="252.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
+                                          <Text fx:id="ordersField" layoutX="347.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+                                          <Text fx:id="postageTitle" layoutX="251.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
+                                          <Text fx:id="postagerText" layoutX="347.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+                                          <Button layoutX="123.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                                       </children>
+                                    </Pane>
                                  </children>
                               </AnchorPane>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Express Delivery">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane layoutX="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="719.0">
-                           <children>
-                              <Label layoutX="72.0" layoutY="66.0" text="Delivery Person:" />
-                              <Label layoutX="72.0" layoutY="98.0" text="Delivery Area:" />
-                              <Button layoutX="60.0" layoutY="330.0" mnemonicParsing="false" onAction="#addExpressDelivery" prefHeight="26.0" prefWidth="134.0" text="Add Express Delivery" />
-                              <Text fx:id="messageToUserExpress" layoutX="60.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-                              <ComboBox fx:id="deliveryAreaBox1" layoutX="208.0" layoutY="94.0" prefWidth="150.0" />
-                              <Label layoutX="76.0" layoutY="208.0" prefHeight="18.0" prefWidth="51.0" text="Order:" />
-                              <ComboBox fx:id="DeliveryPersonBox1" layoutX="208.0" layoutY="62.0" prefWidth="150.0" />
-                              <CheckBox fx:id="yesChoice1" layoutX="233.0" layoutY="134.0" mnemonicParsing="false" text="Yes" />
-                              <Label layoutX="76.0" layoutY="134.0" prefHeight="18.0" prefWidth="85.0" text="Is Delivered?" />
-                              <Label layoutX="71.0" layoutY="173.0" prefHeight="18.0" prefWidth="85.0" text="Delivery Date:" />
-                              <DatePicker fx:id="deliveryDate1" layoutX="208.0" layoutY="169.0" />
-                              <ComboBox fx:id="orderBox" layoutX="213.0" layoutY="204.0" prefWidth="150.0" />
-                              <Label layoutX="76.0" layoutY="240.0" prefHeight="18.0" prefWidth="51.0" text="Postage:" />
-                              <TextField fx:id="postageField" layoutX="214.0" layoutY="237.0" />
+                              <Label layoutX="3.0" layoutY="15.0" prefHeight="25.0" prefWidth="133.0" text="Choose Delivey Type:" />
+                              <Button layoutX="128.0" layoutY="17.0" mnemonicParsing="false" onAction="#regularDeliveryChoice" text="Regular" />
+                              <Button layoutX="191.0" layoutY="19.0" mnemonicParsing="false" onAction="#expressDeliveryChoice" text="Express" />
                            </children>
                         </AnchorPane>
                      </children>

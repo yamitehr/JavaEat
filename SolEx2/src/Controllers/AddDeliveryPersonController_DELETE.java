@@ -26,7 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class AddDeliveryPersonController extends ControllerWrapper{
+public class AddDeliveryPersonController_DELETE extends ControllerWrapper{
 	@FXML
 	private ComboBox<String> vehicleBox;
 	@FXML

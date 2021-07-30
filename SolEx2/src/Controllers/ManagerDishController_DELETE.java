@@ -1,7 +1,6 @@
 package Controllers;
 
 import java.util.stream.Collectors;
-
 import Model.Component;
 import Model.Dish;
 import Model.Restaurant;
@@ -10,13 +9,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ManagerDishController extends ControllerWrapper {
+public class ManagerDishController_DELETE extends ControllerWrapper {
 	//Dishes
 	@FXML
 	private ListView<Dish> allDishes;
@@ -49,6 +50,9 @@ public class ManagerDishController extends ControllerWrapper {
 	private Text sensitivitiesField;
 	
 	@FXML
+	private AnchorPane toReplacePane;
+	
+	@FXML
     public void initialize() {
 		initDish();
 		initComp();
@@ -70,7 +74,7 @@ public class ManagerDishController extends ControllerWrapper {
 		    }
 		});
 				
-		//Add all cooks
+		//Add all dishes
 		allDishes.getItems().addAll(FXCollections.observableArrayList(
 				Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		
@@ -111,8 +115,11 @@ public class ManagerDishController extends ControllerWrapper {
 		});
 	}
 	
-	public void MoveToAddDishScene(ActionEvent e) {
-		moveToScene("/View/AddDish.fxml", (Stage)addDishBtn.getScene().getWindow());
+	public void MoveToAddDishScene(ActionEvent e) throws Exception {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddDish.fxml"));
+		AnchorPane pane = loader.load();
+		toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
+		toReplacePane.getChildren().add(pane);
 	}
 	/*
 	

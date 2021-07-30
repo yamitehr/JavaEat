@@ -5,34 +5,155 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCookController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCookController">
    <children>
-      <Label layoutX="72.0" layoutY="66.0" text="First Name" />
-      <Label layoutX="72.0" layoutY="104.0" text="Last Name" />
-      <Label layoutX="72.0" layoutY="146.0" text="Date Of Birth" />
-      <Label layoutX="72.0" layoutY="191.0" text="Gender" />
-      <RadioButton layoutX="220.0" layoutY="191.0" mnemonicParsing="false" text="Male">
-         <toggleGroup>
-            <ToggleGroup fx:id="Gender_group" />
-         </toggleGroup>
-      </RadioButton>
-      <TextField fx:id="first_Name" layoutX="220.0" layoutY="62.0" />
-      <TextField fx:id="last_Name" layoutX="220.0" layoutY="100.0" />
-      <DatePicker fx:id="date" layoutX="220.0" layoutY="142.0" />
-      <RadioButton layoutX="300.0" layoutY="191.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group" />
-      <Label layoutX="72.0" layoutY="227.0" text="Expertise" />
-      <Label layoutX="72.0" layoutY="259.0" text="is Chef" />
-      <CheckBox fx:id="isChef" layoutX="219.0" layoutY="259.0" mnemonicParsing="false" text="Yes" />
-      <ComboBox fx:id="expertiseBox" layoutX="219.0" layoutY="223.0" prefWidth="150.0" />
-      <Button layoutX="74.0" layoutY="319.0" mnemonicParsing="false" onAction="#addCook" prefHeight="26.0" prefWidth="109.0" text="Add Cook" />
-      <Button layoutX="74.0" layoutY="21.0" mnemonicParsing="false" onAction="#moveToManagerCooksScene" text="Back" />
-      <Text fx:id="messageToUser" layoutX="72.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-      <RadioButton layoutX="380.0" layoutY="191.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group" />
+      <TabPane prefHeight="705.0" prefWidth="1200.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Cook">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="759.0" prefWidth="997.0">
+                     <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1200.0">
+                           <children>
+                              <Label layoutX="72.0" layoutY="66.0" text="First Name" />
+                              <Label layoutX="366.0" layoutY="66.0" text="Last Name" />
+                              <Label layoutX="66.0" layoutY="109.0" text="Date Of Birth" />
+                              <Label layoutX="375.0" layoutY="109.0" text="Gender" />
+                              <RadioButton layoutX="452.0" layoutY="109.0" mnemonicParsing="false" text="Male">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="Gender_group" />
+                                 </toggleGroup>
+                                 <effect>
+                                    <SepiaTone level="0.25" />
+                                 </effect>
+                              </RadioButton>
+                              <TextField fx:id="first_Name" layoutX="170.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <TextField fx:id="last_Name" layoutX="452.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <DatePicker fx:id="date" layoutX="170.0" layoutY="105.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <RadioButton layoutX="508.0" layoutY="109.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group">
+                                 <effect>
+                                    <SepiaTone level="0.25" />
+                                 </effect>
+                              </RadioButton>
+                              <Label layoutX="77.0" layoutY="145.0" text="Expertise" />
+                              <Label layoutX="376.0" layoutY="145.0" text="is Chef" />
+                              <CheckBox fx:id="isChef" layoutX="457.0" layoutY="145.0" mnemonicParsing="false" text="Yes">
+                                 <effect>
+                                    <SepiaTone level="0.25" />
+                                 </effect>
+                              </CheckBox>
+                              <ComboBox fx:id="expertiseBox" layoutX="170.0" layoutY="141.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                              <Text fx:id="messageToUserCook" layoutX="660.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+                              <RadioButton layoutX="573.0" layoutY="109.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group">
+                                 <effect>
+                                    <SepiaTone level="0.25" />
+                                 </effect>
+                              </RadioButton>
+                              <Pane layoutX="238.0" layoutY="213.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0">
+                                 <children>
+                                    <ListView fx:id="allCooks" layoutX="25.0" layoutY="73.0" prefHeight="301.0" prefWidth="174.0" style="-fx-border-color: PeachPuff;" />
+                                    <Label layoutX="25.0" layoutY="46.0" text="List of cooks" />
+                                    <Button layoutX="28.0" layoutY="383.0" mnemonicParsing="false" onAction="#removeCook" text="Remove" />
+                                    <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cooks Details" />
+                                    <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First  Name:" />
+                                    <Text layoutX="206.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
+                                    <Text layoutX="207.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" />
+                                    <Text layoutX="207.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" />
+                                    <Text layoutX="208.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="is Chef:" />
+                                    <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                                    <Text fx:id="lastNameField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                                    <Text fx:id="dobField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+                                    <Text fx:id="genderField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                                    <Text layoutX="207.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expertise:" wrappingWidth="70.36376953125" />
+                                    <Text fx:id="expertiseField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                                    <Text fx:id="isChefFiled" fill="#c88021" layoutX="275.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="64.3525390625" />
+                                    <Button layoutX="100.0" layoutY="383.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Edit" />
+                                 </children>
+                              </Pane>
+                              <Button fx:id="addCookBtn" layoutX="665.0" layoutY="92.0" mnemonicParsing="false" onAction="#addCook" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Cook" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Delivery Person">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="736.0">
+                           <children>
+                              <Label layoutX="72.0" layoutY="66.0" text="First Name" />
+                              <Label layoutX="359.0" layoutY="66.0" text="Last Name" />
+                              <Label layoutX="66.0" layoutY="104.0" text="Date Of Birth" />
+                              <Label layoutX="361.0" layoutY="104.0" text="Gender" />
+                              <RadioButton layoutX="452.0" layoutY="104.0" mnemonicParsing="false" text="Male">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="Gender_group1" />
+                                 </toggleGroup>
+                                 <effect>
+                                    <SepiaTone level="0.25" />
+                                 </effect>
+                              </RadioButton>
+                              <TextField fx:id="first_Name1" layoutX="160.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <TextField fx:id="last_Name1" layoutX="452.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <DatePicker fx:id="date1" layoutX="157.0" layoutY="100.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <RadioButton layoutX="507.0" layoutY="104.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group1">
+                                 <effect>
+                                    <SepiaTone level="0.25" />
+                                 </effect>
+                              </RadioButton>
+                              <Label layoutX="82.0" layoutY="146.0" text="Vehicle" />
+                              <ComboBox fx:id="vehicleBox" layoutX="157.0" layoutY="142.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                              <Text fx:id="messageToUserDeliveryPerson" layoutX="72.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+                              <RadioButton layoutX="574.0" layoutY="104.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group1">
+                                 <effect>
+                                    <SepiaTone level="0.25" />
+                                 </effect>
+                              </RadioButton>
+                              <Label layoutX="345.0" layoutY="146.0" text="Delivery Area" />
+                              <ComboBox fx:id="deliveryAreaBox" layoutX="432.0" layoutY="142.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                           </children>
+                        </AnchorPane>
+                        <Button layoutX="689.0" layoutY="99.0" mnemonicParsing="false" onAction="#addDeliveryPerson" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Delivery Person" />
+                        <Pane layoutX="242.0" layoutY="215.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="600.0">
+                           <children>
+                              <ListView fx:id="allDeliveryPeople" layoutX="25.0" layoutY="73.0" prefHeight="269.0" prefWidth="174.0" style="-fx-border-color: PeachPuff;" />
+                              <Label layoutX="25.0" layoutY="46.0" text="List of delivery people" />
+                              <Button layoutX="25.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeDeliveryPerson" text="Remove" />
+                              <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery person Details" />
+                              <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First  Name:" />
+                              <Text layoutX="206.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
+                              <Text layoutX="207.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" />
+                              <Text layoutX="207.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" />
+                              <Text layoutX="208.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Area:" />
+                              <Text fx:id="firstNameField1" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                              <Text fx:id="lastNameField1" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                              <Text fx:id="dobField1" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+                              <Text fx:id="genderField1" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                              <Text layoutX="207.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle:" wrappingWidth="70.36376953125" />
+                              <Text fx:id="vehicleField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                              <Text fx:id="deliveryAreaField" fill="#c88021" layoutX="300.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+                              <Button layoutX="92.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeDeliveryPerson" prefHeight="25.0" prefWidth="49.0" text="Edit" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>
