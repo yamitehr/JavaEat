@@ -25,7 +25,7 @@
                               <Label layoutX="69.0" layoutY="43.0" text="Dish Name" />
                               <TextField fx:id="dish_Name" layoutX="220.0" layoutY="43.0" prefHeight="32.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <Label layoutX="405.0" layoutY="43.0" text="Dish Type" />
-                              <Button layoutX="746.0" layoutY="56.0" mnemonicParsing="false" onAction="#addDish" prefHeight="38.0" prefWidth="137.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Dish" />
+                              <Button fx:id="addDishBtn" layoutX="746.0" layoutY="56.0" mnemonicParsing="false" onAction="#addDish" prefHeight="38.0" prefWidth="137.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Dish" />
                               <Text fx:id="messageToUserDish" layoutX="762.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                               <Label layoutX="69.0" layoutY="96.0" text="Time To Make:" />
                               <TextField fx:id="timeToMake" layoutX="220.0" layoutY="90.0" prefHeight="29.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
@@ -48,9 +48,10 @@
                                     <Text fx:id="timeToMakeField" fill="#c88021" layoutX="409.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text layoutX="325.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" wrappingWidth="70.36376953125" />
                                     <Text fx:id="priceField" fill="#c88021" layoutX="396.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Button layoutX="178.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Edit" />
+                                    <Button layoutX="178.0" layoutY="352.0" mnemonicParsing="false" onAction="#editDish" prefHeight="25.0" prefWidth="127.0" text="Edit" />
                                  </children>
                               </AnchorPane>
+                              <Button fx:id="editDishbtn" layoutX="748.0" layoutY="68.0" mnemonicParsing="false" onAction="#setEditDish" prefHeight="38.0" prefWidth="137.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Dish" />
                            </children>
                         </AnchorPane>
                      </children>

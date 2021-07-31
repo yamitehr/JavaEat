@@ -20,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
@@ -85,6 +86,8 @@ public class AddDishController extends ControllerWrapper {
 	private Text timeToMakeField;
 	@FXML
 	private Text priceField;
+	@FXML
+	private Button editDishbtn;
 
 	
 	@FXML
@@ -93,6 +96,8 @@ public class AddDishController extends ControllerWrapper {
     }
 	
 	private void init() {
+		editDishbtn.setVisible(false);
+		
 		ObservableList<DishType> types = FXCollections.observableArrayList(DishType.values());
 		typesBox.getItems().clear();				
 		typesBox.setItems(FXCollections.observableArrayList(types));
@@ -189,6 +194,32 @@ public class AddDishController extends ControllerWrapper {
 			allDishes.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}
+	}
+	
+	public void editDish(ActionEvent e) {
+		Dish selectedDish = allDishes.getSelectionModel().getSelectedItem();
+		if(selectedDish !=  null) {
+			addDishBtn.setVisible(false);
+			editDishbtn.setVisible(true);
+			dish_Name.setText(selectedDish.getDishName());
+			typesBox.setValue(selectedDish.getType());
+			typesBox.setEditable(false);
+			timeToMake.setText(String.valueOf(selectedDish.getTimeToMake()));
+			for(int i = 0; i < selectedDish.getComponenets().size(); i++) {
+				componentsList.getSelectionModel().select(selectedDish.getComponenets().get(i));
+			}			
+		}
+	}
+	
+	public void setEditDish(ActionEvent e) {
+		Dish selectedDish = allDishes.getSelectionModel().getSelectedItem();
+		if(!selectedDish.getDishName().equals(dish_Name.getText())) {
+			selectedDish.setDishName(dish_Name.getText());
+		}
+		if(!selectedDish.getType().equals(typesBox.getValue()))
+			selectedDish.setType(typesBox.getValue());
+		if(selectedDish.getTimeToMake() != Integer.parseInt(timeToMake.getText()))
+			selectedDish.setTimeToMake(Integer.parseInt(timeToMake.getText()));
 	}
 	
 	/*public void moveToManagerDishScene(ActionEvent e) {
