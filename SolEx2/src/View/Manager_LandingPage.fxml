@@ -13,7 +13,7 @@
          <children>
             <ImageView fitHeight="409.0" fitWidth="353.0" layoutX="-4.0" layoutY="-83.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../../שולחן%20העבודה/לימודים/סמסטר%20ב/תכנות%20מונחה%20עצמים/JavaEat.png" />
+                  <Image url="@../../icons/JavaEat.png" />
                </image>
             </ImageView>
             <Button fx:id="dashboardBtn" layoutX="3.0" layoutY="223.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Dashboard">
