@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 
 public class CustomerLandingPageController extends ControllerWrapper{
 	Customer current = State.getCurrentCustomer();
@@ -42,6 +43,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	private AnchorPane toReplacePane;
 	@FXML
 	private MediaView restaurantVideo;
+	@FXML
+	private Button logOutBtn;
 	
 	private File file;
 	private MediaPlayer mediaPlayer;
@@ -93,5 +96,10 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	public void moveToPersonalDetailsScene(ActionEvent e) {
 		
+	}
+	
+	public void MoveToLoginScene(ActionEvent e) {
+		mediaPlayer.pause();
+		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow());
 	}
 }

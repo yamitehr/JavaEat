@@ -88,6 +88,16 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+                        <Button fx:id="logOutBtn" layoutX="888.0" layoutY="13.0" mnemonicParsing="false" onAction="#MoveToLoginScene" prefHeight="47.0" prefWidth="193.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Log Out">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="27.0" fitWidth="31.0" layoutX="911.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/sign-in-alt-solid.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="toReplacePane" layoutX="340.0" layoutY="54.0" prefHeight="717.0" prefWidth="1095.0">
