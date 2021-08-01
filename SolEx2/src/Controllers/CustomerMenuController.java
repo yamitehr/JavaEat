@@ -1,14 +1,19 @@
 package Controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import Model.Component;
 import Model.Dish;
 import Model.Restaurant;
+import Model.State;
 import Utils.DishType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,10 +31,16 @@ public class CustomerMenuController extends ControllerWrapper{
 	@FXML
 	private VBox menuItemsVbox;
 	
+	private CustomerLandingPageController landingController;
+	
 	@FXML
     public void initialize() {
 		initMenu();
     }
+	
+	public void setLandingController(CustomerLandingPageController c) {
+		landingController = c;
+	}
 	
 	private void initMenu() {
 		menuItemsVbox.setSpacing(10);
@@ -59,7 +70,7 @@ public class CustomerMenuController extends ControllerWrapper{
 			menuItems.add(starterPane);
 			for(Entry<Integer, Dish> d : starters) {
 				Dish dish = d.getValue();
-				menuItems.add(getMenuItem(dish.getDishName(), dish.calcDishPrice(), dish.getComponenets().toString()));
+				menuItems.add(getMenuItem(dish));
 			}
 		}
 		if (main.size() > 0) {
@@ -72,7 +83,7 @@ public class CustomerMenuController extends ControllerWrapper{
 			menuItems.add(mainPane);
 			for(Entry<Integer, Dish> d : main) {
 				Dish dish = d.getValue();
-				menuItems.add(getMenuItem(dish.getDishName(), dish.calcDishPrice(), dish.getComponenets().toString()));
+				menuItems.add(getMenuItem(dish));
 			}
 		}
 		if (deserts.size() > 0) {
@@ -85,16 +96,37 @@ public class CustomerMenuController extends ControllerWrapper{
 			menuItems.add(desertsPane);
 			for(Entry<Integer, Dish> d : starters) {
 				Dish dish = d.getValue();
-				menuItems.add(getMenuItem(dish.getDishName(), dish.calcDishPrice(), dish.getComponenets().toString()));
+				menuItems.add(getMenuItem(dish));
 			}
 		}
 		return menuItems;
 	}
 	
-	private Pane getMenuItem(String dishName, double dishPrice, String dishDescription) {
+	private Pane getMenuItem(Dish dish) {
+		String dishName = dish.getDishName();
+		double dishPrice = dish.calcDishPrice();
+		String dishDescription = dish.getComponenets().toString();
+		
 		Pane newMenuItem = new Pane();
 		Label dishLa = new Label("Dish: " + dishName + "\nPrice: " + String.valueOf(dishPrice) + "\nContains: " + dishDescription);
 		Button addBtn = new Button("+Add");
+
+		//Copy dish and components to a new object, so we can remove components from the dish without affecting
+		// the instance of the restaurant
+		ArrayList<Component> newComps = new ArrayList<Component>();
+		for(Component c : dish.getComponenets()) {
+			newComps.add(new Component(c.getComponentName(), c.isHasLactose(), c.isHasGluten(), c.getPrice()));
+		}
+		addBtn.setOnAction((ActionEvent evt)->{
+			Dish newDish = new Dish(dish.getId());
+			newDish.setDishName(dish.getDishName());
+			newDish.setType(dish.getType());
+			newComps.forEach(c -> newDish.addComponent(c));
+			newDish.setTimeToMake(dish.getTimeToMake());
+			
+			State.setCurrentDish(newDish);
+			landingController.toggleEditDish();
+        });
 		
 		dishLa.getStyleClass().add("descLabel");
 		newMenuItem.getStyleClass().add("menuItem");

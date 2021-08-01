@@ -36,6 +36,7 @@ public class Dish implements Serializable{
 	
 	public Dish(int id) {
 		this.id = id;
+		this.componenets = new ArrayList<Component>();
 	}
 	
 	// getters setters
@@ -69,7 +70,7 @@ public class Dish implements Serializable{
 	}
 	
 	public double getPrice() {
-		return price;
+		return calcDishPrice();
 	}
 	public void setPrice(double price) {
 		if(price > 0.0)
