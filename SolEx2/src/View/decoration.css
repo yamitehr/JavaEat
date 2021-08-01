@@ -56,3 +56,9 @@
 	-fx-border-color: PeachPuff;
 	-fx-background-color: White;
 }
+
+.shoppingCartItem{
+	-fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 1;
+    -fx-border-color: gray;
+}

@@ -2,6 +2,8 @@ package Controllers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import Model.Component;
 import Model.Customer;
@@ -17,6 +19,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -25,10 +29,12 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -47,13 +53,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	private Button ordersBtn;
 	
 	@FXML
-	private Button shoppingCartBtn;
-	
-	@FXML
 	private Button menuBtn;
-	
-	@FXML
-	private Button addOrderBtn;
 	
 	@FXML
 	private Button personalDetailsBtn;
@@ -82,6 +82,13 @@ public class CustomerLandingPageController extends ControllerWrapper{
     private Button addDishToOrder;
     @FXML
 	private GridPane componentGrid;
+    @FXML
+    private VBox cartVbox;
+    @FXML
+    private ScrollPane cartScrollPane;
+    
+    @FXML 
+    private Text priceText;
 	
 	@FXML
 	public void initialize() {
@@ -89,9 +96,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		componentList = new ArrayList<Pair<CheckBox, Component>>();
 		dashboardBtn.setAlignment(Pos.BASELINE_LEFT);
 		ordersBtn.setAlignment(Pos.BASELINE_LEFT);
-		shoppingCartBtn.setAlignment(Pos.BASELINE_LEFT);
 		menuBtn.setAlignment(Pos.BASELINE_LEFT);
-		addOrderBtn.setAlignment(Pos.BASELINE_LEFT);
 		personalDetailsBtn.setAlignment(Pos.BASELINE_LEFT);
 		
 		file = new File("restaurantVideoHD.mp4");
@@ -100,10 +105,14 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		mediaPlayer.play();
 		restaurantVideo.setMediaPlayer(mediaPlayer);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-
+		
+		cartScrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		cartScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+		cartVbox.setFillWidth(true);
 		initializeCompGrid();
         prepareSlideMenuAnimation();
         initializeAddDishButton();
+        initShoppingCart();
 		
 	}
 
@@ -232,9 +241,73 @@ public class CustomerLandingPageController extends ControllerWrapper{
             	dishes.add(dish);
         		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
         	}
-        	
+
+			initShoppingCart();
         	//close side menu
         	toggleEditDish();
         });
+	}
+	
+	public void initShoppingCart() {
+		//Clear shopping cart
+		cartVbox.getChildren().clear();
+		
+		//init values
+		Order currentOrder = State.getCurrentOrder();
+		if (currentOrder != null &&  State.getCurrentOrder().getDishes() != null && State.getCurrentOrder().getDishes().size() > 0) {
+			List<Dish> dishes = State.getCurrentOrder().getDishes();
+			cartVbox.getChildren().addAll(
+					dishes
+					.stream()
+					.map(d -> getShoppingCartItem(d))
+					.collect(Collectors.toList())
+					);	
+
+			double totalPrice = 0;
+			for(Dish d : dishes) {
+				totalPrice += d.calcDishPrice();
+			}
+			
+			priceText.setText(String.valueOf(totalPrice) + "$");
+		} else {
+			priceText.setText("0");
+			Pane emptyDishesPane = new Pane();
+			Label noDishesLabel = new Label("No dishes");
+			emptyDishesPane.getChildren().add(noDishesLabel);
+			cartVbox.getChildren().add(emptyDishesPane);
+		}
+	}
+	
+
+	private Pane getShoppingCartItem(Dish dish) {
+		String dishName = dish.getDishName();
+		double dishPrice = dish.calcDishPrice();
+		String dishDescription = dish.getComponenets().toString();
+		
+		Pane newMenuItem = new Pane();
+		Label dishLa = new Label("Dish: " + dishName + "\nPrice: " + String.valueOf(dishPrice) + "\nContains: " + dishDescription);
+		Button editBtn = new Button("Edit");
+		Button removeBtn = new Button("Remove");
+
+		editBtn.setOnAction((ActionEvent evt)->{
+			State.setCurrentDish(dish);
+			toggleEditDish();
+        });
+
+		removeBtn.setOnAction((ActionEvent evt)->{
+			Order order = State.getCurrentOrder();
+			order.removeDish(dish);
+			initShoppingCart();
+        });
+		
+		newMenuItem.getStyleClass().add("shoppingCartItem");
+		
+		newMenuItem.getChildren().addAll(dishLa);
+		newMenuItem.getChildren().addAll(editBtn);
+		newMenuItem.getChildren().addAll(removeBtn);
+		
+		editBtn.relocate(280, 20);
+		removeBtn.relocate(180, 20);
+		return newMenuItem;
 	}
 }
