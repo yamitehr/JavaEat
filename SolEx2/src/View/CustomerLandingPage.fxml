@@ -2,23 +2,24 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerLandingPageController">
    <children>
-      <AnchorPane layoutY="-34.0" prefHeight="770.0" prefWidth="343.0" style="-fx-background-color: PeachPuff;">
+      <AnchorPane layoutY="-34.0" prefHeight="804.0" prefWidth="343.0" style="-fx-background-color: PeachPuff;">
          <children>
-            <ImageView fitHeight="170.0" fitWidth="340.0" layoutX="-11.0" layoutY="-15.0" pickOnBounds="true">
+            <ImageView fitHeight="158.0" fitWidth="322.0" layoutX="11.0" layoutY="43.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../../שולחן%20העבודה/לימודים/סמסטר%20ב/תכנות%20מונחה%20עצמים/JavaEat.png" />
+                  <Image url="@../../icons/cookie-bite-solid.png" />
                </image>
             </ImageView>
             <Button fx:id="dashboardBtn" layoutX="3.0" layoutY="351.0" mnemonicParsing="false" onAction="#moveToDashboardScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" text="Dashboard">
@@ -41,16 +42,6 @@
 	         	   </ImageView>
             	</graphic>
             </Button>
-            <Button fx:id="shoppingCartBtn" layoutX="3.0" layoutY="560.0" mnemonicParsing="false" onAction="#moveToShoppingCartScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" text="Shopping Cart">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <graphic>
-	                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-	                  <Image url="@../../icons/shopping-cart-solid-2.png" />
-	         	   </ImageView>
-            	</graphic>
-            </Button>
             
             <Button fx:id="menuBtn" layoutX="3.0" layoutY="213.0" mnemonicParsing="false" onAction="#moveToMenuScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" text="Menu">
                <font>
@@ -62,17 +53,7 @@
 	         	   </ImageView>
             	</graphic>
             </Button>
-            <Button fx:id="addOrderBtn" layoutX="3.0" layoutY="420.0" mnemonicParsing="false" onAction="#moveToAddOrderScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" text="Add Order">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <graphic>
-	                <ImageView fitHeight="43.0" fitWidth="55.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-	                  <Image url="@../../icons/plus-square-solid.png" />
-	         	   </ImageView>
-            	</graphic>
-            </Button>
-            <Button fx:id="personalDetailsBtn" layoutX="3.0" layoutY="489.0" mnemonicParsing="false" onAction="#moveToPersonalDetailsScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" text="Personal Details">
+            <Button fx:id="personalDetailsBtn" layoutX="3.0" layoutY="420.0" mnemonicParsing="false" onAction="#moveToPersonalDetailsScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" text="Personal Details">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -82,6 +63,18 @@
 	         	   </ImageView>
             	</graphic>
             </Button>
+            <AnchorPane layoutY="743.0" prefHeight="54.0" prefWidth="343.0">
+               <children>
+                  <Button layoutX="100.0" layoutY="31.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" text="Continue" />
+                  <Text fx:id="priceText" layoutX="182.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price" />
+                  <Label layoutX="100.0" layoutY="6.0" text="Current Price:" />
+               </children>
+            </AnchorPane>
+            <ScrollPane fx:id="cartScrollPane" layoutX="3.0" layoutY="489.0" prefHeight="257.0" prefWidth="338.0">
+               <content>
+                  <VBox fx:id="cartVbox" prefWidth="330.0" />
+               </content>
+            </ScrollPane>
             
          </children>
       </AnchorPane>
@@ -109,7 +102,7 @@
             <MediaView fx:id="restaurantVideo" fitHeight="715.0" fitWidth="1100.0" layoutX="6.0" layoutY="1.0" />
          </children></AnchorPane>
          <!-- NAV BAR -->
-        <AnchorPane fx:id="navList" prefWidth="360.0" style="-fx-background-color:white" translateX="180" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="56.0">
+        <AnchorPane fx:id="navList" prefWidth="360.0" style="-fx-background-color:white" translateX="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="56.0">
             <children>
                 <Label fx:id="dishName" text="left side menu" />
             <Pane fx:id="componentsContainer" layoutY="91.0" prefHeight="200.0" prefWidth="200.0">
