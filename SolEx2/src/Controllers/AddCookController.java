@@ -72,6 +72,22 @@ public class AddCookController extends ControllerWrapper{
 	
 	//delivery person
 	@FXML
+	private TextField first_Name_DP;
+	@FXML
+	private TextField last_Name_DP;
+	@FXML
+	private ToggleGroup Gender_group_DP;
+	@FXML
+	private DatePicker dateDP;
+	@FXML
+	private Text firstNameFieldDP;
+	@FXML
+	private Text lastNameFieldDP;
+	@FXML
+	private Text dobFieldDP;
+	@FXML
+	private Text genderFieldDP;
+	@FXML
 	private ComboBox<Vehicle> vehicleBox;
 	@FXML
 	private ComboBox<DeliveryArea> deliveryAreaBox;
@@ -189,12 +205,6 @@ public class AddCookController extends ControllerWrapper{
 			});
 	}
 	
-	public void moveToManagerCooksScene(ActionEvent e) {
-		moveToScene("/View/Manager_Cooks.fxml", (Stage)first_Name.getScene().getWindow());
-	}
-	
-	
-	
 	public void updateCookDetailsFields() {
 		Cook selectedCook = allCooks.getSelectionModel().getSelectedItem();
 		// fill text fields with values about the selected customer on the list
@@ -229,11 +239,11 @@ public class AddCookController extends ControllerWrapper{
 		DeliveryPerson selectedDeliveryPerson = allDeliveryPeople.getSelectionModel().getSelectedItem();
 		// fill text fields with values about the selected delivery person on the list
 		if(selectedDeliveryPerson != null) {
-			firstNameField.setText(selectedDeliveryPerson.getFirstName());
-			lastNameField.setText(selectedDeliveryPerson.getLastName());
-			dobField.setText(selectedDeliveryPerson.getBirthDay().toString());
+			firstNameFieldDP.setText(selectedDeliveryPerson.getFirstName());
+			lastNameFieldDP.setText(selectedDeliveryPerson.getLastName());
+			dobFieldDP.setText(selectedDeliveryPerson.getBirthDay().toString());
 			vehicleField.setText(selectedDeliveryPerson.getVehicle().name());
-			genderField.setText(selectedDeliveryPerson.getGender().name());
+			genderFieldDP.setText(selectedDeliveryPerson.getGender().name());
 			deliveryAreaField.setText(selectedDeliveryPerson.getArea().getAreaName());
 			
 		//clean the text fields if there is no selection
@@ -414,33 +424,33 @@ public class AddCookController extends ControllerWrapper{
 		if(selectedDeliveryPerson !=  null) {
 			addDeliveryPersonBtn.setDisable(true);
 			editDeliveryPersonBtn.setDisable(false);
-			first_Name.setText(selectedDeliveryPerson.getFirstName());
-			last_Name.setText(selectedDeliveryPerson.getLastName());
-			date.setValue(selectedDeliveryPerson.getBirthDay());
-			Gender_group.setUserData(selectedDeliveryPerson.getGender());
+			first_Name_DP.setText(selectedDeliveryPerson.getFirstName());
+			last_Name_DP.setText(selectedDeliveryPerson.getLastName());
+			dateDP.setValue(selectedDeliveryPerson.getBirthDay());
+			Gender_group_DP.setUserData(selectedDeliveryPerson.getGender());
 			vehicleBox.setValue(selectedDeliveryPerson.getVehicle());
 			deliveryAreaBox.setValue(selectedDeliveryPerson.getArea());	
 			
-			date.setDisable(true);
-			date.setEditable(false);
+			dateDP.setDisable(true);
+			dateDP.setEditable(false);
 		}
 	}
 	
 	public void setEditDeliveryPerson(ActionEvent e) {
 		DeliveryPerson selectedDeliveryPerson = allDeliveryPeople.getSelectionModel().getSelectedItem();
 		try {
-			if(!selectedDeliveryPerson.getFirstName().equals(first_Name.getText())) {
-				if(first_Name.getText().isEmpty())
+			if(!selectedDeliveryPerson.getFirstName().equals(first_Name_DP.getText())) {
+				if(first_Name_DP.getText().isEmpty())
 					throw new InvalidInputException("First Name cannot be empty");
-				selectedDeliveryPerson.setFirstName(first_Name.getText());
+				selectedDeliveryPerson.setFirstName(first_Name_DP.getText());
 			}
-			if(!selectedDeliveryPerson.getLastName().equals(last_Name.getText())) {
-				if(last_Name.getText().isEmpty())
+			if(!selectedDeliveryPerson.getLastName().equals(last_Name_DP.getText())) {
+				if(last_Name_DP.getText().isEmpty())
 					throw new InvalidInputException("Last Name cannot be empty");
-				selectedDeliveryPerson.setLastName(last_Name.getText());
+				selectedDeliveryPerson.setLastName(last_Name_DP.getText());
 			}
-			if(!selectedDeliveryPerson.getGender().equals(Gender_group.getUserData()))
-				selectedDeliveryPerson.setGender((Gender)Gender_group.getUserData());
+			if(!selectedDeliveryPerson.getGender().equals(Gender_group_DP.getUserData()))
+				selectedDeliveryPerson.setGender((Gender)Gender_group_DP.getUserData());
 				
 		if(!selectedDeliveryPerson.getVehicle().equals(vehicleBox.getValue())) {
 			if(vehicleBox.getValue() == null)
@@ -456,11 +466,11 @@ public class AddCookController extends ControllerWrapper{
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setHeaderText("DeliveryPerson edited successfully!");
 		alert.showAndWait();
-		messageToUserCook.setText("");
-		first_Name.clear();
-		last_Name.clear();
-		date.setValue(null);
-		Gender_group.getSelectedToggle().setSelected(false);
+		messageToUserDeliveryPerson.setText("");
+		first_Name_DP.clear();
+		last_Name_DP.clear();
+		dateDP.setValue(null);
+		Gender_group_DP.getSelectedToggle().setSelected(false);
 		vehicleBox.getSelectionModel().clearSelection();
 		deliveryAreaBox.getSelectionModel().clearSelection();
 		allDeliveryPeople.getItems().clear();
@@ -470,8 +480,8 @@ public class AddCookController extends ControllerWrapper{
 		addDeliveryPersonBtn.setDisable(false);
 		date.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			messageToUserCook.setFill(Color.RED);
-			messageToUserCook.setText(inputE.getMessage());
+			messageToUserDeliveryPerson.setFill(Color.RED);
+			messageToUserDeliveryPerson.setText(inputE.getMessage());
 		}
 	}
 	
@@ -483,19 +493,19 @@ public class AddCookController extends ControllerWrapper{
 			
 			try {
 				
-				String firstName = first_Name.getText();
+				String firstName = first_Name_DP.getText();
 				if(firstName.isEmpty()) {
 					throw new InvalidPersonInputException("Please fill First Name");
 				}
 				
-				String lastName = last_Name.getText();
+				String lastName = last_Name_DP.getText();
 				if(lastName.isEmpty()) {
 					throw new InvalidPersonInputException("Please fill Last Name");
 				}
 				
 				//get DOB
 				LocalDate birthDate;
-				birthDate = date.getValue();
+				birthDate = dateDP.getValue();
 				if(birthDate == null) {
 					throw new InvalidPersonInputException("Please select Date of Birth");
 				}
@@ -506,7 +516,7 @@ public class AddCookController extends ControllerWrapper{
 				Gender gender = null;
 				//get gender
 				try {
-					RadioButton selectedRadioButton = (RadioButton) Gender_group.getSelectedToggle();
+					RadioButton selectedRadioButton = (RadioButton) Gender_group_DP.getSelectedToggle();
 					String toogleGroupValue = selectedRadioButton.getText();
 					for(Gender g : Gender.values()) {
 						if(g.name().equals(toogleGroupValue)) {
@@ -542,12 +552,12 @@ public class AddCookController extends ControllerWrapper{
 				//add deliveryPerson to the restaurant
 				if(Restaurant.getInstance().addDeliveryPerson(newDeliveryPerson, selectedDeliveryArea)) {
 					messageToUserDeliveryPerson.setFill(Color.BLUE);
-					messageToUserDeliveryPerson.setText("Cook added successfully");
-					first_Name.clear();
-					last_Name.clear();
-					Gender_group.getSelectedToggle().setSelected(false);
+					messageToUserDeliveryPerson.setText("Delivery Person added successfully");
+					first_Name_DP.clear();
+					last_Name_DP.clear();
+					Gender_group_DP.getSelectedToggle().setSelected(false);
 					vehicleBox.getSelectionModel().clearSelection();
-					date.setValue(null);
+					dateDP.setValue(null);
 					allDeliveryPeople.getItems().clear();
 					allDeliveryPeople.getItems().addAll(FXCollections.observableArrayList(
 							Restaurant.getInstance().getDeliveryPersons().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));

@@ -2,6 +2,7 @@ package Controllers;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import Exceptions.InvalidPersonInputException;
 import Model.DeliveryArea;
@@ -9,9 +10,13 @@ import Model.Restaurant;
 import Utils.Neighberhood;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -36,6 +41,18 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 	private ArrayList<Pair<CheckBox, Neighberhood>> neighberhoodList;
 	@FXML
 	private Text messageToUser;
+	@FXML
+	private Button addDeliveryAreaBtn;
+	@FXML
+	private Button removeDeliveryAreaBtn;
+	@FXML
+	private ListView<DeliveryArea> allDeliveryAreas;
+	@FXML
+	private Text areaNameField;
+	@FXML
+	private Text deliveryTimeField;
+	@FXML
+	private Text neighborhoodField;
 	
 	
 	@FXML
@@ -87,6 +104,56 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 		    	}
 		    }
 		});
+		
+		////////All delivery people list view
+		//Set the listview cell factory to show the right delivery person name
+		allDeliveryAreas.setCellFactory(param -> new ListCell<DeliveryArea>() {
+		    @Override
+		    protected void updateItem(DeliveryArea item, boolean empty) {
+		        super.updateItem(item, empty);
+
+		        if (empty || item == null) {
+		            setText(null);
+		        } else {
+		            setText(item.getAreaName());
+		        }
+		    }
+		});
+				
+		//Add all delivery people
+		allDeliveryAreas.getItems().addAll(FXCollections.observableArrayList(
+				Restaurant.getInstance().getAreas().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
+		
+		//Event listener for listview
+		allDeliveryAreas.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<DeliveryArea>() {
+		    @Override
+		    public void changed(ObservableValue<? extends DeliveryArea> observable, DeliveryArea oldValue, DeliveryArea newValue) {
+		    	updateDeliveryAreaDetailsFields();
+		    }
+		});
+	}
+	
+	public void updateDeliveryAreaDetailsFields() {
+		DeliveryArea selectedDeliveryArea = allDeliveryAreas.getSelectionModel().getSelectedItem();
+		// fill text fields with values about the selected delivery area on the list
+		if(selectedDeliveryArea != null) {
+			areaNameField.setText(selectedDeliveryArea.getAreaName());
+			deliveryTimeField.setText(String.valueOf(selectedDeliveryArea.getDeliverTime()));
+			String neighborhoodsStr = "";
+			if (selectedDeliveryArea.getNeighberhoods().size() > 0) {
+				for(Neighberhood n : selectedDeliveryArea.getNeighberhoods()) {
+					neighborhoodsStr += n.name() + ", ";
+				}
+				neighborhoodsStr = neighborhoodsStr.substring(0, neighborhoodsStr.length() - 3);
+			}
+			neighborhoodField.setText(neighborhoodsStr);
+			
+		//clean the text fields if there is no selection
+		} else if(selectedDeliveryArea == null) {
+			areaNameField.setText("");
+			deliveryTimeField.setText("");
+			neighborhoodField.setText("");
+		}
 	}
 	
 	public void addDeliveryArea(ActionEvent e) {
@@ -140,9 +207,12 @@ public class AddDeliveryAreaController extends ControllerWrapper{
 		}
 		
 	}
-	
-	public void moveToManagerDeliveryAreaScene(ActionEvent e) {
-		moveToScene("/View/Manager_DeliveryArea.fxml", (Stage)deliveryAreaName.getScene().getWindow());
+		
+	public void removeDeliveryArea(ActionEvent e) {
+		DeliveryArea selectedDeliveryArea = allDeliveryAreas.getSelectionModel().getSelectedItem();
+		if(selectedDeliveryArea !=  null) {
+		
+		}
 	}
 	
 	
