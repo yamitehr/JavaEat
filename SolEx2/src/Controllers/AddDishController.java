@@ -2,7 +2,6 @@ package Controllers;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-
 import Exceptions.InvalidInputException;
 import Model.Component;
 import Model.Dish;
@@ -20,15 +19,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class AddDishController extends ControllerWrapper {
 	@FXML
@@ -217,16 +212,24 @@ public class AddDishController extends ControllerWrapper {
 	
 	public void setEditDish(ActionEvent e) {
 		Dish selectedDish = allDishes.getSelectionModel().getSelectedItem();
-		if(!selectedDish.getDishName().equals(dish_Name.getText())) {
-			selectedDish.setDishName(dish_Name.getText());
+		try {
+			if(!selectedDish.getDishName().equals(dish_Name.getText())) {
+				if(dish_Name.getText().isEmpty())
+					throw new InvalidInputException("Dish Name cannot be empty");
+				selectedDish.setDishName(dish_Name.getText());
 		}
-		if(!selectedDish.getType().equals(typesBox.getValue()))
+		if(!selectedDish.getType().equals(typesBox.getValue())) {
+			if(typesBox.getValue() == null)
+				throw new InvalidInputException("you must choose Dish Type");
 			selectedDish.setType(typesBox.getValue());
+		}
 		if(selectedDish.getTimeToMake() != Integer.parseInt(timeToMake.getText()))
 			selectedDish.setTimeToMake(Integer.parseInt(timeToMake.getText()));
 		
 		ArrayList<Component> changedComponents = new ArrayList<Component>();
 		changedComponents.addAll(componentsList.getSelectionModel().getSelectedItems());
+		if(changedComponents.isEmpty()) 
+			throw new InvalidInputException("You must choose at least one component");
 		for(int i = 0; i < selectedDish.getComponenets().size(); i++) {
 			if(!changedComponents.contains(selectedDish.getComponenets().get(i)))
 				selectedDish.removeComponent(selectedDish.getComponenets().get(i));			
@@ -239,6 +242,7 @@ public class AddDishController extends ControllerWrapper {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setHeaderText("Dish edited successfully!");
 		alert.showAndWait();
+		messageToUserDish.setText("");
 		dish_Name.clear();
 		timeToMake.clear();
 		typesBox.getSelectionModel().clearSelection();
@@ -248,12 +252,16 @@ public class AddDishController extends ControllerWrapper {
 		Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		editDishbtn.setDisable(true);
 		addDishBtn.setDisable(false);
+		}catch(InvalidInputException inputE) {
+			messageToUserDish.setFill(Color.RED);
+			messageToUserDish.setText(inputE.getMessage());
+		}catch(NumberFormatException ne) {
+			messageToUserDish.setFill(Color.RED);
+			messageToUserDish.setText("Wrong Input!");
+		}
+		
 		
 	}
-	
-	/*public void moveToManagerDishScene(ActionEvent e) {
-		moveToScene("/View/Manager_Dish.fxml", (Stage)dish_Name.getScene().getWindow());
-	}*/
 	
 	public void addDish(ActionEvent e) {
 		try {
@@ -322,26 +330,38 @@ public class AddDishController extends ControllerWrapper {
 	
 	public void setEditComponent(ActionEvent e) {
 		Component selectedComponent = allComponents.getSelectionModel().getSelectedItem();
-		if(!selectedComponent.getComponentName().equals(component_Name.getText())) {
-			selectedComponent.setComponentName(component_Name.getText());
+		try {
+			if(!selectedComponent.getComponentName().equals(component_Name.getText())) {
+				if(component_Name.getText().isEmpty())
+					throw new InvalidInputException("Component Name cannot be empty");
+				selectedComponent.setComponentName(component_Name.getText());
+			}
+			if(selectedComponent.getPrice() != Double.parseDouble(price.getText()))
+				selectedComponent.setPrice(Double.parseDouble(price.getText()));
+			
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setHeaderText("Component edited successfully!");
+			alert.showAndWait();
+			messageToUserComp.setText("");
+			component_Name.clear();
+			price.clear();
+			isGluten.setSelected(false);
+			isLactose.setSelected(false);
+			isGluten.setDisable(false);
+			isLactose.setDisable(false);
+			allComponents.getItems().clear();
+			allComponents.getItems().addAll(FXCollections.observableArrayList(
+			Restaurant.getInstance().getComponenets().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
+			editComponentBtn.setDisable(true);
+			addComponentBtn.setDisable(false);
 		}
-		if(selectedComponent.getPrice() != Double.parseDouble(price.getText()))
-			selectedComponent.setPrice(Double.parseDouble(price.getText()));				
-		
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setHeaderText("Component edited successfully!");
-		alert.showAndWait();
-		component_Name.clear();
-		price.clear();
-		isGluten.setSelected(false);
-		isLactose.setSelected(false);
-		isGluten.setDisable(false);
-		isLactose.setDisable(false);
-		allComponents.getItems().clear();
-		allComponents.getItems().addAll(FXCollections.observableArrayList(
-		Restaurant.getInstance().getComponenets().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
-		editComponentBtn.setDisable(true);
-		addComponentBtn.setDisable(false);
+		catch(InvalidInputException inputE) {
+			messageToUserComp.setFill(Color.RED);
+			messageToUserComp.setText(inputE.getMessage());
+		}catch(NumberFormatException ne) {
+			messageToUserComp.setFill(Color.RED);
+			messageToUserComp.setText("Wrong Input!");
+		}
 		
 	}
 	

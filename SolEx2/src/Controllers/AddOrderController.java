@@ -22,6 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -58,6 +59,8 @@ public class AddOrderController extends ControllerWrapper {
 	private Text dishesField;
 	@FXML
 	private Text deliveryField;
+	@FXML
+	private Button editOrderBtn;
 	
 	//delivery
 	@FXML
@@ -120,6 +123,8 @@ public class AddOrderController extends ControllerWrapper {
     }
 	
 	private void init() {
+		editOrderBtn.setDisable(true);
+		
 		orderBox.setVisible(false);
 		ordersList.setVisible(false);
 		postageField.setVisible(false);
@@ -229,6 +234,79 @@ public class AddOrderController extends ControllerWrapper {
 	}
 	
 	
+	public void editOrder(ActionEvent e) {
+		Order selectedOrder = allOrders.getSelectionModel().getSelectedItem();
+		if(selectedOrder !=  null) {
+			addOrderBtn.setDisable(true);
+			editOrderBtn.setDisable(false);
+			customerBox.setValue(selectedOrder.getCustomer());
+			customerBox.setEditable(false);
+			if(selectedOrder.getDelivery() != null)
+				deliveryBox.setValue(selectedOrder.getDelivery());
+			for(int i = 0; i < selectedOrder.getDishes().size(); i++) {
+				dishesList.getSelectionModel().select(selectedOrder.getDishes().get(i));
+			}
+			customerBox.setDisable(true);
+		}
+	}
+	
+	public void setEditOrder(ActionEvent e) {
+		Order selectedOrder = allOrders.getSelectionModel().getSelectedItem();
+		try {
+			if(!selectedOrder.getCustomer().equals(customerBox.getValue())) {
+				if(customerBox.getValue() == null)
+					throw new InvalidInputException("You must choose Customer");
+				selectedOrder.setCustomer(customerBox.getValue());
+		}
+			if(selectedOrder.getDelivery() != null) {
+				if(!selectedOrder.getDelivery().equals(deliveryBox.getValue())) {
+					if(deliveryBox.getValue() == null)
+						throw new InvalidInputException("you must choose Delivery");
+					selectedOrder.setDelivery(deliveryBox.getValue());
+				}
+		}
+		ArrayList<Dish> changedDishes = new ArrayList<Dish>();
+		changedDishes.addAll(dishesList.getSelectionModel().getSelectedItems());
+		if(changedDishes.isEmpty()) 
+			throw new InvalidInputException("You must choose at least one dish");
+		for(Dish d: changedDishes) {
+			for(Component c: d.getComponenets()) {
+				if(selectedOrder.getCustomer().isSensitiveToGluten() && c.isHasGluten()) {
+					throw new InvalidInputException(selectedOrder.getCustomer() + " is sensitive to " + c);
+				}
+				else if(selectedOrder.getCustomer().isSensitiveToLactose() && c.isHasLactose()) {
+					throw new InvalidInputException(selectedOrder.getCustomer() + " is sensitive to " + c);
+				}
+			}
+		}
+		for(int i = 0; i < selectedOrder.getDishes().size(); i++) {
+			if(!changedDishes.contains(selectedOrder.getDishes().get(i)))
+				selectedOrder.removeDish(selectedOrder.getDishes().get(i));			
+		}
+		for(Dish d: changedDishes) {
+			if(!selectedOrder.getDishes().contains(d))
+				selectedOrder.addDish(d);
+		}
+		
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setHeaderText("Order edited successfully!");
+		alert.showAndWait();
+		messageToUserOrder.setText("");
+		customerBox.getSelectionModel().clearSelection();
+		deliveryBox.getSelectionModel().clearSelection();
+		dishesList.getSelectionModel().clearSelection();
+		allOrders.getItems().clear();
+		allOrders.getItems().addAll(FXCollections.observableArrayList(
+		Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
+		editOrderBtn.setDisable(true);
+		addOrderBtn.setDisable(false);
+		}catch(InvalidInputException inputE) {
+			messageToUserOrder.setFill(Color.RED);
+			messageToUserOrder.setText(inputE.getMessage());
+		}
+	}
+	
+	
 	public void addOrder(ActionEvent e) {
 		try {
 			Customer customer = customerBox.getValue();
@@ -248,10 +326,10 @@ public class AddOrderController extends ControllerWrapper {
 			for(Dish d: orderDishes) {
 				for(Component c: d.getComponenets()) {
 					if(customer.isSensitiveToGluten() && c.isHasGluten()) {
-						throw new InvalidInputException(customer + " is sensitive to one of the components");
+						throw new InvalidInputException(customer + " is sensitive to " + c);
 					}
 					else if(customer.isSensitiveToLactose() && c.isHasLactose()) {
-						throw new InvalidInputException(customer + " is sensitive to one of the components");
+						throw new InvalidInputException(customer + " is sensitive to " + c);
 					}
 				}
 			}
