@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -88,6 +89,8 @@ public class AddDishController extends ControllerWrapper {
 	private Text priceField;
 	@FXML
 	private Button editDishbtn;
+	@FXML
+	private Button editComponentBtn;
 
 	
 	@FXML
@@ -96,7 +99,8 @@ public class AddDishController extends ControllerWrapper {
     }
 	
 	private void init() {
-		editDishbtn.setVisible(false);
+		editDishbtn.setDisable(true);
+		editComponentBtn.setDisable(true);
 		
 		ObservableList<DishType> types = FXCollections.observableArrayList(DishType.values());
 		typesBox.getItems().clear();				
@@ -199,8 +203,8 @@ public class AddDishController extends ControllerWrapper {
 	public void editDish(ActionEvent e) {
 		Dish selectedDish = allDishes.getSelectionModel().getSelectedItem();
 		if(selectedDish !=  null) {
-			addDishBtn.setVisible(false);
-			editDishbtn.setVisible(true);
+			addDishBtn.setDisable(true);
+			editDishbtn.setDisable(false);
 			dish_Name.setText(selectedDish.getDishName());
 			typesBox.setValue(selectedDish.getType());
 			typesBox.setEditable(false);
@@ -220,6 +224,31 @@ public class AddDishController extends ControllerWrapper {
 			selectedDish.setType(typesBox.getValue());
 		if(selectedDish.getTimeToMake() != Integer.parseInt(timeToMake.getText()))
 			selectedDish.setTimeToMake(Integer.parseInt(timeToMake.getText()));
+		
+		ArrayList<Component> changedComponents = new ArrayList<Component>();
+		changedComponents.addAll(componentsList.getSelectionModel().getSelectedItems());
+		for(int i = 0; i < selectedDish.getComponenets().size(); i++) {
+			if(!changedComponents.contains(selectedDish.getComponenets().get(i)))
+				selectedDish.removeComponent(selectedDish.getComponenets().get(i));			
+		}
+		for(Component c: changedComponents) {
+			if(!selectedDish.getComponenets().contains(c))
+				selectedDish.addComponent(c);
+		}
+		
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setHeaderText("Dish edited successfully!");
+		alert.showAndWait();
+		dish_Name.clear();
+		timeToMake.clear();
+		typesBox.getSelectionModel().clearSelection();
+		componentsList.getSelectionModel().clearSelection();
+		allDishes.getItems().clear();
+		allDishes.getItems().addAll(FXCollections.observableArrayList(
+		Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
+		editDishbtn.setDisable(true);
+		addDishBtn.setDisable(false);
+		
 	}
 	
 	/*public void moveToManagerDishScene(ActionEvent e) {
@@ -273,6 +302,47 @@ public class AddDishController extends ControllerWrapper {
 			messageToUserDish.setFill(Color.RED);
 			messageToUserDish.setText("an error has accured please try again");
 		}
+	}
+	
+	public void editComponent(ActionEvent e) {
+		Component selectedComponent = allComponents.getSelectionModel().getSelectedItem();
+		if(selectedComponent !=  null) {
+			addComponentBtn.setDisable(true);
+			editComponentBtn.setDisable(false);
+			component_Name.setText(selectedComponent.getComponentName());
+			price.setText(String.valueOf(selectedComponent.getPrice()));
+			if(selectedComponent.isHasGluten()) 
+				isGluten.setSelected(true);
+			if(selectedComponent.isHasLactose()) 
+				isLactose.setSelected(true);
+			isGluten.setDisable(true);
+			isLactose.setDisable(true);
+		}
+	}
+	
+	public void setEditComponent(ActionEvent e) {
+		Component selectedComponent = allComponents.getSelectionModel().getSelectedItem();
+		if(!selectedComponent.getComponentName().equals(component_Name.getText())) {
+			selectedComponent.setComponentName(component_Name.getText());
+		}
+		if(selectedComponent.getPrice() != Double.parseDouble(price.getText()))
+			selectedComponent.setPrice(Double.parseDouble(price.getText()));				
+		
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setHeaderText("Component edited successfully!");
+		alert.showAndWait();
+		component_Name.clear();
+		price.clear();
+		isGluten.setSelected(false);
+		isLactose.setSelected(false);
+		isGluten.setDisable(false);
+		isLactose.setDisable(false);
+		allComponents.getItems().clear();
+		allComponents.getItems().addAll(FXCollections.observableArrayList(
+		Restaurant.getInstance().getComponenets().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
+		editComponentBtn.setDisable(true);
+		addComponentBtn.setDisable(false);
+		
 	}
 	
 	public void updateComponentDetailsFields() {
