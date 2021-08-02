@@ -78,9 +78,10 @@
                                     <Label layoutX="381.0" layoutY="101.0" prefHeight="18.0" prefWidth="85.0" text="Delivery Date:" />
                                     <DatePicker fx:id="deliveryDate" layoutX="473.0" layoutY="105.0" styleClass="textFields" stylesheets="@decoration.css" />
                                     <ComboBox fx:id="orderBox" layoutX="151.0" layoutY="132.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                                    <Label fx:id="postageLbl" layoutX="390.0" layoutY="135.0" prefHeight="18.0" prefWidth="51.0" text="Postage:" />
-                                    <TextField fx:id="postageField" layoutX="475.0" layoutY="132.0" styleClass="textFields" stylesheets="@decoration.css" />
+                                    <Label fx:id="postageLbl" layoutX="387.0" layoutY="139.0" prefHeight="18.0" prefWidth="51.0" text="Postage:" />
+                                    <TextField fx:id="postageField" layoutX="473.0" layoutY="139.0" styleClass="textFields" stylesheets="@decoration.css" />
                                     <Button fx:id="addExpressBtn" layoutX="685.0" layoutY="97.0" mnemonicParsing="false" onAction="#addExpressDelivery" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Express Delivery" />
+                                    <Button fx:id="editDeliveryBtn" layoutX="685.0" layoutY="130.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Delivery" />
                                  </children>
                               </AnchorPane>
                               <Pane layoutX="304.0" layoutY="272.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="670.0">
@@ -96,12 +97,12 @@
                                     <Text fx:id="deliveryAreaField" fill="#c88021" layoutX="347.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="isDeliveredField" fill="#c88021" layoutX="347.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
                                     <Text layoutX="252.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Date:" />
-                                    <Text fx:id="dateField" layoutX="347.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
+                                    <Text fx:id="dateField" fill="#c88021" layoutX="347.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
                                     <Text fx:id="orderTitle" layoutX="252.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
-                                    <Text fx:id="ordersField" layoutX="347.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+                                    <Text fx:id="ordersField" fill="#c88021" layoutX="347.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
                                     <Text fx:id="postageTitle" layoutX="251.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
-                                    <Text fx:id="postagerText" layoutX="347.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-                                    <Button layoutX="123.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                                    <Text fx:id="postageText" fill="#c88021" layoutX="347.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+                                    <Button layoutX="123.0" layoutY="352.0" mnemonicParsing="false" onAction="#editDelivery" prefHeight="25.0" prefWidth="50.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                                  </children>
                               </Pane>
                               <Label layoutX="7.0" layoutY="9.0" prefHeight="25.0" prefWidth="133.0" text="Choose Delivey Type:" />
