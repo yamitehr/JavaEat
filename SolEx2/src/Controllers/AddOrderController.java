@@ -476,6 +476,9 @@ public class AddOrderController extends ControllerWrapper {
 			allOrders.getItems().clear();
 			allOrders.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
+			ordersList.getItems().clear();
+			ordersList.getItems().addAll(FXCollections.observableArrayList(
+			Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
 			messageToUserOrder.setFill(Color.RED);
 			messageToUserOrder.setText(inputE.getMessage());
@@ -567,8 +570,8 @@ public class AddOrderController extends ControllerWrapper {
 			///		
 	
 			Restaurant.getInstance().addDelivery(newExpressDelivery); 
-			messageToUserExpress.setFill(Color.BLUE);
-			messageToUserExpress.setText("Express Delivery added successfully");
+			messageToUserRegular.setFill(Color.BLUE);
+			messageToUserRegular.setText("Express Delivery added successfully");
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
 			orderBox.getSelectionModel().clearSelection();
@@ -579,14 +582,14 @@ public class AddOrderController extends ControllerWrapper {
 			allDeliveries.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
-			messageToUserExpress.setFill(Color.RED);
-			messageToUserExpress.setText(inputE.getMessage());
+			messageToUserRegular.setFill(Color.RED);
+			messageToUserRegular.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
-			messageToUserExpress.setFill(Color.RED);
-			messageToUserExpress.setText("Wrong Input!");
+			messageToUserRegular.setFill(Color.RED);
+			messageToUserRegular.setText("Wrong Input!");
 		}catch(Exception ex) {
-			messageToUserExpress.setFill(Color.RED);
-			messageToUserExpress.setText("an error has accured please try again");
+			messageToUserRegular.setFill(Color.RED);
+			messageToUserRegular.setText("an error has accured please try again");
 		}
 	}
 	

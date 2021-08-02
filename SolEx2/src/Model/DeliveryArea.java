@@ -99,8 +99,7 @@ public class DeliveryArea implements Serializable{
 
 	@Override
 	public String toString() {
-		return "DeliveryArea [id=" + id + ", areaName=" + areaName + ", neighberhoods=" + neighberhoods
-				+ ", deliverTime=" + deliverTime + "]";
+		return areaName;
 	}
 	
 	//methods

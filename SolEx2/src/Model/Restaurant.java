@@ -244,7 +244,6 @@ public class Restaurant implements Serializable{
 					ed.getOrder().setDelivery(delivery);
 			}
 		}catch(ConvertToExpressException e) {
-			Utils.MyFileLogWriter.println(e.getMessage());
 			RegularDelivery rd = (RegularDelivery)delivery;
 			delivery = new ExpressDelivery(rd.getDeliveryPerson(), rd.getArea(),rd.isDelivered(), rd.getOrders().first() ,rd.getDeliveredDate());
 		}finally {

@@ -45,7 +45,7 @@ public class DeliveryPerson extends Person {
 	}
 	@Override
 	public String toString() {
-		return super.toString()+" DeliveryPerson [vehicle=" + vehicle + "]";
+		return super.toString();
 	}
 
 	protected Object readResolve() {

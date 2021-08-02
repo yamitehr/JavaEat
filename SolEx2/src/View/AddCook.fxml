@@ -20,7 +20,7 @@
    <children>
       <TabPane prefHeight="705.0" prefWidth="1200.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab style="-fx-background-color: White;" text="Cook">
+          <Tab text="Cook">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="759.0" prefWidth="997.0">
                      <children>
@@ -89,7 +89,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab style="-fx-background-color: White;" text="Delivery Person">
+          <Tab closable="false" text="Delivery Person">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -108,7 +108,7 @@
                                  </toggleGroup>
                               </RadioButton>
                               <TextField fx:id="first_Name_DP" layoutX="160.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <TextField fx:id="last_NameDP" layoutX="452.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <TextField fx:id="last_Name_DP" layoutX="452.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <DatePicker fx:id="dateDP" layoutX="157.0" layoutY="100.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <RadioButton layoutX="507.0" layoutY="104.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group_DP">
                                  <effect>

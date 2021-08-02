@@ -45,8 +45,8 @@
             <SepiaTone level="0.25" />
          </effect></CheckBox>
       <ComboBox fx:id="neighberhoodsBox" layoutX="173.0" layoutY="143.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-      <Button layoutX="689.0" layoutY="113.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Customer" />
-      <Text fx:id="messageToUser" layoutX="607.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+      <Button fx:id="addCustomerBtn" layoutX="689.0" layoutY="100.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Customer" />
+      <Text fx:id="messageToUser" layoutX="600.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
       <RadioButton layoutX="556.0" layoutY="105.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group">
          <effect>
             <SepiaTone level="0.25" />
@@ -72,8 +72,9 @@
             <Text fx:id="neighberhoodField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <Text fx:id="genderField" fill="#c88021" layoutX="253.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <Text fx:id="sensitivitiesField" fill="#c88021" layoutX="285.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <Button layoutX="53.0" layoutY="390.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+            <Button layoutX="53.0" layoutY="390.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="56.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
          </children>
       </Pane>
+      <Button fx:id="editCustomerBtn" disable="true" layoutX="689.0" layoutY="133.0" mnemonicParsing="false" onAction="#setEditCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Customer" />
    </children>
 </AnchorPane>

@@ -1,11 +1,12 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class RegularDelivery extends Delivery {
+public class RegularDelivery extends Delivery implements Serializable {
 	/**
 	 * 
 	 */

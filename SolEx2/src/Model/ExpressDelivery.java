@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ExpressDelivery extends Delivery {
+public class ExpressDelivery extends Delivery implements Serializable {
 	/**
 	 * 
 	 */

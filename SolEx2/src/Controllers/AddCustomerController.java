@@ -4,16 +4,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import Exceptions.InvalidInputException;
 import Exceptions.InvalidPersonInputException;
+import Model.Cook;
 import Model.Customer;
 import Model.Restaurant;
+import Utils.Expertise;
 import Utils.Gender;
 import Utils.Neighberhood;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -29,7 +34,7 @@ import javafx.stage.Stage;
 
 public class AddCustomerController extends ControllerWrapper{
 	@FXML
-	private ComboBox<String> neighberhoodsBox;
+	private ComboBox<Neighberhood> neighberhoodsBox;
 
 	@FXML
 	private TextField first_Name;
@@ -47,6 +52,8 @@ public class AddCustomerController extends ControllerWrapper{
 	private Text messageToUser;
 	@FXML
 	private Button addCustomerBtn;
+	@FXML
+	private Button editCustomerBtn;
 	@FXML
 	private Button removeCustomerBtn;
 	@FXML
@@ -72,16 +79,12 @@ public class AddCustomerController extends ControllerWrapper{
 		init();
     }
 	
-	private void init() {
-		neighberhoodsBox.getItems().clear();
+	private void init() {	
 		
-		ArrayList<String> neighberhoodNames = new ArrayList<String>();
-		
-		for(Neighberhood n : Neighberhood.values()) {
-			neighberhoodNames.add(n.toString());
-		}
-		
-		neighberhoodsBox.getItems().addAll(FXCollections.observableArrayList(neighberhoodNames));
+		ObservableList<Neighberhood> neighberhoods = FXCollections.observableArrayList(Neighberhood.values());
+		neighberhoodsBox.getItems().clear();				
+		neighberhoodsBox.setItems(FXCollections.observableArrayList(neighberhoods));
+	
 		
 		////////All customers list view
 		//Set the listview cell factory to show the right customer name
@@ -158,6 +161,76 @@ public class AddCustomerController extends ControllerWrapper{
 			neighberhoodField.setText("");
 			genderField.setText("");
 			sensitivitiesField.setText("");
+		}
+	}
+	
+	public void editCustomer(ActionEvent e) {
+		Customer selectedCustomer = allCustomers.getSelectionModel().getSelectedItem();
+		if(selectedCustomer !=  null) {
+			addCustomerBtn.setDisable(true);
+			editCustomerBtn.setDisable(false);
+			first_Name.setText(selectedCustomer.getFirstName());
+			last_Name.setText(selectedCustomer.getLastName());
+			date.setValue(selectedCustomer.getBirthDay());
+			Gender_group.setUserData(selectedCustomer.getGender());
+			neighberhoodsBox.setValue(selectedCustomer.getNeighberhood());
+			isGluten.setSelected(selectedCustomer.isSensitiveToGluten());	
+			isLactose.setSelected(selectedCustomer.isSensitiveToLactose());
+			
+			date.setDisable(true);
+		}
+	}
+	
+	public void setEditCustomer(ActionEvent e) {
+		Customer selectedCustomer = allCustomers.getSelectionModel().getSelectedItem();
+		try {
+			if(!selectedCustomer.getFirstName().equals(first_Name.getText())) {
+				if(first_Name.getText().isEmpty())
+					throw new InvalidInputException("First Name cannot be empty");
+				selectedCustomer.setFirstName(first_Name.getText());
+			}
+			if(!selectedCustomer.getLastName().equals(last_Name.getText())) {
+				if(last_Name.getText().isEmpty())
+					throw new InvalidInputException("Last Name cannot be empty");
+				selectedCustomer.setLastName(last_Name.getText());
+			}
+			if(!selectedCustomer.getGender().equals(Gender_group.getUserData()))
+				selectedCustomer.setGender((Gender)Gender_group.getUserData());
+				
+		if(!selectedCustomer.getNeighberhood().equals(neighberhoodsBox.getValue())) {
+			if(neighberhoodsBox.getValue() == null)
+				throw new InvalidInputException("you must choose Neighberhood");
+			selectedCustomer.setNeighberhood(neighberhoodsBox.getValue());
+		}
+		if(!selectedCustomer.isSensitiveToGluten() && isGluten.isSelected())
+			selectedCustomer.setSensitiveToGluten(true);
+		if(selectedCustomer.isSensitiveToGluten() && !isGluten.isSelected())
+			selectedCustomer.setSensitiveToGluten(false);
+		if(!selectedCustomer.isSensitiveToLactose() && isLactose.isSelected())
+			selectedCustomer.setSensitiveToLactose(true);
+		if(selectedCustomer.isSensitiveToLactose() && !isLactose.isSelected())
+			selectedCustomer.setSensitiveToLactose(false);
+		
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setHeaderText("Customer edited successfully!");
+		alert.showAndWait();
+		messageToUser.setText("");
+		first_Name.clear();
+		last_Name.clear();
+		date.setValue(null);
+		Gender_group.getSelectedToggle().setSelected(false);
+		neighberhoodsBox.getSelectionModel().clearSelection();
+		isGluten.setSelected(false);
+		isLactose.setSelected(false);
+		allCustomers.getItems().clear();
+		allCustomers.getItems().addAll(FXCollections.observableArrayList(
+		Restaurant.getInstance().getCustomers().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
+		editCustomerBtn.setDisable(true);
+		addCustomerBtn.setDisable(false);
+		date.setDisable(false);
+		}catch(InvalidInputException inputE) {
+			messageToUser.setFill(Color.RED);
+			messageToUser.setText(inputE.getMessage());
 		}
 	}
 	

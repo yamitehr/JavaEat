@@ -415,6 +415,9 @@ public class AddDishController extends ControllerWrapper {
 				allComponents.getItems().clear();
 				allComponents.getItems().addAll(FXCollections.observableArrayList(
 				Restaurant.getInstance().getComponenets().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
+				componentsList.getItems().clear();
+				componentsList.getItems().addAll(FXCollections.observableArrayList(
+				Restaurant.getInstance().getComponenets().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			}else {
 				messageToUserComp.setFill(Color.RED);
 				messageToUserComp.setText("an error has accured, please try again.");
