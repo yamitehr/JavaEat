@@ -1,16 +1,18 @@
 package Model;
 
+import Controllers.CurrentDishModel;
+
 public class State {
 	
 	private static Customer _currentCustomer;
 	private static Order _currentOrder;
-	private static Dish _currentDish;
+	private static CurrentDishModel _currentDish;
 	
-	public static void setCurrentDish(Dish dish) {
+	public static void setCurrentDish(CurrentDishModel dish) {
 		_currentDish = dish;
 	}
 	
-	public static Dish getCurrentDish() {
+	public static CurrentDishModel getCurrentDish() {
 		return _currentDish;
 	}
 	

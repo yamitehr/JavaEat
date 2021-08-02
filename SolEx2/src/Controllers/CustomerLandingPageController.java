@@ -111,7 +111,6 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		cartVbox.setFillWidth(true);
 		initializeCompGrid();
         prepareSlideMenuAnimation();
-        initializeAddDishButton();
         initShoppingCart();
 		
 	}
@@ -165,7 +164,9 @@ public class CustomerLandingPageController extends ControllerWrapper{
     }
 	
 	public void toggleEditDish() {
-		setEditDishData(State.getCurrentDish());
+
+        initializeAddDishButton();
+		setEditDishData(State.getCurrentDish().getDish());
 		
         TranslateTransition openNav = new TranslateTransition(new Duration(350), navList);
         TranslateTransition closeNav = new TranslateTransition(new Duration(350), navList);
@@ -221,8 +222,16 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	
 	private void initializeAddDishButton() {
+		if(State.getCurrentDish() != null) {
+			if (State.getCurrentDish().isNew()) {
+				addDishToOrder.setText("Add");
+			} else {
+				addDishToOrder.setText("Edit");
+			}
+		}
+		
 		addDishToOrder.setOnAction((ActionEvent evt)->{
-        	Dish dish = State.getCurrentDish();
+        	Dish dish = State.getCurrentDish().getDish();
         	
         	//Remove components based on selection
         	for(Pair<CheckBox, Component> compPair : componentList) {
@@ -233,15 +242,17 @@ public class CustomerLandingPageController extends ControllerWrapper{
         	
         	Order order = State.getCurrentOrder();
         	
-        	//If order exists, add dish. otherwise create a new order
-        	if (order != null) {
-        		order.addDish(dish);
-        	} else {
-            	ArrayList<Dish> dishes = new ArrayList<Dish>();
-            	dishes.add(dish);
-        		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
+        	if(State.getCurrentDish().isNew()) {
+        		//If order exists, add dish. otherwise create a new order
+            	if (order != null) {
+            		order.addDish(dish);
+            	} else {
+                	ArrayList<Dish> dishes = new ArrayList<Dish>();
+                	dishes.add(dish);
+            		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
+            	}
         	}
-
+        	
 			initShoppingCart();
         	//close side menu
         	toggleEditDish();
@@ -290,7 +301,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		Button removeBtn = new Button("Remove");
 
 		editBtn.setOnAction((ActionEvent evt)->{
-			State.setCurrentDish(dish);
+			State.setCurrentDish(new CurrentDishModel(dish, false));
 			toggleEditDish();
         });
 
