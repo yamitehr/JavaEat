@@ -124,6 +124,8 @@ public class AddOrderController extends ControllerWrapper {
 	private Text postageTitle;
 	@FXML
 	private Text postageText;
+	@FXML
+	private Button editDeliveryBtn;
 	
 	//delivery area
 	@FXML
@@ -522,7 +524,7 @@ public class AddOrderController extends ControllerWrapper {
 				orderTitle.setText("Order:");
 				ordersField.setText(((ExpressDelivery) selectedDelivery).getOrder().toString());
 				postageTitle.setText("Postage:");
-				postageField.setText(String.valueOf(((ExpressDelivery) selectedDelivery).getPostage()));
+				postageText.setText(String.valueOf(((ExpressDelivery) selectedDelivery).getPostage()));
 				
 			}
 			
@@ -533,6 +535,39 @@ public class AddOrderController extends ControllerWrapper {
 			isDeliveredField.setText("");
 			dateField.setText("");
 			ordersField.setText("");
+		}
+	}
+	
+	public void editDelivery(ActionEvent e) {
+		Delivery selectedDelivery = allDeliveries.getSelectionModel().getSelectedItem();
+		if(selectedDelivery !=  null) {
+			addExpressBtn.setDisable(true);
+			addRegularBtn.setDisable(true);
+			editDeliveryBtn.setDisable(false);
+			DeliveryPersonBox.setValue(selectedDelivery.getDeliveryPerson());
+			deliveryAreaBox.setValue(selectedDelivery.getArea());
+			yesChoice.setSelected(selectedDelivery.isDelivered());
+			deliveryDate.setValue(selectedDelivery.getDeliveredDate());
+			deliveryDate.setDisable(true);
+			if(selectedDelivery instanceof RegularDelivery) {
+				orderBox.setVisible(false);
+				postageLbl.setVisible(false);
+				postageField.setVisible(false);
+				regularPane.setVisible(true);
+				ordersList.setVisible(true);
+				for(Order o: ((RegularDelivery) selectedDelivery).getOrders()) {
+					ordersList.getSelectionModel().select(o);
+				}
+			}
+			else { //express
+				ordersList.setVisible(false);
+				regularPane.setVisible(true);
+				orderBox.setVisible(true);
+				postageLbl.setVisible(true);
+				postageField.setVisible(true);
+				orderBox.setValue(((ExpressDelivery) selectedDelivery).getOrder());
+				postageField.setText(String.valueOf(((ExpressDelivery) selectedDelivery).getPostage()));
+			}
 		}
 	}
 	
@@ -551,6 +586,8 @@ public class AddOrderController extends ControllerWrapper {
 			Order order = orderBox.getValue();	
 			if(order == null)
 				throw new InvalidInputException("Please select order");
+			if(order.getDelivery() != null)
+				throw new InvalidInputException("This order is already linked to delivery");
 			
 			LocalDate dateOfDelivery;
 			dateOfDelivery = deliveryDate.getValue();
@@ -558,11 +595,9 @@ public class AddOrderController extends ControllerWrapper {
 				throw new InvalidInputException("Please select Date of Delivery");
 			}
 			double postage;
-			if(postageField.getText().isEmpty()) {
+			if(postageField.getText().isEmpty()) 
 				throw new InvalidInputException("Please fill postage");
-			}
-			else
-				postage = Double.parseDouble(postageField.getText());
+			postage = Double.parseDouble(postageField.getText());
 			boolean isDelivered;
 			isDelivered = yesChoice.isSelected() ? true : false;
 			
@@ -577,6 +612,7 @@ public class AddOrderController extends ControllerWrapper {
 			orderBox.getSelectionModel().clearSelection();
 			deliveryDate.setValue(null);
 			yesChoice.setSelected(false);
+			postageField.setText("");
 			//update the list
 			allDeliveries.getItems().clear();
 			allDeliveries.getItems().addAll(FXCollections.observableArrayList(
@@ -608,7 +644,14 @@ public class AddOrderController extends ControllerWrapper {
 			TreeSet<Order> deliveryOrders = new TreeSet<Order>();
 			deliveryOrders.addAll(ordersList.getSelectionModel().getSelectedItems());	
 			if(deliveryOrders.isEmpty())
-				throw new InvalidInputException("Please choose at least one order!");
+				throw new InvalidInputException("Please choose at least 2 orders!");
+			if(deliveryOrders.size() == 1)
+				throw new InvalidInputException("In Regular Delivery need to be 2 orders or more");
+			for(Order o: deliveryOrders) {
+				if(o.getDelivery() != null) {
+					throw new InvalidInputException(o + " already linked to another delivery");
+				}
+			}
 			
 			LocalDate dateOfDelivery;
 			dateOfDelivery = deliveryDate.getValue();

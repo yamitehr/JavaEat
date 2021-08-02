@@ -98,6 +98,13 @@ public class ManagerLandingPageController extends ControllerWrapper {
 		replacePane(toReplacePane, "/View/AddCustomer.fxml");
 	}
 	
+	public void moveToStatisticsScene(ActionEvent e) throws Exception {
+		messageLbl.setText("Statistics");
+		image = new Image("file:///C:/Users/li493/OneDrive/מסמכים/JavaEat/SolEx2/icons/chart-line-solid.png");
+		icon.setImage(image);
+		replacePane(toReplacePane, "/View/Manager_Statistics.fxml");
+	}
+	
 	public void MoveToLoginScene(ActionEvent e) {
 		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow());
 	}

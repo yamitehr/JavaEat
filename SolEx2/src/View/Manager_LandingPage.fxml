@@ -11,7 +11,7 @@
    <children>
       <AnchorPane prefHeight="770.0" prefWidth="343.0" style="-fx-background-color: PeachPuff;">
          <children>
-            <ImageView fitHeight="409.0" fitWidth="353.0" layoutX="-4.0" layoutY="-83.0" pickOnBounds="true">
+            <ImageView fitHeight="409.0" fitWidth="353.0" layoutX="-4.0" layoutY="-115.0" pickOnBounds="true">
                <image>
                   <Image url="@../../icons/JavaEat.png" />
                </image>
@@ -66,7 +66,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="statisticsBtn" alignment="CENTER" layoutX="3.0" layoutY="575.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Statistics">
+            <Button fx:id="statisticsBtn" alignment="CENTER" layoutX="3.0" layoutY="575.0" mnemonicParsing="false" onAction="#moveToStatisticsScene" prefHeight="48.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" stylesheets="@decoration.css" text="Statistics">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
