@@ -150,7 +150,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		}
 	}
 	public void moveToOrdersHistoryScene(ActionEvent e) {
-		
+		messageLbl.setText("Orders History");
+		mediaPlayer.pause();
 		try {
 			replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
 		} catch (IOException ex) {

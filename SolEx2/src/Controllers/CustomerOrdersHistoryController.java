@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import Model.Order;
 import Model.Restaurant;
+import Model.State;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
@@ -48,7 +49,9 @@ public class CustomerOrdersHistoryController {
 		
 		
 		List<Order> orders = new ArrayList<Order>();
-		orders = Restaurant.getInstance().getOrders().values().stream().collect(Collectors.toList());
+		orders = Restaurant.getInstance().getOrders().values().stream()
+				.filter(o -> o.getCustomer().equals(State.getCurrentCustomer()))
+				.collect(Collectors.toList());
 		
 		allOrdersTable.getItems().addAll(orders);
 	}
