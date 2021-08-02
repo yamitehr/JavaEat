@@ -277,7 +277,7 @@ public class AddCustomerController extends ControllerWrapper{
 			Neighberhood neighberhood = null;
 	
 			for(Neighberhood n : Neighberhood.values()) {
-				if(n.name().equals(neighberhoodsBox.getValue().toString())) {
+				if(n.name().equals(neighberhoodsBox.getValue())) {
 					neighberhood = n;
 				}
 			}
