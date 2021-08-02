@@ -31,4 +31,10 @@ public class State {
 	public static Order getCurrentOrder() {
 		return _currentOrder;
 	}
+	
+	public static void cleanState() {
+		_currentCustomer = null;
+		_currentOrder = null;
+		_currentDish = null;
+	}
 }
