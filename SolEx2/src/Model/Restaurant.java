@@ -253,13 +253,7 @@ public class Restaurant implements Serializable{
 				for(Order o: rg.getOrders()) {
 					TreeSet<Order> orders = orderByCustomer.get(o);
 					if(orders == null)
-						orders = new TreeSet<>(new Comparator<Order>() {
-
-							@Override
-							public int compare(Order o1, Order o2) {
-								return o1.getDelivery().getDeliveredDate().compareTo(o2.getDelivery().getDeliveredDate());
-							}
-						});
+						orders = new TreeSet<>(new ordersComparator());
 					orders.add(o);
 					orderByCustomer.put(o.getCustomer(), orders);
 				}
@@ -268,18 +262,27 @@ public class Restaurant implements Serializable{
 				ExpressDelivery ex = (ExpressDelivery)delivery;
 				TreeSet<Order> orders = orderByCustomer.get(ex.getOrder());
 				if(orders == null)
-					orders = new TreeSet<>(new Comparator<Order>() {
-
-						@Override
-						public int compare(Order o1, Order o2) {
-							return o1.getDelivery().getDeliveredDate().compareTo(o2.getDelivery().getDeliveredDate());
-						}
-					});
+					orders = new TreeSet<>(new ordersComparator());
 				orders.add(ex.getOrder());
 				orderByCustomer.put(ex.getOrder().getCustomer(), orders);
 			}
 		}
 		return getDeliveries().put(delivery.getId(),delivery) ==null;
+	}
+	
+	//comparator for orders for addDelivery method
+	class ordersComparator implements Comparator<Order>, Serializable{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public int compare(Order o1, Order o2) {
+			return o1.getDelivery().getDeliveredDate().compareTo(o2.getDelivery().getDeliveredDate());
+		}
+		
 	}
 
 	public boolean addDeliveryArea(DeliveryArea da) {
