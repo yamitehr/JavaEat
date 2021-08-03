@@ -1,20 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="699.0" prefWidth="1196.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controllers.ManagerStatisticsController">
    <children>
-      <Label layoutX="26.0" layoutY="39.0" text="Relevant Dishes For You" />
-      <TableView fx:id="relevantDishesTable" layoutX="26.0" layoutY="65.0" prefHeight="200.0" prefWidth="233.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Dish ID" />
-          <TableColumn prefWidth="75.0" text="Dish Name" />
-            <TableColumn prefWidth="75.0" text="Components" />
-        </columns>
-      </TableView>
+      <AnchorPane layoutX="-3.0" layoutY="-2.0" prefHeight="350.0" prefWidth="575.0" style="-fx-border-color: PeachPuff;">
+         <children>
+            <Label layoutX="25.0" layoutY="71.0" text="Choose delivery Person:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="deliveryPersonBox" layoutX="192.0" layoutY="69.0" prefWidth="150.0" />
+            <Label layoutX="25.0" layoutY="100.0" text="Choose Month:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="monthBox" layoutX="192.0" layoutY="98.0" prefWidth="150.0" />
+            <Button layoutX="101.0" layoutY="133.0" mnemonicParsing="false" onAction="#getDeliveries" prefHeight="25.0" prefWidth="165.0" text="Get Deliveries" />
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="298.0" text="Deliveries By Person">
+               <font>
+                  <Font name="System Bold Italic" size="31.0" />
+               </font>
+            </Label>
+            <ListView fx:id="deliveriesByPerson" layoutX="297.0" layoutY="133.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: PeachPuff;" visible="false" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="346.0" prefHeight="346.0" prefWidth="572.0" style="-fx-border-color: PeachPuff;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="14.0" prefHeight="46.0" prefWidth="469.0" text="Number Of Deliveries Per Type">
+               <font>
+                  <Font name="System Bold Italic" size="31.0" />
+               </font>
+            </Label>
+            <Label fx:id="regularDeliveries" layoutX="271.0" layoutY="60.0" prefHeight="38.0" prefWidth="210.0">
+               <font>
+                  <Font name="System Bold Italic" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="56.0" prefHeight="46.0" prefWidth="200.0" text="Regular Delivery">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="expressDeliveries" layoutX="271.0" layoutY="118.0" prefHeight="38.0" prefWidth="210.0" textFill="PEACHPUFF">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="116.0" prefHeight="46.0" prefWidth="194.0" text="Express Delivery">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="572.0" layoutY="346.0" prefHeight="346.0" prefWidth="687.0" style="-fx-border-color: PeachPuff;">
+         <children>
+            <Label contentDisplay="CENTER" layoutX="5.0" layoutY="12.0" prefHeight="46.0" prefWidth="469.0" text="Cooks By Expertise">
+               <font>
+                  <Font name="System Bold Italic" size="31.0" />
+               </font>
+            </Label>
+            <Label layoutX="5.0" layoutY="63.0" prefHeight="21.0" prefWidth="136.0" text="Choose expertise:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="expertiseBox" layoutX="141.0" layoutY="61.0" prefWidth="150.0" />
+            <ListView fx:id="cooksByExpertise" layoutX="307.0" layoutY="123.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: PeachPuff;" visible="false" />
+            <Button layoutX="84.0" layoutY="98.0" mnemonicParsing="false" onAction="#getCooks" prefHeight="25.0" prefWidth="165.0" text="Get Cooks" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="572.0" prefHeight="346.0" prefWidth="687.0">
+         <children>
+            <Label layoutX="28.0" layoutY="14.0" prefHeight="46.0" prefWidth="506.0" text="Customer's Relevent Dishes">
+               <font>
+                  <Font name="System Bold Italic" size="31.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="74.0" text="Choose customer:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="customerBox" layoutX="161.0" layoutY="72.0" prefWidth="150.0" />
+            <ListView fx:id="relevantDishList" layoutX="153.0" layoutY="150.0" prefHeight="167.0" prefWidth="200.0" style="-fx-border-color: PeachPuff;" visible="false" />
+            <Button layoutX="116.0" layoutY="110.0" mnemonicParsing="false" onAction="#getDishes" prefHeight="25.0" prefWidth="165.0" text="Get Dishes" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
