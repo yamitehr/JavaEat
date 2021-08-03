@@ -1,6 +1,8 @@
 package Controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -102,10 +106,10 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	public void initialize() {
 		messageLbl.setText("Hello " + current.getFirstName());
 		componentList = new ArrayList<Pair<CheckBox, Component>>();
-		dashboardBtn.setAlignment(Pos.BASELINE_LEFT);
+		/*dashboardBtn.setAlignment(Pos.BASELINE_LEFT);
 		ordersBtn.setAlignment(Pos.BASELINE_LEFT);
 		menuBtn.setAlignment(Pos.BASELINE_LEFT);
-		personalDetailsBtn.setAlignment(Pos.BASELINE_LEFT);
+		personalDetailsBtn.setAlignment(Pos.BASELINE_LEFT);*/
 		
 		file = new File("restaurantVideoHD.mp4");
 		media = new Media(file.toURI().toString());
@@ -309,8 +313,24 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		} else {
 			priceText.setText("0");
 			Pane emptyDishesPane = new Pane();
-			Label noDishesLabel = new Label("No dishes");
-			emptyDishesPane.getChildren().add(noDishesLabel);
+		//	Label noDishesLabel = new Label("No dishes");
+			
+			//Creating an image 
+		      Image image = null;
+			try {
+				image = new Image(new FileInputStream("icons/shopping-cart-solid-grey.png"));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}  
+		      
+		      //Setting the image view 
+			if(image != null) {
+				ImageView imageView = new ImageView(image);
+				emptyDishesPane.getChildren().addAll(imageView);
+				imageView.relocate(57, 27);
+			}
+			
+		//	emptyDishesPane.getChildren().add(noDishesLabel);
 			cartVbox.getChildren().add(emptyDishesPane);
 		}
 	}
