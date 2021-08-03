@@ -210,7 +210,13 @@ public class Restaurant implements Serializable{
 					}
 				}
 			}
-			return getOrders().put(order.getId(), order) == null;
+
+			Order added =  getOrders().put(order.getId(), order);
+			if (added == null) {
+				order.startOrderTimer();
+			}
+			
+			return added == null;
 		}catch(SensitiveException e) {
 			return false;
 		}catch(IllegalCustomerException e) {

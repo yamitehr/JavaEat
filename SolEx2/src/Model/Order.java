@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import Utils.DeliveryManager;
 import Utils.MyFileLogWriter;
 
 public class Order implements Comparable<Order>, Serializable{
@@ -17,6 +20,7 @@ public class Order implements Comparable<Order>, Serializable{
 	private Customer customer;
 	private ArrayList<Dish> dishes;
 	private Delivery delivery;
+	private OrderStatus status;
 	
 	// constructors 
 	
@@ -26,6 +30,7 @@ public class Order implements Comparable<Order>, Serializable{
 		this.customer = customer;
 		this.dishes = dishes;
 		this.delivery = delivery;
+		this.status = OrderStatus.InProgress;
 	}
 	
 	public Order(int id) {
@@ -68,6 +73,14 @@ public class Order implements Comparable<Order>, Serializable{
 
 	public void setDelivery(Delivery delivery) {
 		this.delivery = delivery;
+	}
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
 	}
 
 	@Override
@@ -124,6 +137,24 @@ public class Order implements Comparable<Order>, Serializable{
 		return time;
 	}
 
+	public void startOrderTimer() {
+		long time = 0;
+		for(Dish d : getDishes()) {
+			time += d.getTimeToMake();
+		}
+		
+		Order thisOrder = this;
+	    TimerTask task = new TimerTask() {
+	        public void run() {
+	        	thisOrder.status = OrderStatus.readyForDelivery;
+	    		DeliveryManager.getInstance().addFinishedOrder(thisOrder);
+	        }
+	    };
+	    
+	    Timer timer = new Timer();
+	    long timeInSeconds = time * 60000 / 60;
+	    timer.schedule(task, timeInSeconds);
+	}
 	
 	public boolean addDish(Dish d) {
 		return dishes.add(d);

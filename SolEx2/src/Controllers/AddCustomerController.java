@@ -27,6 +27,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -218,7 +219,11 @@ public class AddCustomerController extends ControllerWrapper{
 		first_Name.clear();
 		last_Name.clear();
 		date.setValue(null);
-		Gender_group.getSelectedToggle().setSelected(false);
+		
+		Toggle selectedGender =Gender_group.getSelectedToggle(); 
+		if (selectedGender != null) {
+			selectedGender.setSelected(false);	
+		}
 		neighberhoodsBox.getSelectionModel().clearSelection();
 		isGluten.setSelected(false);
 		isLactose.setSelected(false);
