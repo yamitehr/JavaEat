@@ -125,7 +125,14 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 
 	public void moveToDashboardScene(ActionEvent e) {
-		
+		messageLbl.setText("Dashboard");
+		mediaPlayer.pause();
+		try {
+			replacePane(toReplacePane, "/View/Customer_Statistics.fxml");
+		} catch (IOException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
 	}
 	public void moveToOrdersScene(ActionEvent e) {
 		
@@ -158,8 +165,6 @@ public class CustomerLandingPageController extends ControllerWrapper{
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
 		}
-		
-		
 	}
 	public void moveToPersonalDetailsScene(ActionEvent e) {
 		
@@ -177,10 +182,6 @@ public class CustomerLandingPageController extends ControllerWrapper{
         double hiddenPlace = screen.getBounds().getMaxX();
         
         navList.setLayoutX(hiddenPlace);
-        
-        personalDetailsBtn.setOnAction((ActionEvent evt)->{
-        	toggleEditDish();
-        });
     }
 	
 	public void toggleEditDish() {
