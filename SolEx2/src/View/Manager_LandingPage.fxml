@@ -85,9 +85,9 @@
 
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="messagePane" layoutX="335.0" prefHeight="74.0" prefWidth="1095.0" style="-fx-background-color: PeachPuff;">
+      <AnchorPane fx:id="messagePane" layoutX="335.0" prefHeight="71.0" prefWidth="1095.0" style="-fx-background-color: PeachPuff;">
          <children>
-            <Label fx:id="messageLbl" alignment="CENTER" layoutY="14.0" prefHeight="26.0" prefWidth="398.0" text="Welcome, Manger">
+            <Label fx:id="messageLbl" alignment="CENTER" layoutY="23.0" prefHeight="26.0" prefWidth="398.0" text="Welcome, Manger">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -102,13 +102,13 @@
                   <Image url="@../../icons/sign-in-alt-solid.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="icon" fitHeight="37.0" fitWidth="36.0" layoutX="68.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="icon" fitHeight="37.0" fitWidth="36.0" layoutX="68.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../icons/users-solid.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="toReplacePane" layoutX="340.0" layoutY="74.0" prefHeight="698.0" prefWidth="1095.0" />
+      <AnchorPane fx:id="toReplacePane" layoutX="348.0" layoutY="70.0" prefHeight="702.0" prefWidth="1087.0" />
    </children>
 </AnchorPane>
