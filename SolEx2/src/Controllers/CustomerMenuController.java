@@ -96,6 +96,9 @@ public class CustomerMenuController extends ControllerWrapper{
 				menuItems.add(getMenuItem(dish));
 			}
 		}
+		
+		//TODO: show message is menu is empty
+		
 		return menuItems;
 	}
 	
@@ -121,7 +124,9 @@ public class CustomerMenuController extends ControllerWrapper{
 			newComps.forEach(c -> newDish.addComponent(c));
 			newDish.setTimeToMake(dish.getTimeToMake());
 			
-			State.setCurrentDish(newDish);
+			CurrentDishModel newCurrentDishModel = new CurrentDishModel(newDish, true);
+			
+			State.setCurrentDish(newCurrentDishModel);
 			landingController.toggleEditDish();
         });
 		

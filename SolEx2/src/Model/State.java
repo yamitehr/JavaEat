@@ -1,16 +1,18 @@
 package Model;
 
+import Controllers.CurrentDishModel;
+
 public class State {
 	
 	private static Customer _currentCustomer;
 	private static Order _currentOrder;
-	private static Dish _currentDish;
+	private static CurrentDishModel _currentDish;
 	
-	public static void setCurrentDish(Dish dish) {
+	public static void setCurrentDish(CurrentDishModel dish) {
 		_currentDish = dish;
 	}
 	
-	public static Dish getCurrentDish() {
+	public static CurrentDishModel getCurrentDish() {
 		return _currentDish;
 	}
 	
@@ -28,5 +30,11 @@ public class State {
 	
 	public static Order getCurrentOrder() {
 		return _currentOrder;
+	}
+	
+	public static void cleanState() {
+		_currentCustomer = null;
+		_currentOrder = null;
+		_currentDish = null;
 	}
 }

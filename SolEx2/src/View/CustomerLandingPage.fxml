@@ -32,7 +32,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="ordersBtn" layoutX="3.0" layoutY="282.0" mnemonicParsing="false" onAction="#moveToOrdersScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" text="Orders">
+            <Button fx:id="ordersBtn" layoutX="3.0" layoutY="282.0" mnemonicParsing="false" onAction="#moveToOrdersHistoryScene" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: PeachPuff;" styleClass="menuBtns" text="Orders">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -65,7 +65,7 @@
             </Button>
             <AnchorPane layoutY="743.0" prefHeight="54.0" prefWidth="343.0">
                <children>
-                  <Button layoutX="100.0" layoutY="31.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" text="Continue" />
+                  <Button fx:id="confirmOrderBtn" layoutX="100.0" layoutY="31.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" text="Confirm Order" />
                   <Text fx:id="priceText" layoutX="182.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price" />
                   <Label layoutX="100.0" layoutY="6.0" text="Current Price:" />
                </children>

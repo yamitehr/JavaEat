@@ -1,14 +1,18 @@
 package Controllers;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import Model.Component;
 import Model.Customer;
+import Model.Delivery;
 import Model.Dish;
+import Model.ExpressDelivery;
 import Model.Order;
+import Model.Restaurant;
 import Model.State;
 import Utils.Neighberhood;
 import javafx.animation.TranslateTransition;
@@ -16,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -89,6 +94,9 @@ public class CustomerLandingPageController extends ControllerWrapper{
     
     @FXML 
     private Text priceText;
+    
+    @FXML
+    private Button confirmOrderBtn;
 	
 	@FXML
 	public void initialize() {
@@ -111,8 +119,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		cartVbox.setFillWidth(true);
 		initializeCompGrid();
         prepareSlideMenuAnimation();
-        initializeAddDishButton();
         initShoppingCart();
+        initializeConfirmButton();
 		
 	}
 
@@ -141,7 +149,16 @@ public class CustomerLandingPageController extends ControllerWrapper{
 			
 		}
 	}
-	public void moveToAddOrderScene(ActionEvent e) {
+	public void moveToOrdersHistoryScene(ActionEvent e) {
+		messageLbl.setText("Orders History");
+		mediaPlayer.pause();
+		try {
+			replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
+		} catch (IOException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+		
 		
 	}
 	public void moveToPersonalDetailsScene(ActionEvent e) {
@@ -150,6 +167,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	
 	public void MoveToLoginScene(ActionEvent e) {
 		mediaPlayer.pause();
+		//clean current customer and order
+		State.cleanState();
 		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow());
 	}
 	
@@ -165,7 +184,9 @@ public class CustomerLandingPageController extends ControllerWrapper{
     }
 	
 	public void toggleEditDish() {
-		setEditDishData(State.getCurrentDish());
+
+        initializeAddDishButton();
+		setEditDishData(State.getCurrentDish().getDish());
 		
         TranslateTransition openNav = new TranslateTransition(new Duration(350), navList);
         TranslateTransition closeNav = new TranslateTransition(new Duration(350), navList);
@@ -221,8 +242,16 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	
 	private void initializeAddDishButton() {
+		if(State.getCurrentDish() != null) {
+			if (State.getCurrentDish().isNew()) {
+				addDishToOrder.setText("Add Dish To Order");
+			} else {
+				addDishToOrder.setText("Edit");
+			}
+		}
+		
 		addDishToOrder.setOnAction((ActionEvent evt)->{
-        	Dish dish = State.getCurrentDish();
+        	Dish dish = State.getCurrentDish().getDish();
         	
         	//Remove components based on selection
         	for(Pair<CheckBox, Component> compPair : componentList) {
@@ -233,15 +262,17 @@ public class CustomerLandingPageController extends ControllerWrapper{
         	
         	Order order = State.getCurrentOrder();
         	
-        	//If order exists, add dish. otherwise create a new order
-        	if (order != null) {
-        		order.addDish(dish);
-        	} else {
-            	ArrayList<Dish> dishes = new ArrayList<Dish>();
-            	dishes.add(dish);
-        		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
+        	if(State.getCurrentDish().isNew()) {
+        		//If order exists, add dish. otherwise create a new order
+            	if (order != null) {
+            		order.addDish(dish);
+            	} else {
+                	ArrayList<Dish> dishes = new ArrayList<Dish>();
+                	dishes.add(dish);
+            		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
+            	}
         	}
-
+        	
 			initShoppingCart();
         	//close side menu
         	toggleEditDish();
@@ -268,7 +299,12 @@ public class CustomerLandingPageController extends ControllerWrapper{
 				totalPrice += d.calcDishPrice();
 			}
 			
-			priceText.setText(String.valueOf(totalPrice) + "$");
+			double totalTime = 0;
+			for(Dish d : dishes) {
+				totalTime += d.getTimeToMake(); //TODO: add the delivery time to the total time
+			}
+			
+			priceText.setText(String.valueOf(totalPrice) + "$ time to prepare: " + totalTime);
 		} else {
 			priceText.setText("0");
 			Pane emptyDishesPane = new Pane();
@@ -290,7 +326,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		Button removeBtn = new Button("Remove");
 
 		editBtn.setOnAction((ActionEvent evt)->{
-			State.setCurrentDish(dish);
+			State.setCurrentDish(new CurrentDishModel(dish, false));
 			toggleEditDish();
         });
 
@@ -309,5 +345,38 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		editBtn.relocate(280, 20);
 		removeBtn.relocate(180, 20);
 		return newMenuItem;
+	}
+	
+	private void initializeConfirmButton() {
+		confirmOrderBtn.setOnAction((ActionEvent evt) -> {
+			
+			Order currentOrder = State.getCurrentOrder();
+			//add order to restaurant
+			if(Restaurant.getInstance().addOrder(currentOrder)) {
+				//TODO: add a delivery to the order
+				
+				//show pop up with message 
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.setTitle("Order ID " + State.getCurrentOrder().getId() + " Success");
+				alert.setHeaderText("Order has been successfully add\n you now will be directed Orders page");
+				alert.showAndWait();
+				
+				State.setCurrentDish(null);
+				State.setCurrentOrder(null);
+				initShoppingCart();
+				
+				try {
+					replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+			} else {
+				//TODO: add error message to user
+			}
+		});
 	}
 }
