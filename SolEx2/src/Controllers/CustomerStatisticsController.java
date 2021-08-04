@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import Exceptions.InvalidPersonInputException;
+import Model.Component;
 import Model.Cook;
 import Model.Dish;
 import Model.Order;
@@ -54,7 +55,16 @@ public class CustomerStatisticsController {
 	private TableColumn<Cook, String> isChefCol;
 	//@FXML
 	//private Button showCookByExpertiseBtn;
-	
+	@FXML
+	private TableView popularComponentsTable;
+	@FXML
+	private TableColumn<Component, Integer> componentIdCol;
+	@FXML
+	private TableColumn<Component, String> componentNameCol;
+	@FXML
+	private TableColumn<Component, String> sensitivitiesCol;
+	@FXML
+	private TableColumn<Component, Double> priceCol;
 	
 	@FXML
     public void initialize() {
@@ -66,6 +76,7 @@ public class CustomerStatisticsController {
 		expertiseBox.setItems(FXCollections.observableArrayList(expertiseList));
 		
 		initCookByExpertise();
+		initPopularComps();
     }
 	
 	private void initRelevantDishes() {
@@ -88,7 +99,39 @@ public class CustomerStatisticsController {
 		relevantDishesTable.getItems().addAll(relevantDishes);
 	}
 	
-	private void initCookByExpertise() {
+	private void initPopularComps() {
+		
+		componentIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+				
+		componentNameCol.setCellValueFactory(component -> new ReadOnlyObjectWrapper<String>(component.getValue().getComponentName()));
+		
+		sensitivitiesCol.setCellValueFactory(component -> {
+            boolean isGluten = component.getValue().isHasGluten();
+            boolean isLactose = component.getValue().isHasLactose();
+            String isSensitiveAsString = "";
+            if(isGluten == true)
+            {
+            	isSensitiveAsString += "Gluten ";
+            }
+            if(isLactose == true)
+            {
+            	isSensitiveAsString += "Lactose";
+            }
+
+         return new ReadOnlyStringWrapper(isSensitiveAsString);
+        });
+		
+		priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+		
+		
+		List<Dish> relevantDishes = new ArrayList<Dish>();
+		relevantDishes = Restaurant.getInstance().getReleventDishList(State.getCurrentCustomer()).stream()
+				.collect(Collectors.toList());
+		
+		popularComponentsTable.getItems().addAll(Restaurant.getInstance().getPopularComponents());
+	}
+	
+private void initCookByExpertise() {
 		
 		expertiseBox.setOnAction(e -> {
 			cookByExpertiseTable.getItems().clear();
@@ -121,7 +164,5 @@ public class CustomerStatisticsController {
 			
 			cookByExpertiseTable.getItems().addAll(relevantCooks);
 		});
-		
-		
 	}
 }
