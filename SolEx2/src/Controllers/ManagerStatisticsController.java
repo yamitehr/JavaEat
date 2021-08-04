@@ -1,14 +1,22 @@
 package Controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import Model.Cook;
 import Model.Customer;
 import Model.Delivery;
+import Model.DeliveryArea;
 import Model.DeliveryPerson;
 import Model.Dish;
+import Model.ExpressDelivery;
+import Model.RegularDelivery;
 import Model.Restaurant;
+import Model.State;
 import Utils.Expertise;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +24,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManagerStatisticsController extends ControllerWrapper {
 	@FXML
@@ -24,8 +35,6 @@ public class ManagerStatisticsController extends ControllerWrapper {
 	@FXML
 	private ComboBox<Integer> monthBox;
 	
-	@FXML
-	private ListView<Delivery> deliveriesByPerson;
 	
 	@FXML
 	private Label regularDeliveries;
@@ -44,6 +53,48 @@ public class ManagerStatisticsController extends ControllerWrapper {
 	
 	@FXML
 	private ListView<Dish> relevantDishList;
+	
+	//getRelevantDish
+		@FXML
+		private TableView<Dish> relevantDishesTable;
+		@FXML
+		private TableColumn<Dish, Integer> dishIdCol;
+		@FXML
+		private TableColumn<Dish, String> dishNameCol;
+		@FXML
+		private TableColumn<Dish, String> componentsCol;
+		@FXML
+		private TableColumn<Dish, Double> priceCol;
+		
+		//getCookByExpertise
+		@FXML
+		private TableView<Cook> cookByExpertiseTable;
+		@FXML
+		private TableColumn<Cook, Integer> cookIdCol;
+		@FXML
+		private TableColumn<Cook, String> cookNameCol;
+		@FXML
+		private TableColumn<Cook, String> cookDobCol;
+		@FXML
+		private TableColumn<Cook, String> cookGenderCol;
+		@FXML
+		private TableColumn<Cook, String> isChefCol;
+		
+		//deliveriesByPerson
+		@FXML
+		private TableView<Delivery> deliveriesByPersonTable;
+		@FXML
+		private TableColumn<Delivery, Integer> deliveryIdCol;
+		@FXML
+		private TableColumn<Delivery, String> deliveryPersonCol;
+		@FXML
+		private TableColumn<Delivery, String> areaCol;
+		@FXML
+		private TableColumn<Delivery, String> deliveryDateCol;
+		@FXML
+		private TableColumn<Delivery, String> isDeliveredCol;
+		@FXML
+		private TableColumn<Delivery, String> ordersCol;
 	
 	@FXML
     public void initialize() {
@@ -71,7 +122,7 @@ public class ManagerStatisticsController extends ControllerWrapper {
 		customerBox.setItems(FXCollections.observableArrayList(customers));
 		
 		
-		
+		//relevant dish list
 		
 		
 	}
@@ -80,30 +131,106 @@ public class ManagerStatisticsController extends ControllerWrapper {
 		DeliveryPerson selectedDP = deliveryPersonBox.getValue();
 		Integer selectedMonth = monthBox.getValue();
 		if(selectedDP != null && selectedMonth != null) {
-			deliveriesByPerson.setVisible(true);
-			deliveriesByPerson.getItems().clear();
-			deliveriesByPerson.getItems().addAll(FXCollections.observableArrayList(
-					Restaurant.getInstance().getDeliveriesByPerson(selectedDP, selectedMonth).stream().collect(Collectors.toList())));
+			List<Delivery> deliveriesByPerson = new ArrayList<Delivery>();
+			deliveriesByPerson = Restaurant.getInstance().getDeliveriesByPerson(selectedDP, selectedMonth).stream()
+					.collect(Collectors.toList());
+			
+			deliveriesByPersonTable.setVisible(true);
+			deliveryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+			
+			deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveryPerson().toString()));
+			
+			areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getArea().toString()));
+			
+			deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveredDate().toString()));
+			
+			isDeliveredCol.setCellValueFactory(delivery -> {
+	            boolean isDelivered = delivery.getValue().isDelivered();
+	            String isDeliveredAsString;
+	            if(isDelivered == true)
+	            {
+	            	isDeliveredAsString = "Yes";
+	            }
+	            else
+	            {
+	            	isDeliveredAsString = "No";
+	            }
+
+	         return new ReadOnlyStringWrapper(isDeliveredAsString);
+	        });
+			for(Delivery del: deliveriesByPerson) {
+				if(del instanceof RegularDelivery) {
+					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
+						((RegularDelivery) delivery.getValue()).getOrders()
+						.stream()
+						.map(d -> d.toString())
+						.reduce((a, b) -> a + ", " + b).get()
+					));
+				}
+				if(del instanceof ExpressDelivery) {
+					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
+				}
+			}
+					
+			deliveriesByPersonTable.getItems().addAll(deliveriesByPerson);
 		}
 	}
 	
 	public void getCooks(ActionEvent e) {
 		Expertise expert = expertiseBox.getValue();
 		if(expert != null) {
-			cooksByExpertise.setVisible(true);
-			cooksByExpertise.getItems().clear();
-			cooksByExpertise.getItems().addAll(FXCollections.observableArrayList(
-					Restaurant.getInstance().GetCooksByExpertise(expert).stream().collect(Collectors.toList())));
+			cookByExpertiseTable.setVisible(true);
+			
+			cookIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
+			cookNameCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getFirstName() + cook.getValue().getLastName()));	
+			cookDobCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getBirthDay().toString()));	
+			cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getGender().name()));	
+			isChefCol.setCellValueFactory(cook -> {
+	            boolean isChef = cook.getValue().isChef();
+	            String isChefAsString;
+	            if(isChef == true)
+	            {
+	                isChefAsString = "Yes";
+	            }
+	            else
+	            {
+	                isChefAsString = "No";
+	            }
+
+	         return new ReadOnlyStringWrapper(isChefAsString);
+	        });
+			
+			List<Cook> relevantCooks = new ArrayList<Cook>();
+			relevantCooks = Restaurant.getInstance().GetCooksByExpertise(expert).stream()
+					.collect(Collectors.toList());
+			
+			cookByExpertiseTable.getItems().addAll(relevantCooks);
 		}
 	}
 	
 	public void getDishes(ActionEvent e) {
 		Customer cust = customerBox.getValue();
 		if(cust != null) {
-			relevantDishList.setVisible(true);
-			relevantDishList.getItems().clear();
-			relevantDishList.getItems().addAll(FXCollections.observableArrayList(
-					Restaurant.getInstance().getReleventDishList(cust).stream().collect(Collectors.toList())));
+			relevantDishesTable.setVisible(true);
+			dishIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+			
+			dishNameCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(dish.getValue().getDishName()));
+			
+			componentsCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(
+					dish.getValue().getComponenets()
+					.stream()
+					.map(d -> d.toString())
+					.reduce((a, b) -> a + ", " + b).get()
+					));
+			priceCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Double>(dish.getValue().getPrice()));
+			
+			
+			List<Dish> relevantDishes = new ArrayList<Dish>();
+			relevantDishes = Restaurant.getInstance().getReleventDishList(cust).stream()
+					.collect(Collectors.toList());
+			
+			relevantDishesTable.getItems().addAll(relevantDishes);
+			
 		}
 	}
 

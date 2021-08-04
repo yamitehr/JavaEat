@@ -1,6 +1,8 @@
 package Controllers;
 
 import java.io.IOException;
+
+import Model.Restaurant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +54,10 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	private Button logOutBtn;
 	@FXML
 	private ImageView icon;
+	@FXML
+	private Label totalCustomers;
+	@FXML
+	private Label totalEmployees;
 	
 	private Image image;
 	
@@ -67,6 +73,12 @@ public class ManagerLandingPageController extends ControllerWrapper {
 //		addOrderAndDeliveryBtn.setAlignment(Pos.BASELINE_LEFT);
 //		addCustomerBtn.setAlignment(Pos.BASELINE_LEFT);
 //		statisticsBtn.setAlignment(Pos.BASELINE_LEFT);
+		
+		totalCustomers.setText(String.valueOf(Restaurant.getInstance().getCustomers().size()));
+		totalEmployees.setText(String.valueOf(Restaurant.getInstance().getCooks().size() + 
+				Restaurant.getInstance().getDeliveryPersons().size()));
+		
+		
 		
 	}
 

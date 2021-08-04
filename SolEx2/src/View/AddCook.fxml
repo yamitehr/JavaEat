@@ -5,10 +5,11 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.SepiaTone?>
@@ -60,25 +61,26 @@
                                     <SepiaTone level="0.25" />
                                  </effect>
                               </RadioButton>
-                              <Pane layoutX="238.0" layoutY="213.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0">
+                              <Pane layoutX="152.0" layoutY="213.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0">
                                  <children>
-                                    <ListView fx:id="allCooks" layoutX="3.0" layoutY="73.0" prefHeight="301.0" prefWidth="196.0" style="-fx-border-color: PeachPuff;" />
-                                    <Label layoutX="25.0" layoutY="46.0" text="List of cooks" />
-                                    <Button layoutX="28.0" layoutY="383.0" mnemonicParsing="false" onAction="#removeCook" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                                    <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cooks Details" />
-                                    <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First  Name:" />
-                                    <Text layoutX="206.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
-                                    <Text layoutX="207.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" />
-                                    <Text layoutX="207.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" />
-                                    <Text layoutX="208.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="is Chef:" />
+                                    <Button layoutX="125.0" layoutY="347.0" mnemonicParsing="false" onAction="#removeCook" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
                                     <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="lastNameField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="dobField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
                                     <Text fx:id="genderField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Text layoutX="207.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expertise:" wrappingWidth="70.36376953125" />
                                     <Text fx:id="expertiseField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="isChefFiled" fill="#c88021" layoutX="275.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="64.3525390625" />
-                                    <Button layoutX="100.0" layoutY="383.0" mnemonicParsing="false" onAction="#editCook" prefHeight="25.0" prefWidth="71.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                                    <Button layoutX="195.0" layoutY="347.0" mnemonicParsing="false" onAction="#editCook" prefHeight="25.0" prefWidth="71.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                                    <TableView fx:id="allCooksTable" layoutX="50.0" layoutY="138.0" prefHeight="200.0" prefWidth="402.0">
+                                       <columns>
+                                          <TableColumn fx:id="cookIdCol" prefWidth="61.5999755859375" text="Cook ID" />
+                                          <TableColumn fx:id="cookNameCol" prefWidth="71.20001220703125" text="Cook Name" />
+                                          <TableColumn fx:id="cookDobCol" prefWidth="64.0" text="DOB" />
+                                          <TableColumn fx:id="cookGenderCol" prefWidth="55.199951171875" text="Gender" />
+                                          <TableColumn fx:id="expertiseCol" prefWidth="92.0" text="Expertise" />
+                                          <TableColumn fx:id="isChefCol" prefWidth="62.4000244140625" text="isChef" />
+                                       </columns>
+                                    </TableView>
                                  </children>
                               </Pane>
                               <Button fx:id="addCookBtn" layoutX="666.0" layoutY="76.0" mnemonicParsing="false" onAction="#addCook" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Cook" />
@@ -129,23 +131,24 @@
                         <Button fx:id="addDeliveryPersonBtn" layoutX="688.0" layoutY="84.0" mnemonicParsing="false" onAction="#addDeliveryPerson" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Delivery Person" />
                         <Pane layoutX="242.0" layoutY="215.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="600.0">
                            <children>
-                              <ListView fx:id="allDeliveryPeople" layoutX="25.0" layoutY="73.0" prefHeight="269.0" prefWidth="174.0" style="-fx-border-color: PeachPuff;" />
-                              <Label layoutX="25.0" layoutY="46.0" text="List of delivery people" />
-                              <Button layoutX="25.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeDeliveryPerson" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                              <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery person Details" />
-                              <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First  Name:" />
-                              <Text layoutX="206.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
-                              <Text layoutX="207.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" />
-                              <Text layoutX="207.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" />
-                              <Text layoutX="208.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Area:" />
+                              <Button layoutX="165.0" layoutY="322.0" mnemonicParsing="false" onAction="#removeDeliveryPerson" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
                               <Text fx:id="firstNameFieldDP" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                               <Text fx:id="lastNameFieldDP" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                               <Text fx:id="dobFieldDP" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
                               <Text fx:id="genderFieldDP" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                              <Text layoutX="207.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle:" wrappingWidth="70.36376953125" />
                               <Text fx:id="vehicleField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                               <Text fx:id="deliveryAreaField" fill="#c88021" layoutX="300.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                              <Button layoutX="92.0" layoutY="358.0" mnemonicParsing="false" onAction="#editDeliveryPerson" prefHeight="25.0" prefWidth="49.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                              <Button layoutX="237.0" layoutY="322.0" mnemonicParsing="false" onAction="#editDeliveryPerson" prefHeight="25.0" prefWidth="49.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                              <TableView fx:id="allDeliveryPersonsTable" layoutX="-2.0" layoutY="107.0" prefHeight="200.0" prefWidth="429.0">
+                                 <columns>
+                                    <TableColumn fx:id="dpIdCol" prefWidth="63.20008850097656" text="DP ID" />
+                                    <TableColumn fx:id="dpNameCol" minWidth="0.0" prefWidth="73.5999755859375" text="DP Name" />
+                                    <TableColumn fx:id="dpDobCol" prefWidth="64.0" text="DOB" />
+                                    <TableColumn fx:id="dpGenderCol" prefWidth="55.199951171875" text="Gender" />
+                                    <TableColumn fx:id="vehicleCol" prefWidth="92.0" text="Vehicle" />
+                                    <TableColumn fx:id="areaCol" prefWidth="79.39996337890625" text="Area" />
+                                 </columns>
+                              </TableView>
                            </children>
                         </Pane>
                         <Button fx:id="editDeliveryPersonBtn" layoutX="688.0" layoutY="117.0" mnemonicParsing="false" onAction="#setEditDeliveryPerson" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Delivery Person" />

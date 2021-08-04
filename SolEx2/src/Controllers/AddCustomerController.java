@@ -2,6 +2,7 @@ package Controllers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import Exceptions.InvalidInputException;
@@ -12,6 +13,8 @@ import Model.Restaurant;
 import Utils.Expertise;
 import Utils.Gender;
 import Utils.Neighberhood;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,9 +29,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -58,7 +64,19 @@ public class AddCustomerController extends ControllerWrapper{
 	@FXML
 	private Button removeCustomerBtn;
 	@FXML
-	private ListView<Customer> allCustomers;
+	private TableView<Customer> allCustomersTable;
+	@FXML
+	private TableColumn<Customer, Integer> customerIdCol;
+	@FXML
+	private TableColumn<Customer, String> customerNameCol;
+	@FXML
+	private TableColumn<Customer, String> customerDobCol;
+	@FXML
+	private TableColumn<Customer, String> customerGenderCol;
+	@FXML
+	private TableColumn<Customer, String> neighberhoodCol;
+	@FXML
+	private TableColumn<Customer, String> sensitivitiesCol;
 	@FXML
 	private ListView<Customer> blackList;
 	@FXML
@@ -86,33 +104,39 @@ public class AddCustomerController extends ControllerWrapper{
 		neighberhoodsBox.getItems().clear();				
 		neighberhoodsBox.setItems(FXCollections.observableArrayList(neighberhoods));
 	
-		
-		////////All customers list view
-		//Set the listview cell factory to show the right customer name
-		allCustomers.setCellFactory(param -> new ListCell<Customer>() {
-		    @Override
-		    protected void updateItem(Customer item, boolean empty) {
-		        super.updateItem(item, empty);
-
-		        if (empty || item == null) {
-		            setText(null);
-		        } else {
-		            setText(item.getFirstName() + " " + item.getLastName());
-		        }
-		    }
-		});
 				
 		//Add all customers
-		allCustomers.getItems().addAll(FXCollections.observableArrayList(
-				Restaurant.getInstance().getCustomers().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
+		customerIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
 		
-		//Event listener for listview
-		allCustomers.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Customer>() {
-		    @Override
-		    public void changed(ObservableValue<? extends Customer> observable, Customer oldValue, Customer newValue) {
-		    	updateCustomerDetailsFields();
-		    }
-		});
+		customerNameCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getFirstName() + " " + cust.getValue().getLastName()));	
+		
+		customerDobCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getBirthDay().toString()));
+		
+		customerGenderCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getGender().name()));
+		
+		neighberhoodCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getNeighberhood().toString()));
+		
+		sensitivitiesCol.setCellValueFactory(cust -> {
+			 boolean isSensitiveToGluten = cust.getValue().isSensitiveToGluten();
+	            boolean isSensitiveToLactose = cust.getValue().isSensitiveToLactose();
+	            String isSensitiveToAsString = "";
+	            if(isSensitiveToGluten == true)
+	            {
+	            	isSensitiveToAsString += "Gluten ";
+	            }
+	            if(isSensitiveToLactose == true)
+	            {
+	            	isSensitiveToAsString += "Lactose";
+	            }
+
+	         return new ReadOnlyStringWrapper(isSensitiveToAsString);
+        });
+		
+		List<Customer> allCustomers = new ArrayList<Customer>();
+		allCustomers = Restaurant.getInstance().getCustomers().values().stream()
+				.collect(Collectors.toList());
+		
+		allCustomersTable.getItems().addAll(allCustomers);
 		
 		////////BlackList list view
 		//Set the listview cell factory for black list
@@ -124,7 +148,7 @@ public class AddCustomerController extends ControllerWrapper{
 		        if (empty || item == null) {
 		            setText(null);
 		        } else {
-		            setText(item.getFirstName() + " " + item.getLastName());
+		            setText(item.getId() + " " + item.getFirstName() + " " + item.getLastName());
 		        }
 		    }
 		});
@@ -135,7 +159,7 @@ public class AddCustomerController extends ControllerWrapper{
 	}
 	
 	public void updateCustomerDetailsFields() {
-		Customer selectedCustomer = allCustomers.getSelectionModel().getSelectedItem();
+		Customer selectedCustomer = allCustomersTable.getSelectionModel().getSelectedItem();
 		// fill text fields with values about the selected customer on the list
 		if(selectedCustomer != null) {
 			firstNameField.setText(selectedCustomer.getFirstName());
@@ -166,7 +190,7 @@ public class AddCustomerController extends ControllerWrapper{
 	}
 	
 	public void editCustomer(ActionEvent e) {
-		Customer selectedCustomer = allCustomers.getSelectionModel().getSelectedItem();
+		Customer selectedCustomer = allCustomersTable.getSelectionModel().getSelectedItem();
 		if(selectedCustomer !=  null) {
 			addCustomerBtn.setDisable(true);
 			editCustomerBtn.setDisable(false);
@@ -183,7 +207,7 @@ public class AddCustomerController extends ControllerWrapper{
 	}
 	
 	public void setEditCustomer(ActionEvent e) {
-		Customer selectedCustomer = allCustomers.getSelectionModel().getSelectedItem();
+		Customer selectedCustomer = allCustomersTable.getSelectionModel().getSelectedItem();
 		try {
 			if(!selectedCustomer.getFirstName().equals(first_Name.getText())) {
 				if(first_Name.getText().isEmpty())
@@ -227,8 +251,8 @@ public class AddCustomerController extends ControllerWrapper{
 		neighberhoodsBox.getSelectionModel().clearSelection();
 		isGluten.setSelected(false);
 		isLactose.setSelected(false);
-		allCustomers.getItems().clear();
-		allCustomers.getItems().addAll(FXCollections.observableArrayList(
+		allCustomersTable.getItems().clear();
+		allCustomersTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getCustomers().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		editCustomerBtn.setDisable(true);
 		addCustomerBtn.setDisable(false);
@@ -279,13 +303,8 @@ public class AddCustomerController extends ControllerWrapper{
 			}
 			
 			//get Neighborhood
-			Neighberhood neighberhood = null;
-	
-			for(Neighberhood n : Neighberhood.values()) {
-				if(n.name().equals(neighberhoodsBox.getValue())) {
-					neighberhood = n;
-				}
-			}
+			Neighberhood neighberhood = neighberhoodsBox.getValue();
+				
 			if(neighberhood == null) {
 				throw new InvalidPersonInputException("Please select Neighborhood");
 			}
@@ -310,8 +329,8 @@ public class AddCustomerController extends ControllerWrapper{
 				isGluten.setSelected(false);
 				//update the lists
 				//update the list after removal
-				allCustomers.getItems().clear();
-				allCustomers.getItems().addAll(FXCollections.observableArrayList(
+				allCustomersTable.getItems().clear();
+				allCustomersTable.getItems().addAll(FXCollections.observableArrayList(
 				Restaurant.getInstance().getCustomers().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 				//update the black list
 				blackList.getItems().clear();
@@ -332,12 +351,12 @@ public class AddCustomerController extends ControllerWrapper{
 	}
 	
 	public void removeCustomer(ActionEvent e) {
-		Customer selectedCustomer = allCustomers.getSelectionModel().getSelectedItem();
+		Customer selectedCustomer = allCustomersTable.getSelectionModel().getSelectedItem();
 		if(selectedCustomer !=  null) {
 			Restaurant.getInstance().removeCustomer(selectedCustomer);
 			//update the list after removal
-			allCustomers.getItems().clear();
-			allCustomers.getItems().addAll(FXCollections.observableArrayList(
+			allCustomersTable.getItems().clear();
+			allCustomersTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getCustomers().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			//update the black list
 			blackList.getItems().clear();
@@ -347,7 +366,7 @@ public class AddCustomerController extends ControllerWrapper{
 	}
 	
 	public void addCustomerToBlackList(ActionEvent e) {
-		Customer selectedCustomer = allCustomers.getSelectionModel().getSelectedItem();
+		Customer selectedCustomer = allCustomersTable.getSelectionModel().getSelectedItem();
 		if(selectedCustomer !=  null) {
 			Restaurant.getInstance().addCustomerToBlackList(selectedCustomer);
 			//update the black list

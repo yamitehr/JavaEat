@@ -109,6 +109,36 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="toReplacePane" layoutX="348.0" layoutY="70.0" prefHeight="702.0" prefWidth="1087.0" />
+      <AnchorPane fx:id="toReplacePane" layoutX="348.0" layoutY="70.0" prefHeight="702.0" prefWidth="1087.0">
+         <children>
+            <AnchorPane layoutX="32.0" layoutY="31.0" prefHeight="149.0" prefWidth="280.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="37.0" layoutY="22.0" prefHeight="17.0" prefWidth="223.0" text="Total Customers">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalCustomers" alignment="CENTER" layoutX="65.0" layoutY="75.0" prefHeight="17.0" prefWidth="167.0" textFill="PEACHPUFF">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="354.0" layoutY="31.0" prefHeight="149.0" prefWidth="280.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="37.0" layoutY="22.0" prefHeight="17.0" prefWidth="223.0" text="Total Employees">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalEmployees" alignment="CENTER" layoutX="65.0" layoutY="75.0" prefHeight="17.0" prefWidth="167.0" textFill="PEACHPUFF">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
    </children>
 </AnchorPane>
