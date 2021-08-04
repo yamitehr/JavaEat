@@ -16,7 +16,7 @@
                   <Image url="@../../icons/JavaEat.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardBtn" alignment="CENTER" layoutX="3.0" layoutY="223.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="338.0" style="-fx-background-color: #008B8B;" styleClass="menuBtns" stylesheets="@decoration.css" text="Dashboard">
+            <Button alignment="CENTER" layoutX="3.0" layoutY="223.0" mnemonicParsing="false" onAction="#moveToDashboardScene" prefHeight="54.0" prefWidth="338.0" style="-fx-background-color: #008B8B;" styleClass="menuBtns" stylesheets="@decoration.css" text="Dashboard">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -42,7 +42,7 @@
                </font>
                <graphic>
                 <ImageView fitHeight="23.0" fitWidth="35.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../icons/users-solid white.png" />
+                  <Image url="@../../icons/users-solid%20white.png" />
          	   </ImageView>
             </graphic>
             </Button>
@@ -96,43 +96,13 @@
                   <Image url="@../../icons/sign-in-alt-solid-white.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="icon" fitHeight="37.0" fitWidth="36.0" layoutX="68.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="icon" fitHeight="23.0" fitWidth="35.0" layoutX="73.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../icons/users-solid white.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="toReplacePane" layoutX="348.0" layoutY="70.0" prefHeight="702.0" prefWidth="1087.0">
-         <children>
-            <AnchorPane layoutX="32.0" layoutY="31.0" prefHeight="149.0" prefWidth="280.0">
-               <children>
-                  <Label alignment="CENTER" layoutX="37.0" layoutY="22.0" prefHeight="17.0" prefWidth="223.0" text="Total Customers">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="totalCustomers" alignment="CENTER" layoutX="65.0" layoutY="75.0" prefHeight="17.0" prefWidth="167.0" textFill="PEACHPUFF">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="354.0" layoutY="31.0" prefHeight="149.0" prefWidth="280.0">
-               <children>
-                  <Label alignment="CENTER" layoutX="37.0" layoutY="22.0" prefHeight="17.0" prefWidth="223.0" text="Total Employees">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="totalEmployees" alignment="CENTER" layoutX="65.0" layoutY="75.0" prefHeight="17.0" prefWidth="167.0" textFill="PEACHPUFF">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children></AnchorPane>
+      <AnchorPane fx:id="toReplacePane" layoutX="348.0" layoutY="70.0" prefHeight="702.0" prefWidth="1087.0" />
    </children>
 </AnchorPane>

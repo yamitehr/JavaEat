@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManagerDashboardController">
+   <children>
+      <AnchorPane layoutX="179.0" layoutY="34.0" prefHeight="702.0" prefWidth="1087.0" styleClass="button2">
+         <children>
+            <ImageView fitHeight="708.0" fitWidth="640.0" layoutX="65.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/MoneyTree.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="88.0" layoutY="36.0" prefHeight="91.0" prefWidth="203.0" styleClass="button2" stylesheets="@decoration.css">
+               <children>
+                  <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="203.0" text="Total Customers" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalCustomers" alignment="CENTER" layoutX="59.0" layoutY="46.0" prefHeight="35.0" prefWidth="85.0" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="44.0" layoutY="152.0" prefHeight="91.0" prefWidth="203.0" styleClass="button2" stylesheets="@decoration.css">
+               <children>
+                  <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="203.0" text="Total Employees" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalEmployees" alignment="CENTER" layoutX="59.0" layoutY="46.0" prefHeight="35.0" prefWidth="85.0" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="297.0" layoutY="-17.0" prefHeight="91.0" prefWidth="203.0" styleClass="button2" stylesheets="@decoration.css">
+               <children>
+                  <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="203.0" text="Total Sell" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalSell" alignment="CENTER" layoutX="59.0" layoutY="46.0" prefHeight="35.0" prefWidth="85.0" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

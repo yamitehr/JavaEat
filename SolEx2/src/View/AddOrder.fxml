@@ -85,7 +85,7 @@
                                     <Label fx:id="postageLbl" layoutX="387.0" layoutY="139.0" prefHeight="18.0" prefWidth="51.0" text="Postage:" />
                                     <TextField fx:id="postageField" layoutX="473.0" layoutY="139.0" styleClass="textFields" stylesheets="@decoration.css" />
                                     <Button fx:id="addExpressBtn" layoutX="685.0" layoutY="97.0" mnemonicParsing="false" onAction="#addExpressDelivery" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Express Delivery" />
-                                    <Button fx:id="editDeliveryBtn" layoutX="685.0" layoutY="130.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Delivery" />
+                                    <Button fx:id="editDeliveryBtn" layoutX="685.0" layoutY="130.0" mnemonicParsing="false" onAction="#setEditDelivery" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Delivery" />
                                  </children>
                               </AnchorPane>
                               <Pane layoutX="121.0" layoutY="281.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="670.0">
@@ -133,7 +133,7 @@
                               <TextField fx:id="deliveryAreaName" layoutX="176.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <TextField fx:id="deliveryTime" layoutX="176.0" layoutY="96.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <Label layoutX="358.0" layoutY="65.0" text="Neighberhoods" />
-                              <Button fx:id="addDeliveryAreaBtn" layoutX="968.0" layoutY="87.0" mnemonicParsing="false" onAction="#addDeliveryArea" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Delivery Area" />
+                              <Button fx:id="addDeliveryAreaBtn" layoutX="948.0" layoutY="82.0" mnemonicParsing="false" onAction="#addDeliveryArea" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Delivery Area" />
                               <Label layoutX="60.0" layoutY="100.0" prefHeight="17.0" prefWidth="85.0" text="Delivery Time" />
                               <Pane fx:id="neighberhood_pane" layoutX="531.0" layoutY="61.0" prefHeight="166.0" prefWidth="425.0" />
                               <Text fx:id="messageToUser" layoutX="74.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="421.21630859375" />
@@ -141,7 +141,7 @@
                               <ListView fx:id="deliveryPersonsList" layoutX="93.0" layoutY="165.0" prefHeight="179.0" prefWidth="200.0" visible="false" />
                               <Label fx:id="editDeliveriesLbl" layoutX="311.0" layoutY="146.0" prefHeight="17.0" prefWidth="95.0" text="Deliveries" visible="false" />
                               <ListView fx:id="deliveriesToAddList" layoutX="302.0" layoutY="167.0" prefHeight="179.0" prefWidth="200.0" visible="false" />
-                              <Button fx:id="editDeliveryAreaBtn" layoutX="968.0" layoutY="117.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Delivery Area" />
+                              <Button fx:id="editDeliveryAreaBtn" layoutX="948.0" layoutY="118.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Delivery Area" />
                            </children>
                         </AnchorPane>
                         <Pane layoutX="128.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="702.0">

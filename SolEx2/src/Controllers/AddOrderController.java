@@ -7,10 +7,8 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import Exceptions.IllegalCustomerException;
 import Exceptions.InvalidInputException;
 import Exceptions.InvalidPersonInputException;
-import Exceptions.SensitiveException;
 import Model.Component;
 import Model.Customer;
 import Model.Delivery;
@@ -37,6 +35,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -53,6 +52,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 public class AddOrderController extends ControllerWrapper {
@@ -194,6 +194,7 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private ListView<Delivery> deliveriesToAddList;
 	
+	
 	@FXML
 	private AnchorPane toReplacePane;
 	
@@ -252,7 +253,7 @@ public class AddOrderController extends ControllerWrapper {
 		
 		
 		//Add all orders
-		orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+			orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		
 		customerCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<String>(o.getValue().getCustomer().toString()));
 				
@@ -272,9 +273,8 @@ public class AddOrderController extends ControllerWrapper {
 				
 		allOrdersTable.getItems().addAll(allOrders);
 			
-			
 			//Add all deliveries
-		List<Delivery> allDeliveries = new ArrayList<Delivery>();
+			List<Delivery> allDeliveries = new ArrayList<Delivery>();
 		allDeliveries = Restaurant.getInstance().getDeliveries().values().stream()
 				.collect(Collectors.toList());
 
@@ -366,8 +366,7 @@ public class AddOrderController extends ControllerWrapper {
 				    }
 				});
 				
-						
-				//Add all delivery areas
+					//Add all delivery areas
 			areaIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 			
 			areaNameCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getAreaName()));
@@ -387,7 +386,8 @@ public class AddOrderController extends ControllerWrapper {
 					.collect(Collectors.toList());
 					
 			allAreasTable.getItems().addAll(allAres);
-		}
+						
+			}
 	
 	
 	public void editOrder(ActionEvent e) {
@@ -470,7 +470,7 @@ public class AddOrderController extends ControllerWrapper {
 				throw new InvalidInputException("Please select Customer");
 			}
 			if(Restaurant.getInstance().getBlackList().contains(customer)) {
-				throw new IllegalCustomerException();
+				throw new InvalidInputException("This customer is in the black list!!");
 			}
 			
 			Delivery delivery = deliveryBox.getValue();
@@ -482,7 +482,7 @@ public class AddOrderController extends ControllerWrapper {
 			for(Dish d: orderDishes) {
 				for(Component c: d.getComponenets()) {
 					if(customer.isSensitiveToGluten() && c.isHasGluten()) {
-						throw new SensitiveException(customer.toString(), d.getDishName());
+						throw new InvalidInputException(customer + " is sensitive to " + c);
 					}
 					else if(customer.isSensitiveToLactose() && c.isHasLactose()) {
 						throw new InvalidInputException(customer + " is sensitive to " + c);
@@ -508,15 +508,7 @@ public class AddOrderController extends ControllerWrapper {
 		}catch(InvalidInputException inputE) {
 			messageToUserOrder.setFill(Color.RED);
 			messageToUserOrder.setText(inputE.getMessage());
-		}
-		catch(IllegalCustomerException exc) {
-			messageToUserOrder.setFill(Color.RED);
-			messageToUserOrder.setText(exc.getMessage());
-		}catch(SensitiveException se) {
-			messageToUserOrder.setFill(Color.RED);
-			messageToUserOrder.setText(se.getMessage());
-		}
-		catch(Exception ex) {
+		}catch(Exception ex) {
 			messageToUserOrder.setFill(Color.RED);
 			messageToUserOrder.setText("an error has accured please try again");
 		}
@@ -533,7 +525,9 @@ public class AddOrderController extends ControllerWrapper {
 		}
 	}
 	
-	//delivery	
+	//delivery
+	
+	
 	public void editDelivery(ActionEvent e) {
 		Delivery selectedDelivery = allDeliveriesTable.getSelectionModel().getSelectedItem();
 		if(selectedDelivery !=  null) {
@@ -564,6 +558,69 @@ public class AddOrderController extends ControllerWrapper {
 				orderBox.setValue(((ExpressDelivery) selectedDelivery).getOrder());
 				postageField.setText(String.valueOf(((ExpressDelivery) selectedDelivery).getPostage()));
 			}
+		}
+	}
+	public void setEditDelivery(ActionEvent e) {
+		Delivery selectedDelivery = allDeliveriesTable.getSelectionModel().getSelectedItem();
+		try {
+			if(!selectedDelivery.getDeliveryPerson().equals(DeliveryPersonBox.getValue())) {
+				if(DeliveryPersonBox.getValue() == null)
+					throw new InvalidInputException("You must choose Delivery Person");
+				selectedDelivery.setDeliveryPerson(DeliveryPersonBox.getValue());
+			}
+			if(!selectedDelivery.getArea().equals(deliveryAreaBox.getValue())) {
+				if(deliveryAreaBox.getValue() == null)
+					throw new InvalidInputException("You must choose Area");
+				selectedDelivery.setArea(deliveryAreaBox.getValue());
+			}
+			if(!selectedDelivery.isDelivered() && yesChoice.isSelected())
+				selectedDelivery.setDelivered(true);
+
+			
+			if(selectedDelivery instanceof RegularDelivery) {
+				
+				ArrayList<Order> changedOrders = new ArrayList<Order>();
+				changedOrders.addAll(ordersList.getSelectionModel().getSelectedItems());
+				if(changedOrders.isEmpty()) 
+					throw new InvalidInputException("You must choose at least one order");
+				for(Order o: ((RegularDelivery) selectedDelivery).getOrders()) {
+					if(!changedOrders.contains(o))
+						((RegularDelivery)selectedDelivery).removeOrder(o);			
+				}
+				for(Order o: changedOrders) {
+					if(!((RegularDelivery) selectedDelivery).getOrders().contains(o))
+						((RegularDelivery)selectedDelivery).addOrder(o);
+				}
+			}			
+			else { //express
+				if(!((ExpressDelivery) selectedDelivery).getOrder().equals(orderBox.getValue())) {
+					if(orderBox.getValue() == null)
+						throw new InvalidInputException("You must choose Order");
+					((ExpressDelivery) selectedDelivery).setOrder(orderBox.getValue());
+				}
+					
+					if(((ExpressDelivery) selectedDelivery).getPostage() != Double.parseDouble(postageField.getText()))
+						((ExpressDelivery) selectedDelivery).setPostage(Double.parseDouble(postageField.getText()));
+			}
+		
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setHeaderText("Delivery edited successfully!");
+		alert.showAndWait();
+		messageToUserOrder.setText("");
+		DeliveryPersonBox.getSelectionModel().clearSelection();
+		deliveryAreaBox.getSelectionModel().clearSelection();
+		yesChoice.setSelected(false);
+		orderBox.getSelectionModel().clearSelection();
+		postageField.clear();
+		allDeliveriesTable.getItems().clear();
+		allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
+		Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
+		editDeliveryBtn.setDisable(true);
+		addRegularBtn.setDisable(false);
+		addExpressBtn.setDisable(false);
+		}catch(InvalidInputException inputE) {
+			messageToUserRegular.setFill(Color.RED);
+			messageToUserRegular.setText(inputE.getMessage());
 		}
 	}
 	
@@ -709,9 +766,6 @@ public class AddOrderController extends ControllerWrapper {
 		postageLbl.setVisible(true);
 		postageField.setVisible(true);
 	}
-	
-	
-	//delivery area
 	
 	public void addDeliveryArea(ActionEvent e) {
 		try {
