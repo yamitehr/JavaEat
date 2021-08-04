@@ -111,12 +111,14 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		menuBtn.setAlignment(Pos.BASELINE_LEFT);
 		personalDetailsBtn.setAlignment(Pos.BASELINE_LEFT);*/
 		
+		
 		file = new File("restaurantVideoHD.mp4");
 		media = new Media(file.toURI().toString());
 		mediaPlayer = new MediaPlayer(media);
 		mediaPlayer.play();
 		restaurantVideo.setMediaPlayer(mediaPlayer);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		
 		
 		cartScrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		cartScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
