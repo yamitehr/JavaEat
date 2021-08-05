@@ -6,10 +6,12 @@ import java.util.LinkedList;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import Model.Customer;
 import Model.Delivery;
@@ -23,13 +25,11 @@ public class DeliveryManager {
 	
 	private static DeliveryManager instance;
 	
-	private HashSet<Order> finishedOrders;
 	private HashMap<DeliveryPerson, LinkedList<Delivery>> readyDeliveriesByDeliveryPerson;
 	private HashSet<DeliveryPerson> freeDeliveryPersons;
 	
 	private DeliveryManager() {
 		freeDeliveryPersons = new HashSet<DeliveryPerson>();
-		finishedOrders = new HashSet<Order>();
 		readyDeliveriesByDeliveryPerson = new HashMap<DeliveryPerson, LinkedList<Delivery>>();
 	}
 	
@@ -40,12 +40,7 @@ public class DeliveryManager {
 		return instance;
 	}
 	
-	public void addFinishedOrder(Order order) {
-		Logger.Log("[addFinishedOrder] got finished order - " + order.getId());
-		finishedOrders.add(order);
-	}
-	
-	private DeliveryArea getDeliveryAreaForOrder(Order order){
+	public DeliveryArea getDeliveryAreaForOrder(Order order){
 		Neighberhood n = order.getCustomer().getNeighberhood();
 		
 		for(DeliveryArea d : Restaurant.getInstance().getAreas().values()) {
@@ -69,6 +64,9 @@ public class DeliveryManager {
 	private HashMap<DeliveryArea, TreeSet<Order>> getOrdersMapping(){
 		
 		HashMap<DeliveryArea, TreeSet<Order>> orderByDeliveryArea = new HashMap<DeliveryArea, TreeSet<Order>>();
+		Set<Order> finishedOrders = Restaurant.getInstance().getOrders().values()
+				.stream()
+				.filter(o -> o.getDelivery() == null && o.getStatus() == OrderStatus.readyForDelivery).collect(Collectors.toSet());
 		
 		for(Order order : finishedOrders) {
 			DeliveryArea area = getDeliveryAreaForOrder(order);
@@ -102,26 +100,31 @@ public class DeliveryManager {
 		    public void run() {
 				Logger.Log("[startDeliveriesTask] starting new task");
 		    	HashMap<DeliveryArea, TreeSet<Order>> orderByDeliveryArea = getOrdersMapping();
-		    	finishedOrders.clear();
 		    	Restaurant.getInstance().setOrderByDeliveryArea(orderByDeliveryArea);
 		    	
 		    	for (Entry<DeliveryArea, TreeSet<Order>> pair : orderByDeliveryArea.entrySet()) {
 					DeliveryPerson dp = getDeliveryPersonByDeliveryArea(pair.getKey());
-					
-					TreeSet<Delivery> deliveries = Restaurant.getInstance().createAIMacine(dp, pair.getKey(), pair.getValue());
-					
-					if (!readyDeliveriesByDeliveryPerson.containsKey(dp)) {
-						readyDeliveriesByDeliveryPerson.put(dp, new LinkedList<Delivery>());
+					if (dp != null) {
+						TreeSet<Delivery> deliveries = Restaurant.getInstance().createAIMacine(dp, pair.getKey(), pair.getValue());
+						
+						//add the deliveries to the restaurant
+						for(Delivery delivery : deliveries) {
+							Restaurant.getInstance().addDelivery(delivery);
+						}
+						
+						if (!readyDeliveriesByDeliveryPerson.containsKey(dp)) {
+							readyDeliveriesByDeliveryPerson.put(dp, new LinkedList<Delivery>());
+						}
+						
+			    		for (Delivery d : deliveries) {
+			    			 readyDeliveriesByDeliveryPerson.get(dp).add(d);
+			    		 }
+			    		
+			    		if (freeDeliveryPersons.contains(dp)) {
+							Logger.Log("[startDeliveriesTask] new delivery for free delivery person - " + dp.getFirstName());
+			    			dp.getNewDelivery();
+			    		}
 					}
-					
-		    		for (Delivery d : deliveries) {
-		    			 readyDeliveriesByDeliveryPerson.get(dp).add(d);
-		    		 }
-		    		
-		    		if (freeDeliveryPersons.contains(dp)) {
-						Logger.Log("[startDeliveriesTask] new delivery for free delivery person - " + dp.getFirstName());
-		    			dp.getNewDelivery();
-		    		}
 		    	}
 		    	
 		    }
