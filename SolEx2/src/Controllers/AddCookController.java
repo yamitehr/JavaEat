@@ -1,6 +1,8 @@
 package Controllers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import Exceptions.InvalidInputException;
 import Exceptions.InvalidPersonInputException;
@@ -11,8 +13,8 @@ import Model.Restaurant;
 import Utils.Expertise;
 import Utils.Gender;
 import Utils.Vehicle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,14 +25,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class AddCookController extends ControllerWrapper{
 	//cooks
@@ -53,19 +56,19 @@ public class AddCookController extends ControllerWrapper{
 	@FXML
 	private Button removeCookBtn;
 	@FXML
-	private ListView<Cook> allCooks;
+	private TableView<Cook> allCooksTable;
 	@FXML
-	private Text firstNameField;
+	private TableColumn<Cook, Integer> cookIdCol;
 	@FXML
-	private Text lastNameField;
+	private TableColumn<Cook, String> cookNameCol;
 	@FXML
-	private Text dobField;
+	private TableColumn<Cook, String> cookDobCol;
 	@FXML
-	private Text expertiseField;
+	private TableColumn<Cook, String> cookGenderCol;
 	@FXML
-	private Text genderField;
+	private TableColumn<Cook, String> isChefCol;
 	@FXML
-	private Text isChefFiled;
+	private TableColumn<Cook, String> expertiseCol;
 	@FXML
 	private Button editCookBtn;
 	
@@ -80,14 +83,6 @@ public class AddCookController extends ControllerWrapper{
 	@FXML
 	private DatePicker dateDP;
 	@FXML
-	private Text firstNameFieldDP;
-	@FXML
-	private Text lastNameFieldDP;
-	@FXML
-	private Text dobFieldDP;
-	@FXML
-	private Text genderFieldDP;
-	@FXML
 	private ComboBox<Vehicle> vehicleBox;
 	@FXML
 	private ComboBox<DeliveryArea> deliveryAreaBox;
@@ -98,11 +93,19 @@ public class AddCookController extends ControllerWrapper{
 	@FXML
 	private Button removeDeliveryPersonBtn;
 	@FXML
-	private ListView<DeliveryPerson> allDeliveryPeople;
+	private TableView<DeliveryPerson> allDeliveryPersonsTable;
 	@FXML
-	private Text vehicleField;
+	private TableColumn<DeliveryPerson, Integer> dpIdCol;
 	@FXML
-	private Text deliveryAreaField;
+	private TableColumn<DeliveryPerson, String> dpNameCol;
+	@FXML
+	private TableColumn<DeliveryPerson, String> dpDobCol;
+	@FXML
+	private TableColumn<DeliveryPerson, String> dpGenderCol;
+	@FXML
+	private TableColumn<DeliveryPerson, String> vehicleCol;
+	@FXML
+	private TableColumn<DeliveryPerson, String> areaCol;
 	@FXML
 	private Button editDeliveryPersonBtn;
 	
@@ -149,116 +152,62 @@ public class AddCookController extends ControllerWrapper{
 			deliveryAreaBox.getItems().addAll(FXCollections.observableArrayList(
 					Restaurant.getInstance().getAreas().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			
-	////////All cooks list view
-			//Set the listview cell factory to show the right cook name
-			allCooks.setCellFactory(param -> new ListCell<Cook>() {
-			    @Override
-			    protected void updateItem(Cook item, boolean empty) {
-			        super.updateItem(item, empty);
-
-			        if (empty || item == null) {
-			            setText(null);
-			        } else {
-			            setText(item.getFirstName() + " " + item.getLastName());
-			        }
-			    }
-			});
-					
+			
 			//Add all cooks
-			allCooks.getItems().addAll(FXCollections.observableArrayList(
-					Restaurant.getInstance().getCooks().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
+			cookIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
 			
-			//Event listener for listview
-			allCooks.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Cook>() {
-			    @Override
-			    public void changed(ObservableValue<? extends Cook> observable, Cook oldValue, Cook newValue) {
-			    	updateCookDetailsFields();
-			    }
-			});
+			cookNameCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getFirstName() + " " + cook.getValue().getLastName()));	
 			
+			cookDobCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getBirthDay().toString()));
 			
-	////////All delivery people list view
-			//Set the listview cell factory to show the right delivery person name
-			allDeliveryPeople.setCellFactory(param -> new ListCell<DeliveryPerson>() {
-			    @Override
-			    protected void updateItem(DeliveryPerson item, boolean empty) {
-			        super.updateItem(item, empty);
+			cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getGender().name()));
+			
+			expertiseCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getExpert().toString()));
+			
+			isChefCol.setCellValueFactory(cook -> {
+	            boolean isChef = cook.getValue().isChef();
+	            String isChefAsString;
+	            if(isChef == true)
+	            {
+	                isChefAsString = "Yes";
+	            }
+	            else
+	            {
+	                isChefAsString = "No";
+	            }
 
-			        if (empty || item == null) {
-			            setText(null);
-			        } else {
-			            setText(item.getFirstName() + " " + item.getLastName());
-			        }
-			    }
-			});
+	         return new ReadOnlyStringWrapper(isChefAsString);
+	        });
+			
+			List<Cook> allCooks = new ArrayList<Cook>();
+			allCooks = Restaurant.getInstance().getCooks().values().stream()
+					.collect(Collectors.toList());
+			
+			allCooksTable.getItems().addAll(allCooks);
+			
 					
 			//Add all delivery people
-			allDeliveryPeople.getItems().addAll(FXCollections.observableArrayList(
-					Restaurant.getInstance().getDeliveryPersons().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
+			dpIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
 			
-			//Event listener for listview
-			allDeliveryPeople.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<DeliveryPerson>() {
-			    @Override
-			    public void changed(ObservableValue<? extends DeliveryPerson> observable, DeliveryPerson oldValue, DeliveryPerson newValue) {
-			    	updateDeliveryPersonDetailsFields();
-			    }
-			});
-	}
-	
-	public void updateCookDetailsFields() {
-		Cook selectedCook = allCooks.getSelectionModel().getSelectedItem();
-		// fill text fields with values about the selected customer on the list
-		if(selectedCook != null) {
-			firstNameField.setText(selectedCook.getFirstName());
-			lastNameField.setText(selectedCook.getLastName());
-			dobField.setText(selectedCook.getBirthDay().toString());
-			expertiseField.setText(selectedCook.getExpert().name());
-			genderField.setText(selectedCook.getGender().name());
+			dpNameCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getFirstName() + " " + dp.getValue().getLastName()));	
 			
-			String isChefText = "";
-			if (selectedCook.isChef()) {
-				isChefText += "Yes";
-			} else {
-				isChefText += "No";
-			}
-			isChefFiled.setText(isChefText);
+			dpDobCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getBirthDay().toString()));
 			
-		//clean the text fields if there is no selection
-		} else if(selectedCook == null) {
-			firstNameField.setText("");
-			lastNameField.setText("");
-			dobField.setText("");
-			expertiseField.setText("");
-			genderField.setText("");
-			isChefFiled.setText("");
-		}
-	}
-	
-	
-	public void updateDeliveryPersonDetailsFields() {
-		DeliveryPerson selectedDeliveryPerson = allDeliveryPeople.getSelectionModel().getSelectedItem();
-		// fill text fields with values about the selected delivery person on the list
-		if(selectedDeliveryPerson != null) {
-			firstNameFieldDP.setText(selectedDeliveryPerson.getFirstName());
-			lastNameFieldDP.setText(selectedDeliveryPerson.getLastName());
-			dobFieldDP.setText(selectedDeliveryPerson.getBirthDay().toString());
-			vehicleField.setText(selectedDeliveryPerson.getVehicle().name());
-			genderFieldDP.setText(selectedDeliveryPerson.getGender().name());
-			deliveryAreaField.setText(selectedDeliveryPerson.getArea().getAreaName());
+			dpGenderCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getGender().name()));
 			
-		//clean the text fields if there is no selection
-		} else if(selectedDeliveryPerson == null) {
-			firstNameField.setText("");
-			lastNameField.setText("");
-			dobField.setText("");
-			vehicleField.setText("");
-			genderField.setText("");
-			deliveryAreaField.setText("");
-		}
+			vehicleCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getVehicle().toString()));
+			
+			areaCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getArea().toString()));
+			
+			List<DeliveryPerson> allDeliveryPersons = new ArrayList<DeliveryPerson>();
+			allDeliveryPersons = Restaurant.getInstance().getDeliveryPersons().values().stream()
+					.collect(Collectors.toList());
+			
+			allDeliveryPersonsTable.getItems().addAll(allDeliveryPersons);
 	}
 	
 	public void editCook(ActionEvent e) {
-		Cook selectedCook = allCooks.getSelectionModel().getSelectedItem();
+		Cook selectedCook = allCooksTable.getSelectionModel().getSelectedItem();
 		if(selectedCook !=  null) {
 			addCookBtn.setDisable(true);
 			editCookBtn.setDisable(false);
@@ -277,7 +226,7 @@ public class AddCookController extends ControllerWrapper{
 	}
 	
 	public void setEditCook(ActionEvent e) {
-		Cook selectedCook = allCooks.getSelectionModel().getSelectedItem();
+		Cook selectedCook = allCooksTable.getSelectionModel().getSelectedItem();
 		try {
 			if(!selectedCook.getFirstName().equals(first_Name.getText())) {
 				if(first_Name.getText().isEmpty())
@@ -310,8 +259,8 @@ public class AddCookController extends ControllerWrapper{
 		Gender_group.getSelectedToggle().setSelected(false);
 		expertiseBox.getSelectionModel().clearSelection();
 		isChef.setSelected(false);
-		allCooks.getItems().clear();
-		allCooks.getItems().addAll(FXCollections.observableArrayList(
+		allCooksTable.getItems().clear();
+		allCooksTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getCooks().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		editCookBtn.setDisable(true);
 		addCookBtn.setDisable(false);
@@ -390,8 +339,8 @@ public class AddCookController extends ControllerWrapper{
 				expertiseBox.getSelectionModel().clearSelection();
 				date.setValue(null);
 				isChef.setSelected(false);
-				allCooks.getItems().clear();
-				allCooks.getItems().addAll(FXCollections.observableArrayList(
+				allCooksTable.getItems().clear();
+				allCooksTable.getItems().addAll(FXCollections.observableArrayList(
 						Restaurant.getInstance().getCooks().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			}else {
 				messageToUserCook.setFill(Color.RED);
@@ -408,19 +357,19 @@ public class AddCookController extends ControllerWrapper{
 	}
 	
 	public void removeCook(ActionEvent e) {
-		Cook selectedCook = allCooks.getSelectionModel().getSelectedItem();
+		Cook selectedCook = allCooksTable.getSelectionModel().getSelectedItem();
 		if(selectedCook !=  null) {
 			Restaurant.getInstance().removeCook(selectedCook);
 			//update the list after removal
-			allCooks.getItems().clear();
-			allCooks.getItems().addAll(FXCollections.observableArrayList(
+			allCooksTable.getItems().clear();
+			allCooksTable.getItems().addAll(FXCollections.observableArrayList(
 					Restaurant.getInstance().getCooks().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		}
 	}
 	
 	
 	public void editDeliveryPerson(ActionEvent e) {
-		DeliveryPerson selectedDeliveryPerson = allDeliveryPeople.getSelectionModel().getSelectedItem();
+		DeliveryPerson selectedDeliveryPerson = allDeliveryPersonsTable.getSelectionModel().getSelectedItem();
 		if(selectedDeliveryPerson !=  null) {
 			addDeliveryPersonBtn.setDisable(true);
 			editDeliveryPersonBtn.setDisable(false);
@@ -437,7 +386,7 @@ public class AddCookController extends ControllerWrapper{
 	}
 	
 	public void setEditDeliveryPerson(ActionEvent e) {
-		DeliveryPerson selectedDeliveryPerson = allDeliveryPeople.getSelectionModel().getSelectedItem();
+		DeliveryPerson selectedDeliveryPerson = allDeliveryPersonsTable.getSelectionModel().getSelectedItem();
 		try {
 			if(!selectedDeliveryPerson.getFirstName().equals(first_Name_DP.getText())) {
 				if(first_Name_DP.getText().isEmpty())
@@ -473,8 +422,8 @@ public class AddCookController extends ControllerWrapper{
 		Gender_group_DP.getSelectedToggle().setSelected(false);
 		vehicleBox.getSelectionModel().clearSelection();
 		deliveryAreaBox.getSelectionModel().clearSelection();
-		allDeliveryPeople.getItems().clear();
-		allDeliveryPeople.getItems().addAll(FXCollections.observableArrayList(
+		allDeliveryPersonsTable.getItems().clear();
+		allDeliveryPersonsTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getDeliveryPersons().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		editDeliveryPersonBtn.setDisable(true);
 		addDeliveryPersonBtn.setDisable(false);
@@ -558,8 +507,8 @@ public class AddCookController extends ControllerWrapper{
 					Gender_group_DP.getSelectedToggle().setSelected(false);
 					vehicleBox.getSelectionModel().clearSelection();
 					dateDP.setValue(null);
-					allDeliveryPeople.getItems().clear();
-					allDeliveryPeople.getItems().addAll(FXCollections.observableArrayList(
+					allDeliveryPersonsTable.getItems().clear();
+					allDeliveryPersonsTable.getItems().addAll(FXCollections.observableArrayList(
 							Restaurant.getInstance().getDeliveryPersons().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 				}else {
 					messageToUserDeliveryPerson.setFill(Color.RED);
@@ -576,12 +525,12 @@ public class AddCookController extends ControllerWrapper{
 		}
 		
 		public void removeDeliveryPerson(ActionEvent e) {
-			DeliveryPerson selectedDeliveryPerson = allDeliveryPeople.getSelectionModel().getSelectedItem();
+			DeliveryPerson selectedDeliveryPerson = allDeliveryPersonsTable.getSelectionModel().getSelectedItem();
 			if(selectedDeliveryPerson !=  null) {
 				Restaurant.getInstance().removeDeliveryPerson(selectedDeliveryPerson);
 				//update the list after removal
-				allDeliveryPeople.getItems().clear();
-				allDeliveryPeople.getItems().addAll(FXCollections.observableArrayList(
+				allDeliveryPersonsTable.getItems().clear();
+				allDeliveryPersonsTable.getItems().addAll(FXCollections.observableArrayList(
 						Restaurant.getInstance().getDeliveryPersons().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			}
 		}

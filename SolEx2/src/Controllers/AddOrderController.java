@@ -3,6 +3,7 @@ package Controllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -16,9 +17,12 @@ import Model.DeliveryPerson;
 import Model.Dish;
 import Model.ExpressDelivery;
 import Model.Order;
+import Model.OrderStatus;
 import Model.RegularDelivery;
 import Model.Restaurant;
 import Utils.Neighberhood;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -34,7 +38,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -57,19 +64,19 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private ListView<Dish> dishesList;
 	@FXML
-	private Button backBtn;
-	@FXML
 	private Text messageToUserOrder;
 	@FXML
-	private ListView<Order> allOrders;
+	private TableView<Order> allOrdersTable;
+	@FXML
+	private TableColumn<Order, Integer> orderIdCol;
+	@FXML
+	private TableColumn<Order, String> customerCol;
+	@FXML
+	private TableColumn<Order, String> dishesCol;
+	@FXML
+	private TableColumn<Order, OrderStatus> statusCol;
 	@FXML
 	private Button addOrderBtn;
-	@FXML
-	private Text customerField;
-	@FXML
-	private Text dishesField;
-	@FXML
-	private Text deliveryField;
 	@FXML
 	private Button editOrderBtn;
 	
@@ -87,14 +94,13 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private TextField postageField;
 	@FXML
+	private Label postageLbl;
+	@FXML
 	private ListView<Order> ordersList;
 	@FXML
 	private Text messageToUserRegular;
 	@FXML
-	private Text messageToUserExpress;
-	@FXML
-	private Label postageLbl;
-	
+	private Text messageToUserExpress;	
 	@FXML
 	private AnchorPane regularPane;
 	@FXML
@@ -103,7 +109,23 @@ public class AddOrderController extends ControllerWrapper {
 	private Button addRegularBtn;
 	
 	@FXML
-	private ListView<Delivery> allDeliveries;
+	private TableView<Delivery> allDeliveriesTable;
+	@FXML
+	private TableColumn<Delivery, Integer> deliveryIdCol;
+	@FXML
+	private TableColumn<Delivery, String> deliveryTypeCol;
+	@FXML
+	private TableColumn<Delivery, String> deliveryPersonCol;
+	@FXML
+	private TableColumn<Delivery, String> areaCol;
+	@FXML
+	private TableColumn<Delivery, String> deliveryDateCol;
+	@FXML
+	private TableColumn<Delivery, String> isDeliveredCol;
+	@FXML
+	private TableColumn<Delivery, String> ordersCol;
+	@FXML
+	private TableColumn<Delivery, Double> postageCol;
 	@FXML
 	private Button addRegularDeliveryBtn;
 	@FXML
@@ -144,7 +166,15 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private Button removeDeliveryAreaBtn;
 	@FXML
-	private ListView<DeliveryArea> allDeliveryAreas;
+	private TableView<DeliveryArea> allAreasTable;
+	@FXML
+	private TableColumn<DeliveryArea, Integer> areaIdCol;
+	@FXML
+	private TableColumn<DeliveryArea, String> areaNameCol;
+	@FXML
+	private TableColumn<DeliveryArea, String> neighborhoodsCol;
+	@FXML
+	private TableColumn<DeliveryArea, Integer> deliveryTimeCol;
 	@FXML
 	private Text areaNameField;
 	@FXML
@@ -163,6 +193,7 @@ public class AddOrderController extends ControllerWrapper {
 	private ListView<DeliveryPerson> deliveryPersonsList;
 	@FXML
 	private ListView<Delivery> deliveriesToAddList;
+	
 	
 	@FXML
 	private AnchorPane toReplacePane;
@@ -220,60 +251,75 @@ public class AddOrderController extends ControllerWrapper {
 		ordersList.setItems(order);
 		ordersList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
-		////////All cooks list view
-		//Set the listview cell factory to show the right cook name
-		allOrders.setCellFactory(param -> new ListCell<Order>() {
-		    @Override
-		    protected void updateItem(Order item, boolean empty) {
-		        super.updateItem(item, empty);
-
-		        if (empty || item == null) {
-		            setText(null);
-		        } else {
-		            setText(item.getId() + " " + item.getCustomer());
-		        }
-		    }
-		});
 		
 		//Add all orders
-			allOrders.getItems().addAll(FXCollections.observableArrayList(
-					Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
+			orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+		
+		customerCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<String>(o.getValue().getCustomer().toString()));
 				
-			//Event listener for listview
-			allOrders.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Order>() {
-				   @Override
-				   public void changed(ObservableValue<? extends Order> observable, Order oldValue, Order newValue) {
-				    updateOrderDetailsFields();
-				   }
-			});
+		dishesCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<String>(
+				o.getValue().getDishes()
+				.stream()
+				.map(d -> d.toString())
+				.reduce((a, b) -> a + ", " + b).get()
+				));
+		
+		statusCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<OrderStatus>(o.getValue().getStatus()));
+				
+				
+		List<Order> allOrders = new ArrayList<Order>();
+		allOrders = Restaurant.getInstance().getOrders().values().stream()
+				.collect(Collectors.toList());
+				
+		allOrdersTable.getItems().addAll(allOrders);
 			
-			
-			////////All cooks list view
-			//Set the listview cell factory to show the right cook name
-			allDeliveries.setCellFactory(param -> new ListCell<Delivery>() {
-			    @Override
-			    protected void updateItem(Delivery item, boolean empty) {
-			        super.updateItem(item, empty);
+			//Add all deliveries
+			List<Delivery> allDeliveries = new ArrayList<Delivery>();
+		allDeliveries = Restaurant.getInstance().getDeliveries().values().stream()
+				.collect(Collectors.toList());
 
-			        if (empty || item == null) {
-			            setText(null);
-			        } else {
-			            setText(item.getClass().getSimpleName() + " " + item.getId());
-			        }
-			    }
-			});
-			
-			//Add all orders
-			allDeliveries.getItems().addAll(FXCollections.observableArrayList(
-						Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
-					
-			//Event listener for listview
-			allDeliveries.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Delivery>() {
-					   @Override
-					   public void changed(ObservableValue<? extends Delivery> observable, Delivery oldValue, Delivery newValue) {
-					    updateDeliveryDetailsFields();
-					   }
-				});
+		deliveryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+		
+		deliveryTypeCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getClass().getSimpleName()));
+		
+		deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveryPerson().toString()));
+		
+		areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getArea().toString()));
+		
+		deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveredDate().toString()));
+		
+		isDeliveredCol.setCellValueFactory(delivery -> {
+            boolean isDelivered = delivery.getValue().isDelivered();
+            String isDeliveredAsString;
+            if(isDelivered == true)
+            {
+            	isDeliveredAsString = "Yes";
+            }
+            else
+            {
+            	isDeliveredAsString = "No";
+            }
+
+         return new ReadOnlyStringWrapper(isDeliveredAsString);
+        });
+		
+		for(Delivery del: allDeliveries) {
+			if(del instanceof RegularDelivery) {
+				postageCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<Double>(0.0));
+				ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
+					((RegularDelivery) delivery.getValue()).getOrders()
+					.stream()
+					.map(d -> d.toString())
+					.reduce((a, b) -> a + ", " + b).get()
+				));
+			}
+			if(del instanceof ExpressDelivery) {
+				postageCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<Double>(((ExpressDelivery) delivery.getValue()).getPostage()));
+				ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
+			}
+		}
+				
+		allDeliveriesTable.getItems().addAll(allDeliveries);
 	}
 			
 		private void generateNeighborhoodGrid() {
@@ -320,54 +366,32 @@ public class AddOrderController extends ControllerWrapper {
 				    }
 				});
 				
-				////////All delivery people list view
-				//Set the listview cell factory to show the right delivery person name
-				allDeliveryAreas.setCellFactory(param -> new ListCell<DeliveryArea>() {
-				    @Override
-				    protected void updateItem(DeliveryArea item, boolean empty) {
-				        super.updateItem(item, empty);
-
-				        if (empty || item == null) {
-				            setText(null);
-				        } else {
-				            setText(item.getAreaName());
-				        }
-				    }
-				});
-						
-				//Add all delivery people
-				allDeliveryAreas.getItems().addAll(FXCollections.observableArrayList(
-						Restaurant.getInstance().getAreas().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
-				
-				//Event listener for listview
-				allDeliveryAreas.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<DeliveryArea>() {
-				    @Override
-				    public void changed(ObservableValue<? extends DeliveryArea> observable, DeliveryArea oldValue, DeliveryArea newValue) {
-				    	updateDeliveryAreaDetailsFields();
-				    }
-				});
-			}
-	
-	public void updateOrderDetailsFields() {
-		Order selectedOrder = allOrders.getSelectionModel().getSelectedItem();
-		// fill text fields with values about the selected order on the list
-		if(selectedOrder != null) {
-			customerField.setText(selectedOrder.getCustomer().toString());
-			dishesField.setText(selectedOrder.getDishes().toString());
-			if(selectedOrder.getDelivery() != null)
-				deliveryField.setText(selectedOrder.getDelivery().toString());
+					//Add all delivery areas
+			areaIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 			
-		//clean the text fields if there is no selection
-		} else if(selectedOrder == null) {
-			customerField.setText("");
-			dishesField.setText("");
-			deliveryField.setText("");
-		}
-	}
+			areaNameCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getAreaName()));
+					
+			neighborhoodsCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(
+					area.getValue().getNeighberhoods()
+					.stream()
+					.map(d -> d.toString())
+					.reduce((a, b) -> a + ", " + b).get()
+					));
+			
+			deliveryTimeCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<Integer>(area.getValue().getDeliverTime()));
+					
+					
+			List<DeliveryArea> allAres = new ArrayList<DeliveryArea>();
+			allAres = Restaurant.getInstance().getAreas().values().stream()
+					.collect(Collectors.toList());
+					
+			allAreasTable.getItems().addAll(allAres);
+						
+			}
 	
 	
 	public void editOrder(ActionEvent e) {
-		Order selectedOrder = allOrders.getSelectionModel().getSelectedItem();
+		Order selectedOrder = allOrdersTable.getSelectionModel().getSelectedItem();
 		if(selectedOrder !=  null) {
 			addOrderBtn.setDisable(true);
 			editOrderBtn.setDisable(false);
@@ -383,7 +407,7 @@ public class AddOrderController extends ControllerWrapper {
 	}
 	
 	public void setEditOrder(ActionEvent e) {
-		Order selectedOrder = allOrders.getSelectionModel().getSelectedItem();
+		Order selectedOrder = allOrdersTable.getSelectionModel().getSelectedItem();
 		try {
 			if(!selectedOrder.getCustomer().equals(customerBox.getValue())) {
 				if(customerBox.getValue() == null)
@@ -427,8 +451,8 @@ public class AddOrderController extends ControllerWrapper {
 		customerBox.getSelectionModel().clearSelection();
 		deliveryBox.getSelectionModel().clearSelection();
 		dishesList.getSelectionModel().clearSelection();
-		allOrders.getItems().clear();
-		allOrders.getItems().addAll(FXCollections.observableArrayList(
+		allOrdersTable.getItems().clear();
+		allOrdersTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
 		editOrderBtn.setDisable(true);
 		addOrderBtn.setDisable(false);
@@ -475,8 +499,8 @@ public class AddOrderController extends ControllerWrapper {
 			customerBox.getSelectionModel().clearSelection();
 			deliveryBox.getSelectionModel().clearSelection();
 			//update the list
-			allOrders.getItems().clear();
-			allOrders.getItems().addAll(FXCollections.observableArrayList(
+			allOrdersTable.getItems().clear();
+			allOrdersTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
 			ordersList.getItems().clear();
 			ordersList.getItems().addAll(FXCollections.observableArrayList(
@@ -491,55 +515,21 @@ public class AddOrderController extends ControllerWrapper {
 	}
 	
 	public void removeOrder(ActionEvent e) {
-		Order selectedOrder = allOrders.getSelectionModel().getSelectedItem();
+		Order selectedOrder = allOrdersTable.getSelectionModel().getSelectedItem();
 		if(selectedOrder !=  null) {
 			Restaurant.getInstance().removeOrder(selectedOrder);
 			//update the list after removal
-			allOrders.getItems().clear();
-			allOrders.getItems().addAll(FXCollections.observableArrayList(
+			allOrdersTable.getItems().clear();
+			allOrdersTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
 		}
 	}
 	
 	//delivery
 	
-	public void updateDeliveryDetailsFields() {
-		Delivery selectedDelivery = allDeliveries.getSelectionModel().getSelectedItem();
-		// fill text fields with values about the selected order on the list
-		if(selectedDelivery != null) {
-			deliveryPersonField.setText(selectedDelivery.getDeliveryPerson().toString());
-			deliveryAreaField.setText(selectedDelivery.getArea().toString());
-			String isDelivered;
-			if(selectedDelivery.isDelivered())
-				isDelivered = "No";
-			else
-				isDelivered = "Yes";
-			isDeliveredField.setText(isDelivered);
-			dateField.setText(selectedDelivery.getDeliveredDate().toString());
-			if(selectedDelivery instanceof RegularDelivery) {
-				orderTitle.setText("Orders:");
-				ordersField.setText(((RegularDelivery) selectedDelivery).getOrders().toString());
-			}
-			else { //Express Delivery
-				orderTitle.setText("Order:");
-				ordersField.setText(((ExpressDelivery) selectedDelivery).getOrder().toString());
-				postageTitle.setText("Postage:");
-				postageText.setText(String.valueOf(((ExpressDelivery) selectedDelivery).getPostage()));
-				
-			}
-			
-		//clean the text fields if there is no selection
-		} else if(selectedDelivery == null) {
-			deliveryPersonField.setText("");
-			deliveryAreaField.setText("");
-			isDeliveredField.setText("");
-			dateField.setText("");
-			ordersField.setText("");
-		}
-	}
 	
 	public void editDelivery(ActionEvent e) {
-		Delivery selectedDelivery = allDeliveries.getSelectionModel().getSelectedItem();
+		Delivery selectedDelivery = allDeliveriesTable.getSelectionModel().getSelectedItem();
 		if(selectedDelivery !=  null) {
 			addExpressBtn.setDisable(true);
 			addRegularBtn.setDisable(true);
@@ -568,6 +558,69 @@ public class AddOrderController extends ControllerWrapper {
 				orderBox.setValue(((ExpressDelivery) selectedDelivery).getOrder());
 				postageField.setText(String.valueOf(((ExpressDelivery) selectedDelivery).getPostage()));
 			}
+		}
+	}
+	public void setEditDelivery(ActionEvent e) {
+		Delivery selectedDelivery = allDeliveriesTable.getSelectionModel().getSelectedItem();
+		try {
+			if(!selectedDelivery.getDeliveryPerson().equals(DeliveryPersonBox.getValue())) {
+				if(DeliveryPersonBox.getValue() == null)
+					throw new InvalidInputException("You must choose Delivery Person");
+				selectedDelivery.setDeliveryPerson(DeliveryPersonBox.getValue());
+			}
+			if(!selectedDelivery.getArea().equals(deliveryAreaBox.getValue())) {
+				if(deliveryAreaBox.getValue() == null)
+					throw new InvalidInputException("You must choose Area");
+				selectedDelivery.setArea(deliveryAreaBox.getValue());
+			}
+			if(!selectedDelivery.isDelivered() && yesChoice.isSelected())
+				selectedDelivery.setDelivered(true);
+
+			
+			if(selectedDelivery instanceof RegularDelivery) {
+				
+				ArrayList<Order> changedOrders = new ArrayList<Order>();
+				changedOrders.addAll(ordersList.getSelectionModel().getSelectedItems());
+				if(changedOrders.isEmpty()) 
+					throw new InvalidInputException("You must choose at least one order");
+				for(Order o: ((RegularDelivery) selectedDelivery).getOrders()) {
+					if(!changedOrders.contains(o))
+						((RegularDelivery)selectedDelivery).removeOrder(o);			
+				}
+				for(Order o: changedOrders) {
+					if(!((RegularDelivery) selectedDelivery).getOrders().contains(o))
+						((RegularDelivery)selectedDelivery).addOrder(o);
+				}
+			}			
+			else { //express
+				if(!((ExpressDelivery) selectedDelivery).getOrder().equals(orderBox.getValue())) {
+					if(orderBox.getValue() == null)
+						throw new InvalidInputException("You must choose Order");
+					((ExpressDelivery) selectedDelivery).setOrder(orderBox.getValue());
+				}
+					
+					if(((ExpressDelivery) selectedDelivery).getPostage() != Double.parseDouble(postageField.getText()))
+						((ExpressDelivery) selectedDelivery).setPostage(Double.parseDouble(postageField.getText()));
+			}
+		
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setHeaderText("Delivery edited successfully!");
+		alert.showAndWait();
+		messageToUserOrder.setText("");
+		DeliveryPersonBox.getSelectionModel().clearSelection();
+		deliveryAreaBox.getSelectionModel().clearSelection();
+		yesChoice.setSelected(false);
+		orderBox.getSelectionModel().clearSelection();
+		postageField.clear();
+		allDeliveriesTable.getItems().clear();
+		allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
+		Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
+		editDeliveryBtn.setDisable(true);
+		addRegularBtn.setDisable(false);
+		addExpressBtn.setDisable(false);
+		}catch(InvalidInputException inputE) {
+			messageToUserRegular.setFill(Color.RED);
+			messageToUserRegular.setText(inputE.getMessage());
 		}
 	}
 	
@@ -614,8 +667,8 @@ public class AddOrderController extends ControllerWrapper {
 			yesChoice.setSelected(false);
 			postageField.setText("");
 			//update the list
-			allDeliveries.getItems().clear();
-			allDeliveries.getItems().addAll(FXCollections.observableArrayList(
+			allDeliveriesTable.getItems().clear();
+			allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
 			messageToUserRegular.setFill(Color.RED);
@@ -672,8 +725,8 @@ public class AddOrderController extends ControllerWrapper {
 			deliveryDate.setValue(null);
 			yesChoice.setSelected(false);
 			//update the list
-			allDeliveries.getItems().clear();
-			allDeliveries.getItems().addAll(FXCollections.observableArrayList(
+			allDeliveriesTable.getItems().clear();
+			allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
 			messageToUserRegular.setFill(Color.RED);
@@ -685,12 +738,12 @@ public class AddOrderController extends ControllerWrapper {
 	}
 	
 	public void removeDelivery(ActionEvent e) {
-		Delivery selectedDelivery = allDeliveries.getSelectionModel().getSelectedItem();
+		Delivery selectedDelivery = allDeliveriesTable.getSelectionModel().getSelectedItem();
 		if(selectedDelivery !=  null) {
 			Restaurant.getInstance().removeDelivery(selectedDelivery);
 			//update the list after removal
-			allDeliveries.getItems().clear();
-			allDeliveries.getItems().addAll(FXCollections.observableArrayList(
+			allDeliveriesTable.getItems().clear();
+			allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}
 	}
@@ -712,31 +765,6 @@ public class AddOrderController extends ControllerWrapper {
 		orderBox.setVisible(true);
 		postageLbl.setVisible(true);
 		postageField.setVisible(true);
-	}
-	
-	
-	//delivery area
-	public void updateDeliveryAreaDetailsFields() {
-		DeliveryArea selectedDeliveryArea = allDeliveryAreas.getSelectionModel().getSelectedItem();
-		// fill text fields with values about the selected delivery area on the list
-		if(selectedDeliveryArea != null) {
-			areaNameField.setText(selectedDeliveryArea.getAreaName());
-			deliveryTimeField.setText(String.valueOf(selectedDeliveryArea.getDeliverTime()));
-			String neighborhoodsStr = "";
-			if (selectedDeliveryArea.getNeighberhoods().size() > 0) {
-				for(Neighberhood n : selectedDeliveryArea.getNeighberhoods()) {
-					neighborhoodsStr += n.name() + ", ";
-				}
-				neighborhoodsStr = neighborhoodsStr.substring(0, neighborhoodsStr.length() - 3);
-			}
-			neighborhoodField.setText(neighborhoodsStr);
-			
-		//clean the text fields if there is no selection
-		} else if(selectedDeliveryArea == null) {
-			areaNameField.setText("");
-			deliveryTimeField.setText("");
-			neighborhoodField.setText("");
-		}
 	}
 	
 	public void addDeliveryArea(ActionEvent e) {
@@ -778,8 +806,8 @@ public class AddOrderController extends ControllerWrapper {
 					cb.setSelected(false);
 				}
 				//update the list after addition
-				allDeliveryAreas.getItems().clear();
-				allDeliveryAreas.getItems().addAll(FXCollections.observableArrayList(
+				allAreasTable.getItems().clear();
+				allAreasTable.getItems().addAll(FXCollections.observableArrayList(
 						Restaurant.getInstance().getAreas().entrySet().stream().map(a -> a.getValue()).collect(Collectors.toList())));
 				newAreaBox.getSelectionModel().clearSelection();
 			} else {
@@ -797,7 +825,7 @@ public class AddOrderController extends ControllerWrapper {
 	}
 		
 	public void removeDeliveryArea(ActionEvent e) {
-		DeliveryArea selectedDeliveryArea = allDeliveryAreas.getSelectionModel().getSelectedItem();
+		DeliveryArea selectedDeliveryArea = allAreasTable.getSelectionModel().getSelectedItem();
 		if(selectedDeliveryArea !=  null) {
 			removeLbl.setVisible(true);
 			newAreaBox.setVisible(true);
@@ -808,8 +836,8 @@ public class AddOrderController extends ControllerWrapper {
 				newAreaBox.setVisible(false);
 				Restaurant.getInstance().removeDeliveryArea(selectedDeliveryArea, newAreaBox.getSelectionModel().getSelectedItem());
 				//update the list after removal
-				allDeliveryAreas.getItems().clear();
-				allDeliveryAreas.getItems().addAll(FXCollections.observableArrayList(
+				allAreasTable.getItems().clear();
+				allAreasTable.getItems().addAll(FXCollections.observableArrayList(
 						Restaurant.getInstance().getAreas().entrySet().stream().map(a -> a.getValue()).collect(Collectors.toList())));
 				newAreaBox.getSelectionModel().clearSelection();
 			}
@@ -817,7 +845,7 @@ public class AddOrderController extends ControllerWrapper {
 	}	
 	
 	public void editDeliveryArea(ActionEvent e) {
-		DeliveryArea selectedDeliveryArea = allDeliveryAreas.getSelectionModel().getSelectedItem();
+		DeliveryArea selectedDeliveryArea = allAreasTable.getSelectionModel().getSelectedItem();
 		if(selectedDeliveryArea !=  null) {
 			addDeliveryAreaBtn.setDisable(true);
 			editDeliveryAreaBtn.setDisable(false);

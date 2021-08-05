@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.SepiaTone?>
@@ -51,28 +53,25 @@
          <effect>
             <SepiaTone level="0.25" />
          </effect></RadioButton>
-      <Pane layoutX="224.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="906.0">
+      <Pane layoutX="134.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="996.0">
          <children>
-            <ListView fx:id="allCustomers" layoutX="25.0" layoutY="73.0" prefHeight="269.0" prefWidth="174.0" style="-fx-border-color: PeachPuff;" />
-            <Label layoutX="25.0" layoutY="46.0" text="List of customers" />
-            <Button fx:id="removeCustomerBtn" layoutX="25.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeCustomer" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-            <Button layoutX="93.0" layoutY="358.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
-            <Label layoutX="422.0" layoutY="46.0" text="Black list" />
-            <ListView fx:id="blackList" layoutX="422.0" layoutY="73.0" prefHeight="211.0" prefWidth="156.0" style="-fx-border-color: PeachPuff;" />
-            <Text layoutX="206.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Details" />
-            <Text layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First  Name:" />
-            <Text layoutX="206.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
-            <Text layoutX="207.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" />
-            <Text layoutX="207.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Neighberhood:" />
-            <Text layoutX="207.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" />
-            <Text layoutX="208.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sensitivities:" />
+            <Button fx:id="removeCustomerBtn" layoutX="114.0" layoutY="298.0" mnemonicParsing="false" onAction="#removeCustomer" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+            <Button layoutX="182.0" layoutY="298.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
+            <Label layoutX="569.0" layoutY="43.0" text="Black list" />
+            <ListView fx:id="blackList" layoutX="569.0" layoutY="74.0" prefHeight="211.0" prefWidth="156.0" style="-fx-border-color: PeachPuff;" />
             <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <Text fx:id="lastNameField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <Text fx:id="dobField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-            <Text fx:id="neighberhoodField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <Text fx:id="genderField" fill="#c88021" layoutX="253.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <Text fx:id="sensitivitiesField" fill="#c88021" layoutX="285.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <Button layoutX="53.0" layoutY="390.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="56.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+            <Button layoutX="154.0" layoutY="333.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="56.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+            <TableView fx:id="allCustomersTable" layoutX="25.0" layoutY="80.0" prefHeight="200.0" prefWidth="448.0">
+               <columns>
+                  <TableColumn fx:id="customerIdCol" prefWidth="80.79998779296875" text="Customer ID" />
+                  <TableColumn fx:id="customerNameCol" minWidth="0.0" prefWidth="102.40007019042969" text="Customer Name" />
+                  <TableColumn fx:id="customerDobCol" prefWidth="42.4000244140625" text="DOB" />
+                  <TableColumn fx:id="customerGenderCol" prefWidth="54.4000244140625" text="Gender" />
+                  <TableColumn fx:id="neighberhoodCol" prefWidth="88.0" text="Neighberhood" />
+                  <TableColumn fx:id="sensitivitiesCol" prefWidth="76.79998779296875" text="Sensitivities" />
+               </columns>
+            </TableView>
          </children>
       </Pane>
       <Button fx:id="editCustomerBtn" disable="true" layoutX="689.0" layoutY="133.0" mnemonicParsing="false" onAction="#setEditCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Customer" />
