@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Utils.DeliveryManager;
+import Utils.Logger;
 import Utils.MyFileLogWriter;
 
 public class Order implements Comparable<Order>, Serializable{
@@ -147,6 +148,7 @@ public class Order implements Comparable<Order>, Serializable{
 	    TimerTask task = new TimerTask() {
 	        public void run() {
 	        	thisOrder.status = OrderStatus.readyForDelivery;
+	    		Logger.Log("[startOrderTimer] order time done for " + thisOrder.getId());
 	    		DeliveryManager.getInstance().addFinishedOrder(thisOrder);
 	        }
 	    };

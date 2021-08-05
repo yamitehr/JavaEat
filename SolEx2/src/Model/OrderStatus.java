@@ -1,5 +1,5 @@
 package Model;
 
 public enum OrderStatus {
-	InProgress, readyForDelivery
+	InProgress, readyForDelivery, cancelled
 }

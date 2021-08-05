@@ -1,8 +1,12 @@
 package Model;
 
 import java.time.LocalDate;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import Utils.DeliveryManager;
 import Utils.Gender;
+import Utils.Logger;
 import Utils.Vehicle;
 
 public class DeliveryPerson extends Person {
@@ -19,6 +23,7 @@ public class DeliveryPerson extends Person {
 		super(idCounter++, firstName, lastName, birthDay, gender);
 		this.vehicle = vehicle;
 		this.area = area;
+		getNewDelivery();
 	}
 	
 	public DeliveryPerson(int id) {
@@ -48,6 +53,17 @@ public class DeliveryPerson extends Person {
 		return super.toString();
 	}
 
+	public void getNewDelivery() {
+		Delivery newDelivery = DeliveryManager.getInstance().getDeliveryForDeliveryPerson(this);
+		if (newDelivery != null) {
+			Logger.Log("[getNewDelivery] delivery person - " + getFirstName() + " starting new delivery timer");
+			newDelivery.startDeliveryTimer();	
+		} else {
+			DeliveryManager.getInstance().setFreeDeliveryPerson(this);
+			Logger.Log("[getNewDelivery] delivery person - " + getFirstName() + " no new deliveries, adding to free dps");
+		}
+	}
+	
 	protected Object readResolve() {
 		if (this.id == idCounter) {
 			idCounter = this.id + 1;
