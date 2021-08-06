@@ -31,16 +31,16 @@
                      <children>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="681.0" prefWidth="1430.0">
                            <children>
-                              <Label layoutX="69.0" layoutY="43.0" text="Dish Name" />
+                              <Label layoutX="69.0" layoutY="43.0" text="Dish Name" styleClass="managerAllText"/>
                               <TextField fx:id="dish_Name" layoutX="220.0" layoutY="43.0" prefHeight="32.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <Label layoutX="405.0" layoutY="43.0" text="Dish Type" />
+                              <Label layoutX="405.0" layoutY="43.0" text="Dish Type" styleClass="managerAllText"/>
                               <Button fx:id="addDishBtn" layoutX="746.0" layoutY="56.0" mnemonicParsing="false" onAction="#addDish" prefHeight="38.0" prefWidth="137.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Dish" />
                               <Text fx:id="messageToUserDish" layoutX="701.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-                              <Label layoutX="69.0" layoutY="96.0" text="Time To Make:" />
+                              <Label layoutX="69.0" layoutY="96.0" text="Time To Make:" styleClass="managerAllText"/>
                               <TextField fx:id="timeToMake" layoutX="220.0" layoutY="90.0" prefHeight="29.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <ComboBox fx:id="typesBox" layoutX="476.0" layoutY="36.0" prefHeight="31.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                               <ListView fx:id="componentsList" layoutX="496.0" layoutY="90.0" prefHeight="147.0" prefWidth="186.0" style="-fx-border-color: PeachPuff;" />
-                              <Label layoutX="405.0" layoutY="88.0" text="Components:" />
+                              <Label layoutX="405.0" layoutY="88.0" text="Components:" styleClass="managerAllText"/>
                               <AnchorPane layoutX="173.0" layoutY="212.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="755.0">
                                  <children>
                                     <Button layoutX="154.0" layoutY="370.0" mnemonicParsing="false" onAction="#removeDish" prefHeight="25.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
@@ -73,9 +73,9 @@
                      <children>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1200.0">
                            <children>
-                              <Label layoutX="72.0" layoutY="66.0" text="Component Name" />
+                              <Label layoutX="72.0" layoutY="66.0" text="Component Name" styleClass="managerAllText"/>
                               <TextField fx:id="component_Name" layoutX="220.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <Label layoutX="423.0" layoutY="66.0" text="contains" />
+                              <Label layoutX="423.0" layoutY="66.0" text="contains" styleClass="managerAllText"/>
                               <CheckBox fx:id="isGluten" layoutX="499.0" layoutY="66.0" mnemonicParsing="false" text="Gluten">
                                  <effect>
                                     <SepiaTone level="0.25" />
@@ -86,7 +86,7 @@
                                  </effect></CheckBox>
                               <Button fx:id="addComponentBtn" layoutX="788.0" layoutY="74.0" mnemonicParsing="false" onAction="#addComponent" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Component" />
                               <Text fx:id="messageToUserComp" layoutX="729.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-                              <Label layoutX="282.0" layoutY="110.0" text="Price" />
+                              <Label layoutX="282.0" layoutY="110.0" text="Price" styleClass="managerAllText"/>
                               <TextField fx:id="price" layoutX="340.0" layoutY="106.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <AnchorPane layoutX="134.0" layoutY="207.0" minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="1002.0">
                                  <children>

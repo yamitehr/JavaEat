@@ -27,8 +27,9 @@
 }
 
 .addBtns {
-	-fx-background-color: White;
-/* 	-fx-border-color: PeachPuff;*/
+	-fx-text-fill: white;
+	-fx-background-color: #b89b5f;
+/* -fx-background-radius: 3px; */	
 }
 
 .comboBox {
@@ -66,4 +67,8 @@
 
 .topPane{
 	-fx-background-color: #3D201C
+}
+
+.managerAllText{
+	-fx-text-fill: white;
 }

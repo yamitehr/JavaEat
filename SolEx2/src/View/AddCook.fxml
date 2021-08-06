@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCookController">
    <children>
     <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.4" pickOnBounds="true">
          <image>
@@ -34,36 +34,36 @@
                      <children>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1200.0">
                            <children>
-                              <Label layoutX="72.0" layoutY="66.0" text="First Name" />
-                              <Label layoutX="366.0" layoutY="66.0" text="Last Name" />
-                              <Label layoutX="66.0" layoutY="109.0" text="Date Of Birth" />
-                              <Label layoutX="375.0" layoutY="109.0" text="Gender" />
-                              <RadioButton layoutX="452.0" layoutY="109.0" mnemonicParsing="false" text="Male">
+                              <Label layoutX="72.0" layoutY="66.0" text="First Name" styleClass="managerAllText"/>
+                              <Label layoutX="366.0" layoutY="66.0" text="Last Name" styleClass="managerAllText"/>
+                              <Label layoutX="66.0" layoutY="109.0" text="Date Of Birth" styleClass="managerAllText"/>
+                              <Label layoutX="375.0" layoutY="109.0" text="Gender" styleClass="managerAllText"/>
+                              <RadioButton layoutX="452.0" layoutY="109.0" mnemonicParsing="false" text="Male" styleClass="managerAllText">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
                                  <toggleGroup>
-                                    <ToggleGroup fx:id="Gender_group" />
+                                    <ToggleGroup fx:id="Gender_group"/>
                                  </toggleGroup>
                               </RadioButton>
                               <TextField fx:id="first_Name" layoutX="170.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <TextField fx:id="last_Name" layoutX="452.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <DatePicker fx:id="date" layoutX="170.0" layoutY="105.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <RadioButton layoutX="508.0" layoutY="109.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group">
+                              <RadioButton layoutX="508.0" layoutY="109.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group" styleClass="managerAllText">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
                               </RadioButton>
-                              <Label layoutX="77.0" layoutY="145.0" text="Expertise" />
-                              <Label layoutX="376.0" layoutY="145.0" text="is Chef" />
-                              <CheckBox fx:id="isChef" layoutX="457.0" layoutY="145.0" mnemonicParsing="false" text="Yes">
+                              <Label layoutX="77.0" layoutY="145.0" text="Expertise" styleClass="managerAllText"/>
+                              <Label layoutX="376.0" layoutY="145.0" text="is Chef" styleClass="managerAllText"/>
+                              <CheckBox fx:id="isChef" layoutX="457.0" layoutY="145.0" mnemonicParsing="false" text="Yes" styleClass="managerAllText">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
                               </CheckBox>
                               <ComboBox fx:id="expertiseBox" layoutX="170.0" layoutY="141.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                               <Text fx:id="messageToUserCook" layoutX="645.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-                              <RadioButton layoutX="573.0" layoutY="109.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group">
+                              <RadioButton layoutX="573.0" layoutY="109.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group" styleClass="managerAllText">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
@@ -104,11 +104,11 @@
                      <children>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="736.0">
                            <children>
-                              <Label layoutX="72.0" layoutY="66.0" text="First Name" />
-                              <Label layoutX="359.0" layoutY="66.0" text="Last Name" />
-                              <Label layoutX="66.0" layoutY="104.0" text="Date Of Birth" />
-                              <Label layoutX="361.0" layoutY="104.0" text="Gender" />
-                              <RadioButton layoutX="452.0" layoutY="104.0" mnemonicParsing="false" text="Male">
+                              <Label layoutX="72.0" layoutY="66.0" text="First Name" styleClass="managerAllText"/>
+                              <Label layoutX="359.0" layoutY="66.0" text="Last Name" styleClass="managerAllText"/>
+                              <Label layoutX="66.0" layoutY="104.0" text="Date Of Birth" styleClass="managerAllText"/>
+                              <Label layoutX="361.0" layoutY="104.0" text="Gender" styleClass="managerAllText"/>
+                              <RadioButton layoutX="452.0" layoutY="104.0" mnemonicParsing="false" text="Male" styleClass="managerAllText">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
@@ -119,19 +119,19 @@
                               <TextField fx:id="first_Name_DP" layoutX="160.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <TextField fx:id="last_Name_DP" layoutX="452.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <DatePicker fx:id="dateDP" layoutX="157.0" layoutY="100.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <RadioButton layoutX="507.0" layoutY="104.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group_DP">
+                              <RadioButton layoutX="507.0" layoutY="104.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group_DP" styleClass="managerAllText">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
                               </RadioButton>
-                              <Label layoutX="82.0" layoutY="146.0" text="Vehicle" />
+                              <Label layoutX="82.0" layoutY="146.0" text="Vehicle" styleClass="managerAllText"/>
                               <ComboBox fx:id="vehicleBox" layoutX="157.0" layoutY="142.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                              <RadioButton layoutX="574.0" layoutY="104.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group_DP">
+                              <RadioButton layoutX="574.0" layoutY="104.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group_DP" styleClass="managerAllText">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
                               </RadioButton>
-                              <Label layoutX="345.0" layoutY="146.0" text="Delivery Area" />
+                              <Label layoutX="345.0" layoutY="146.0" text="Delivery Area" styleClass="managerAllText"/>
                               <ComboBox fx:id="deliveryAreaBox" layoutX="432.0" layoutY="142.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                            </children>
                         </AnchorPane>

@@ -27,11 +27,11 @@
       </ImageView>
       <AnchorPane layoutX="334.0" layoutY="21.0" prefHeight="705.0" prefWidth="991.0" stylesheets="@decoration.css">
                <children>
-      <Label layoutX="72.0" layoutY="66.0" text="First Name" />
-      <Label layoutX="359.0" layoutY="66.0" text="Last Name" />
-      <Label layoutX="68.0" layoutY="105.0" text="Date Of Birth" />
-      <Label layoutX="361.0" layoutY="105.0" text="Gender" />
-      <RadioButton layoutX="434.0" layoutY="105.0" mnemonicParsing="false" text="Male">
+      <Label layoutX="72.0" layoutY="66.0" styleClass="managerAllText" text="First Name" />
+      <Label layoutX="359.0" layoutY="66.0" styleClass="managerAllText" text="Last Name" />
+      <Label layoutX="68.0" layoutY="105.0" styleClass="managerAllText" text="Date Of Birth" />
+      <Label layoutX="361.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
+      <RadioButton layoutX="434.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="Gender_group" />
          </toggleGroup>
@@ -41,36 +41,35 @@
       <TextField fx:id="first_Name" layoutX="173.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
       <TextField fx:id="last_Name" layoutX="434.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
       <DatePicker fx:id="date" layoutX="173.0" layoutY="101.0" styleClass="textFields" stylesheets="@decoration.css" />
-      <RadioButton layoutX="489.0" layoutY="105.0" mnemonicParsing="false" text="Female" toggleGroup="$Gender_group">
+      <RadioButton layoutX="489.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
          <effect>
             <SepiaTone level="0.25" />
          </effect></RadioButton>
-      <Label layoutX="64.0" layoutY="147.0" text="Neighberhood" />
-      <Label layoutX="350.0" layoutY="147.0" text="Sensitivities" />
-      <CheckBox fx:id="isGluten" layoutX="430.0" layoutY="147.0" mnemonicParsing="false" text="Gluten">
+      <Label layoutX="64.0" layoutY="147.0" styleClass="managerAllText" text="Neighberhood" />
+      <Label layoutX="350.0" layoutY="147.0" styleClass="managerAllText" text="Sensitivities" />
+      <CheckBox fx:id="isGluten" layoutX="430.0" layoutY="147.0" mnemonicParsing="false" styleClass="managerAllText" text="Gluten">
          <effect>
             <SepiaTone level="0.25" />
          </effect></CheckBox>
-      <CheckBox fx:id="isLactose" layoutX="495.0" layoutY="147.0" mnemonicParsing="false" text="Lactose">
+      <CheckBox fx:id="isLactose" layoutX="495.0" layoutY="147.0" mnemonicParsing="false" styleClass="managerAllText" text="Lactose">
          <effect>
             <SepiaTone level="0.25" />
          </effect></CheckBox>
       <ComboBox fx:id="neighberhoodsBox" layoutX="173.0" layoutY="143.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-      <Button fx:id="addCustomerBtn" layoutX="689.0" layoutY="100.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Customer" />
+      <Button fx:id="addCustomerBtn" layoutX="689.0" layoutY="62.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Customer" />
       <Text fx:id="messageToUser" layoutX="600.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-      <RadioButton layoutX="556.0" layoutY="105.0" mnemonicParsing="false" text="Unknown" toggleGroup="$Gender_group">
+      <RadioButton layoutX="556.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
          <effect>
             <SepiaTone level="0.25" />
          </effect></RadioButton>
       <Pane layoutX="134.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="996.0" stylesheets="@decoration.css">
          <children>
-            <Button fx:id="removeCustomerBtn" layoutX="114.0" layoutY="298.0" mnemonicParsing="false" onAction="#removeCustomer" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-            <Button layoutX="182.0" layoutY="298.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
-            <Label layoutX="569.0" layoutY="43.0" text="Black list" />
+            <Button fx:id="removeCustomerBtn" layoutX="93.0" layoutY="298.0" mnemonicParsing="false" onAction="#removeCustomer" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+            <Button layoutX="163.0" layoutY="298.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
+            <Label layoutX="569.0" layoutY="43.0" styleClass="managerAllText" text="Black list" />
             <ListView fx:id="blackList" layoutX="569.0" layoutY="74.0" prefHeight="211.0" prefWidth="156.0" style="-fx-border-color: PeachPuff;" />
             <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <Text fx:id="sensitivitiesField" fill="#c88021" layoutX="285.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <Button layoutX="154.0" layoutY="333.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="56.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
             <TableView fx:id="allCustomersTable" layoutX="25.0" layoutY="80.0" prefHeight="200.0" prefWidth="448.0">
                <columns>
                   <TableColumn fx:id="customerIdCol" prefWidth="80.79998779296875" text="Customer ID" />
@@ -81,9 +80,10 @@
                   <TableColumn fx:id="sensitivitiesCol" prefWidth="76.79998779296875" text="Sensitivities" />
                </columns>
             </TableView>
+            <Button layoutX="25.0" layoutY="298.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="56.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
          </children>
       </Pane>
-      <Button fx:id="editCustomerBtn" disable="true" layoutX="689.0" layoutY="133.0" mnemonicParsing="false" onAction="#setEditCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Customer" />
+      <Button fx:id="editCustomerBtn" disable="true" layoutX="689.0" layoutY="101.0" mnemonicParsing="false" onAction="#setEditCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Customer" />
       </children>
             </AnchorPane>
    </children>
