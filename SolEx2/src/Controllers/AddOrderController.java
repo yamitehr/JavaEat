@@ -38,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -197,6 +198,9 @@ public class AddOrderController extends ControllerWrapper {
 	
 	@FXML
 	private AnchorPane toReplacePane;
+	
+	@FXML
+	private TabPane tabPane;
 	
 	@FXML
     public void initialize() {

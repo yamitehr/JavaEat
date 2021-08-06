@@ -26,6 +26,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -71,6 +72,8 @@ public class AddCookController extends ControllerWrapper{
 	private TableColumn<Cook, String> expertiseCol;
 	@FXML
 	private Button editCookBtn;
+	@FXML
+	private TabPane tabPane;
 	
 	
 	//delivery person

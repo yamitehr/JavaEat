@@ -2,7 +2,6 @@
       -fx-text-fill: white;
        -fx-font-family: "Monaco";
        -fx-font-size: 17px;
-    /*    -fx-background-color: #c18640;*/
    -fx-background-color: #3D201C
      
    
@@ -71,4 +70,40 @@
 
 .managerAllText{
 	-fx-text-fill: white;
+}
+
+#tabPane{
+	-fx-tab-min-width:8em;
+	-fx-tab-max-width:14em;
+	-fx-tab-min-height:3em;
+	-fx-tab-max-height:3em;
+	-fx-background-color: transparent;
+}
+
+.tab{
+	-fx-background-color: #3D201C;
+	-fx-opacity:0.71;
+	-fx-text-base-color: white;
+	 -fx-font-family: "Monaco";
+	 -fx-font-size: 15px;
+	 -fx-padding: 0 30 0 30;
+}
+
+.tab:selected{
+	-fx-border-width: 5 0 0 0;
+	-fx-border-color: white;
+	-fx-background-radius: 0;
+	-fx-background-insets: 0;
+}
+
+.tab:selected .focus-indicator{
+	-fx-focus-color: transparent;
+}
+
+.tab:focused{
+	-fx-focus-color: transparent;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
 }

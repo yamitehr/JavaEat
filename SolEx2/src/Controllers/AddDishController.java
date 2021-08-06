@@ -20,6 +20,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -87,6 +88,9 @@ public class AddDishController extends ControllerWrapper {
 	private Button editDishbtn;
 	@FXML
 	private Button editComponentBtn;
+	
+	@FXML
+	private TabPane tabPane;
 
 	
 	@FXML
