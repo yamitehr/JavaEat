@@ -2,6 +2,9 @@
       -fx-text-fill: white;
        -fx-font-family: "Monaco";
        -fx-font-size: 17px;
+    /*    -fx-background-color: #c18640;*/
+   -fx-background-color: #3D201C
+     
    
 }
 
@@ -20,16 +23,16 @@
 
 .textFields {
     -fx-background-color: White;
-  	 -fx-border-color: transparent transparent PeachPuff;
+  /*	 -fx-border-color: transparent transparent PeachPuff; */
 }
 
 .addBtns {
 	-fx-background-color: White;
-	-fx-border-color: PeachPuff;
+/* 	-fx-border-color: PeachPuff;*/
 }
 
 .comboBox {
-	-fx-border-color: PeachPuff;
+/* 	-fx-border-color: PeachPuff;*/
 	-fx-background-color: White;
 }
 
@@ -49,3 +52,18 @@
 	-fx-background-radius :  20;
 }
 
+.addCustomerPane {
+	 -fx-font-family: "Microsoft JhengHei";
+	
+	
+}
+
+.sidePane{
+	-fx-background-color: #3D201C
+	
+	 
+}
+
+.topPane{
+	-fx-background-color: #3D201C
+}

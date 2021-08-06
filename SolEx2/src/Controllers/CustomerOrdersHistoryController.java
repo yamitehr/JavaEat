@@ -67,7 +67,7 @@ public class CustomerOrdersHistoryController {
 						+ " " + orderProperty.getValue()
 						.getDelivery().getDeliveryPerson().getLastName());
 			} else {
-				return new ReadOnlyObjectWrapper<String>("N/A");
+				return new ReadOnlyObjectWrapper<String>("order in progress");
 				}
 		});
 		

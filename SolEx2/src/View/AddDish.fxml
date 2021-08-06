@@ -11,18 +11,25 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="705.0" prefWidth="1200.0" style="-fx-background-color: White;" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddDishController">
+<AnchorPane prefHeight="770.0" prefWidth="1396.0" style="-fx-background-color: black;" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddDishController">
    <children>
-      <TabPane prefHeight="770.0" prefWidth="1200.0" style="-fx-background-color: White;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.4" pickOnBounds="true">
+         <image>
+            <Image url="@../../img/main.jpg" />
+         </image>
+      </ImageView>
+      <TabPane layoutX="349.0" prefHeight="777.0" prefWidth="1002.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab closable="false" style="-fx-background-color: White;" text="Dish">
+          <Tab closable="false" text="Dish">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="626.0" prefWidth="888.0" style="-fx-background-color: White;">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="626.0" prefWidth="888.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="681.0" prefWidth="1430.0" style="-fx-background-color: White;">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="681.0" prefWidth="1430.0">
                            <children>
                               <Label layoutX="69.0" layoutY="43.0" text="Dish Name" />
                               <TextField fx:id="dish_Name" layoutX="220.0" layoutY="43.0" prefHeight="32.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
@@ -60,7 +67,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab closable="false" style="-fx-background-color: White;" text="Component">
+          <Tab closable="false" text="Component">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
