@@ -123,7 +123,6 @@ public class Order implements Comparable<Order>, Serializable{
 			}
 			revenue += (price - cost);
 		}
-		MyFileLogWriter.println("Order Revenue = "+revenue);
 		return revenue;
 	}
 	
