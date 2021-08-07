@@ -1,7 +1,7 @@
 .menuBtns {
       -fx-text-fill: white;
        -fx-font-family: "Monaco";
-       -fx-font-size: 17px;
+       -fx-font-size: 17.5px;
    -fx-background-color: #3D201C
      
    
@@ -23,17 +23,32 @@
 .textFields {
     -fx-background-color: White;
   /*	 -fx-border-color: transparent transparent PeachPuff; */
+  -fx-min-width:3em;
+	-fx-max-width:13em;
+	-fx-min-height:2.5em;
+	-fx-max-height:2.5em;
 }
 
 .addBtns {
 	-fx-text-fill: white;
 	-fx-background-color: #b89b5f;
-/* -fx-background-radius: 3px; */	
+/* -fx-background-radius: 3px; */
+-fx-font-family: "Tahoma";
+	-fx-font-size: 15px;	
+	-fx-padding: 10 30 10 30;
+	-fx-min-width:7em;
+	-fx-max-width:100em;
+	-fx-min-height:2.5em;
+	-fx-max-height:2.5em;
 }
 
 .comboBox {
 /* 	-fx-border-color: PeachPuff;*/
 	-fx-background-color: White;
+	-fx-min-width:7em;
+	-fx-max-width:16em;
+	-fx-min-height:2.5em;
+	-fx-max-height:2.5em;
 }
 
 .shoppingCartItem{
@@ -52,11 +67,6 @@
 	-fx-background-radius :  20;
 }
 
-.addCustomerPane {
-	 -fx-font-family: "Microsoft JhengHei";
-	
-	
-}
 
 .sidePane{
 	-fx-background-color: #3D201C
@@ -70,6 +80,8 @@
 
 .managerAllText{
 	-fx-text-fill: white;
+	-fx-font-family: "Tahoma";
+	-fx-font-size: 15px;
 }
 
 #tabPane{
@@ -85,7 +97,7 @@
 	-fx-opacity:0.71;
 	-fx-text-base-color: white;
 	 -fx-font-family: "Monaco";
-	 -fx-font-size: 15px;
+	 -fx-font-size: 17px;
 	 -fx-padding: 0 30 0 30;
 }
 
