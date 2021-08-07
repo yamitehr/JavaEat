@@ -7,7 +7,10 @@ import java.io.ObjectOutputStream;
 
 import Controllers.Consts;
 import Model.Restaurant;
+import Utils.DeliveryManager;
+import Utils.MyFileLogWriter;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +26,9 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		MyFileLogWriter.initializeMyFileWriter();
 		readRestaurant();
+		DeliveryManager.getInstance().startDeliveriesTask();
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
 		Scene scene = new Scene(root, Consts.defaultWidth, Consts.defaultHeight);
@@ -38,6 +43,8 @@ public class Main extends Application {
 	@Override
 	public void stop() {
 		saveRestaurant();
+		Platform.exit();
+	    System.exit(0);
 	}
 	
 	private void readRestaurant() {

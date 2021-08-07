@@ -140,9 +140,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 			ex.printStackTrace();
 		}
 	}
-	public void moveToOrdersScene(ActionEvent e) {
-		
-	}
+	
 	public void moveToShoppingCartScene(ActionEvent e) {
 		
 	}
@@ -159,7 +157,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 			
 		}catch(Exception er) 
 		{
-			
+			er.printStackTrace();
 		}
 	}
 	public void moveToOrdersHistoryScene(ActionEvent e) {
@@ -173,7 +171,13 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		}
 	}
 	public void moveToPersonalDetailsScene(ActionEvent e) {
-		
+		mediaPlayer.pause();
+		try {
+			replacePane(toReplacePane, "/View/Customer_UpdatePersonalDetails.fxml");
+		} catch (IOException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
 	}
 	
 	public void MoveToLoginScene(ActionEvent e) {

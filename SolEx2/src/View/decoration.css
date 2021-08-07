@@ -1,7 +1,9 @@
 .menuBtns {
       -fx-text-fill: white;
        -fx-font-family: "Monaco";
-       -fx-font-size: 17px;
+       -fx-font-size: 17.5px;
+   -fx-background-color: #3D201C
+     
    
 }
 
@@ -20,17 +22,33 @@
 
 .textFields {
     -fx-background-color: White;
-  	 -fx-border-color: transparent transparent PeachPuff;
+  /*	 -fx-border-color: transparent transparent PeachPuff; */
+  -fx-min-width:3em;
+	-fx-max-width:13em;
+	-fx-min-height:2.5em;
+	-fx-max-height:2.5em;
 }
 
 .addBtns {
-	-fx-background-color: White;
-	-fx-border-color: PeachPuff;
+	-fx-text-fill: white;
+	-fx-background-color: #b89b5f;
+/* -fx-background-radius: 3px; */
+-fx-font-family: "Tahoma";
+	-fx-font-size: 15px;	
+	-fx-padding: 10 30 10 30;
+	-fx-min-width:7em;
+	-fx-max-width:100em;
+	-fx-min-height:2.5em;
+	-fx-max-height:2.5em;
 }
 
 .comboBox {
-	-fx-border-color: PeachPuff;
+/* 	-fx-border-color: PeachPuff;*/
 	-fx-background-color: White;
+	-fx-min-width:7em;
+	-fx-max-width:16em;
+	-fx-min-height:2.5em;
+	-fx-max-height:2.5em;
 }
 
 .shoppingCartItem{
@@ -49,3 +67,55 @@
 	-fx-background-radius :  20;
 }
 
+
+.sidePane{
+	-fx-background-color: #3D201C
+	
+	 
+}
+
+.topPane{
+	-fx-background-color: #3D201C
+}
+
+.managerAllText{
+	-fx-text-fill: white;
+	-fx-font-family: "Tahoma";
+	-fx-font-size: 15px;
+}
+
+#tabPane{
+	-fx-tab-min-width:8em;
+	-fx-tab-max-width:14em;
+	-fx-tab-min-height:3em;
+	-fx-tab-max-height:3em;
+	-fx-background-color: transparent;
+}
+
+.tab{
+	-fx-background-color: #3D201C;
+	-fx-opacity:0.71;
+	-fx-text-base-color: white;
+	 -fx-font-family: "Monaco";
+	 -fx-font-size: 17px;
+	 -fx-padding: 0 30 0 30;
+}
+
+.tab:selected{
+	-fx-border-width: 5 0 0 0;
+	-fx-border-color: white;
+	-fx-background-radius: 0;
+	-fx-background-insets: 0;
+}
+
+.tab:selected .focus-indicator{
+	-fx-focus-color: transparent;
+}
+
+.tab:focused{
+	-fx-focus-color: transparent;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}

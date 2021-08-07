@@ -2,6 +2,11 @@ package Model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import Utils.DeliveryManager;
+import Utils.Logger;
 
 public abstract class Delivery implements Serializable{
 	/**
@@ -71,6 +76,26 @@ public abstract class Delivery implements Serializable{
 		this.deliveredDate = deliveredDate;
 	}
 
+
+	public void startDeliveryTimer() {
+		Logger.Log("[startDeliveryTimer] starting delivery timer");
+		long time = area.getDeliverTime();
+		
+		Delivery thisDelivery = this;
+	    TimerTask task = new TimerTask() {
+	        public void run() {
+	        	Restaurant.getInstance().deliver(thisDelivery);
+	        	//Tell dp to get new delivery
+	    		Logger.Log("[startDeliveryTimer] timer is done, telling dp to get new delivery");
+	    		thisDelivery.deliveryPerson.getNewDelivery();
+	        }
+	    };
+	    
+	    Timer timer = new Timer();
+	    long timeInSeconds = time * 60000 / 60;
+	    timer.schedule(task, timeInSeconds);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -100,7 +125,7 @@ public abstract class Delivery implements Serializable{
 	}
 	
 	protected Object readResolve() {
-		if (this.id == idCounter) {
+		if (this.id >= idCounter) {
 			idCounter = this.id + 1;
 		}
 	    return this;

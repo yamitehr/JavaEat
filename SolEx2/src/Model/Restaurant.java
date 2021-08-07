@@ -38,7 +38,7 @@ public class Restaurant implements Serializable{
 
 	/*NEW*/
 	private HashMap<Customer, TreeSet<Order>> orderByCustomer;
-	private HashMap<DeliveryArea, HashSet<Order>> orderByDeliveryArea;
+	private HashMap<DeliveryArea, TreeSet<Order>> orderByDeliveryArea;
 	private HashSet<Customer> blackList;
 	
 	public static Restaurant getInstance()
@@ -134,11 +134,11 @@ public class Restaurant implements Serializable{
 		this.orderByCustomer = orderByCustomer;
 	}
 
-	public HashMap<DeliveryArea, HashSet<Order>> getOrderByDeliveryArea() {
+	public HashMap<DeliveryArea, TreeSet<Order>> getOrderByDeliveryArea() {
 		return orderByDeliveryArea;
 	}
 
-	public void setOrderByDeliveryArea(HashMap<DeliveryArea, HashSet<Order>> orderByDeliveryArea) {
+	public void setOrderByDeliveryArea(HashMap<DeliveryArea, TreeSet<Order>> orderByDeliveryArea) {
 		this.orderByDeliveryArea = orderByDeliveryArea;
 	}
 

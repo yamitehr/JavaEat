@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Utils.DeliveryManager;
+import Utils.Logger;
 import Utils.MyFileLogWriter;
 
 public class Order implements Comparable<Order>, Serializable{
@@ -132,7 +133,6 @@ public class Order implements Comparable<Order>, Serializable{
 		for(Dish d : getDishes()) {
 			time += d.getTimeToMake();
 		}
-		MyFileLogWriter.println("Time for order: "+this+" is "+time+" minutes");
 		return time;
 	}
 
@@ -142,11 +142,10 @@ public class Order implements Comparable<Order>, Serializable{
 			time += d.getTimeToMake();
 		}
 		
-		Order thisOrder = this;
 	    TimerTask task = new TimerTask() {
 	        public void run() {
-	        	thisOrder.status = OrderStatus.readyForDelivery;
-	    		DeliveryManager.getInstance().addFinishedOrder(thisOrder);
+	        	status = OrderStatus.readyForDelivery;
+	    		Logger.Log("[startOrderTimer] order time done for " + getId());
 	        }
 	    };
 	    
@@ -169,7 +168,7 @@ public class Order implements Comparable<Order>, Serializable{
 	}
 
 	protected Object readResolve() {
-		if (this.id == idCounter) {
+		if (this.id >= idCounter) {
 			idCounter = this.id + 1;
 		}
 	    return this;

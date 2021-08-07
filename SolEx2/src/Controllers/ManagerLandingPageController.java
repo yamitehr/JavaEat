@@ -84,52 +84,54 @@ public class ManagerLandingPageController extends ControllerWrapper {
 //		}
 //		totalSell.setText(String.valueOf(totalPrice));
 		
-				messageLbl.setText("Dashboard");
-				image = new Image("file:///C:/Users/li493/OneDrive/осолйн/JavaEat/SolEx2/icons/tachometer-alt-solid.png");
-				icon.setImage(image);
-				replacePane(toReplacePane, "/View/Manager_Dashboard.fxml");
+	
+		
+		//		messageLbl.setText("Dashboard");
+				image = new Image("file:///C:/Users/li493/OneDrive/пїЅпїЅпїЅпїЅпїЅпїЅ/JavaEat/SolEx2/icons/tachometer-alt-solid.png");
+		//		icon.setImage(image);
+				replacePane(toReplacePane, "/View/Manager_Dashboard.fxml"); 
 				
 	}
 
 	public void MoveToAddDishScene(ActionEvent e) throws IOException {
-		messageLbl.setText("Food Items");
-		image = new Image("file:///C:/Users/li493/OneDrive/осолйн/JavaEat/SolEx2/icons/utensils-solid-white.png");
-		icon.setImage(image);
+	//	messageLbl.setText("Food Items");
+		image = new Image("file:///C:/Users/li493/OneDrive/пїЅпїЅпїЅпїЅпїЅпїЅ/JavaEat/SolEx2/icons/utensils-solid-white.png");
+	//	icon.setImage(image);
 		replacePane(toReplacePane, "/View/AddDish.fxml");
 	}
 	
 	public void MoveToAddCookScene(ActionEvent e) throws Exception {
-		messageLbl.setText("Employees");
-		image = new Image("file:///C:/Users/li493/OneDrive/осолйн/JavaEat/SolEx2/icons/users-solid white.png");
-		icon.setImage(image);
+	//	messageLbl.setText("Employees");
+		image = new Image("file:///C:/Users/li493/OneDrive/пїЅпїЅпїЅпїЅпїЅпїЅ/JavaEat/SolEx2/icons/users-solid white.png");
+	//	icon.setImage(image);
 		replacePane(toReplacePane, "/View/AddCook.fxml");
 	}
 	
 	public void MoveToAddOrderScene(ActionEvent e) throws Exception {
-		messageLbl.setText("Orders & Deliveries");
-		image = new Image("file:///C:/Users/li493/OneDrive/осолйн/JavaEat/SolEx2/icons/truck-solid-white.png");
-		icon.setImage(image);
+	//	messageLbl.setText("Orders & Deliveries");
+		image = new Image("file:///C:/Users/li493/OneDrive/пїЅпїЅпїЅпїЅпїЅпїЅ/JavaEat/SolEx2/icons/truck-solid-white.png");
+	//	icon.setImage(image);
 		replacePane(toReplacePane, "/View/AddOrder.fxml");
 	}
 	
 	public void MoveToAddCustomerScene(ActionEvent e) throws Exception {
-		messageLbl.setText("Customers");
-		image = new Image("file:///C:/Users/li493/OneDrive/осолйн/JavaEat/SolEx2/icons/users-solid white.png");
-		icon.setImage(image);
+	//	messageLbl.setText("Customers");
+		image = new Image("file:///C:/Users/li493/OneDrive/пїЅпїЅпїЅпїЅпїЅпїЅ/JavaEat/SolEx2/icons/users-solid white.png");
+	//	icon.setImage(image);
 		replacePane(toReplacePane, "/View/AddCustomer.fxml");
 	}
 	
 	public void moveToStatisticsScene(ActionEvent e) throws Exception {
-		messageLbl.setText("Statistics");
-		image = new Image("file:///C:/Users/li493/OneDrive/осолйн/JavaEat/SolEx2/icons/chart-line-solid-white.png");
-		icon.setImage(image);
+	//	messageLbl.setText("Statistics");
+		image = new Image("file:///C:/Users/li493/OneDrive/пїЅпїЅпїЅпїЅпїЅпїЅ/JavaEat/SolEx2/icons/chart-line-solid-white.png");
+	//	icon.setImage(image);
 		replacePane(toReplacePane, "/View/Manager_Statistics.fxml");
 	}
 	
 	public void moveToDashboardScene(ActionEvent e) throws Exception {
-		messageLbl.setText("Dashboard");
-		image = new Image("file:///C:/Users/li493/OneDrive/осолйн/JavaEat/SolEx2/icons/tachometer-alt-solid.png");
-		icon.setImage(image);
+	//	messageLbl.setText("Dashboard");
+		image = new Image("file:///C:/Users/li493/OneDrive/пїЅпїЅпїЅпїЅпїЅпїЅ/JavaEat/SolEx2/icons/tachometer-alt-solid.png");
+	//	icon.setImage(image);
 		replacePane(toReplacePane, "/View/Manager_Dashboard.fxml");
 	}
 	

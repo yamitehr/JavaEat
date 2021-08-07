@@ -12,13 +12,20 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1275.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddOrderController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddOrderController">
    <children>
-      <TabPane layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1235.0" tabClosingPolicy="UNAVAILABLE">
+   <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.4" pickOnBounds="true">
+         <image>
+            <Image url="@../../img/main4.jpg" />
+         </image>
+      </ImageView>
+      <TabPane fx:id="tabPane" layoutX="343.0" layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="848.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Order">
                <content>
@@ -26,21 +33,21 @@
                      <children>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1235.0">
                            <children>
-                              <Label layoutX="72.0" layoutY="66.0" text="Customer:" />
-                              <Label layoutX="361.0" layoutY="66.0" text="Delivery:" />
-                              <Button fx:id="addOrderBtn" layoutX="639.0" layoutY="75.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Order" />
+                              <Label layoutX="72.0" layoutY="66.0" styleClass="managerAllText" text="Customer:" />
+                              <Label layoutX="361.0" layoutY="66.0" styleClass="managerAllText" text="Delivery:" />
+                              <Button fx:id="addOrderBtn" layoutX="639.0" layoutY="59.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
                               <Text fx:id="messageToUserOrder" layoutX="587.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                               <ComboBox fx:id="deliveryBox" layoutX="436.0" layoutY="62.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                              <ListView fx:id="dishesList" layoutX="347.0" layoutY="103.0" prefHeight="156.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
-                              <Label layoutX="281.0" layoutY="103.0" text="Dishes:" />
+                              <ListView fx:id="dishesList" layoutX="169.0" layoutY="119.0" prefHeight="156.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
+                              <Label layoutX="72.0" layoutY="119.0" styleClass="managerAllText" text="Dishes:" />
                               <ComboBox fx:id="customerBox" layoutX="169.0" layoutY="62.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                               <Pane layoutX="247.0" layoutY="259.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="667.0">
                                  <children>
-                                    <Button layoutX="14.0" layoutY="349.0" mnemonicParsing="false" onAction="#removeOrder" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+                                    <Button layoutX="65.0" layoutY="349.0" mnemonicParsing="false" onAction="#removeOrder" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
                                     <Text fx:id="customerField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="dishesField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="deliveryField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-                                    <Button layoutX="94.0" layoutY="349.0" mnemonicParsing="false" onAction="#editOrder" prefHeight="25.0" prefWidth="46.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                                    <Button layoutX="-52.0" layoutY="349.0" mnemonicParsing="false" onAction="#editOrder" prefHeight="25.0" prefWidth="46.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                                     <TableView fx:id="allOrdersTable" layoutX="-50.0" layoutY="81.0" prefHeight="258.0" prefWidth="430.0">
                                        <columns>
                                           <TableColumn fx:id="orderIdCol" prefWidth="97.5999755859375" text="Order ID" />
@@ -51,7 +58,7 @@
                                     </TableView>
                                  </children>
                               </Pane>
-                              <Button fx:id="editOrderBtn" layoutX="639.0" layoutY="107.0" mnemonicParsing="false" onAction="#setEditOrder" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Order" />
+                              <Button fx:id="editOrderBtn" layoutX="639.0" layoutY="107.0" mnemonicParsing="false" onAction="#setEditOrder" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -66,31 +73,31 @@
                            <children>
                               <AnchorPane fx:id="regularPane" layoutX="7.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="297.0" prefWidth="1122.0">
                                  <children>
-                                    <Label layoutX="72.0" layoutY="66.0" text="Delivery Person:" />
-                                    <Label layoutX="387.0" layoutY="66.0" text="Delivery Area:" />
-                                    <Button fx:id="addRegularBtn" layoutX="685.0" layoutY="96.0" mnemonicParsing="false" onAction="#addRegularDelivery" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Regular Delivery" />
+                                    <Label layoutX="72.0" layoutY="66.0" styleClass="managerAllText" text="Delivery Person:" />
+                                    <Label layoutX="387.0" layoutY="66.0" styleClass="managerAllText" text="Delivery Area:" />
+                                    <Button fx:id="addRegularBtn" layoutX="685.0" layoutY="96.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addRegularDelivery" prefHeight="38.0" prefWidth="168.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Regular Delivery" />
                                     <Text fx:id="messageToUserRegular" layoutX="657.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-                                    <ComboBox fx:id="deliveryAreaBox" layoutX="474.0" layoutY="62.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                                    <ComboBox fx:id="deliveryAreaBox" layoutX="486.0" layoutY="62.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                                     <ListView fx:id="ordersList" layoutX="127.0" layoutY="135.0" prefHeight="156.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
-                                    <Label layoutX="72.0" layoutY="135.0" prefHeight="18.0" prefWidth="51.0" text="Orders:" />
+                                    <Label layoutX="72.0" layoutY="135.0" prefHeight="18.0" prefWidth="51.0" styleClass="managerAllText" text="Orders:" />
                                     <ComboBox fx:id="DeliveryPersonBox" layoutX="219.0" layoutY="62.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
                                     <CheckBox fx:id="yesChoice" layoutX="226.0" layoutY="101.0" mnemonicParsing="false" text="Yes">
                                        <effect>
                                           <SepiaTone level="0.25" />
                                        </effect></CheckBox>
-                                    <Label layoutX="72.0" layoutY="100.0" prefHeight="18.0" prefWidth="85.0" text="Is Delivered?" />
-                                    <Label layoutX="381.0" layoutY="101.0" prefHeight="18.0" prefWidth="85.0" text="Delivery Date:" />
-                                    <DatePicker fx:id="deliveryDate" layoutX="473.0" layoutY="105.0" styleClass="textFields" stylesheets="@decoration.css" />
+                                    <Label layoutX="72.0" layoutY="100.0" prefHeight="19.0" prefWidth="107.0" styleClass="managerAllText" text="Is Delivered?" />
+                                    <Label layoutX="381.0" layoutY="101.0" prefHeight="19.0" prefWidth="102.0" styleClass="managerAllText" text="Delivery Date:" />
+                                    <DatePicker fx:id="deliveryDate" layoutX="488.0" layoutY="98.0" styleClass="textFields" stylesheets="@decoration.css" />
                                     <ComboBox fx:id="orderBox" layoutX="151.0" layoutY="132.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                                    <Label fx:id="postageLbl" layoutX="387.0" layoutY="139.0" prefHeight="18.0" prefWidth="51.0" text="Postage:" />
+                                    <Label fx:id="postageLbl" layoutX="387.0" layoutY="139.0" prefHeight="19.0" prefWidth="70.0" styleClass="managerAllText" text="Postage:" />
                                     <TextField fx:id="postageField" layoutX="473.0" layoutY="139.0" styleClass="textFields" stylesheets="@decoration.css" />
-                                    <Button fx:id="addExpressBtn" layoutX="685.0" layoutY="97.0" mnemonicParsing="false" onAction="#addExpressDelivery" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Express Delivery" />
-                                    <Button fx:id="editDeliveryBtn" layoutX="685.0" layoutY="130.0" mnemonicParsing="false" onAction="#setEditDelivery" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Delivery" />
+                                    <Button fx:id="addExpressBtn" layoutX="685.0" layoutY="97.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addExpressDelivery" prefHeight="38.0" prefWidth="199.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Express Delivery" />
+                                    <Button fx:id="editDeliveryBtn" layoutX="685.0" layoutY="130.0" maxHeight="38.0" mnemonicParsing="false" onAction="#setEditDelivery" prefHeight="38.0" prefWidth="201.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Delivery" />
                                  </children>
                               </AnchorPane>
                               <Pane layoutX="121.0" layoutY="281.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="670.0">
                                  <children>
-                                    <Button layoutX="199.0" layoutY="339.0" mnemonicParsing="false" onAction="#removeDelivery" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+                                    <Button layoutX="117.0" layoutY="339.0" mnemonicParsing="false" onAction="#removeDelivery" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
                                     <Text fx:id="deliveryPersonField" fill="#c88021" layoutX="347.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="deliveryAreaField" fill="#c88021" layoutX="347.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="isDeliveredField" fill="#c88021" layoutX="347.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
@@ -99,7 +106,7 @@
                                     <Text fx:id="ordersField" fill="#c88021" layoutX="347.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
                                     <Text fx:id="postageTitle" layoutX="251.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
                                     <Text fx:id="postageText" fill="#c88021" layoutX="347.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-                                    <Button layoutX="268.0" layoutY="339.0" mnemonicParsing="false" onAction="#editDelivery" prefHeight="25.0" prefWidth="50.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                                    <Button layoutX="-4.0" layoutY="339.0" mnemonicParsing="false" onAction="#editDelivery" prefHeight="25.0" prefWidth="50.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                                     <TableView fx:id="allDeliveriesTable" layoutX="-4.0" layoutY="119.0" prefHeight="200.0" prefWidth="676.0">
                                        <columns>
                                           <TableColumn fx:id="deliveryIdCol" prefWidth="68.80001831054688" text="Delivery ID" />
@@ -114,9 +121,9 @@
                                     </TableView>
                                  </children>
                               </Pane>
-                              <Label layoutX="7.0" layoutY="9.0" prefHeight="25.0" prefWidth="133.0" text="Choose Delivey Type:" />
-                              <Button layoutX="128.0" layoutY="9.0" mnemonicParsing="false" onAction="#regularDeliveryChoice" text="Regular" />
-                              <Button layoutX="202.0" layoutY="9.0" mnemonicParsing="false" onAction="#expressDeliveryChoice" text="Express" />
+                              <Label layoutX="7.0" layoutY="9.0" prefHeight="25.0" prefWidth="185.0" styleClass="managerAllText" text="Choose Delivey Type:" />
+                              <Button layoutX="192.0" layoutY="9.0" mnemonicParsing="false" onAction="#regularDeliveryChoice" text="Regular" />
+                              <Button layoutX="272.0" layoutY="9.0" mnemonicParsing="false" onAction="#expressDeliveryChoice" text="Express" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -129,28 +136,28 @@
                      <children>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="309.0" prefWidth="1235.0">
                            <children>
-                              <Label layoutX="72.0" layoutY="65.0" text="Area Name" />
+                              <Label layoutX="72.0" layoutY="65.0" styleClass="managerAllText" text="Area Name" />
                               <TextField fx:id="deliveryAreaName" layoutX="176.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <TextField fx:id="deliveryTime" layoutX="176.0" layoutY="96.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <Label layoutX="358.0" layoutY="65.0" text="Neighberhoods" />
+                              <Label layoutX="358.0" layoutY="65.0" styleClass="managerAllText" text="Neighberhoods" />
                               <Button fx:id="addDeliveryAreaBtn" layoutX="948.0" layoutY="82.0" mnemonicParsing="false" onAction="#addDeliveryArea" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add Delivery Area" />
-                              <Label layoutX="60.0" layoutY="100.0" prefHeight="17.0" prefWidth="85.0" text="Delivery Time" />
+                              <Label layoutX="60.0" layoutY="100.0" prefHeight="19.0" prefWidth="100.0" styleClass="managerAllText" text="Delivery Time" />
                               <Pane fx:id="neighberhood_pane" layoutX="531.0" layoutY="61.0" prefHeight="166.0" prefWidth="425.0" />
                               <Text fx:id="messageToUser" layoutX="74.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="421.21630859375" />
-                              <Label fx:id="editDelPersonsLbl" layoutX="41.0" layoutY="147.0" prefHeight="17.0" prefWidth="95.0" text="Delivery Persons" visible="false" />
+                              <Label fx:id="editDelPersonsLbl" layoutX="41.0" layoutY="147.0" prefHeight="17.0" prefWidth="95.0" styleClass="managerAllText" text="Delivery Persons" visible="false" />
                               <ListView fx:id="deliveryPersonsList" layoutX="93.0" layoutY="165.0" prefHeight="179.0" prefWidth="200.0" visible="false" />
-                              <Label fx:id="editDeliveriesLbl" layoutX="311.0" layoutY="146.0" prefHeight="17.0" prefWidth="95.0" text="Deliveries" visible="false" />
+                              <Label fx:id="editDeliveriesLbl" layoutX="311.0" layoutY="146.0" prefHeight="17.0" prefWidth="95.0" styleClass="managerAllText" text="Deliveries" visible="false" />
                               <ListView fx:id="deliveriesToAddList" layoutX="302.0" layoutY="167.0" prefHeight="179.0" prefWidth="200.0" visible="false" />
                               <Button fx:id="editDeliveryAreaBtn" layoutX="948.0" layoutY="118.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit Delivery Area" />
                            </children>
                         </AnchorPane>
                         <Pane layoutX="128.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="702.0">
                            <children>
-                              <Button layoutX="86.0" layoutY="301.0" mnemonicParsing="false" onAction="#removeDeliveryArea" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+                              <Button layoutX="44.0" layoutY="304.0" mnemonicParsing="false" onAction="#removeDeliveryArea" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
                               <Text fx:id="deliveryTimeField" fill="#c88021" layoutX="313.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
                               <ComboBox fx:id="newAreaBox" layoutX="516.0" layoutY="302.0" prefWidth="150.0" />
                               <Label fx:id="removeLbl" layoutX="162.0" layoutY="306.0" prefHeight="17.0" prefWidth="362.0" text="Please choose new area in order to remove the area you chose:" textFill="RED" />
-                              <Button layoutX="86.0" layoutY="337.0" mnemonicParsing="false" onAction="#editDeliveryArea" prefHeight="27.0" prefWidth="60.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                              <Button layoutX="48.0" layoutY="354.0" mnemonicParsing="false" onAction="#editDeliveryArea" prefHeight="27.0" prefWidth="60.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                               <TableView fx:id="allAreasTable" layoutX="48.0" layoutY="92.0" prefHeight="200.0" prefWidth="438.0">
                                  <columns>
                                     <TableColumn fx:id="areaIdCol" prefWidth="75.0" text="Area ID" />

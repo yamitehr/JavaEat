@@ -138,7 +138,7 @@ public class Dish implements Serializable{
 	
 
 	protected Object readResolve() {
-		if (this.id == idCounter) {
+		if (this.id >= idCounter) {
 			idCounter = this.id + 1;
 		}
 	    return this;
