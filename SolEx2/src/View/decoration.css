@@ -85,7 +85,8 @@
 }
 
 .topPane{
-	-fx-background-color: #3D201C
+	-fx-background-color: #3D201C;
+	-fx-opacity:0.82;
 }
 
 .managerAllText{
