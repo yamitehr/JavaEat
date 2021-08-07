@@ -79,7 +79,7 @@
 
                </children>
       </AnchorPane>
-      <Button fx:id="logOutBtn" alignment="CENTER" layoutX="1285.0" mnemonicParsing="false" onAction="#MoveToLoginScene" opacity="0.71" prefHeight="47.0" prefWidth="145.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Log Out">
+      <Button fx:id="logOutBtn" alignment="CENTER" layoutX="1285.0" mnemonicParsing="false" onAction="#MoveToLoginScene" opacity="0.82" prefHeight="47.0" prefWidth="145.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Log Out">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
