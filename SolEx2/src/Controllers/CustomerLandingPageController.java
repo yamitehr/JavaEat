@@ -69,15 +69,9 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	
 	@FXML
 	private AnchorPane toReplacePane;
-	@FXML
-	private MediaView restaurantVideo;
+
 	@FXML
 	private Button logOutBtn;
-	
-	private File file;
-	private MediaPlayer mediaPlayer;
-	private Media media;
-	
 	@FXML
 	private Label dishName;
 
@@ -106,19 +100,13 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	public void initialize() {
 		messageLbl.setText("Hello " + current.getFirstName());
 		componentList = new ArrayList<Pair<CheckBox, Component>>();
-		/*dashboardBtn.setAlignment(Pos.BASELINE_LEFT);
-		ordersBtn.setAlignment(Pos.BASELINE_LEFT);
-		menuBtn.setAlignment(Pos.BASELINE_LEFT);
-		personalDetailsBtn.setAlignment(Pos.BASELINE_LEFT);*/
 		
-		
-		file = new File("restaurantVideoHD.mp4");
-		media = new Media(file.toURI().toString());
-		mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.play();
-		restaurantVideo.setMediaPlayer(mediaPlayer);
-		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-		
+		try {
+			replacePane(toReplacePane, "/View/Video.fxml");
+		} catch (IOException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
 		
 		cartScrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		cartScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
@@ -132,7 +120,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 
 	public void moveToDashboardScene(ActionEvent e) {
 		messageLbl.setText("Dashboard");
-		mediaPlayer.pause();
+	//	mediaPlayer.pause();
 		try {
 			replacePane(toReplacePane, "/View/Customer_Statistics.fxml");
 		} catch (IOException ex) {
@@ -146,14 +134,15 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	public void moveToMenuScene(ActionEvent e) {
 		messageLbl.setText("Menu");
-		mediaPlayer.pause();
+	//	mediaPlayer.pause();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Customer_Menu.fxml"));
 			AnchorPane pane = loader.load();
 			CustomerMenuController controller = (CustomerMenuController)loader.getController();
 			controller.setLandingController(this);
 			toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
-			toReplacePane.getChildren().add(pane);
+			toReplacePane.getChildren().add(pane); 
+
 			
 		}catch(Exception er) 
 		{
@@ -162,7 +151,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	public void moveToOrdersHistoryScene(ActionEvent e) {
 		messageLbl.setText("Orders History");
-		mediaPlayer.pause();
+	//	mediaPlayer.pause();
 		try {
 			replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
 		} catch (IOException ex) {
@@ -171,7 +160,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		}
 	}
 	public void moveToPersonalDetailsScene(ActionEvent e) {
-		mediaPlayer.pause();
+	//	mediaPlayer.pause();
 		try {
 			replacePane(toReplacePane, "/View/Customer_UpdatePersonalDetails.fxml");
 		} catch (IOException ex) {
@@ -181,7 +170,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	
 	public void MoveToLoginScene(ActionEvent e) {
-		mediaPlayer.pause();
+	//	mediaPlayer.pause();
 		//clean current customer and order
 		State.cleanState();
 		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow());

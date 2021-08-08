@@ -35,10 +35,10 @@
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1200.0">
                            <children>
                               <Label layoutX="72.0" layoutY="66.0" styleClass="managerAllText" text="First Name" />
-                              <Label layoutX="366.0" layoutY="66.0" styleClass="managerAllText" text="Last Name" />
+                              <Label layoutX="406.0" layoutY="62.0" styleClass="managerAllText" text="Last Name" />
                               <Label layoutX="66.0" layoutY="109.0" styleClass="managerAllText" text="Date Of Birth" />
-                              <Label layoutX="375.0" layoutY="109.0" styleClass="managerAllText" text="Gender" />
-                              <RadioButton layoutX="452.0" layoutY="109.0" mnemonicParsing="false" styleClass="managerAllText" text="Male">
+                              <Label layoutX="405.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
+                              <RadioButton layoutX="482.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Male">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
@@ -46,24 +46,24 @@
                                     <ToggleGroup fx:id="Gender_group" />
                                  </toggleGroup>
                               </RadioButton>
-                              <TextField fx:id="first_Name" layoutX="170.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <TextField fx:id="last_Name" layoutX="452.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <DatePicker fx:id="date" layoutX="170.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <RadioButton layoutX="532.0" layoutY="109.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
+                              <TextField fx:id="first_Name" layoutX="193.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <TextField fx:id="last_Name" layoutX="501.0" layoutY="57.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <DatePicker fx:id="date" layoutX="193.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <RadioButton layoutX="562.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
                               </RadioButton>
                               <Label layoutX="77.0" layoutY="145.0" styleClass="managerAllText" text="Expertise" />
-                              <Label layoutX="376.0" layoutY="145.0" styleClass="managerAllText" text="is Chef" />
-                              <CheckBox fx:id="isChef" layoutX="457.0" layoutY="145.0" mnemonicParsing="false" styleClass="managerAllText" text="Yes">
+                              <Label layoutX="406.0" layoutY="141.0" styleClass="managerAllText" text="is Chef" />
+                              <CheckBox fx:id="isChef" layoutX="487.0" layoutY="141.0" mnemonicParsing="false" styleClass="managerAllText" text="Yes">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
                               </CheckBox>
-                              <ComboBox fx:id="expertiseBox" layoutX="170.0" layoutY="141.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                              <Text fx:id="messageToUserCook" layoutX="645.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-                              <RadioButton layoutX="620.0" layoutY="108.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
+                              <ComboBox fx:id="expertiseBox" layoutX="193.0" layoutY="140.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                              <Text fx:id="messageToUserCook" layoutX="675.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
+                              <RadioButton layoutX="650.0" layoutY="104.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
@@ -90,8 +90,8 @@
                                     </TableView>
                                  </children>
                               </Pane>
-                              <Button fx:id="addCookBtn" layoutX="740.0" layoutY="56.0" mnemonicParsing="false" onAction="#addCook" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
-                              <Button fx:id="editCookBtn" layoutX="740.0" layoutY="122.0" mnemonicParsing="false" onAction="#setEditCook" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />
+                              <Button fx:id="addCookBtn" layoutX="770.0" layoutY="52.0" mnemonicParsing="false" onAction="#addCook" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
+                              <Button fx:id="editCookBtn" layoutX="770.0" layoutY="118.0" mnemonicParsing="false" onAction="#setEditCook" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />
                            </children>
                         </AnchorPane>
                      </children>
