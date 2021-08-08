@@ -1,13 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
 .menuItem {
-   -fx-border-color: black;
+   -fx-border-color: white;
    -fx-border-radius: 20px;
+   -fx-padding: 10 10 10 10;
+   -fx-min-width:25em;
+	-fx-max-width:25em;
    
 }
 
-.descLabel{
+.dishLabel{
 	
-	-fx-padding: 0 0 0 15px;
-	-fx-font-family: Sans Sharif;
-    -fx-font-weight: Bold;
+	-fx-padding: 15 15 15 15;
+	-fx-font-family: 'Rubik Mono One', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
     
+}
+
+
+.vBox{
+
+}
+
+.compsLabel{
+	-fx-padding: 15 15 15 15;
+	-fx-font-family: 'Permanent Marker', cursive;
+    -fx-text-fill: white;
+     -fx-font-size: 17px;
+}
+
+.priceLabel{
+	-fx-padding: 15 15 15 15;
+	-fx-font-family: 'Permanent Marker', cursive;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+}
+
+.addButton{
+	-fx-background-color: transparent;
+}
+
+.headersLabel{
+	 -fx-text-fill: white;
+       -fx-font-size: 21px;
+   -fx-background-color: #3D201C;
+   -fx-font-family: 'Concert One', cursive;
+   -fx-padding: 15 15 15 15;
 }

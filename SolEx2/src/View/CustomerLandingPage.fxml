@@ -15,14 +15,14 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerLandingPageController">
    <children>
       <AnchorPane fx:id="toReplacePane" prefHeight="770.0" prefWidth="1430.0" />
-      <AnchorPane layoutY="-34.0" prefHeight="804.0" prefWidth="343.0" style="-fx-background-color: #008B8B#008B8B #008B8B#008B8B;" styleClass="sidePane">
+      <AnchorPane layoutY="-34.0" prefHeight="804.0" prefWidth="343.0" styleClass="sidePane">
          <children>
             <ImageView fitHeight="158.0" fitWidth="322.0" layoutX="11.0" layoutY="43.0" pickOnBounds="true">
                <image>
                   <Image url="@../../icons/JavaEat.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardBtn" layoutX="3.0" layoutY="337.0" mnemonicParsing="false" onAction="#moveToDashboardScene" prefHeight="57.0" prefWidth="338.0" style="-fx-background-color: #008B8B#008B8B;" styleClass="menuBtns" text="Dashboard">
+            <Button fx:id="dashboardBtn" layoutX="3.0" layoutY="337.0" mnemonicParsing="false" onAction="#moveToDashboardScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Dashboard">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -32,7 +32,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="ordersBtn" layoutX="3.0" layoutY="272.0" mnemonicParsing="false" onAction="#moveToOrdersHistoryScene" prefHeight="57.0" prefWidth="338.0" style="-fx-background-color: #008B8B#008B8B;" styleClass="menuBtns" text="Orders">
+            <Button fx:id="ordersBtn" layoutX="3.0" layoutY="272.0" mnemonicParsing="false" onAction="#moveToOrdersHistoryScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Orders">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -43,7 +43,7 @@
             	</graphic>
             </Button>
             
-            <Button fx:id="menuBtn" layoutX="3.0" layoutY="201.0" mnemonicParsing="false" onAction="#moveToMenuScene" prefHeight="57.0" prefWidth="338.0" style="-fx-background-color: #008B8B#008B8B;" styleClass="menuBtns" text="Menu" textFill="#060645">
+            <Button fx:id="menuBtn" layoutX="3.0" layoutY="201.0" mnemonicParsing="false" onAction="#moveToMenuScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Menu" textFill="#060645">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -53,7 +53,7 @@
 	         	   </ImageView>
             	</graphic>
             </Button>
-            <Button fx:id="personalDetailsBtn" layoutX="3.0" layoutY="402.0" mnemonicParsing="false" onAction="#moveToPersonalDetailsScene" prefHeight="57.0" prefWidth="338.0" style="-fx-background-color: #008B8B#008B8B #008B8B#008B8B;" styleClass="menuBtns" text="Personal Details">
+            <Button fx:id="personalDetailsBtn" layoutX="3.0" layoutY="402.0" mnemonicParsing="false" onAction="#moveToPersonalDetailsScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Personal Details">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -78,25 +78,6 @@
             
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="343.0" prefHeight="60.0" prefWidth="1087.0" style="-fx-background-color: #008B8B#008B8B #008B8B#008B8B;" styleClass="topPane">
-         <children>
-            <Label fx:id="messageLbl" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="398.0" text="Welcome back manager ..." textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-                        <Button fx:id="logOutBtn" layoutX="886.0" layoutY="4.0" mnemonicParsing="false" onAction="#MoveToLoginScene" prefHeight="47.0" prefWidth="193.0" style="-fx-background-color: #008B8B#008B8B #008B8B#008B8B;" styleClass="menuBtns" stylesheets="@decoration.css" text="Log Out" textFill="#020227">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="27.0" fitWidth="31.0" layoutX="911.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../icons/sign-in-alt-solid.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
          <!-- NAV BAR -->
         <AnchorPane fx:id="navList" prefWidth="360.0" style="-fx-background-color:white" translateX="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="56.0">
             <children>
@@ -109,6 +90,12 @@
             <Button fx:id="addDishToOrder" layoutX="145.0" layoutY="466.0" mnemonicParsing="false" text="Add dish" />
             </children>
         </AnchorPane>
+                  <Button fx:id="logOutBtn" layoutX="1237.0" mnemonicParsing="false" onAction="#MoveToLoginScene" prefHeight="47.0" prefWidth="193.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Log Out" textFill="#020227">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="messageLbl" layoutX="370.0" prefHeight="17.0" prefWidth="144.0" text="Label" />
          <!-- NAV BAR -->
    </children>
 </AnchorPane>
