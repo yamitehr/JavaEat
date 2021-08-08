@@ -58,12 +58,17 @@ import javafx.util.Pair;
 
 public class AddOrderController extends ControllerWrapper {
 	//order
+	private ObservableList<Dish> finalDishes = FXCollections.observableArrayList();
 	@FXML
 	private ComboBox<Customer> customerBox;
 	@FXML
 	private ComboBox<Delivery> deliveryBox;
 	@FXML
 	private ListView<Dish> dishesList;
+	@FXML
+	private TextField quantityField;
+	@FXML
+	private ListView<Dish> finalDishesList;
 	@FXML
 	private Text messageToUserOrder;
 	@FXML
@@ -231,6 +236,7 @@ public class AddOrderController extends ControllerWrapper {
 		dishesList.setItems(dishes);
 		dishesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
+		
 		ObservableList<DeliveryPerson> deliveryPersons = FXCollections.observableArrayList(Restaurant.getInstance().getDeliveryPersons().values());
 		DeliveryPersonBox.getItems().clear();				
 		DeliveryPersonBox.setItems(FXCollections.observableArrayList(deliveryPersons));
@@ -350,7 +356,9 @@ public class AddOrderController extends ControllerWrapper {
 				} else {
 					j ++;
 				}
+				
 			}
+			
 				
 			neighberhood_pane.getChildren().add(grid);
 		}
@@ -466,6 +474,18 @@ public class AddOrderController extends ControllerWrapper {
 		}
 	}
 	
+	public void addDishesToOrder(ActionEvent event) {
+		int quantity = Integer.parseInt(quantityField.getText());
+		for(int i = 0; i < quantity; i++) {
+			finalDishes.add(dishesList.getSelectionModel().getSelectedItem());
+		}
+		finalDishesList.setItems(finalDishes);
+		
+		ObservableList<Dish> dishes = FXCollections.observableArrayList(Restaurant.getInstance().getDishes().values());
+		dishes.remove(dishesList.getSelectionModel().getSelectedItem());
+		dishesList.setItems(dishes);
+	}
+	
 	
 	public void addOrder(ActionEvent e) {
 		try {
@@ -478,9 +498,9 @@ public class AddOrderController extends ControllerWrapper {
 			}
 			
 			Delivery delivery = deliveryBox.getValue();
-		
+			
 			ArrayList<Dish> orderDishes = new ArrayList<Dish>();
-			orderDishes.addAll(dishesList.getSelectionModel().getSelectedItems());	
+			orderDishes.addAll(finalDishesList.getItems());	
 			if(orderDishes.isEmpty())
 				throw new InvalidInputException("Please choose at least one dish!");
 			for(Dish d: orderDishes) {
@@ -749,6 +769,18 @@ public class AddOrderController extends ControllerWrapper {
 			allDeliveriesTable.getItems().clear();
 			allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
+		}
+	}
+	
+	public void signAsDelivered(ActionEvent e) {
+		Delivery selectedDelivery = allDeliveriesTable.getSelectionModel().getSelectedItem();
+		if(selectedDelivery != null) {
+			if(!selectedDelivery.isDelivered()) {
+				Restaurant.getInstance().deliver(selectedDelivery);
+				allDeliveriesTable.getItems().clear();
+				allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
+						Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
+			}
 		}
 	}
 	
