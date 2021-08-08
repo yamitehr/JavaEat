@@ -23,7 +23,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class CustomerMenuController extends ControllerWrapper{
 	
@@ -66,7 +65,7 @@ public class CustomerMenuController extends ControllerWrapper{
 			Pane starterPane = new Pane();
 			Label starterLabel = new Label("Starters");
 			starterLabel.getStyleClass().add("headersLabel");
-			starterPane.setMinSize(10, 10);
+			starterPane.setMinSize(55, 55);
 			
 			starterPane.getChildren().add(starterLabel);
 			menuItems.add(starterPane);
@@ -79,7 +78,7 @@ public class CustomerMenuController extends ControllerWrapper{
 			Pane mainPane = new Pane();
 			Label mainLabel = new Label("Main Courses");
 			mainLabel.getStyleClass().add("headersLabel");
-			mainPane.setMinSize(10, 10);
+			mainPane.setMinSize(55, 55);
 			
 			mainPane.getChildren().add(mainLabel);
 			menuItems.add(mainPane);
@@ -92,7 +91,7 @@ public class CustomerMenuController extends ControllerWrapper{
 			Pane desertsPane = new Pane();
 			Label desertsLabel = new Label("Desserts");
 			desertsLabel.getStyleClass().add("headersLabel");
-			desertsPane.setMinSize(10, 10);
+			desertsPane.setMinSize(55, 55);
 			
 			desertsPane.getChildren().add(desertsLabel);
 			menuItems.add(desertsPane);
