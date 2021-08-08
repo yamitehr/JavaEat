@@ -7,21 +7,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerOrdersHistoryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" stylesheets="@ordersHistory.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerOrdersHistoryController">
    <children>
     <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.7" pickOnBounds="true">
          <image>
             <Image url="@../../img/82.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="allOrdersTable" layoutX="374.0" layoutY="186.0" prefHeight="399.0" prefWidth="802.0">
+      <TableView fx:id="allOrdersTable" layoutX="404.0" layoutY="186.0" prefHeight="399.0" prefWidth="905.0">
         <columns>
-          <TableColumn fx:id="orderIdCol" prefWidth="58.0" text="OrderID" />
-          <TableColumn fx:id="dishesCol" prefWidth="315.0" text="Dishes" />
+          <TableColumn fx:id="orderIdCol" prefWidth="82.0" text="OrderID" />
+          <TableColumn fx:id="dishesCol" prefWidth="291.0" text="Dishes" />
             <TableColumn fx:id="deliveryPersonCol" minWidth="0.0" prefWidth="166.0" text="Delivery Person" />
-            <TableColumn fx:id="deliveryStatusCol" prefWidth="122.0" text="Delivery Status" />
-            <TableColumn fx:id="etaCol" prefWidth="64.0" text="ETA" />
-            <TableColumn fx:id="priceCol" prefWidth="76.0" text="Price" />
+            <TableColumn fx:id="deliveryStatusCol" prefWidth="177.0" text="Delivery Status" />
+            <TableColumn fx:id="etaCol" prefWidth="91.0" text="ETA" />
+            <TableColumn fx:id="priceCol" prefWidth="97.0" text="Price" />
         </columns>
       </TableView>
       <Button fx:id="refreshBtn" layoutX="374.0" layoutY="131.0" mnemonicParsing="false" text="Refresh" />
