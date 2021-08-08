@@ -99,6 +99,120 @@ public class ManagerStatisticsController extends ControllerWrapper {
 	@FXML
     public void initialize() {
 		init();
+		initRelevantDishes();
+		initCooksByExpertise();
+		initDeliveryByPerson();
+	}
+
+	private void initDeliveryByPerson() {
+			monthBox.setOnAction(dp -> {
+				List<Delivery> deliveriesByPerson = new ArrayList<Delivery>();
+				if(deliveryPersonBox.getValue() != null) {
+					deliveriesByPerson = Restaurant.getInstance().getDeliveriesByPerson(deliveryPersonBox.getValue(), monthBox.getValue()).stream()
+							.collect(Collectors.toList());
+					
+					deliveriesByPersonTable.setVisible(true);
+					deliveriesByPersonTable.getItems().clear();
+					
+					deliveryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+					
+					deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveryPerson().toString()));
+					
+					areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getArea().toString()));
+					
+					deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveredDate().toString()));
+					
+					isDeliveredCol.setCellValueFactory(delivery -> {
+			            boolean isDelivered = delivery.getValue().isDelivered();
+			            String isDeliveredAsString;
+			            if(isDelivered == true)
+			            {
+			            	isDeliveredAsString = "Yes";
+			            }
+			            else
+			            {
+			            	isDeliveredAsString = "No";
+			            }
+		
+			         return new ReadOnlyStringWrapper(isDeliveredAsString);
+			        });
+					for(Delivery del: deliveriesByPerson) {
+						if(del instanceof RegularDelivery) {
+							ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
+								((RegularDelivery) delivery.getValue()).getOrders()
+								.stream()
+								.map(d -> d.toString())
+								.reduce((a, b) -> a + ", " + b).get()
+							));
+						}
+						if(del instanceof ExpressDelivery) {
+							ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
+						}
+					}
+							
+					deliveriesByPersonTable.getItems().addAll(deliveriesByPerson);
+				}
+			});
+				
+	}
+
+	private void initCooksByExpertise() {
+		expertiseBox.setOnAction(e -> {
+			cookByExpertiseTable.setVisible(true);
+			cookByExpertiseTable.getItems().clear();
+			
+			cookIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
+			cookNameCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getFirstName() + cook.getValue().getLastName()));	
+			cookDobCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getBirthDay().toString()));	
+			cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getGender().name()));	
+			isChefCol.setCellValueFactory(cook -> {
+	            boolean isChef = cook.getValue().isChef();
+	            String isChefAsString;
+	            if(isChef == true)
+	            {
+	                isChefAsString = "Yes";
+	            }
+	            else
+	            {
+	                isChefAsString = "No";
+	            }
+
+	         return new ReadOnlyStringWrapper(isChefAsString);
+	        });
+			
+			List<Cook> relevantCooks = new ArrayList<Cook>();
+			relevantCooks = Restaurant.getInstance().GetCooksByExpertise(expertiseBox.getValue()).stream()
+					.collect(Collectors.toList());
+			
+			cookByExpertiseTable.getItems().addAll(relevantCooks);
+		});
+		
+	}
+
+	private void initRelevantDishes() {
+		customerBox.setOnAction(c -> {
+			relevantDishesTable.setVisible(true);
+			relevantDishesTable.getItems().clear();
+			dishIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+			
+			dishNameCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(dish.getValue().getDishName()));
+			
+			componentsCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(
+					dish.getValue().getComponenets()
+					.stream()
+					.map(d -> d.toString())
+					.reduce((a, b) -> a + ", " + b).get()
+					));
+			priceCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Double>(dish.getValue().getPrice()));
+			
+			
+			List<Dish> relevantDishes = new ArrayList<Dish>();
+			relevantDishes = Restaurant.getInstance().getReleventDishList(customerBox.getValue()).stream()
+					.collect(Collectors.toList());
+			
+			relevantDishesTable.getItems().addAll(relevantDishes);
+		});
+		
 	}
 
 	private void init() {
@@ -127,111 +241,111 @@ public class ManagerStatisticsController extends ControllerWrapper {
 		
 	}
 	
-	public void getDeliveries(ActionEvent e) {
-		DeliveryPerson selectedDP = deliveryPersonBox.getValue();
-		Integer selectedMonth = monthBox.getValue();
-		if(selectedDP != null && selectedMonth != null) {
-			List<Delivery> deliveriesByPerson = new ArrayList<Delivery>();
-			deliveriesByPerson = Restaurant.getInstance().getDeliveriesByPerson(selectedDP, selectedMonth).stream()
-					.collect(Collectors.toList());
-			
-			deliveriesByPersonTable.setVisible(true);
-			deliveryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-			
-			deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveryPerson().toString()));
-			
-			areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getArea().toString()));
-			
-			deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveredDate().toString()));
-			
-			isDeliveredCol.setCellValueFactory(delivery -> {
-	            boolean isDelivered = delivery.getValue().isDelivered();
-	            String isDeliveredAsString;
-	            if(isDelivered == true)
-	            {
-	            	isDeliveredAsString = "Yes";
-	            }
-	            else
-	            {
-	            	isDeliveredAsString = "No";
-	            }
-
-	         return new ReadOnlyStringWrapper(isDeliveredAsString);
-	        });
-			for(Delivery del: deliveriesByPerson) {
-				if(del instanceof RegularDelivery) {
-					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
-						((RegularDelivery) delivery.getValue()).getOrders()
-						.stream()
-						.map(d -> d.toString())
-						.reduce((a, b) -> a + ", " + b).get()
-					));
-				}
-				if(del instanceof ExpressDelivery) {
-					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
-				}
-			}
-					
-			deliveriesByPersonTable.getItems().addAll(deliveriesByPerson);
-		}
-	}
+//	public void getDeliveries(ActionEvent e) {
+//		DeliveryPerson selectedDP = deliveryPersonBox.getValue();
+//		Integer selectedMonth = monthBox.getValue();
+//		if(selectedDP != null && selectedMonth != null) {
+//			List<Delivery> deliveriesByPerson = new ArrayList<Delivery>();
+//			deliveriesByPerson = Restaurant.getInstance().getDeliveriesByPerson(selectedDP, selectedMonth).stream()
+//					.collect(Collectors.toList());
+//			
+//			deliveriesByPersonTable.setVisible(true);
+//			deliveryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+//			
+//			deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveryPerson().toString()));
+//			
+//			areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getArea().toString()));
+//			
+//			deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveredDate().toString()));
+//			
+//			isDeliveredCol.setCellValueFactory(delivery -> {
+//	            boolean isDelivered = delivery.getValue().isDelivered();
+//	            String isDeliveredAsString;
+//	            if(isDelivered == true)
+//	            {
+//	            	isDeliveredAsString = "Yes";
+//	            }
+//	            else
+//	            {
+//	            	isDeliveredAsString = "No";
+//	            }
+//
+//	         return new ReadOnlyStringWrapper(isDeliveredAsString);
+//	        });
+//			for(Delivery del: deliveriesByPerson) {
+//				if(del instanceof RegularDelivery) {
+//					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
+//						((RegularDelivery) delivery.getValue()).getOrders()
+//						.stream()
+//						.map(d -> d.toString())
+//						.reduce((a, b) -> a + ", " + b).get()
+//					));
+//				}
+//				if(del instanceof ExpressDelivery) {
+//					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
+//				}
+//			}
+//					
+//			deliveriesByPersonTable.getItems().addAll(deliveriesByPerson);
+//		}
+//	}
 	
-	public void getCooks(ActionEvent e) {
-		Expertise expert = expertiseBox.getValue();
-		if(expert != null) {
-			cookByExpertiseTable.setVisible(true);
-			
-			cookIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
-			cookNameCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getFirstName() + cook.getValue().getLastName()));	
-			cookDobCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getBirthDay().toString()));	
-			cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getGender().name()));	
-			isChefCol.setCellValueFactory(cook -> {
-	            boolean isChef = cook.getValue().isChef();
-	            String isChefAsString;
-	            if(isChef == true)
-	            {
-	                isChefAsString = "Yes";
-	            }
-	            else
-	            {
-	                isChefAsString = "No";
-	            }
-
-	         return new ReadOnlyStringWrapper(isChefAsString);
-	        });
-			
-			List<Cook> relevantCooks = new ArrayList<Cook>();
-			relevantCooks = Restaurant.getInstance().GetCooksByExpertise(expert).stream()
-					.collect(Collectors.toList());
-			
-			cookByExpertiseTable.getItems().addAll(relevantCooks);
-		}
-	}
+//	public void getCooks(ActionEvent e) {
+//		Expertise expert = expertiseBox.getValue();
+//		if(expert != null) {
+//			cookByExpertiseTable.setVisible(true);
+//			
+//			cookIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
+//			cookNameCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getFirstName() + cook.getValue().getLastName()));	
+//			cookDobCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getBirthDay().toString()));	
+//			cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getGender().name()));	
+//			isChefCol.setCellValueFactory(cook -> {
+//	            boolean isChef = cook.getValue().isChef();
+//	            String isChefAsString;
+//	            if(isChef == true)
+//	            {
+//	                isChefAsString = "Yes";
+//	            }
+//	            else
+//	            {
+//	                isChefAsString = "No";
+//	            }
+//
+//	         return new ReadOnlyStringWrapper(isChefAsString);
+//	        });
+//			
+//			List<Cook> relevantCooks = new ArrayList<Cook>();
+//			relevantCooks = Restaurant.getInstance().GetCooksByExpertise(expert).stream()
+//					.collect(Collectors.toList());
+//			
+//			cookByExpertiseTable.getItems().addAll(relevantCooks);
+//		}
+//	}
 	
-	public void getDishes(ActionEvent e) {
-		Customer cust = customerBox.getValue();
-		if(cust != null) {
-			relevantDishesTable.setVisible(true);
-			dishIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-			
-			dishNameCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(dish.getValue().getDishName()));
-			
-			componentsCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(
-					dish.getValue().getComponenets()
-					.stream()
-					.map(d -> d.toString())
-					.reduce((a, b) -> a + ", " + b).get()
-					));
-			priceCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Double>(dish.getValue().getPrice()));
-			
-			
-			List<Dish> relevantDishes = new ArrayList<Dish>();
-			relevantDishes = Restaurant.getInstance().getReleventDishList(cust).stream()
-					.collect(Collectors.toList());
-			
-			relevantDishesTable.getItems().addAll(relevantDishes);
-			
-		}
-	}
+//	public void getDishes(ActionEvent e) {
+//		Customer cust = customerBox.getValue();
+//		if(cust != null) {
+//			relevantDishesTable.setVisible(true);
+//			dishIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+//			
+//			dishNameCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(dish.getValue().getDishName()));
+//			
+//			componentsCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(
+//					dish.getValue().getComponenets()
+//					.stream()
+//					.map(d -> d.toString())
+//					.reduce((a, b) -> a + ", " + b).get()
+//					));
+//			priceCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Double>(dish.getValue().getPrice()));
+//			
+//			
+//			List<Dish> relevantDishes = new ArrayList<Dish>();
+//			relevantDishes = Restaurant.getInstance().getReleventDishList(cust).stream()
+//					.collect(Collectors.toList());
+//			
+//			relevantDishesTable.getItems().addAll(relevantDishes);
+//			
+//		}
+//	}
 
 }

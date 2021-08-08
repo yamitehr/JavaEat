@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 import Utils.Gender;
 import Utils.Neighberhood;
@@ -26,6 +27,18 @@ public class Customer extends Person{
 		this.isSensitiveToGluten = isSensitiveToGluten;
 		this.userName = userName;
 		this.password = password;
+	}
+	
+	public Customer(String firstName, String lastName, LocalDate birthDay, Gender gender,
+			Neighberhood neighberhood,	boolean isSensitiveToLactose, boolean isSensitiveToGluten) {
+		super(idCounter++, firstName, lastName, birthDay, gender);
+		this.neighberhood = neighberhood;
+		this.isSensitiveToLactose = isSensitiveToLactose;
+		this.isSensitiveToGluten = isSensitiveToGluten;
+		this.userName = firstName + lastName;
+		Random rand = new Random();
+		this.password = String.valueOf(rand.nextInt(1000000));
+		
 	}
 		
 	public String getUserName() {

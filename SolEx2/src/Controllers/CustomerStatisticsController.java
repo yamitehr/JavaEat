@@ -131,7 +131,7 @@ public class CustomerStatisticsController {
 		popularComponentsTable.getItems().addAll(Restaurant.getInstance().getPopularComponents());
 	}
 	
-private void initCookByExpertise() {
+	private void initCookByExpertise() {
 		
 		expertiseBox.setOnAction(e -> {
 			cookByExpertiseTable.getItems().clear();
