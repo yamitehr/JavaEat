@@ -6,19 +6,26 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerStatisticsController">
+<AnchorPane style="-fx-background-color: black;" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerStatisticsController">
    <children>
-      <TableView fx:id="relevantDishesTable" layoutX="36.0" layoutY="105.0" prefHeight="165.0" prefWidth="302.0">
+   <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.7" pickOnBounds="true">
+         <image>
+            <Image url="@../../img/86.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="relevantDishesTable" layoutX="534.0" layoutY="108.0" prefHeight="165.0" prefWidth="302.0">
         <columns>
           <TableColumn fx:id="dishIdCol" prefWidth="75.0" text="Dish ID" />
           <TableColumn fx:id="dishNameCol" prefWidth="75.0" text="Dish Name" />
             <TableColumn fx:id="componentsCol" prefWidth="151.0" text="Components" />
         </columns>
       </TableView>
-      <Label layoutX="36.0" layoutY="77.0" text="Relevant dishes suggested to you..." />
-      <Text fx:id="messageToUser" layoutX="424.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.0" />
-      <TableView fx:id="cookByExpertiseTable" layoutX="424.0" layoutY="100.0" prefHeight="200.0" prefWidth="348.0">
+      <Label layoutX="534.0" layoutY="80.0" text="Relevant dishes suggested to you..." />
+      <Text fx:id="messageToUser" layoutX="922.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.0" />
+      <TableView fx:id="cookByExpertiseTable" layoutX="922.0" layoutY="103.0" prefHeight="200.0" prefWidth="348.0">
         <columns>
           <TableColumn fx:id="cookIdCol" prefWidth="75.0" text="Cook ID" />
           <TableColumn fx:id="cookNameCol" prefWidth="75.0" text="Cook Name" />
@@ -27,9 +34,9 @@
             <TableColumn fx:id="isChefCol" prefWidth="63.0" text="isChef" />
         </columns>
       </TableView>
-      <ComboBox fx:id="expertiseBox" layoutX="424.0" layoutY="54.0" prefWidth="150.0" />
-      <Label layoutX="424.0" layoutY="26.0" text="Select expertise..." />
-      <TableView fx:id="popularComponentsTable" layoutX="155.0" layoutY="398.0" prefHeight="165.0" prefWidth="436.0">
+      <ComboBox fx:id="expertiseBox" layoutX="922.0" layoutY="57.0" prefWidth="150.0" />
+      <Label layoutX="922.0" layoutY="29.0" text="Select expertise..." />
+      <TableView fx:id="popularComponentsTable" layoutX="653.0" layoutY="401.0" prefHeight="165.0" prefWidth="436.0">
          <columns>
             <TableColumn fx:id="componentIdCol" prefWidth="111.0" text="Component ID" />
             <TableColumn fx:id="componentNameCol" prefWidth="130.0" text="Component Name" />
@@ -37,6 +44,6 @@
             <TableColumn fx:id="priceCol" prefWidth="60.0" text="Price" />
          </columns>
       </TableView>
-      <Label layoutX="155.0" layoutY="374.0" text="Popular components..." />
+      <Label layoutX="653.0" layoutY="377.0" text="Popular components..." />
    </children>
 </AnchorPane>

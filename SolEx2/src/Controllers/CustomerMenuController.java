@@ -1,5 +1,8 @@
 package Controllers;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -15,10 +18,11 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class CustomerMenuController extends ControllerWrapper{
 	
@@ -60,8 +64,8 @@ public class CustomerMenuController extends ControllerWrapper{
 		if (starters.size() > 0) {
 			Pane starterPane = new Pane();
 			Label starterLabel = new Label("Starters");
-			starterLabel.setTextFill(Color.RED);
-			starterPane.setMinSize(10, 10);
+			starterLabel.getStyleClass().add("headersLabel");
+			starterPane.setMinSize(55, 55);
 			
 			starterPane.getChildren().add(starterLabel);
 			menuItems.add(starterPane);
@@ -72,9 +76,9 @@ public class CustomerMenuController extends ControllerWrapper{
 		}
 		if (main.size() > 0) {
 			Pane mainPane = new Pane();
-			Label mainLabel = new Label("Main");
-			mainLabel.setTextFill(Color.RED);
-			mainPane.setMinSize(10, 10);
+			Label mainLabel = new Label("Main Courses");
+			mainLabel.getStyleClass().add("headersLabel");
+			mainPane.setMinSize(55, 55);
 			
 			mainPane.getChildren().add(mainLabel);
 			menuItems.add(mainPane);
@@ -86,8 +90,8 @@ public class CustomerMenuController extends ControllerWrapper{
 		if (deserts.size() > 0) {
 			Pane desertsPane = new Pane();
 			Label desertsLabel = new Label("Desserts");
-			desertsLabel.setTextFill(Color.RED);
-			desertsPane.setMinSize(10, 10);
+			desertsLabel.getStyleClass().add("headersLabel");
+			desertsPane.setMinSize(55, 55);
 			
 			desertsPane.getChildren().add(desertsLabel);
 			menuItems.add(desertsPane);
@@ -108,9 +112,22 @@ public class CustomerMenuController extends ControllerWrapper{
 		String dishDescription = dish.getComponenets().toString();
 		
 		Pane newMenuItem = new Pane();
-		Label dishLa = new Label("Dish: " + dishName + "\nPrice: " + String.valueOf(dishPrice) + "\nContains: " + dishDescription);
-		Button addBtn = new Button("+Add");
-
+		Label dishLa = new Label(dishName);
+		Label priceLa = new Label(String.valueOf(dishPrice) + "$");
+		Label compsLa = new Label("Contains: " + dishDescription);
+		Button addBtn = new Button();
+		
+		InputStream is = null;
+		try {
+			is = new FileInputStream("icons/plus-circle-solid.png");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Image addIcon = new Image(is);
+		ImageView addIconView = new ImageView(addIcon);
+		addBtn.setGraphic(addIconView);
+      
 		//Copy dish and components to a new object, so we can remove components from the dish without affecting
 		// the instance of the restaurant
 		ArrayList<Component> newComps = new ArrayList<Component>();
@@ -130,16 +147,24 @@ public class CustomerMenuController extends ControllerWrapper{
 			landingController.toggleEditDish();
         });
 		
-		dishLa.getStyleClass().add("descLabel");
+		dishLa.getStyleClass().add("dishLabel");
+		compsLa.getStyleClass().add("compsLabel");
+		priceLa.getStyleClass().add("priceLabel");
 		newMenuItem.getStyleClass().add("menuItem");
+		addBtn.getStyleClass().add("addButton");
 		
 		newMenuItem.setMinSize(100, 100);
 		newMenuItem.setMaxSize(200, 200);
 		
 		newMenuItem.getChildren().addAll(dishLa);
+		newMenuItem.getChildren().addAll(priceLa);
+		newMenuItem.getChildren().addAll(compsLa);
 		newMenuItem.getChildren().addAll(addBtn);
 		
-		addBtn.relocate(142, 65);
+		
+		compsLa.relocate(dishLa.getLayoutX(), dishLa.getLayoutY() +20);
+		priceLa.relocate(dishLa.getLayoutX()+252, dishLa.getLayoutY());
+		addBtn.relocate(priceLa.getLayoutX() + 7, priceLa.getLayoutY()+50);
 		return newMenuItem;
 	}
 }
