@@ -1,6 +1,5 @@
 package Controllers;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,13 +9,10 @@ import java.util.stream.Collectors;
 
 import Model.Component;
 import Model.Customer;
-import Model.Delivery;
 import Model.Dish;
-import Model.ExpressDelivery;
 import Model.Order;
 import Model.Restaurant;
 import Model.State;
-import Utils.Neighberhood;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,9 +35,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
@@ -92,6 +85,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
     
     @FXML 
     private Text priceText;
+    @FXML 
+    private Text totalTimeText;
     
     @FXML
     private Button confirmOrderBtn;
@@ -201,6 +196,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	
 	private void setEditDishData(Dish dish) {
 		clearNav();
+		dishName.getStyleClass().add("dishLabelEditDish");
 		if (dish == null) {
 			dishName.setText("No dish found");
 		} else {
@@ -235,8 +231,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	
 	private void initializeCompGrid() {
-		componentGrid.setBorder(new Border(new BorderStroke(Color.BLACK, 
-	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+	/*	componentGrid.setBorder(new Border(new BorderStroke(Color.BLACK, 
+	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT))); */
 		componentGrid.setHgap(12);
 		componentGrid.setVgap(12);
 	}
@@ -244,7 +240,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	private void initializeAddDishButton() {
 		if(State.getCurrentDish() != null) {
 			if (State.getCurrentDish().isNew()) {
-				addDishToOrder.setText("Add Dish To Order");
+				addDishToOrder.setText("Add To Order");
 			} else {
 				addDishToOrder.setText("Edit");
 			}
@@ -304,23 +300,25 @@ public class CustomerLandingPageController extends ControllerWrapper{
 				totalTime += d.getTimeToMake(); //TODO: add the delivery time to the total time
 			}
 			
-			priceText.setText(String.valueOf(totalPrice) + "$ time to prepare: " + totalTime);
+			priceText.setText(String.valueOf(totalPrice) + " $");
+			totalTimeText.setText(String.valueOf(totalTime) + " minutes");
 		} else {
 			priceText.setText("0");
+			totalTimeText.setText("0");
 			Pane emptyDishesPane = new Pane();
 		//	Label noDishesLabel = new Label("No dishes");
 			
 			//Creating an image 
-		      Image image = null;
+		      Image imageCart = null;
 			try {
-				image = new Image(new FileInputStream("icons/shopping-cart-solid-grey.png"));
+				imageCart = new Image(new FileInputStream("icons/shopping-cart-solid-grey.png"));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}  
 		      
 		      //Setting the image view 
-			if(image != null) {
-				ImageView imageView = new ImageView(image);
+			if(imageCart != null) {
+				ImageView imageView = new ImageView(imageCart);
 				emptyDishesPane.getChildren().addAll(imageView);
 				imageView.relocate(57, 27);
 			}
@@ -338,8 +336,56 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		
 		Pane newMenuItem = new Pane();
 		Label dishLa = new Label("Dish: " + dishName + "\nPrice: " + String.valueOf(dishPrice) + "\nContains: " + dishDescription);
-		Button editBtn = new Button("Edit");
-		Button removeBtn = new Button("Remove");
+		dishLa.getStyleClass().add("dishInCart");
+		Button editBtn = new Button();
+		Button removeBtn = new Button();
+		
+		editBtn.setStyle(
+	                "-fx-background-radius: 10em;" +
+	                "-fx-border-radius: 10em;" +
+	                "-fx-border-color: gray;" +
+	                "-fx-padding: 5px;" +
+	                "-fx-background-color: transparent;" 
+	        );
+		
+		removeBtn.setStyle(
+                "-fx-background-radius: 10em;" +
+                "-fx-border-radius: 10em;" +
+                "-fx-border-color: gray;" +
+                "-fx-padding: 5px;" +
+                "-fx-background-color: transparent;" 
+        );
+		
+		////////// add images to edit and remove buttons
+		//Creating an image 
+	      Image imageTrash = null;
+		try {
+			imageTrash = new Image(new FileInputStream("icons/trash-alt-solid.png"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}  
+	      
+	      //Setting the image view 
+		if(imageTrash != null) {
+			ImageView imageView = new ImageView(imageTrash);
+			removeBtn.setGraphic(imageView);
+		}
+		
+		//Creating an image 
+	      Image imagePencil = null;
+		try {
+			imagePencil = new Image(new FileInputStream("icons/pencil-alt-solid.png"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}  
+	      
+	      //Setting the image view 
+		if(imagePencil != null) {
+			ImageView imageView = new ImageView(imagePencil);
+			editBtn.setGraphic(imageView);
+		}
+		
+		///////////
 
 		editBtn.setOnAction((ActionEvent evt)->{
 			State.setCurrentDish(new CurrentDishModel(dish, false));
@@ -358,8 +404,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		newMenuItem.getChildren().addAll(editBtn);
 		newMenuItem.getChildren().addAll(removeBtn);
 		
-		editBtn.relocate(280, 20);
-		removeBtn.relocate(180, 20);
+		editBtn.relocate(300, 5);
+		removeBtn.relocate(265, 5);
 		return newMenuItem;
 	}
 	

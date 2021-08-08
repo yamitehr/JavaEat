@@ -22,7 +22,7 @@
                   <Image url="@../../icons/JavaEat.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardBtn" layoutX="3.0" layoutY="337.0" mnemonicParsing="false" onAction="#moveToDashboardScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Dashboard">
+            <Button fx:id="dashboardBtn" layoutX="3.0" layoutY="310.0" mnemonicParsing="false" onAction="#moveToDashboardScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Dashboard">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -32,7 +32,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="ordersBtn" layoutX="3.0" layoutY="272.0" mnemonicParsing="false" onAction="#moveToOrdersHistoryScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Orders">
+            <Button fx:id="ordersBtn" layoutX="3.0" layoutY="250.0" mnemonicParsing="false" onAction="#moveToOrdersHistoryScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Orders">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -43,7 +43,7 @@
             	</graphic>
             </Button>
             
-            <Button fx:id="menuBtn" layoutX="3.0" layoutY="201.0" mnemonicParsing="false" onAction="#moveToMenuScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Menu" textFill="#060645">
+            <Button fx:id="menuBtn" layoutX="3.0" layoutY="190.0" mnemonicParsing="false" onAction="#moveToMenuScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Menu" textFill="#060645">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -53,7 +53,7 @@
 	         	   </ImageView>
             	</graphic>
             </Button>
-            <Button fx:id="personalDetailsBtn" layoutX="3.0" layoutY="402.0" mnemonicParsing="false" onAction="#moveToPersonalDetailsScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Personal Details">
+            <Button fx:id="personalDetailsBtn" layoutX="3.0" layoutY="370.0" mnemonicParsing="false" onAction="#moveToPersonalDetailsScene" prefHeight="57.0" prefWidth="338.0" styleClass="menuBtns" text="Personal Details">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -65,37 +65,38 @@
             </Button>
             <AnchorPane layoutY="743.0" prefHeight="54.0" prefWidth="343.0">
                <children>
-                  <Button fx:id="confirmOrderBtn" layoutX="100.0" layoutY="31.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" text="Confirm Order" />
-                  <Text fx:id="priceText" fill="WHITE" layoutX="182.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price" />
-                  <Label layoutX="100.0" layoutY="6.0" text="Current Price:" textFill="WHITE" />
+                  <Button fx:id="confirmOrderBtn" layoutX="64.0" layoutY="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" styleClass="confirmOrderButton" text="Confirm Order" />
                </children>
             </AnchorPane>
-            <ScrollPane fx:id="cartScrollPane" layoutX="3.0" layoutY="489.0" prefHeight="257.0" prefWidth="338.0">
-               <content>
-                  <VBox fx:id="cartVbox" prefWidth="330.0" />
-               </content>
-            </ScrollPane>
-            
+            <Label layoutX="10.0" layoutY="704.0" styleClass="currentPriceLabel" text="Current Price:" textFill="WHITE" />
+            <Text fx:id="priceText" fill="WHITE" layoutX="110.0" layoutY="720.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentPriceLabel" text="price" />
+            <Label layoutX="10.0" layoutY="725.0" styleClass="currentPriceLabel" text="Time to prepare:" textFill="WHITE" />
+            <Text fx:id="totalTimeText" fill="WHITE" layoutX="128.0" layoutY="741.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentPriceLabel" text="time" />
          </children>
       </AnchorPane>
          <!-- NAV BAR -->
-        <AnchorPane fx:id="navList" prefWidth="360.0" style="-fx-background-color:white" translateX="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="56.0">
+        <AnchorPane fx:id="navList" prefHeight="721.5" prefWidth="360.0" styleClass="compsEditor" stylesheets="@menu.css" translateX="1000.0" AnchorPane.bottomAnchor="0.0">
             <children>
                 <Label fx:id="dishName" text="left side menu" />
-            <Pane fx:id="componentsContainer" layoutY="91.0" prefHeight="200.0" prefWidth="200.0">
+            <Pane fx:id="componentsContainer" layoutX="20.0" layoutY="120.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@menu.css">
                <children>
                   <GridPane fx:id="componentGrid" layoutY="14.0">
                   </GridPane>
                </children></Pane>
-            <Button fx:id="addDishToOrder" layoutX="145.0" layoutY="466.0" mnemonicParsing="false" text="Add dish" />
+            <Button fx:id="addDishToOrder" layoutX="106.0" layoutY="468.0" mnemonicParsing="false" styleClass="addDishButton" stylesheets="@menu.css" text="Add dish" />
             </children>
         </AnchorPane>
-                  <Button fx:id="logOutBtn" layoutX="1237.0" mnemonicParsing="false" onAction="#MoveToLoginScene" prefHeight="47.0" prefWidth="193.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Log Out" textFill="#020227">
+                  <Button fx:id="logOutBtn" layoutX="1237.0" mnemonicParsing="false" onAction="#MoveToLoginScene" opacity="0.82" prefHeight="47.0" prefWidth="193.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Log Out" textFill="#020227">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
       <Label fx:id="messageLbl" layoutX="370.0" prefHeight="17.0" prefWidth="144.0" text="Label" />
+      <ScrollPane fx:id="cartScrollPane" layoutY="405.0" prefHeight="257.0" prefWidth="343.0">
+         <content>
+            <VBox fx:id="cartVbox" prefWidth="330.0" />
+         </content>
+      </ScrollPane>
          <!-- NAV BAR -->
    </children>
 </AnchorPane>
