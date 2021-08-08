@@ -30,6 +30,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -217,7 +218,12 @@ public class AddCookController extends ControllerWrapper{
 			first_Name.setText(selectedCook.getFirstName());
 			last_Name.setText(selectedCook.getLastName());
 			date.setValue(selectedCook.getBirthDay());
-			Gender_group.setUserData(selectedCook.getGender());
+			if(selectedCook.getGender().equals(Gender.Male))
+				Gender_group.getToggles().get(0).setSelected(true);
+			if(selectedCook.getGender().equals(Gender.Female))
+				Gender_group.getToggles().get(1).setSelected(true);
+			if(selectedCook.getGender().equals(Gender.Unknown))
+				Gender_group.getToggles().get(2).setSelected(true);
 			expertiseBox.setValue(selectedCook.getExpert());
 			isChef.setSelected(selectedCook.isChef());	
 			if(isChef.isSelected())
@@ -379,7 +385,12 @@ public class AddCookController extends ControllerWrapper{
 			first_Name_DP.setText(selectedDeliveryPerson.getFirstName());
 			last_Name_DP.setText(selectedDeliveryPerson.getLastName());
 			dateDP.setValue(selectedDeliveryPerson.getBirthDay());
-			Gender_group_DP.setUserData(selectedDeliveryPerson.getGender());
+			if(selectedDeliveryPerson.getGender().equals(Gender.Male))
+				Gender_group_DP.getToggles().get(0).setSelected(true);
+			if(selectedDeliveryPerson.getGender().equals(Gender.Female))
+				Gender_group_DP.getToggles().get(1).setSelected(true);
+			if(selectedDeliveryPerson.getGender().equals(Gender.Unknown))
+				Gender_group_DP.getToggles().get(2).setSelected(true);
 			vehicleBox.setValue(selectedDeliveryPerson.getVehicle());
 			deliveryAreaBox.setValue(selectedDeliveryPerson.getArea());	
 			
