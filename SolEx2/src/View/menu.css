@@ -51,3 +51,50 @@
    -fx-font-family: 'Concert One', cursive;
    -fx-padding: 15 15 15 15;
 }
+
+.compsEditor{
+	-fx-background-color: #3D201C;
+	-fx-opacity:0.82;
+}
+
+.dishLabelEditDish{
+	-fx-padding: 70 20 30 20;
+	-fx-text-alignment:center;
+	-fx-font-family: 'Rubik Mono One', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    
+}
+
+.check-box{
+	-fx-font-family: 'Permanent Marker', cursive;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+}
+
+.check-box .box {
+
+-fx-background-color: white;
+-fx-border-color:grey;
+-fx-border-radius:3px; 
+
+}
+
+.check-box:selected .mark {
+
+-fx-background-color: white;
+
+}
+
+.check-box:selected .box {
+
+-fx-background-color: #28a3f4;
+}
+
+.addDishButton{
+	-fx-padding: 15 40 15 40;
+	-fx-background-color: white;
+	 -fx-font-family: 'Concert One', cursive;
+    -fx-font-size: 18px;
+}
+

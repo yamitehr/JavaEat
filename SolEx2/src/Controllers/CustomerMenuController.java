@@ -95,7 +95,7 @@ public class CustomerMenuController extends ControllerWrapper{
 			
 			desertsPane.getChildren().add(desertsLabel);
 			menuItems.add(desertsPane);
-			for(Entry<Integer, Dish> d : starters) {
+			for(Entry<Integer, Dish> d : deserts) {
 				Dish dish = d.getValue();
 				menuItems.add(getMenuItem(dish));
 			}

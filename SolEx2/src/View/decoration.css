@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arima+Madurai&family=Oleo+Script:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
 
 .menuBtns {
       -fx-text-fill: white;
@@ -62,7 +63,7 @@
 
 .shoppingCartItem{
 	-fx-border-style: hidden hidden solid hidden;
-    -fx-border-width: 1;
+    -fx-border-width: 1.5;
     -fx-border-color: gray;
 }
 
@@ -130,4 +131,27 @@
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-opacity: 0;
+}
+
+.dishInCart{
+	
+	 -fx-font-family: 'Yusei Magic', sans-serif;
+	 -fx-font-size: 16px;
+      -fx-text-fill: gray;
+	 -fx-padding: 0 0 0 5;
+}
+
+.currentPriceLabel{
+	 -fx-font-family: 'Concert One', cursive;
+	 -fx-font-size: 15px;
+}
+
+.confirmOrderButton{
+	-fx-background-color: white;
+	 -fx-font-family: 'Concert One', cursive;
+    -fx-font-size: 18px;
+	-fx-min-width:12em;
+	-fx-max-width:12em;
+	-fx-min-height:2.2em;
+	-fx-max-height:2.2em;
 }
