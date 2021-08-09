@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+/* 
+.table-view{
+    -fx-background-color: transparent;
+	
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+    
+}
+
+.table-row-cell{
+-fx-border-color: white;}
+
+.table-column-cell{
+-fx-border-color: transparent;}
+
+.table-view .column-header-background{
+    -fx-background-color: #3D201C;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+    
+	-fx-background-radius:  5px;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  transparent;
+}
+.table-view .column-header .label{
+   -fx-text-fill: white;
+   -fx-alignment: CENTER_LEFT;
+   -fx-padding: 30 0 30 0;
+	-fx-font-family: 'Concert One', cursive;
+	 -fx-font-size: 19px;
+}
+.table-view .cell{
+	
+   -fx-cell-size: 55;
+  -fx-alignment: center-left;
+  -fx-text-fill: white;
+  -fx-alignment: CENTER_LEFT;
+  -fx-opacity:0.82;
+  
+	-fx-background-radius:  5px;
+ 
+	
+	 -fx-font-size: 16px;
+ -fx-font-family: 'Yusei Magic', sans-serif;
+    -fx-background-color: #3D201C;
+   
+}    
+
+*/
+
+.table-view .cell{
+ -fx-font-size: 15px;
+ -fx-font-family: 'Yusei Magic', sans-serif;
+   
+}  
+	
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {   
+	
+	
+	-fx-font-family: 'Concert One', cursive;
+	 -fx-font-size: 19px;
+    -fx-stroke: transparent;
+    -fx-size:50;
+    -fx-alignment: CENTER ;    
+    -fx-text-alignment: center;
+
+}
+.table-row-cell:filled:hover {
+
+    -fx-size:50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+
+}
+.table-view:row-selection {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-fixed-cell-size: 50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+}
+
+.table-view .table-column{
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER 
+
+}
+
+/* scroll bar starts here */
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button ,.table-view .decrement-button {
+    -fx-background-color:transparent;
+	-fx-background-radius: 2em;
+
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track{
+	-fx-background-color: transparent;
+	-fx-border-color:derive( #3D201C,80%);
+
+	-fx-background-radius: 2em;
+	-fx-border-radius:2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color:derive( #3D201C,90%);
+	-fx-background-insets: 2, 0, 0;
+	-fx-background-radius: 2em;
+
+}
+
+
