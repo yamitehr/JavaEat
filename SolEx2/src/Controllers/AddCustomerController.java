@@ -197,7 +197,12 @@ public class AddCustomerController extends ControllerWrapper{
 			first_Name.setText(selectedCustomer.getFirstName());
 			last_Name.setText(selectedCustomer.getLastName());
 			date.setValue(selectedCustomer.getBirthDay());
-			Gender_group.setUserData(selectedCustomer.getGender());
+			if(selectedCustomer.getGender().equals(Gender.Male))
+				Gender_group.getToggles().get(0).setSelected(true);
+			if(selectedCustomer.getGender().equals(Gender.Female))
+				Gender_group.getToggles().get(1).setSelected(true);
+			if(selectedCustomer.getGender().equals(Gender.Unknown))
+				Gender_group.getToggles().get(2).setSelected(true);
 			neighberhoodsBox.setValue(selectedCustomer.getNeighberhood());
 			isGluten.setSelected(selectedCustomer.isSensitiveToGluten());	
 			isLactose.setSelected(selectedCustomer.isSensitiveToLactose());
