@@ -314,7 +314,7 @@ public class AddCustomerController extends ControllerWrapper{
 			///
 			
 			Customer newCustomer = new Customer(firstName, lastName, birthDate, gender, 
-											neighberhood, isSensitiveToLactose, isSensitiveToGluten, "", "");
+											neighberhood, isSensitiveToLactose, isSensitiveToGluten);
 			
 			//add customer to the restaurant
 			if(Restaurant.getInstance().addCustomer(newCustomer)) {

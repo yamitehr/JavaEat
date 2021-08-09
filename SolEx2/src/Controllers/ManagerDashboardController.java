@@ -88,7 +88,7 @@ public class ManagerDashboardController extends ControllerWrapper {
 		}
 		totalRevenue.setText(String.valueOf(revenue));
 		
-		//revenueFromExpress.setText(String.valueOf(Restaurant.getInstance().revenueFromExpressDeliveries()));
+		revenueFromExpress.setText(String.valueOf(Restaurant.getInstance().revenueFromExpressDeliveries()));
 		
 		
 		//popular Components
@@ -131,8 +131,6 @@ public class ManagerDashboardController extends ControllerWrapper {
 				.collect(Collectors.toList());
 				
 		profitRelationTable.getItems().addAll(profitRelation);
-//		double SellDate = 0;
-//		double revenueDate = 0;
 		selectedDate.setOnAction(d -> {
 			double SellDate = 0;
 			double revenueDate = 0;
