@@ -4,11 +4,14 @@ import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.Duration;
 
@@ -30,7 +33,7 @@ import javafx.scene.control.Button;
 
 public class CustomerOrdersHistoryController {
 	@FXML
-	private TableView allOrdersTable;
+	private TableView<Order> allOrdersTable;
 	@FXML
 	private TableColumn<Order, Integer> orderIdCol;
 	@FXML
@@ -45,11 +48,19 @@ public class CustomerOrdersHistoryController {
 	private TableColumn<Order, Integer> etaCol;
 	@FXML
 	private Button refreshBtn;
+	@FXML
+	private Button removeBtn;
+	@FXML
+	private Text message;
 	
 	@FXML
     public void initialize() {
 		init();
 		refreshBtn.setOnAction(e -> initData());
+		allOrdersTable.setOnMouseClicked(e -> {
+			message.setText("");
+		});
+		
     }
 	
 	private void init() {
@@ -187,6 +198,7 @@ public class CustomerOrdersHistoryController {
 	}
 	
 	private void initData() {
+		message.setText("");
 		List<Order> orders = new ArrayList<Order>();
 		orders = Restaurant.getInstance().getOrders().values().stream()
 				.filter(o -> o.getCustomer().equals(State.getCurrentCustomer()))
@@ -226,5 +238,18 @@ public class CustomerOrdersHistoryController {
 	            });
 	        }
 	    }
-	
+	 
+	 public void cancelOrder(ActionEvent e) {
+			Order selectedOrder = allOrdersTable.getSelectionModel().getSelectedItem();
+			if(selectedOrder !=  null) {
+				if(selectedOrder.getStatus().equals(OrderStatus.InProgress)) {
+					selectedOrder.setStatus(OrderStatus.cancelled);
+					initData();
+				} else {
+					message.setText("can delete only in progress orders");
+				}
+			} else {
+				message.setText("no selection was detected");
+			}
+		}
 }
