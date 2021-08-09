@@ -14,7 +14,7 @@
             <Image url="@../../img/82.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="allOrdersTable" layoutX="404.0" layoutY="186.0" prefHeight="399.0" prefWidth="905.0">
+      <TableView fx:id="allOrdersTable" layoutX="379.0" layoutY="166.0" prefHeight="487.0" prefWidth="989.0">
         <columns>
           <TableColumn fx:id="orderIdCol" prefWidth="82.0" text="OrderID" />
           <TableColumn fx:id="dishesCol" prefWidth="291.0" text="Dishes" />
@@ -24,6 +24,6 @@
             <TableColumn fx:id="priceCol" prefWidth="97.0" text="Price" />
         </columns>
       </TableView>
-      <Button fx:id="refreshBtn" layoutX="374.0" layoutY="131.0" mnemonicParsing="false" text="Refresh" />
+      <Button fx:id="refreshBtn" layoutX="379.0" layoutY="111.0" mnemonicParsing="false" styleClass="menuBtns" stylesheets="@decoration.css" text="Refresh" />
    </children>
 </AnchorPane>

@@ -1,21 +1,28 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
-
+/* 
 .table-view{
-	-fx-background-radius:  50px;
+    -fx-background-color: transparent;
 	
-    -fx-background-color: #3D201C;
 }
 
 .table-view .corner {
     -fx-background-color: transparent;
+    
 }
+
+.table-row-cell{
+-fx-border-color: white;}
+
+.table-column-cell{
+-fx-border-color: transparent;}
 
 .table-view .column-header-background{
     -fx-background-color: #3D201C;
-    -fx-background-radius: 30px;
     -fx-background-insets: 0 11px 0 0;
     -fx-padding: 0 0 5px 0;
+    
+	-fx-background-radius:  5px;
 }
 
 .table-view .column-header,
@@ -31,15 +38,64 @@
 }
 .table-view .cell{
 	
-   -fx-cell-size: 35;
+   -fx-cell-size: 55;
   -fx-alignment: center-left;
-  -fx-background-color: transparent;
-  -fx-border-color: transparent;
   -fx-text-fill: white;
   -fx-alignment: CENTER_LEFT;
+  -fx-opacity:0.82;
+  
+	-fx-background-radius:  5px;
+ 
+	
+	 -fx-font-size: 16px;
+ -fx-font-family: 'Yusei Magic', sans-serif;
+    -fx-background-color: #3D201C;
    
 }    
 
+*/
+
+.table-view .cell{
+ -fx-font-size: 15px;
+ -fx-font-family: 'Yusei Magic', sans-serif;
+   
+}  
+	
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {   
+	
+	
+	-fx-font-family: 'Concert One', cursive;
+	 -fx-font-size: 19px;
+    -fx-stroke: transparent;
+    -fx-size:50;
+    -fx-alignment: CENTER ;    
+    -fx-text-alignment: center;
+
+}
+.table-row-cell:filled:hover {
+
+    -fx-size:50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+
+}
+.table-view:row-selection {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-fixed-cell-size: 50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+}
+
+.table-view .table-column{
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER 
+
+}
 
 /* scroll bar starts here */
 
@@ -68,4 +124,5 @@
 	-fx-background-radius: 2em;
 
 }
+
 
