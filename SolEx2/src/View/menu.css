@@ -2,7 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Sarina&display=swap');
+.menuHeader{
+	-fx-font-family: 'Sarina', cursive;
+    -fx-text-fill: white;
+    -fx-font-size: 50px;
+}
 
 .menuItem {
    -fx-border-color: white;

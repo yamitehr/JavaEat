@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import Exceptions.NoComponentsExceptions;
 import Model.Component;
 import Model.Customer;
 import Model.Dish;
@@ -90,11 +91,18 @@ public class CustomerLandingPageController extends ControllerWrapper{
     
     @FXML
     private Button confirmOrderBtn;
+    
+    Label messageDishLbl = new Label();
 	
 	@FXML
 	public void initialize() {
 		messageLbl.setText("Hello " + current.getFirstName());
 		componentList = new ArrayList<Pair<CheckBox, Component>>();
+		messageDishLbl.setText("");
+		messageDishLbl.setLayoutX(20);
+		messageDishLbl.setLayoutY(566);
+		messageDishLbl.getStyleClass().add("managerAllText"); 
+		navList.getChildren().add(messageDishLbl);
 		
 		try {
 			replacePane(toReplacePane, "/View/Video.fxml");
@@ -175,7 +183,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
     }
 	
 	public void toggleEditDish() {
-
+		messageDishLbl.setText("");
         initializeAddDishButton();
 		setEditDishData(State.getCurrentDish().getDish());
 		
@@ -204,7 +212,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	private void generateComponentsCheckboxes(Dish dish) {
 		for (Component comp : dish.getComponenets()) {
 			CheckBox cb = new CheckBox(comp.getComponentName());
-			cb.setSelected(true);
+			cb.setSelected(comp.isSelected());
 			componentList.add(new Pair<CheckBox, Component>(cb, comp));
 		}
 		
@@ -244,30 +252,32 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		
 		addDishToOrder.setOnAction((ActionEvent evt)->{
         	Dish dish = State.getCurrentDish().getDish();
-        	
-        	//Remove components based on selection
-        	for(Pair<CheckBox, Component> compPair : componentList) {
-        		if (!compPair.getKey().isSelected()) {
-        			dish.removeComponent(compPair.getValue());
-        		}
-        	}
-        	
-        	Order order = State.getCurrentOrder();
-        	
-        	if(State.getCurrentDish().isNew()) {
-        		//If order exists, add dish. otherwise create a new order
-            	if (order != null) {
-            		order.addDish(dish);
-            	} else {
-                	ArrayList<Dish> dishes = new ArrayList<Dish>();
-                	dishes.add(dish);
-            		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
+        		
+        		//Remove components based on selection
+            	for(Pair<CheckBox, Component> compPair : componentList) {
+            		Component component = dish.getComponenets()
+    						.stream().filter(c -> c.equals(compPair.getValue())).findFirst().get();
+    				if (component != null) {
+    					component.setIsSelected(compPair.getKey().isSelected());
+    				}
             	}
-        	}
+            	Order order = State.getCurrentOrder();
+            	
+            	if(State.getCurrentDish().isNew()) {
+            		//If order exists, add dish. otherwise create a new order
+                	if (order != null) {
+                		order.addDish(dish);
+                	} else {
+                    	ArrayList<Dish> dishes = new ArrayList<Dish>();
+                    	dishes.add(dish);
+                		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
+                	}
+            	}
+            	
+    			initShoppingCart();
+            	//close side menu
+            	toggleEditDish();
         	
-			initShoppingCart();
-        	//close side menu
-        	toggleEditDish();
         });
 	}
 	
@@ -328,7 +338,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	private Pane getShoppingCartItem(Dish dish) {
 		String dishName = dish.getDishName();
 		double dishPrice = dish.calcDishPrice();
-		String dishDescription = dish.getComponenets().toString();
+		String dishDescription = dish.getComponenets().stream().filter(c -> c.isSelected()).collect(Collectors.toList()).toString();
 		
 		Pane newMenuItem = new Pane();
 		Label dishLa = new Label("Dish: " + dishName + "\nPrice: " + String.valueOf(dishPrice) + "\nContains: " + dishDescription);
@@ -409,6 +419,18 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		confirmOrderBtn.setOnAction((ActionEvent evt) -> {
 			
 			Order currentOrder = State.getCurrentOrder();
+			
+			//Remove unselected components from dishes
+			for (Dish d : currentOrder.getDishes()) {
+				
+				List<Component> allComponents = new ArrayList<Component>(d.getComponenets()); 
+				for (Component c : allComponents) {
+					if (!c.isSelected()) {
+						d.removeComponent(c);
+					}
+				}
+			}
+			
 			//add order to restaurant
 			if(Restaurant.getInstance().addOrder(currentOrder)) {
 				//TODO: add a delivery to the order

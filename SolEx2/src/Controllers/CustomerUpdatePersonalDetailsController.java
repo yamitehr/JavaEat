@@ -158,6 +158,11 @@ public class CustomerUpdatePersonalDetailsController {
 					if(!currentCustomer.getUserName().equals(userName.getText())) {
 						if(userName.getText().isEmpty())
 							throw new InvalidInputException("User Name cannot be empty");
+						for(Customer c : Restaurant.getInstance().getCustomers().values()) {
+							if(c.getUserName().equals(userName.getText())) {
+							throw new InvalidInputException("User Name already exists");
+							}
+						}
 						currentCustomer.setUserName(userName.getText());
 					}
 					
