@@ -70,7 +70,8 @@ public class CustomerStatisticsController {
 	private TableColumn<Component, String> sensitivitiesCol;
 	@FXML
 	private TableColumn<Component, Double> priceCol;
-	
+
+	private CustomerLandingPageController landingController;
 
 	@FXML
 	private TabPane tabPane;
@@ -87,6 +88,9 @@ public class CustomerStatisticsController {
 		initCookByExpertise();
 		initPopularComps();
     }
+	public void setLandingController(CustomerLandingPageController c) {
+		landingController = c;
+	}
 	
 	private void initRelevantDishes() {
 		dishIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));

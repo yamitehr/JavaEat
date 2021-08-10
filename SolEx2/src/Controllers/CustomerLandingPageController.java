@@ -125,16 +125,18 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	public void moveToDashboardScene(ActionEvent e) {
 		messageLbl.setText("Dashboard");
 		try {
-			replacePane(toReplacePane, "/View/Customer_Statistics.fxml");
-		} catch (IOException ex) {
-			// TODO Auto-generated catch block
-			ex.printStackTrace();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Customer_Statistics.fxml"));
+			AnchorPane pane = loader.load();
+			CustomerStatisticsController controller = (CustomerStatisticsController)loader.getController();
+			controller.setLandingController(this);
+			toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
+			toReplacePane.getChildren().add(pane); 
+		}catch(Exception er) 
+		{
+			er.printStackTrace();
 		}
 	}
 	
-	public void moveToShoppingCartScene(ActionEvent e) {
-		
-	}
 	public void moveToMenuScene(ActionEvent e) {
 		messageLbl.setText("Menu");
 		try {
