@@ -252,6 +252,17 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		
 		addDishToOrder.setOnAction((ActionEvent evt)->{
         	Dish dish = State.getCurrentDish().getDish();
+        	try {
+        		int counter = 0;
+        		for(Pair<CheckBox, Component> compPair : componentList) {
+        			if(compPair.getKey().isSelected()) {
+        				counter++;
+        			}
+        		}
+        		
+        		if(counter < 1) {
+        			throw new NoComponentsExceptions(dish);
+        		}
         		
         		//Remove components based on selection
             	for(Pair<CheckBox, Component> compPair : componentList) {
@@ -277,7 +288,9 @@ public class CustomerLandingPageController extends ControllerWrapper{
     			initShoppingCart();
             	//close side menu
             	toggleEditDish();
-        	
+        	} catch (NoComponentsExceptions nce) {
+        		messageDishLbl.setText(nce.getMessage());
+        	}
         });
 	}
 	
