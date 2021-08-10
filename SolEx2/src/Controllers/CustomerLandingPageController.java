@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import Exceptions.NoComponentsExceptions;
+import Exceptions.SensitiveException;
 import Model.Component;
 import Model.Customer;
 import Model.Dish;
@@ -252,6 +253,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		
 		addDishToOrder.setOnAction((ActionEvent evt)->{
         	Dish dish = State.getCurrentDish().getDish();
+        	
+        	//Check there is at least 1 component selected
         	try {
         		int counter = 0;
         		for(Pair<CheckBox, Component> compPair : componentList) {
@@ -263,6 +266,18 @@ public class CustomerLandingPageController extends ControllerWrapper{
         		if(counter < 1) {
         			throw new NoComponentsExceptions(dish);
         		}
+        		
+        		//check customer is not sensitive
+        		for(Pair<CheckBox, Component> compPair : componentList) {
+        			if(compPair.getKey().isSelected()) {
+        				if(State.getCurrentCustomer().isSensitiveToGluten() && compPair.getValue().isHasGluten()) {
+    						throw new SensitiveException(compPair.getValue(), "Gluten");
+    					}
+    					else if(State.getCurrentCustomer().isSensitiveToLactose() && compPair.getValue().isHasLactose()) {
+    						throw new SensitiveException(compPair.getValue(), "Lactose");
+    					}
+        			}
+				}
         		
         		//Remove components based on selection
             	for(Pair<CheckBox, Component> compPair : componentList) {
@@ -290,6 +305,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
             	toggleEditDish();
         	} catch (NoComponentsExceptions nce) {
         		messageDishLbl.setText(nce.getMessage());
+        	} catch(SensitiveException se) {
+        		messageDishLbl.setText(se.getMessage());
         	}
         });
 	}
