@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,19 +31,23 @@ public class CustomerStatisticsController {
 	private Text messageToUser;
 	//getRelevantDish
 	@FXML
-	private TableView relevantDishesTable;
+	private TableView<Dish> relevantDishesTable;
 	@FXML
 	private TableColumn<Dish, Integer> dishIdCol;
 	@FXML
 	private TableColumn<Dish, String> dishNameCol;
 	@FXML
 	private TableColumn<Dish, String> componentsCol;
+	@FXML
+	private TableColumn<Dish, String> dishPriceCol;
+	@FXML
+	private TableColumn<Dish, String> dishTimeCol;
 	
 	//getCookByExpertise
 	@FXML
 	private ComboBox<Expertise> expertiseBox;
 	@FXML
-	private TableView cookByExpertiseTable;
+	private TableView<Cook> cookByExpertiseTable;
 	@FXML
 	private TableColumn<Cook, Integer> cookIdCol;
 	@FXML
@@ -56,7 +61,7 @@ public class CustomerStatisticsController {
 	//@FXML
 	//private Button showCookByExpertiseBtn;
 	@FXML
-	private TableView popularComponentsTable;
+	private TableView<Component> popularComponentsTable;
 	@FXML
 	private TableColumn<Component, Integer> componentIdCol;
 	@FXML
@@ -65,6 +70,10 @@ public class CustomerStatisticsController {
 	private TableColumn<Component, String> sensitivitiesCol;
 	@FXML
 	private TableColumn<Component, Double> priceCol;
+	
+
+	@FXML
+	private TabPane tabPane;
 	
 	@FXML
     public void initialize() {
@@ -90,7 +99,8 @@ public class CustomerStatisticsController {
 				.map(d -> d.toString())
 				.reduce((a, b) -> a + ", " + b).get()
 				));
-		
+		dishPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+		dishTimeCol.setCellValueFactory(new PropertyValueFactory<>("timeToMake"));
 		
 		List<Dish> relevantDishes = new ArrayList<Dish>();
 		relevantDishes = Restaurant.getInstance().getReleventDishList(State.getCurrentCustomer()).stream()

@@ -90,8 +90,15 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="35.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/sign-out-alt-solid.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <Label fx:id="messageLbl" layoutX="370.0" prefHeight="17.0" prefWidth="144.0" text="Label" />
+      <Label fx:id="messageLbl" layoutX="616.0" layoutY="50.0" styleClass="labelHeader" text="Label" />
       <ScrollPane fx:id="cartScrollPane" layoutY="405.0" prefHeight="257.0" prefWidth="343.0">
          <content>
             <VBox fx:id="cartVbox" prefWidth="330.0" />

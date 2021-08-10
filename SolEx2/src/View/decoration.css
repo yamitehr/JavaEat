@@ -7,6 +7,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
 
+.labelHeader{
+	-fx-font-family: 'Sarina', cursive;
+    -fx-text-fill: white;
+    -fx-font-size: 50px;
+}
+
 .menuBtns {
       -fx-text-fill: white;
    /*    -fx-font-family: "Monaco"; */ 

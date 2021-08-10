@@ -115,7 +115,6 @@ public class CustomerLandingPageController extends ControllerWrapper{
 
 	public void moveToDashboardScene(ActionEvent e) {
 		messageLbl.setText("Dashboard");
-	//	mediaPlayer.pause();
 		try {
 			replacePane(toReplacePane, "/View/Customer_Statistics.fxml");
 		} catch (IOException ex) {
@@ -129,7 +128,6 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	public void moveToMenuScene(ActionEvent e) {
 		messageLbl.setText("Menu");
-	//	mediaPlayer.pause();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Customer_Menu.fxml"));
 			AnchorPane pane = loader.load();
@@ -146,7 +144,6 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	public void moveToOrdersHistoryScene(ActionEvent e) {
 		messageLbl.setText("Orders History");
-	//	mediaPlayer.pause();
 		try {
 			replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
 		} catch (IOException ex) {
@@ -155,7 +152,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		}
 	}
 	public void moveToPersonalDetailsScene(ActionEvent e) {
-	//	mediaPlayer.pause();
+		messageLbl.setText("Personal Detalis");
 		try {
 			replacePane(toReplacePane, "/View/Customer_UpdatePersonalDetails.fxml");
 		} catch (IOException ex) {
@@ -165,7 +162,6 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	
 	public void MoveToLoginScene(ActionEvent e) {
-	//	mediaPlayer.pause();
 		//clean current customer and order
 		State.cleanState();
 		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow());

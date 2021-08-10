@@ -52,19 +52,21 @@
             <Button fx:id="editBtn" layoutX="550.0" layoutY="539.0" mnemonicParsing="false" styleClass="menuBtns" text="Edit mode" />
             <Button fx:id="saveBtn" layoutX="714.0" layoutY="539.0" mnemonicParsing="false" styleClass="menuBtns" text="Save" />
             <Text fx:id="messageToUser" layoutX="312.0" layoutY="617.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="591.7367706298828" />
-            <Label layoutX="408.0" layoutY="470.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" text="Password" />
-            <Label layoutX="408.0" layoutY="410.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" stylesheets="@decoration.css" text="Sensitivies" />
-            <Label layoutX="408.0" layoutY="359.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" text="Neighborhood" />
-            <Label layoutX="405.0" layoutY="298.0" prefHeight="26.0" prefWidth="80.0" styleClass="customerUpdateDetails" text="Gender" />
-            <Label layoutX="406.0" layoutY="232.0" prefHeight="26.0" prefWidth="80.0" styleClass="customerUpdateDetails" text="birthDate" />
+            <Label layoutX="400.0" layoutY="469.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" text="Password" />
+            <Label layoutX="395.0" layoutY="410.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" stylesheets="@decoration.css" text="Sensitivies" />
+            <Label layoutX="395.0" layoutY="359.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Neighborhood" />
+            <Label layoutX="400.0" layoutY="297.0" prefHeight="26.0" prefWidth="80.0" styleClass="customerUpdateDetails" text="Gender" />
+            <Label layoutX="400.0" layoutY="231.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Birth Date" />
             <Label layoutX="380.0" layoutY="29.0" prefHeight="18.0" prefWidth="314.0" styleClass="customerUpdateDetails" text="you can update your personal details!">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="409.0" layoutY="71.0" prefHeight="18.0" prefWidth="89.0" styleClass="customerUpdateDetails" text="username" />
-            <Label layoutX="408.0" layoutY="119.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" text="Firse name" />
-            <Label layoutX="400.0" layoutY="168.0" prefHeight="26.0" prefWidth="80.0" styleClass="customerUpdateDetails" text="Last name" />
+            <Label layoutX="397.0" layoutY="71.0" prefHeight="18.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="username" />
+            <Label layoutX="397.0" layoutY="119.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="First name" />
+            <Label layoutX="400.0" layoutY="168.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Last name" />
+            <CheckBox fx:id="showPassCheckBox" layoutX="778.0" layoutY="473.0" mnemonicParsing="false" styleClass="customerUpdateDetails" stylesheets="@decoration.css" text="show password" />
+            <TextField fx:id="showPass" layoutX="577.0" layoutY="469.0" styleClass="customerUpdateDetailsTextFields" />
       
    		</children>
 	</AnchorPane>
