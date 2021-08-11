@@ -42,6 +42,8 @@ public class CustomerStatisticsController {
 	private TableColumn<Dish, String> dishPriceCol;
 	@FXML
 	private TableColumn<Dish, String> dishTimeCol;
+	@FXML
+	private TableColumn<Dish, String> dishTypeCol;
 	
 	//getCookByExpertise
 	@FXML
@@ -58,8 +60,8 @@ public class CustomerStatisticsController {
 	private TableColumn<Cook, String> cookGenderCol;
 	@FXML
 	private TableColumn<Cook, String> isChefCol;
-	//@FXML
-	//private Button showCookByExpertiseBtn;
+
+	//popularComponents
 	@FXML
 	private TableView<Component> popularComponentsTable;
 	@FXML
@@ -70,6 +72,8 @@ public class CustomerStatisticsController {
 	private TableColumn<Component, String> sensitivitiesCol;
 	@FXML
 	private TableColumn<Component, Double> priceCol;
+	@FXML
+	private TableColumn<Component, Integer> popularityCol;
 
 	private CustomerLandingPageController landingController;
 
@@ -109,6 +113,7 @@ public class CustomerStatisticsController {
 				));
 		dishPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 		dishTimeCol.setCellValueFactory(new PropertyValueFactory<>("timeToMake"));
+		dishTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
 		
 		List<Dish> relevantDishes = new ArrayList<Dish>();
 		relevantDishes = Restaurant.getInstance().getReleventDishList(State.getCurrentCustomer()).stream()
@@ -140,11 +145,8 @@ public class CustomerStatisticsController {
         });
 		
 		priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-		
-		
-		List<Dish> relevantDishes = new ArrayList<Dish>();
-		relevantDishes = Restaurant.getInstance().getReleventDishList(State.getCurrentCustomer()).stream()
-				.collect(Collectors.toList());
+
+		popularityCol.setCellValueFactory(component -> new ReadOnlyObjectWrapper<Integer>(popularComponentsTable.getItems().indexOf(component.getValue())+1));
 		
 		popularComponentsTable.getItems().addAll(Restaurant.getInstance().getPopularComponents());
 	}

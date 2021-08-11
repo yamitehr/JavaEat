@@ -25,17 +25,18 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="relevantDishesTable" layoutX="285.0" layoutY="240.0" prefHeight="259.0" prefWidth="575.0">
+                        <TableView fx:id="relevantDishesTable" layoutX="189.0" layoutY="210.0" prefHeight="326.0" prefWidth="654.0">
                           <columns>
                             <TableColumn fx:id="dishIdCol" prefWidth="94.0" text="Dish ID" />
                             <TableColumn fx:id="dishNameCol" prefWidth="182.0" text="Dish Name" />
                               <TableColumn fx:id="dishPriceCol" prefWidth="74.0" text="Price" />
                               <TableColumn fx:id="componentsCol" prefWidth="133.0" text="Components" />
-                              <TableColumn fx:id="dishTimeCol" prefWidth="74.0" text="Time" />
+                              <TableColumn fx:id="dishTypeCol" prefWidth="81.0" text="Type" />
+                              <TableColumn fx:id="dishTimeCol" prefWidth="64.0" text="Time" />
                           </columns>
                         </TableView>
-                        <Label layoutX="285.0" layoutY="194.0" text="Relevant dishes suggested to you..." />
-                        <Button fx:id="addDishBtn" layoutX="313.0" layoutY="564.0" mnemonicParsing="false" styleClass="menuBtns" stylesheets="@decoration.css" text="Add to order" />
+                        <Label layoutX="189.0" layoutY="167.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Recommended For You..." />
+                        <Button fx:id="addDishBtn" layoutX="454.0" layoutY="543.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="172.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Add to order" />
                      </children>
                   </AnchorPane>
             </content>
@@ -44,15 +45,16 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="popularComponentsTable" layoutX="245.0" layoutY="232.0" prefHeight="294.0" prefWidth="546.0">
+                        <TableView fx:id="popularComponentsTable" layoutX="189.0" layoutY="210.0" prefHeight="326.0" prefWidth="654.0">
                            <columns>
                               <TableColumn fx:id="componentIdCol" prefWidth="129.0" text="Component ID" />
                               <TableColumn fx:id="componentNameCol" prefWidth="155.0" text="Component Name" />
                               <TableColumn fx:id="sensitivitiesCol" prefWidth="171.0" text="Contains" />
-                              <TableColumn fx:id="priceCol" prefWidth="90.0" text="Price" />
+                              <TableColumn fx:id="priceCol" prefWidth="76.0" text="Price" />
+                              <TableColumn fx:id="popularityCol" prefWidth="104.0" text="#Popularity" />
                            </columns>
                         </TableView>
-                        <Label layoutX="245.0" layoutY="164.0" text="Popular components..." />
+                        <Label layoutX="189.0" layoutY="167.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Components' Rating" />
                      </children>
                   </AnchorPane>
             </content>
@@ -62,7 +64,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Text fx:id="messageToUser" layoutX="247.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.0" y="400.0" />
-                        <TableView fx:id="cookByExpertiseTable" layoutX="247.0" layoutY="208.0" prefHeight="259.0" prefWidth="510.0">
+                        <TableView fx:id="cookByExpertiseTable" layoutX="189.0" layoutY="210.0" prefHeight="326.0" prefWidth="654.0">
                           <columns>
                             <TableColumn fx:id="cookIdCol" prefWidth="75.0" text="Cook ID" />
                             <TableColumn fx:id="cookNameCol" prefWidth="153.0" text="Cook Name" />
@@ -71,8 +73,8 @@
                               <TableColumn fx:id="isChefCol" prefWidth="78.0" text="isChef" />
                           </columns>
                         </TableView>
-                        <ComboBox fx:id="expertiseBox" layoutX="247.0" layoutY="165.0" prefWidth="150.0" />
-                        <Label layoutX="247.0" layoutY="125.0" text="Select expertise..." />
+                        <ComboBox fx:id="expertiseBox" layoutX="489.0" layoutY="167.0" prefWidth="150.0" styleClass="comboBoxDashCust" stylesheets="@decoration.css" />
+                        <Label layoutX="189.0" layoutY="167.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Select expertise:" />
                      </children>
                   </AnchorPane>
               </content>

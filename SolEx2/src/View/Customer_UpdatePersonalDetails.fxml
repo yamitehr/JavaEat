@@ -14,7 +14,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerUpdatePersonalDetailsController">
@@ -49,19 +48,14 @@
             <PasswordField fx:id="password" layoutX="577.0" layoutY="569.0" styleClass="customerUpdateDetailsTextFields" />
             <CheckBox fx:id="gluten" layoutX="570.0" layoutY="514.0" mnemonicParsing="false" styleClass="customerUpdateDetails" text="Gluten" />
             <CheckBox fx:id="lactose" layoutX="660.0" layoutY="514.0" mnemonicParsing="false" styleClass="customerUpdateDetails" text="Lactose" />
-            <Button fx:id="editBtn" layoutX="577.0" layoutY="640.0" mnemonicParsing="false" styleClass="menuBtns" text="Edit mode" />
-            <Button fx:id="saveBtn" layoutX="577.0" layoutY="684.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" styleClass="menuBtns" text="Save" />
+            <Button fx:id="editBtn" layoutX="576.0" layoutY="647.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="90.0" styleClass="menuBtns" text="Edit mode" />
+            <Button fx:id="saveBtn" layoutX="727.0" layoutY="647.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="72.0" styleClass="menuBtns" text="Save" />
             <Text fx:id="messageToUser" layoutX="576.0" layoutY="743.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="591.7367706298828" />
             <Label layoutX="400.0" layoutY="569.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" text="Password" />
             <Label layoutX="395.0" layoutY="510.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" stylesheets="@decoration.css" text="Sensitivies" />
             <Label layoutX="395.0" layoutY="459.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Neighborhood" />
             <Label layoutX="400.0" layoutY="397.0" prefHeight="26.0" prefWidth="80.0" styleClass="customerUpdateDetails" text="Gender" />
             <Label layoutX="400.0" layoutY="331.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Birth Date" />
-            <Label layoutX="380.0" layoutY="129.0" prefHeight="18.0" prefWidth="314.0" styleClass="customerUpdateDetails" text="you can update your personal details!">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
             <Label layoutX="397.0" layoutY="171.0" prefHeight="18.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="username" />
             <Label layoutX="397.0" layoutY="219.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="First name" />
             <Label layoutX="400.0" layoutY="268.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Last name" />
