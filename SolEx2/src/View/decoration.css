@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Arima+Madurai&family=Oleo+Script:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap');
 
 .labelHeader{
 	-fx-font-family: 'Sarina', cursive;
@@ -189,4 +190,21 @@
 	-fx-max-width:12em;
 	-fx-min-height:2.2em;
 	-fx-max-height:2.2em;
+}
+
+.customerDashboardLabels{
+	-fx-text-fill: white;
+	 -fx-font-family: 'Pacifico', cursive;
+	-fx-font-size: 24px;
+}
+
+.comboBoxDashCust {
+/* 	-fx-border-color: PeachPuff;*/
+	-fx-background-color: White;
+	-fx-min-width:7em;
+	-fx-max-width:16em;
+	-fx-min-height:2.5em;
+	-fx-max-height:2.5em;
+	 -fx-font-family: 'Yusei Magic', sans-serif;
+	-fx-font-size: 17px;
 }

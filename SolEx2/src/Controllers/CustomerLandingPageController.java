@@ -92,6 +92,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
     
     @FXML
     private Button confirmOrderBtn;
+    @FXML
+    private Button videoButton;
     
     Label messageDishLbl = new Label();
 	
@@ -120,6 +122,17 @@ public class CustomerLandingPageController extends ControllerWrapper{
         initShoppingCart();
         initializeConfirmButton();
 		
+	}
+	
+	public void moveToVideoScene(ActionEvent e) {
+
+		messageLbl.setText("Hello " + current.getFirstName());
+		try {
+			replacePane(toReplacePane, "/View/Video.fxml");
+		} catch (IOException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
 	}
 
 	public void moveToDashboardScene(ActionEvent e) {

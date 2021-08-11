@@ -42,6 +42,8 @@ public class CustomerStatisticsController {
 	private TableColumn<Dish, String> dishPriceCol;
 	@FXML
 	private TableColumn<Dish, String> dishTimeCol;
+	@FXML
+	private TableColumn<Dish, String> dishTypeCol;
 	
 	//getCookByExpertise
 	@FXML
@@ -58,8 +60,8 @@ public class CustomerStatisticsController {
 	private TableColumn<Cook, String> cookGenderCol;
 	@FXML
 	private TableColumn<Cook, String> isChefCol;
-	//@FXML
-	//private Button showCookByExpertiseBtn;
+
+	//popularComponents
 	@FXML
 	private TableView<Component> popularComponentsTable;
 	@FXML
@@ -70,11 +72,15 @@ public class CustomerStatisticsController {
 	private TableColumn<Component, String> sensitivitiesCol;
 	@FXML
 	private TableColumn<Component, Double> priceCol;
+	@FXML
+	private TableColumn<Component, Integer> popularityCol;
 
 	private CustomerLandingPageController landingController;
 
 	@FXML
 	private TabPane tabPane;
+	@FXML
+	private Button addDishBtn;
 	
 	@FXML
     public void initialize() {
@@ -87,6 +93,8 @@ public class CustomerStatisticsController {
 		
 		initCookByExpertise();
 		initPopularComps();
+		
+		initializeAddDishButton();
     }
 	public void setLandingController(CustomerLandingPageController c) {
 		landingController = c;
@@ -105,6 +113,7 @@ public class CustomerStatisticsController {
 				));
 		dishPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 		dishTimeCol.setCellValueFactory(new PropertyValueFactory<>("timeToMake"));
+		dishTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
 		
 		List<Dish> relevantDishes = new ArrayList<Dish>();
 		relevantDishes = Restaurant.getInstance().getReleventDishList(State.getCurrentCustomer()).stream()
@@ -136,11 +145,8 @@ public class CustomerStatisticsController {
         });
 		
 		priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-		
-		
-		List<Dish> relevantDishes = new ArrayList<Dish>();
-		relevantDishes = Restaurant.getInstance().getReleventDishList(State.getCurrentCustomer()).stream()
-				.collect(Collectors.toList());
+
+		popularityCol.setCellValueFactory(component -> new ReadOnlyObjectWrapper<Integer>(popularComponentsTable.getItems().indexOf(component.getValue())+1));
 		
 		popularComponentsTable.getItems().addAll(Restaurant.getInstance().getPopularComponents());
 	}
@@ -177,6 +183,41 @@ public class CustomerStatisticsController {
 					.collect(Collectors.toList());
 			
 			cookByExpertiseTable.getItems().addAll(relevantCooks);
+		});
+	}
+	
+	private void initializeAddDishButton(){
+		addDishBtn.setOnAction(e -> {
+		Dish dish = relevantDishesTable.getSelectionModel().getSelectedItem();
+		
+		ArrayList<Component> newComps = new ArrayList<Component>();
+		for(Component c : dish.getComponenets()) {
+			newComps.add(new Component(c.getComponentName(), c.isHasLactose(), c.isHasGluten(), c.getPrice()));
+		}
+		Dish newDish = new Dish(dish.getId());
+		newDish.setDishName(dish.getDishName());
+		newDish.setType(dish.getType());
+		newComps.forEach(c -> newDish.addComponent(c));
+		newDish.setTimeToMake(dish.getTimeToMake());
+		
+		CurrentDishModel newCurrentDishModel = new CurrentDishModel(newDish, true);
+		
+		State.setCurrentDish(newCurrentDishModel);
+		
+		Order order = State.getCurrentOrder();
+    	
+    	if(State.getCurrentDish().isNew()) {
+    		//If order exists, add dish. otherwise create a new order
+        	if (order != null) {
+        		order.addDish(newDish);
+        	} else {
+            	ArrayList<Dish> dishes = new ArrayList<Dish>();
+            	dishes.add(newDish);
+        		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
+        	}
+    	}
+    	
+    	landingController.initShoppingCart();
 		});
 	}
 }
