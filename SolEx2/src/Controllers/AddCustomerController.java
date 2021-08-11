@@ -257,6 +257,7 @@ public class AddCustomerController extends ControllerWrapper{
 		isGluten.setSelected(false);
 		isLactose.setSelected(false);
 		allCustomersTable.getItems().clear();
+		Gender_group.getSelectedToggle().setSelected(false);
 		allCustomersTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getCustomers().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		editCustomerBtn.setDisable(true);

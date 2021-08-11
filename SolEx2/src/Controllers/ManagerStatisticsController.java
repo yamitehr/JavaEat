@@ -101,59 +101,6 @@ public class ManagerStatisticsController extends ControllerWrapper {
 		init();
 		initRelevantDishes();
 		initCooksByExpertise();
-		initDeliveryByPerson();
-	}
-
-	private void initDeliveryByPerson() {
-			monthBox.setOnAction(dp -> {
-				List<Delivery> deliveriesByPerson = new ArrayList<Delivery>();
-				if(deliveryPersonBox.getValue() != null) {
-					deliveriesByPerson = Restaurant.getInstance().getDeliveriesByPerson(deliveryPersonBox.getValue(), monthBox.getValue()).stream()
-							.collect(Collectors.toList());
-					
-					deliveriesByPersonTable.setVisible(true);
-					deliveriesByPersonTable.getItems().clear();
-					
-					deliveryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-					
-					deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveryPerson().toString()));
-					
-					areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getArea().toString()));
-					
-					deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveredDate().toString()));
-					
-					isDeliveredCol.setCellValueFactory(delivery -> {
-			            boolean isDelivered = delivery.getValue().isDelivered();
-			            String isDeliveredAsString;
-			            if(isDelivered == true)
-			            {
-			            	isDeliveredAsString = "Yes";
-			            }
-			            else
-			            {
-			            	isDeliveredAsString = "No";
-			            }
-		
-			         return new ReadOnlyStringWrapper(isDeliveredAsString);
-			        });
-					for(Delivery del: deliveriesByPerson) {
-						if(del instanceof RegularDelivery) {
-							ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
-								((RegularDelivery) delivery.getValue()).getOrders()
-								.stream()
-								.map(d -> d.toString())
-								.reduce((a, b) -> a + ", " + b).get()
-							));
-						}
-						if(del instanceof ExpressDelivery) {
-							ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
-						}
-					}
-							
-					deliveriesByPersonTable.getItems().addAll(deliveriesByPerson);
-				}
-			});
-				
 	}
 
 	private void initCooksByExpertise() {
@@ -241,54 +188,56 @@ public class ManagerStatisticsController extends ControllerWrapper {
 		
 	}
 	
-//	public void getDeliveries(ActionEvent e) {
-//		DeliveryPerson selectedDP = deliveryPersonBox.getValue();
-//		Integer selectedMonth = monthBox.getValue();
-//		if(selectedDP != null && selectedMonth != null) {
-//			List<Delivery> deliveriesByPerson = new ArrayList<Delivery>();
-//			deliveriesByPerson = Restaurant.getInstance().getDeliveriesByPerson(selectedDP, selectedMonth).stream()
-//					.collect(Collectors.toList());
-//			
-//			deliveriesByPersonTable.setVisible(true);
-//			deliveryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-//			
-//			deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveryPerson().toString()));
-//			
-//			areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getArea().toString()));
-//			
-//			deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveredDate().toString()));
-//			
-//			isDeliveredCol.setCellValueFactory(delivery -> {
-//	            boolean isDelivered = delivery.getValue().isDelivered();
-//	            String isDeliveredAsString;
-//	            if(isDelivered == true)
-//	            {
-//	            	isDeliveredAsString = "Yes";
-//	            }
-//	            else
-//	            {
-//	            	isDeliveredAsString = "No";
-//	            }
-//
-//	         return new ReadOnlyStringWrapper(isDeliveredAsString);
-//	        });
-//			for(Delivery del: deliveriesByPerson) {
-//				if(del instanceof RegularDelivery) {
-//					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
-//						((RegularDelivery) delivery.getValue()).getOrders()
-//						.stream()
-//						.map(d -> d.toString())
-//						.reduce((a, b) -> a + ", " + b).get()
-//					));
-//				}
-//				if(del instanceof ExpressDelivery) {
-//					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
-//				}
-//			}
-//					
-//			deliveriesByPersonTable.getItems().addAll(deliveriesByPerson);
-//		}
-//	}
+	public void getDeliveries(ActionEvent e) {
+		DeliveryPerson selectedDP = deliveryPersonBox.getValue();
+		Integer selectedMonth = monthBox.getValue();
+		if(selectedDP != null && selectedMonth != null) {
+			List<Delivery> deliveriesByPerson = new ArrayList<Delivery>();
+			deliveriesByPerson = Restaurant.getInstance().getDeliveriesByPerson(selectedDP, selectedMonth).stream()
+					.collect(Collectors.toList());
+			
+			deliveriesByPersonTable.setVisible(true);
+			deliveriesByPersonTable.getItems().clear();
+			
+			deliveryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+			
+			deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveryPerson().toString()));
+			
+			areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getArea().toString()));
+			
+			deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveredDate().toString()));
+			
+			isDeliveredCol.setCellValueFactory(delivery -> {
+	            boolean isDelivered = delivery.getValue().isDelivered();
+	            String isDeliveredAsString;
+	            if(isDelivered == true)
+	            {
+	            	isDeliveredAsString = "Yes";
+	            }
+	            else
+	            {
+	            	isDeliveredAsString = "No";
+	            }
+
+	         return new ReadOnlyStringWrapper(isDeliveredAsString);
+	        });
+			for(Delivery del: deliveriesByPerson) {
+				if(del instanceof RegularDelivery) {
+					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
+						((RegularDelivery) delivery.getValue()).getOrders()
+						.stream()
+						.map(d -> d.toString())
+						.reduce((a, b) -> a + ", " + b).get()
+					));
+				}
+				if(del instanceof ExpressDelivery) {
+					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
+				}
+			}
+					
+			deliveriesByPersonTable.getItems().addAll(deliveriesByPerson);
+		}
+	}
 	
 //	public void getCooks(ActionEvent e) {
 //		Expertise expert = expertiseBox.getValue();

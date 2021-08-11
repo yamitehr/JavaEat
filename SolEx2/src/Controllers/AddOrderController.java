@@ -35,7 +35,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TabPane;
@@ -53,7 +52,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Pair;
 
 public class AddOrderController extends ControllerWrapper {
@@ -818,6 +816,12 @@ public class AddOrderController extends ControllerWrapper {
 					selectedNeighberhoods.add(cbp.getValue());
 				}
 			}
+			for(DeliveryArea area: Restaurant.getInstance().getAreas().values()) {
+				for(Neighberhood n: area.getNeighberhoods()) {
+					if(selectedNeighberhoods.contains(n))
+						throw new InvalidInputException(n.name() + " is already in another delivery area.");
+				}
+			}
 			
 			if(selectedNeighberhoods.isEmpty()) {
 				throw new InvalidPersonInputException("Please select Neighberhoods");
@@ -892,7 +896,96 @@ public class AddOrderController extends ControllerWrapper {
 			deliveryPersonsList.setVisible(true);
 			editDeliveriesLbl.setVisible(true);
 			deliveriesToAddList.setVisible(true);
+			for(Delivery d: selectedDeliveryArea.getDelivers()) {
+				deliveriesToAddList.getSelectionModel().select(d);
+			}			
 		}
 	}
+	
+	public void setEditDeliveryArea(ActionEvent e) {
+		DeliveryArea selectedArea = allAreasTable.getSelectionModel().getSelectedItem();
+		try {
+			
+			if(!selectedArea.getAreaName().equals(deliveryAreaName.getText())) {
+				if(deliveryAreaName.getText().isEmpty())
+					throw new InvalidInputException("You must enter area name");
+				selectedArea.setAreaName(deliveryAreaName.getText());
+			}
+			//neighberhoods
+			HashSet<Neighberhood> selectedNeighberhoods = new HashSet<Neighberhood>();
+			for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
+				CheckBox cb = cbp.getKey();
+				if (cb.isSelected()) {
+					selectedNeighberhoods.add(cbp.getValue());
+				}
+			}
+			
+			HashSet<Neighberhood> toRemove = new HashSet<Neighberhood>();			
+			if(selectedNeighberhoods.isEmpty()) 
+				throw new InvalidInputException("You must choose at least one neighberhood");
+			
+				for(Neighberhood n:  selectedArea.getNeighberhoods()) {
+					if(!selectedNeighberhoods.contains(n))
+						toRemove.add(n);	
+				}
+				for(Neighberhood n: toRemove) {
+					selectedArea.removeNeighberhood(n);
+				}
+				
+				for(Neighberhood n: selectedNeighberhoods) {
+					if(!selectedArea.getNeighberhoods().contains(n))
+						selectedArea.addNeighberhood(n);
+				}	
+				
+				//deliveries
+				ArrayList<DeliveryPerson> changedDP = new ArrayList<DeliveryPerson>();
+				changedDP.addAll(deliveryPersonsList.getSelectionModel().getSelectedItems());
+				for(DeliveryPerson dp: selectedArea.getDelPersons()) {
+					if(!changedDP.contains(dp))
+						selectedArea.removeDelPerson(dp);			
+				}
+				for(DeliveryPerson dp: changedDP) {
+					if(!selectedArea.getDelPersons().contains(dp))
+						selectedArea.addDelPerson(dp);
+				}
+				
+				//delivery person
+				ArrayList<Delivery> changedDeliveries = new ArrayList<Delivery>();
+				changedDeliveries.addAll(deliveriesToAddList.getSelectionModel().getSelectedItems());
+				for(Delivery d: selectedArea.getDelivers()) {
+					if(!changedDeliveries.contains(d))
+						selectedArea.removeDelivery(d);			
+				}
+				for(Delivery d: changedDeliveries) {
+					if(!selectedArea.getDelivers().contains(d))
+						selectedArea.addDelivery(d);
+				}
+				
+		
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setHeaderText("Area edited successfully!");
+		alert.showAndWait();
+		messageToUser.setText("");
+		deliveryAreaName.clear();
+		deliveryTime.clear();
+		deliveryPersonsList.getItems().clear();
+		deliveriesToAddList.getItems().clear();
+		for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
+			CheckBox cb = cbp.getKey();
+			cb.setSelected(false);
+		}
+		deliveriesToAddList.setVisible(false);
+		deliveryPersonsList.setVisible(false);
+		allAreasTable.getItems().clear();
+		allAreasTable.getItems().addAll(FXCollections.observableArrayList(
+		Restaurant.getInstance().getAreas().entrySet().stream().map(a -> a.getValue()).collect(Collectors.toList())));
+		editDeliveryAreaBtn.setDisable(true);
+		addDeliveryAreaBtn.setDisable(false);
+		}catch(InvalidInputException inputE) {
+			messageToUserRegular.setFill(Color.RED);
+			messageToUserRegular.setText(inputE.getMessage());
+		}
+	}
+	
 }
 	
