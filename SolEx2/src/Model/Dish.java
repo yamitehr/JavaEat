@@ -32,7 +32,7 @@ public class Dish implements Serializable{
 		this.type = type;
 		this.componenets = componenets;
 		this.timeToMake = timeToMake;
-		price = calcDishPrice();
+		this.price = calcDishPrice();
 	}
 	
 	public Dish(int id) {

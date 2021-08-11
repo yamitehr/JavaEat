@@ -8,7 +8,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 import Exceptions.ConvertToExpressException;
 import Exceptions.IllegalCustomerException;
 import Exceptions.NoComponentsExceptions;
@@ -551,11 +554,15 @@ public class Restaurant implements Serializable{
 	public double revenueFromExpressDeliveries() {
 		HashSet<Customer> customers = new HashSet<>();
 		double amountOfPostages = 0;
+		
 		for(Delivery d: getDeliveries().values()) {
 			if(d instanceof ExpressDelivery) {
 				ExpressDelivery ed = (ExpressDelivery)d;
 				amountOfPostages+=ed.getPostage();
-				customers.add(ed.getOrder().getCustomer());
+				if(ed.getOrder() != null) {
+
+					customers.add(ed.getOrder().getCustomer());
+				}
 			}
 		}
 		amountOfPostages+=(30*customers.size());

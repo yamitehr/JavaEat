@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" stylesheets="@ordersHistory.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerOrdersHistoryController">
    <children>
@@ -25,5 +26,7 @@
         </columns>
       </TableView>
       <Button fx:id="refreshBtn" layoutX="379.0" layoutY="111.0" mnemonicParsing="false" styleClass="menuBtns" stylesheets="@decoration.css" text="Refresh" />
+      <Button fx:id="removeBtn" layoutX="825.0" layoutY="691.0" mnemonicParsing="false" onAction="#cancelOrder" styleClass="menuBtns" stylesheets="@decoration.css" text="Cancel" />
+      <Text fx:id="message" fill="WHITE" layoutX="960.0" layoutY="716.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="messageCancelOrder" text="Text" />
    </children>
 </AnchorPane>

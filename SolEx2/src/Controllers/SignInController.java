@@ -2,8 +2,10 @@ package Controllers;
 
 import java.time.LocalDate;
 
+import Exceptions.InvalidInputException;
 import Exceptions.InvalidPersonInputException;
 import Model.Customer;
+import Model.Restaurant;
 import Utils.Gender;
 import Utils.Neighberhood;
 import javafx.collections.FXCollections;
@@ -61,6 +63,11 @@ public class SignInController extends ControllerWrapper {
 			String user_Name = userName.getText();
 			if(user_Name.isEmpty()) {
 				throw new InvalidPersonInputException("Please fill User Name");
+			}
+			for(Customer c : Restaurant.getInstance().getCustomers().values()) {
+				if(c.getUserName().equals(user_Name)) {
+				throw new InvalidInputException("User Name already exists");
+				}
 			}
 			String first_Name = firstName.getText();
 			if(first_Name.isEmpty()) {

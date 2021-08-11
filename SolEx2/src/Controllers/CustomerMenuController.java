@@ -130,11 +130,12 @@ public class CustomerMenuController extends ControllerWrapper{
       
 		//Copy dish and components to a new object, so we can remove components from the dish without affecting
 		// the instance of the restaurant
-		ArrayList<Component> newComps = new ArrayList<Component>();
-		for(Component c : dish.getComponenets()) {
-			newComps.add(new Component(c.getComponentName(), c.isHasLactose(), c.isHasGluten(), c.getPrice()));
-		}
+		
 		addBtn.setOnAction((ActionEvent evt)->{
+			ArrayList<Component> newComps = new ArrayList<Component>();
+			for(Component c : dish.getComponenets()) {
+				newComps.add(new Component(c.getComponentName(), c.isHasLactose(), c.isHasGluten(), c.getPrice()));
+			}
 			Dish newDish = new Dish(dish.getId());
 			newDish.setDishName(dish.getDishName());
 			newDish.setType(dish.getType());

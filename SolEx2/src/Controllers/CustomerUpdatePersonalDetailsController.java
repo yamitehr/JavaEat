@@ -53,11 +53,15 @@ public class CustomerUpdatePersonalDetailsController {
 	@FXML
 	private PasswordField password;
 	@FXML
+	private TextField showPass;
+	@FXML
 	private Text messageToUser;
 	@FXML
 	private Button editBtn;
 	@FXML
 	private Button saveBtn;
+	@FXML
+	private CheckBox showPassCheckBox;
 	
 	@FXML
 	private void initialize() {
@@ -72,6 +76,11 @@ public class CustomerUpdatePersonalDetailsController {
 			firstName.setText(currentCustomer.getFirstName());
 			lastName.setText(currentCustomer.getLastName());
 			birthDate.setValue(currentCustomer.getBirthDay());
+			userName.setText(currentCustomer.getUserName());
+			password.setText(currentCustomer.getPassword());
+			
+			password.setVisible(true);
+			showPass.setVisible(false);
 			
 			Gender customerGender = currentCustomer.getGender();
 			//get gender
@@ -99,6 +108,9 @@ public class CustomerUpdatePersonalDetailsController {
 			NeighberhoodBox.setDisable(true);
 			gluten.setDisable(true);
 			lactose.setDisable(true);
+			userName.setDisable(true);
+			password.setDisable(true);
+			showPass.setDisable(true);
 			
 			editBtn.setOnAction(e -> {
 				firstName.setDisable(false);
@@ -109,9 +121,25 @@ public class CustomerUpdatePersonalDetailsController {
 				NeighberhoodBox.setDisable(false);
 				gluten.setDisable(false);
 				lactose.setDisable(false);
+				userName.setDisable(false);
+				password.setDisable(false);
+				showPass.setDisable(false);
 				saveBtn.setDisable(false);
 				editBtn.setDisable(true);
 				messageToUser.setText("");
+			});
+			
+			showPassCheckBox.setOnAction( e -> {
+				if(showPassCheckBox.isSelected()) {
+					String pass = password.getText();
+					showPass.setText(pass);
+					password.setVisible(false);
+					showPass.setVisible(true);
+				} else {
+					showPass.setVisible(false);
+					password.setVisible(true);
+					password.setText(showPass.getText());
+				}
 			});
 			
 			saveBtn.setOnAction(e ->{
@@ -126,6 +154,24 @@ public class CustomerUpdatePersonalDetailsController {
 							throw new InvalidInputException("Last Name cannot be empty");
 						currentCustomer.setLastName(lastName.getText());
 					}
+					
+					if(!currentCustomer.getUserName().equals(userName.getText())) {
+						if(userName.getText().isEmpty())
+							throw new InvalidInputException("User Name cannot be empty");
+						for(Customer c : Restaurant.getInstance().getCustomers().values()) {
+							if(c.getUserName().equals(userName.getText())) {
+							throw new InvalidInputException("User Name already exists");
+							}
+						}
+						currentCustomer.setUserName(userName.getText());
+					}
+					
+					if(!currentCustomer.getPassword().equals(password.getText())) {
+						if(password.getText().isEmpty())
+							throw new InvalidInputException("Password cannot be empty");
+						currentCustomer.setPassword(password.getText());
+					}
+					
 					Gender selectedGender = null;
 					//get gender
 					try {
@@ -168,6 +214,9 @@ public class CustomerUpdatePersonalDetailsController {
 					NeighberhoodBox.setDisable(true);
 					gluten.setDisable(true);
 					lactose.setDisable(true);
+					userName.setDisable(true);
+					password.setDisable(true);
+					showPass.setDisable(true);
 					
 					}catch(InvalidInputException inputE) {
 						messageToUser.setFill(Color.RED);

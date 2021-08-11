@@ -13,6 +13,7 @@ public class Component implements Comparable<Component>, Serializable{
 	private boolean hasLactose;
 	private boolean hasGluten;
 	private Double price;
+	private boolean isSelected;
 	
 	public Component(String componentName, boolean hasLactose, boolean hasGluten, double price) {
 		super();
@@ -20,10 +21,12 @@ public class Component implements Comparable<Component>, Serializable{
 		this.componentName = componentName;
 		this.hasLactose = hasLactose;
 		this.hasGluten = hasGluten;
+		this.isSelected = true;
 		setPrice(price);
 	}
 	
 	public Component(int id) {
+		this.isSelected = true;
 		this.id = id;
 	}
 
@@ -76,6 +79,14 @@ public class Component implements Comparable<Component>, Serializable{
 			this.price = price;
 		else
 			price = 0.0;
+	}
+
+	public boolean isSelected() {
+		return this.isSelected;
+	}
+
+	public void setIsSelected(boolean isSelected) {
+		this.isSelected = isSelected;
 	}
 
 	

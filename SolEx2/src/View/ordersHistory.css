@@ -1,59 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
-/* 
-.table-view{
-    -fx-background-color: transparent;
-	
-}
-
-.table-view .corner {
-    -fx-background-color: transparent;
-    
-}
-
-.table-row-cell{
--fx-border-color: white;}
-
-.table-column-cell{
--fx-border-color: transparent;}
-
-.table-view .column-header-background{
-    -fx-background-color: #3D201C;
-    -fx-background-insets: 0 11px 0 0;
-    -fx-padding: 0 0 5px 0;
-    
-	-fx-background-radius:  5px;
-}
-
-.table-view .column-header,
-.table-view .column-header-background .filler {
-    -fx-background-color:  transparent;
-}
-.table-view .column-header .label{
-   -fx-text-fill: white;
-   -fx-alignment: CENTER_LEFT;
-   -fx-padding: 30 0 30 0;
-	-fx-font-family: 'Concert One', cursive;
-	 -fx-font-size: 19px;
-}
-.table-view .cell{
-	
-   -fx-cell-size: 55;
-  -fx-alignment: center-left;
-  -fx-text-fill: white;
-  -fx-alignment: CENTER_LEFT;
-  -fx-opacity:0.82;
-  
-	-fx-background-radius:  5px;
- 
-	
-	 -fx-font-size: 16px;
- -fx-font-family: 'Yusei Magic', sans-serif;
-    -fx-background-color: #3D201C;
-   
-}    
-
-*/
 
 .table-view .cell{
  -fx-font-size: 15px;
@@ -125,4 +71,11 @@
 
 }
 
+/* MESSAGE to user */
+.messageCancelOrder{
+	
+ -fx-font-size: 15px;
+ -fx-font-family: 'Yusei Magic', sans-serif;
+  -fx-text-fill: white;
+}
 

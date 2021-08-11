@@ -10,57 +10,67 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 
-<AnchorPane style="-fx-background-color: black;" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerUpdatePersonalDetailsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerUpdatePersonalDetailsController">
    <children>
- 		  <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.6" pickOnBounds="true">
+   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0">
+    <children>
+      <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.6" pickOnBounds="true">
          <image>
             <Image url="@../../img/122.jpg" />
          </image>
       </ImageView>
-      <DatePicker fx:id="birthDate" layoutX="529.0" layoutY="215.0" />
-      <Label layoutX="427.0" layoutY="99.0" prefHeight="18.0" prefWidth="89.0" text="username" />
-      <TextField fx:id="userName" layoutX="529.0" layoutY="95.0" />
-      <Label layoutX="422.0" layoutY="130.0" prefHeight="26.0" prefWidth="90.0" text="Firse name" />
-      <TextField fx:id="firstName" layoutX="529.0" layoutY="130.0" />
-      <Label layoutX="420.0" layoutY="172.0" prefHeight="26.0" prefWidth="80.0" text="Last name" />
-      <TextField fx:id="lastName" layoutX="529.0" layoutY="172.0" />
-      <Label layoutX="420.0" layoutY="215.0" prefHeight="26.0" prefWidth="80.0" text="birthDate" />
-      <Label layoutX="420.0" layoutY="266.0" prefHeight="26.0" prefWidth="80.0" text="Gender" />
-      <HBox layoutX="522.0" layoutY="266.0" prefHeight="54.0" prefWidth="302.0" spacing="20.0">
-         <children>
-            <RadioButton fx:id="male" mnemonicParsing="false" selected="true" text="Male">
-               <toggleGroup>
-                  <ToggleGroup fx:id="gender" />
-               </toggleGroup>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </RadioButton>
-            <RadioButton fx:id="female" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
-            <RadioButton fx:id="unknown" mnemonicParsing="false" text="Unknown" toggleGroup="$gender" />
-         </children>
-      </HBox>
-      <ChoiceBox fx:id="NeighberhoodBox" layoutX="522.0" layoutY="306.0" prefHeight="28.0" prefWidth="179.0" />
-      <Label layoutX="415.0" layoutY="307.0" prefHeight="26.0" prefWidth="90.0" text="Neighborhood" />
-      <Label layoutX="432.0" layoutY="52.0" prefHeight="18.0" prefWidth="314.0" text="you can update your personal details!">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <PasswordField fx:id="password" layoutX="529.0" layoutY="385.0" />
-      <Label layoutX="415.0" layoutY="384.0" prefHeight="26.0" prefWidth="90.0" text="Password" />
-      <Button fx:id="saveBtn" layoutX="558.0" layoutY="428.0" mnemonicParsing="false" text="Save" />
-      <Label layoutX="415.0" layoutY="347.0" prefHeight="26.0" prefWidth="90.0" text="Sensitivies" />
-      <CheckBox fx:id="gluten" layoutX="523.0" layoutY="352.0" mnemonicParsing="false" text="Gluten" />
-      <CheckBox fx:id="lactose" layoutX="612.0" layoutY="352.0" mnemonicParsing="false" text="Lactose" />
-      <Text fx:id="messageToUser" layoutX="398.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="591.7367706298828" />
-      <Button fx:id="editBtn" layoutX="457.0" layoutY="428.0" mnemonicParsing="false" text="Edit mode" />
+         
+            <DatePicker fx:id="birthDate" layoutX="577.0" layoutY="331.0" styleClass="customerUpdateDetailsTextFields" />
+            <TextField fx:id="userName" layoutX="577.0" layoutY="167.0" styleClass="customerUpdateDetailsTextFields" />
+            <TextField fx:id="firstName" layoutX="577.0" layoutY="219.0" styleClass="customerUpdateDetailsTextFields" />
+            <TextField fx:id="lastName" layoutX="577.0" layoutY="268.0" styleClass="customerUpdateDetailsTextFields" />
+            <HBox layoutX="576.0" layoutY="397.0" prefHeight="54.0" prefWidth="302.0" spacing="20.0">
+               <children>
+                  <RadioButton fx:id="male" mnemonicParsing="false" selected="true" styleClass="customerUpdateDetails" text="Male">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="gender" />
+                     </toggleGroup>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </RadioButton>
+                  <RadioButton fx:id="female" mnemonicParsing="false" styleClass="customerUpdateDetails" text="Female" toggleGroup="$gender" />
+                  <RadioButton fx:id="unknown" mnemonicParsing="false" styleClass="customerUpdateDetails" text="Unknown" toggleGroup="$gender" />
+               </children>
+            </HBox>
+            <ChoiceBox fx:id="NeighberhoodBox" layoutX="571.0" layoutY="458.0" prefHeight="28.0" prefWidth="179.0" styleClass="customerUpdateDetailsTextFields" />
+            <PasswordField fx:id="password" layoutX="577.0" layoutY="569.0" styleClass="customerUpdateDetailsTextFields" />
+            <CheckBox fx:id="gluten" layoutX="570.0" layoutY="514.0" mnemonicParsing="false" styleClass="customerUpdateDetails" text="Gluten" />
+            <CheckBox fx:id="lactose" layoutX="660.0" layoutY="514.0" mnemonicParsing="false" styleClass="customerUpdateDetails" text="Lactose" />
+            <Button fx:id="editBtn" layoutX="577.0" layoutY="640.0" mnemonicParsing="false" styleClass="menuBtns" text="Edit mode" />
+            <Button fx:id="saveBtn" layoutX="577.0" layoutY="684.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" styleClass="menuBtns" text="Save" />
+            <Text fx:id="messageToUser" layoutX="576.0" layoutY="743.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="591.7367706298828" />
+            <Label layoutX="400.0" layoutY="569.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" text="Password" />
+            <Label layoutX="395.0" layoutY="510.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" stylesheets="@decoration.css" text="Sensitivies" />
+            <Label layoutX="395.0" layoutY="459.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Neighborhood" />
+            <Label layoutX="400.0" layoutY="397.0" prefHeight="26.0" prefWidth="80.0" styleClass="customerUpdateDetails" text="Gender" />
+            <Label layoutX="400.0" layoutY="331.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Birth Date" />
+            <Label layoutX="380.0" layoutY="129.0" prefHeight="18.0" prefWidth="314.0" styleClass="customerUpdateDetails" text="you can update your personal details!">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="397.0" layoutY="171.0" prefHeight="18.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="username" />
+            <Label layoutX="397.0" layoutY="219.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="First name" />
+            <Label layoutX="400.0" layoutY="268.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Last name" />
+            <CheckBox fx:id="showPassCheckBox" layoutX="773.0" layoutY="570.0" mnemonicParsing="false" styleClass="customerUpdateDetails" stylesheets="@decoration.css" text="show password" />
+            <TextField fx:id="showPass" layoutX="577.0" layoutY="569.0" styleClass="customerUpdateDetailsTextFields" />
+      
+   		</children>
+	</AnchorPane>
+      
+      
    </children>
 </AnchorPane>
