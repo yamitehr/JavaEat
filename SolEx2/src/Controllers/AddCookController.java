@@ -9,6 +9,7 @@ import Exceptions.InvalidPersonInputException;
 import Model.Cook;
 import Model.DeliveryArea;
 import Model.DeliveryPerson;
+import Model.Dish;
 import Model.Restaurant;
 import Utils.Expertise;
 import Utils.Gender;
@@ -75,6 +76,8 @@ public class AddCookController extends ControllerWrapper{
 	private Button editCookBtn;
 	@FXML
 	private TabPane tabPane;
+	@FXML
+	private TextField searchCookField;
 	
 	
 	//delivery person
@@ -112,6 +115,8 @@ public class AddCookController extends ControllerWrapper{
 	private TableColumn<DeliveryPerson, String> areaCol;
 	@FXML
 	private Button editDeliveryPersonBtn;
+	@FXML
+	private TextField searchDPField;
 	
 	@FXML
 	private AnchorPane toReplacePane;
@@ -189,6 +194,10 @@ public class AddCookController extends ControllerWrapper{
 			
 			allCooksTable.getItems().addAll(allCooks);
 			
+			 searchCookField.textProperty().addListener((observable, oldValue, newValue) -> {
+				 searchCookByID();
+				});
+			
 					
 			//Add all delivery people
 			dpIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
@@ -208,8 +217,44 @@ public class AddCookController extends ControllerWrapper{
 					.collect(Collectors.toList());
 			
 			allDeliveryPersonsTable.getItems().addAll(allDeliveryPersons);
+			
+			 searchDPField.textProperty().addListener((observable, oldValue, newValue) -> {
+				 searchDPByID();
+				});
+	}
+
+	private void searchCookByID() {
+		String keyword = searchCookField.getText();
+		ObservableList<Cook> filteredData = FXCollections.observableArrayList();
+		  if (keyword.isEmpty()) {
+			  filteredData.addAll(Restaurant.getInstance().getCooks().values());
+			  allCooksTable.setItems(filteredData);
+		  }
+		  else {
+			  Cook cook = Restaurant.getInstance().getRealCook(Integer.parseInt(searchCookField.getText()));
+			  if(cook != null)
+				  filteredData.add(cook);
+		     allCooksTable.setItems(filteredData);
+		  }
+		
 	}
 	
+	private void searchDPByID() {
+		String keyword = searchDPField.getText();
+		ObservableList<DeliveryPerson> filteredData = FXCollections.observableArrayList();
+		  if (keyword.isEmpty()) {
+			  filteredData.addAll(Restaurant.getInstance().getDeliveryPersons().values());
+			  allDeliveryPersonsTable.setItems(filteredData);
+		  }
+		  else {
+			  DeliveryPerson dp = Restaurant.getInstance().getRealDeliveryPerson(Integer.parseInt(searchDPField.getText()));
+			  if(dp != null)
+				  filteredData.add(dp);
+		     allDeliveryPersonsTable.setItems(filteredData);
+		  }
+		
+	}
+
 	public void editCook(ActionEvent e) {
 		Cook selectedCook = allCooksTable.getSelectionModel().getSelectedItem();
 		if(selectedCook !=  null) {

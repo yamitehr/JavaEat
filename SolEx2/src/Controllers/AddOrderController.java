@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import Exceptions.InvalidInputException;
 import Exceptions.InvalidPersonInputException;
 import Model.Component;
+import Model.Cook;
 import Model.Customer;
 import Model.Delivery;
 import Model.DeliveryArea;
@@ -83,6 +84,8 @@ public class AddOrderController extends ControllerWrapper {
 	private Button addOrderBtn;
 	@FXML
 	private Button editOrderBtn;
+	@FXML
+	private TextField searchOrderField;
 	
 	//delivery
 	@FXML
@@ -152,6 +155,8 @@ public class AddOrderController extends ControllerWrapper {
 	private Text postageText;
 	@FXML
 	private Button editDeliveryBtn;
+	@FXML
+	private TextField searchDeliveryField;
 	
 	//delivery area
 	@FXML
@@ -197,6 +202,8 @@ public class AddOrderController extends ControllerWrapper {
 	private ListView<DeliveryPerson> deliveryPersonsList;
 	@FXML
 	private ListView<Delivery> deliveriesToAddList;
+	@FXML
+	private TextField searchAreaField;
 	
 	
 	@FXML
@@ -280,6 +287,10 @@ public class AddOrderController extends ControllerWrapper {
 				.collect(Collectors.toList());
 				
 		allOrdersTable.getItems().addAll(allOrders);
+		
+		searchOrderField.textProperty().addListener((observable, oldValue, newValue) -> {
+			 searchOrderByID();
+			});
 			
 			//Add all deliveries
 			List<Delivery> allDeliveries = new ArrayList<Delivery>();
@@ -328,8 +339,12 @@ public class AddOrderController extends ControllerWrapper {
 		}
 				
 		allDeliveriesTable.getItems().addAll(allDeliveries);
+		
+		searchDeliveryField.textProperty().addListener((observable, oldValue, newValue) -> {
+			 searchDeliveryByID();
+			});
 	}
-			
+
 		private void generateNeighborhoodGrid() {
 			neighberhoodList = new ArrayList<Pair<CheckBox, Neighberhood>>();
 			GridPane grid = new GridPane();
@@ -396,10 +411,60 @@ public class AddOrderController extends ControllerWrapper {
 					.collect(Collectors.toList());
 					
 			allAreasTable.getItems().addAll(allAres);
+			
+			searchAreaField.textProperty().addListener((observable, oldValue, newValue) -> {
+				 searchAreaByID();
+				});
 						
 			}
 	
-	
+	private void searchOrderByID() {
+		String keyword = searchOrderField.getText();
+		ObservableList<Order> filteredData = FXCollections.observableArrayList();
+		  if (keyword.isEmpty()) {
+			  filteredData.addAll(Restaurant.getInstance().getOrders().values());
+			  allOrdersTable.setItems(filteredData);
+		  }
+		  else {
+			  Order order = Restaurant.getInstance().getRealOrder(Integer.parseInt(searchOrderField.getText()));
+			  if(order != null)
+				  filteredData.add(order);
+		     allOrdersTable.setItems(filteredData);
+		  }
+			
+	}
+				
+	private void searchDeliveryByID() {
+		String keyword = searchDeliveryField.getText();
+		ObservableList<Delivery> filteredData = FXCollections.observableArrayList();
+		  if (keyword.isEmpty()) {
+			  filteredData.addAll(Restaurant.getInstance().getDeliveries().values());
+			  allDeliveriesTable.setItems(filteredData);
+		  }
+		  else {
+			  Delivery delivery = Restaurant.getInstance().getRealDelivery(Integer.parseInt(searchDeliveryField.getText()));
+			  if(delivery != null)
+				  filteredData.add(delivery);
+		     allDeliveriesTable.setItems(filteredData);
+		  }
+			
+	}
+	private void searchAreaByID() {
+		String keyword = searchAreaField.getText();
+		ObservableList<DeliveryArea> filteredData = FXCollections.observableArrayList();
+		  if (keyword.isEmpty()) {
+			  filteredData.addAll(Restaurant.getInstance().getAreas().values());
+			  allAreasTable.setItems(filteredData);
+		  }
+		  else {
+			  DeliveryArea da = Restaurant.getInstance().getRealDeliveryArea(Integer.parseInt(searchAreaField.getText()));
+			  if(da != null)
+				  filteredData.add(da);
+		     allAreasTable.setItems(filteredData);
+		  }
+			
+		}
+
 	public void editOrder(ActionEvent e) {
 		Order selectedOrder = allOrdersTable.getSelectionModel().getSelectedItem();
 		if(selectedOrder !=  null) {

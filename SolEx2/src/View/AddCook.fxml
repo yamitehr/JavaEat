@@ -88,6 +88,7 @@
                                           <TableColumn fx:id="isChefCol" prefWidth="62.4000244140625" text="isChef" />
                                        </columns>
                                     </TableView>
+                                    <TextField fx:id="searchCookField" layoutX="50.0" layoutY="110.0" promptText="Search By Id" />
                                  </children>
                               </Pane>
                               <Button fx:id="addCookBtn" layoutX="770.0" layoutY="52.0" mnemonicParsing="false" onAction="#addCook" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
@@ -155,6 +156,7 @@
                                     <TableColumn fx:id="areaCol" prefWidth="79.39996337890625" text="Area" />
                                  </columns>
                               </TableView>
+                              <TextField fx:id="searchDPField" layoutX="-2.0" layoutY="77.0" promptText="Search By Id" />
                            </children>
                         </Pane>
                         <Button fx:id="editDeliveryPersonBtn" layoutX="737.0" layoutY="119.0" mnemonicParsing="false" onAction="#setEditDeliveryPerson" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />

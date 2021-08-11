@@ -2,6 +2,7 @@ package Controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.stream.Collectors;
 import Exceptions.InvalidInputException;
 import Model.Component;
@@ -12,6 +13,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -30,6 +32,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class AddDishController extends ControllerWrapper {
+	
 	@FXML
 	private TextField dish_Name;
 	@FXML
@@ -53,6 +56,8 @@ public class AddDishController extends ControllerWrapper {
 	private TableColumn<Dish, String> componentsCol;
 	@FXML
 	private TableColumn<Dish, Double> priceCol;
+	@FXML
+	private TextField searchDishField;
 	
 	
 	//components
@@ -79,6 +84,8 @@ public class AddDishController extends ControllerWrapper {
 	private TableColumn<Component, Double> compPriceCol;
 	@FXML
 	private AnchorPane toReplacePane;
+	@FXML
+	private TextField searchCompField;
 	
 	
 	//to check
@@ -131,6 +138,10 @@ public class AddDishController extends ControllerWrapper {
 				
 		allDishesTable.getItems().addAll(allDishes);
 		
+		 searchDishField.textProperty().addListener((observable, oldValue, newValue) -> {
+			 searchDishByID();
+			});
+		
 						
 			//Add all components
 		componentIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -161,8 +172,45 @@ public class AddDishController extends ControllerWrapper {
 				.collect(Collectors.toList());
 				
 		allComponentsTable.getItems().addAll(allComponents);
+		
+		 searchCompField.textProperty().addListener((observable, oldValue, newValue) -> {
+			 searchCompByID();
+			});
 	}
 	
+	private void searchDishByID() {
+		String keyword = searchDishField.getText();
+		ObservableList<Dish> filteredData = FXCollections.observableArrayList();
+		  if (keyword.isEmpty()) {
+			  filteredData.addAll(Restaurant.getInstance().getDishes().values());
+			  allDishesTable.setItems(filteredData);
+		  }
+		  else {
+			  Dish dish = Restaurant.getInstance().getRealDish(Integer.parseInt(searchDishField.getText()));
+			  if(dish != null)
+				  filteredData.add(dish);
+		     allDishesTable.setItems(filteredData);
+		  }
+		
+	}
+
+	private void searchCompByID() {
+		String keyword = searchCompField.getText();
+		ObservableList<Component> filteredData = FXCollections.observableArrayList();
+		  if (keyword.isEmpty()) {
+			  filteredData.addAll(Restaurant.getInstance().getComponenets().values());
+			  allComponentsTable.setItems(filteredData);
+		  }
+		  else {
+			  Component comp = Restaurant.getInstance().getRealComponent(Integer.parseInt(searchCompField.getText()));
+			  if(comp != null)
+				  filteredData.add(comp);
+		     allComponentsTable.setItems(filteredData);
+		  }
+		   
+		
+	}
+
 	public void removeDish(ActionEvent e) {
 		Dish selectedDish = allDishesTable.getSelectionModel().getSelectedItem();
 		if(selectedDish !=  null) {
