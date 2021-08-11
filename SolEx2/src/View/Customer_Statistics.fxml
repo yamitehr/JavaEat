@@ -35,7 +35,7 @@
                           </columns>
                         </TableView>
                         <Label layoutX="285.0" layoutY="194.0" text="Relevant dishes suggested to you..." />
-                        <Button layoutX="313.0" layoutY="564.0" mnemonicParsing="false" text="Add to order" />
+                        <Button fx:id="addDishBtn" layoutX="313.0" layoutY="564.0" mnemonicParsing="false" styleClass="menuBtns" stylesheets="@decoration.css" text="Add to order" />
                      </children>
                   </AnchorPane>
             </content>

@@ -75,6 +75,8 @@ public class CustomerStatisticsController {
 
 	@FXML
 	private TabPane tabPane;
+	@FXML
+	private Button addDishBtn;
 	
 	@FXML
     public void initialize() {
@@ -87,6 +89,8 @@ public class CustomerStatisticsController {
 		
 		initCookByExpertise();
 		initPopularComps();
+		
+		initializeAddDishButton();
     }
 	public void setLandingController(CustomerLandingPageController c) {
 		landingController = c;
@@ -177,6 +181,41 @@ public class CustomerStatisticsController {
 					.collect(Collectors.toList());
 			
 			cookByExpertiseTable.getItems().addAll(relevantCooks);
+		});
+	}
+	
+	private void initializeAddDishButton(){
+		addDishBtn.setOnAction(e -> {
+		Dish dish = relevantDishesTable.getSelectionModel().getSelectedItem();
+		
+		ArrayList<Component> newComps = new ArrayList<Component>();
+		for(Component c : dish.getComponenets()) {
+			newComps.add(new Component(c.getComponentName(), c.isHasLactose(), c.isHasGluten(), c.getPrice()));
+		}
+		Dish newDish = new Dish(dish.getId());
+		newDish.setDishName(dish.getDishName());
+		newDish.setType(dish.getType());
+		newComps.forEach(c -> newDish.addComponent(c));
+		newDish.setTimeToMake(dish.getTimeToMake());
+		
+		CurrentDishModel newCurrentDishModel = new CurrentDishModel(newDish, true);
+		
+		State.setCurrentDish(newCurrentDishModel);
+		
+		Order order = State.getCurrentOrder();
+    	
+    	if(State.getCurrentDish().isNew()) {
+    		//If order exists, add dish. otherwise create a new order
+        	if (order != null) {
+        		order.addDish(newDish);
+        	} else {
+            	ArrayList<Dish> dishes = new ArrayList<Dish>();
+            	dishes.add(newDish);
+        		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
+        	}
+    	}
+    	
+    	landingController.initShoppingCart();
 		});
 	}
 }
