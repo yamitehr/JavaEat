@@ -33,14 +33,14 @@
                            <children>
                               <Label layoutX="69.0" layoutY="49.0" styleClass="managerAllText" text="Dish Name" />
                               <TextField fx:id="dish_Name" layoutX="193.0" layoutY="42.0" prefHeight="32.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <Label layoutX="405.0" layoutY="43.0" styleClass="managerAllText" text="Dish Type" />
+                              <Label layoutX="392.0" layoutY="44.0" styleClass="managerAllText" text="Dish Type" />
                               <Button fx:id="addDishBtn" layoutX="746.0" layoutY="40.0" mnemonicParsing="false" onAction="#addDish" prefHeight="38.0" prefWidth="137.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
                               <Text fx:id="messageToUserDish" layoutX="701.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                               <Label layoutX="69.0" layoutY="96.0" styleClass="managerAllText" text="Time To Make:" />
                               <TextField fx:id="timeToMake" layoutX="193.0" layoutY="89.0" prefHeight="29.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <ComboBox fx:id="typesBox" layoutX="493.0" layoutY="36.0" prefHeight="31.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                               <ListView fx:id="componentsList" layoutX="496.0" layoutY="90.0" prefHeight="147.0" prefWidth="186.0" style="-fx-border-color: PeachPuff;" />
-                              <Label layoutX="405.0" layoutY="88.0" styleClass="managerAllText" text="Components:" />
+                              <Label layoutX="392.0" layoutY="91.0" styleClass="managerAllText" text="Components:" />
                               <AnchorPane layoutX="173.0" layoutY="212.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="755.0">
                                  <children>
                                     <Button layoutX="194.0" layoutY="370.0" mnemonicParsing="false" onAction="#removeDish" prefHeight="25.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
@@ -58,6 +58,7 @@
                                           <TableColumn fx:id="priceCol" prefWidth="111.20001220703125" text="Price" />
                                        </columns>
                                     </TableView>
+                                    <TextField fx:id="searchDishField" layoutX="58.0" layoutY="75.0" promptText="Search By Id" />
                                  </children>
                               </AnchorPane>
                               <Button fx:id="editDishbtn" layoutX="746.0" layoutY="96.0" mnemonicParsing="false" onAction="#setEditDish" prefHeight="38.0" prefWidth="137.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />
@@ -105,6 +106,7 @@
                                                 <TableColumn fx:id="compPriceCol" prefWidth="103.199951171875" text="Price" />
                                              </columns>
                                           </TableView>
+                                          <TextField fx:id="searchCompField" layoutX="9.0" layoutY="60.0" promptText="Search By Id" />
                                        </children>
                                     </AnchorPane>
                                  </children>

@@ -9,6 +9,7 @@ import Exceptions.InvalidInputException;
 import Exceptions.InvalidPersonInputException;
 import Model.Cook;
 import Model.Customer;
+import Model.Dish;
 import Model.Restaurant;
 import Utils.Expertise;
 import Utils.Gender;
@@ -42,7 +43,6 @@ import javafx.stage.Stage;
 public class AddCustomerController extends ControllerWrapper{
 	@FXML
 	private ComboBox<Neighberhood> neighberhoodsBox;
-
 	@FXML
 	private TextField first_Name;
 	@FXML
@@ -80,17 +80,7 @@ public class AddCustomerController extends ControllerWrapper{
 	@FXML
 	private ListView<Customer> blackList;
 	@FXML
-	private Text firstNameField;
-	@FXML
-	private Text lastNameField;
-	@FXML
-	private Text dobField;
-	@FXML
-	private Text neighberhoodField;
-	@FXML
-	private Text genderField;
-	@FXML
-	private Text sensitivitiesField;
+	private TextField searchCustomerField;
 	
 
 	@FXML
@@ -138,6 +128,10 @@ public class AddCustomerController extends ControllerWrapper{
 		
 		allCustomersTable.getItems().addAll(allCustomers);
 		
+		searchCustomerField.textProperty().addListener((observable, oldValue, newValue) -> {
+			 searchCustomerByID();
+			});
+		
 		////////BlackList list view
 		//Set the listview cell factory for black list
 		blackList.setCellFactory(param -> new ListCell<Customer>() {
@@ -158,35 +152,20 @@ public class AddCustomerController extends ControllerWrapper{
 				Restaurant.getInstance().getBlackList().stream().collect(Collectors.toList())));
 	}
 	
-	public void updateCustomerDetailsFields() {
-		Customer selectedCustomer = allCustomersTable.getSelectionModel().getSelectedItem();
-		// fill text fields with values about the selected customer on the list
-		if(selectedCustomer != null) {
-			firstNameField.setText(selectedCustomer.getFirstName());
-			lastNameField.setText(selectedCustomer.getLastName());
-			dobField.setText(selectedCustomer.getBirthDay().toString());
-			neighberhoodField.setText(selectedCustomer.getNeighberhood().name());
-			genderField.setText(selectedCustomer.getGender().name());
-			
-			String sensitivities = "";
-			if (selectedCustomer.isSensitiveToGluten()) {
-				sensitivities += "Gluten";
-				if (selectedCustomer.isSensitiveToLactose()) {
-					sensitivities += ", Lactose";
-				}
-			} else if (selectedCustomer.isSensitiveToLactose()) {
-				sensitivities += "Lactose";
-			}
-			sensitivitiesField.setText(sensitivities);
-		//clean the text fields if there is no selection
-		} else if(selectedCustomer == null) {
-			firstNameField.setText("");
-			lastNameField.setText("");
-			dobField.setText("");
-			neighberhoodField.setText("");
-			genderField.setText("");
-			sensitivitiesField.setText("");
-		}
+	private void searchCustomerByID() {
+		String keyword = searchCustomerField.getText();
+		ObservableList<Customer> filteredData = FXCollections.observableArrayList();
+		  if (keyword.isEmpty()) {
+			  filteredData.addAll(Restaurant.getInstance().getCustomers().values());
+			  allCustomersTable.setItems(filteredData);
+		  }
+		  else {
+			  Customer cust = Restaurant.getInstance().getRealCustomer(Integer.parseInt(searchCustomerField.getText()));
+			  if(cust != null)
+				  filteredData.add(cust);
+			  allCustomersTable.setItems(filteredData);
+		  }
+		
 	}
 	
 	public void editCustomer(ActionEvent e) {
@@ -197,7 +176,12 @@ public class AddCustomerController extends ControllerWrapper{
 			first_Name.setText(selectedCustomer.getFirstName());
 			last_Name.setText(selectedCustomer.getLastName());
 			date.setValue(selectedCustomer.getBirthDay());
-			Gender_group.setUserData(selectedCustomer.getGender());
+			if(selectedCustomer.getGender().equals(Gender.Male))
+				Gender_group.getToggles().get(0).setSelected(true);
+			if(selectedCustomer.getGender().equals(Gender.Female))
+				Gender_group.getToggles().get(1).setSelected(true);
+			if(selectedCustomer.getGender().equals(Gender.Unknown))
+				Gender_group.getToggles().get(2).setSelected(true);
 			neighberhoodsBox.setValue(selectedCustomer.getNeighberhood());
 			isGluten.setSelected(selectedCustomer.isSensitiveToGluten());	
 			isLactose.setSelected(selectedCustomer.isSensitiveToLactose());
@@ -252,6 +236,7 @@ public class AddCustomerController extends ControllerWrapper{
 		isGluten.setSelected(false);
 		isLactose.setSelected(false);
 		allCustomersTable.getItems().clear();
+		Gender_group.getSelectedToggle().setSelected(false);
 		allCustomersTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getCustomers().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		editCustomerBtn.setDisable(true);
