@@ -70,25 +70,25 @@
                               </RadioButton>
                               <Pane layoutX="152.0" layoutY="213.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0">
                                  <children>
-                                    <Button layoutX="50.0" layoutY="347.0" mnemonicParsing="false" onAction="#removeCook" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
                                     <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="lastNameField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="dobField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
                                     <Text fx:id="genderField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="expertiseField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                     <Text fx:id="isChefFiled" fill="#c88021" layoutX="275.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="64.3525390625" />
-                                    <Button layoutX="182.0" layoutY="347.0" mnemonicParsing="false" onAction="#editCook" prefHeight="39.0" prefWidth="118.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                                    <TableView fx:id="allCooksTable" layoutX="50.0" layoutY="138.0" prefHeight="200.0" prefWidth="402.0">
+                                    <Button layoutX="120.0" layoutY="373.0" mnemonicParsing="false" onAction="#editCook" prefHeight="39.0" prefWidth="118.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                                    <TableView fx:id="allCooksTable" layoutX="-6.0" layoutY="88.0" prefHeight="278.0" prefWidth="559.0">
                                        <columns>
-                                          <TableColumn fx:id="cookIdCol" prefWidth="61.5999755859375" text="Cook ID" />
-                                          <TableColumn fx:id="cookNameCol" prefWidth="71.20001220703125" text="Cook Name" />
-                                          <TableColumn fx:id="cookDobCol" prefWidth="64.0" text="DOB" />
-                                          <TableColumn fx:id="cookGenderCol" prefWidth="55.199951171875" text="Gender" />
-                                          <TableColumn fx:id="expertiseCol" prefWidth="92.0" text="Expertise" />
-                                          <TableColumn fx:id="isChefCol" prefWidth="62.4000244140625" text="isChef" />
+                                          <TableColumn fx:id="cookIdCol" prefWidth="86.0" text="Cook ID" />
+                                          <TableColumn fx:id="cookNameCol" prefWidth="114.0" text="Cook Name" />
+                                          <TableColumn fx:id="cookDobCol" prefWidth="81.0" text="DOB" />
+                                          <TableColumn fx:id="cookGenderCol" prefWidth="87.0" text="Gender" />
+                                          <TableColumn fx:id="expertiseCol" prefWidth="99.0" text="Expertise" />
+                                          <TableColumn fx:id="isChefCol" prefWidth="90.0" text="isChef" />
                                        </columns>
                                     </TableView>
-                                    <TextField fx:id="searchCookField" layoutX="50.0" layoutY="110.0" promptText="Search By Id" />
+                                    <TextField fx:id="searchCookField" layoutX="-6.0" layoutY="56.0" promptText="Search By Id" />
+                                    <Button layoutX="-6.0" layoutY="373.0" mnemonicParsing="false" onAction="#removeCook" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
                                  </children>
                               </Pane>
                               <Button fx:id="addCookBtn" layoutX="770.0" layoutY="52.0" mnemonicParsing="false" onAction="#addCook" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
@@ -117,16 +117,16 @@
                                     <ToggleGroup fx:id="Gender_group_DP" />
                                  </toggleGroup>
                               </RadioButton>
-                              <TextField fx:id="first_Name_DP" layoutX="160.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <TextField fx:id="first_Name_DP" layoutX="172.0" layoutY="64.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <TextField fx:id="last_Name_DP" layoutX="452.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <DatePicker fx:id="dateDP" layoutX="157.0" layoutY="100.0" styleClass="textFields" stylesheets="@decoration.css" />
+                              <DatePicker fx:id="dateDP" layoutX="172.0" layoutY="101.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <RadioButton layoutX="524.0" layoutY="104.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group_DP">
                                  <effect>
                                     <SepiaTone level="0.25" />
                                  </effect>
                               </RadioButton>
                               <Label layoutX="82.0" layoutY="146.0" styleClass="managerAllText" text="Vehicle" />
-                              <ComboBox fx:id="vehicleBox" layoutX="157.0" layoutY="142.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                              <ComboBox fx:id="vehicleBox" layoutX="172.0" layoutY="143.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                               <RadioButton layoutX="626.0" layoutY="103.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group_DP">
                                  <effect>
                                     <SepiaTone level="0.25" />
@@ -138,25 +138,25 @@
                         </AnchorPane>
                         <Pane layoutX="242.0" layoutY="215.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="600.0">
                            <children>
-                              <Button layoutY="322.0" mnemonicParsing="false" onAction="#removeDeliveryPerson" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+                              <Button layoutY="373.0" mnemonicParsing="false" onAction="#removeDeliveryPerson" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
                               <Text fx:id="firstNameFieldDP" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                               <Text fx:id="lastNameFieldDP" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                               <Text fx:id="dobFieldDP" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
                               <Text fx:id="genderFieldDP" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                               <Text fx:id="vehicleField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                               <Text fx:id="deliveryAreaField" fill="#c88021" layoutX="300.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                              <Button layoutX="140.0" layoutY="322.0" mnemonicParsing="false" onAction="#editDeliveryPerson" prefHeight="25.0" prefWidth="49.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                              <TableView fx:id="allDeliveryPersonsTable" layoutX="-2.0" layoutY="107.0" prefHeight="200.0" prefWidth="429.0">
+                              <Button layoutX="126.0" layoutY="373.0" mnemonicParsing="false" onAction="#editDeliveryPerson" prefHeight="25.0" prefWidth="49.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                              <TableView fx:id="allDeliveryPersonsTable" layoutX="2.0" layoutY="93.0" prefHeight="278.0" prefWidth="564.0">
                                  <columns>
                                     <TableColumn fx:id="dpIdCol" prefWidth="63.20008850097656" text="DP ID" />
-                                    <TableColumn fx:id="dpNameCol" minWidth="0.0" prefWidth="73.5999755859375" text="DP Name" />
-                                    <TableColumn fx:id="dpDobCol" prefWidth="64.0" text="DOB" />
-                                    <TableColumn fx:id="dpGenderCol" prefWidth="55.199951171875" text="Gender" />
-                                    <TableColumn fx:id="vehicleCol" prefWidth="92.0" text="Vehicle" />
-                                    <TableColumn fx:id="areaCol" prefWidth="79.39996337890625" text="Area" />
+                                    <TableColumn fx:id="dpNameCol" minWidth="0.0" prefWidth="99.0" text="DP Name" />
+                                    <TableColumn fx:id="dpDobCol" prefWidth="112.0" text="DOB" />
+                                    <TableColumn fx:id="dpGenderCol" prefWidth="93.0" text="Gender" />
+                                    <TableColumn fx:id="vehicleCol" prefWidth="88.0" text="Vehicle" />
+                                    <TableColumn fx:id="areaCol" prefWidth="106.0" text="Area" />
                                  </columns>
                               </TableView>
-                              <TextField fx:id="searchDPField" layoutX="-2.0" layoutY="77.0" promptText="Search By Id" />
+                              <TextField fx:id="searchDPField" layoutX="2.0" layoutY="61.0" promptText="Search By Id" />
                            </children>
                         </Pane>
                         <Button fx:id="editDeliveryPersonBtn" layoutX="737.0" layoutY="119.0" mnemonicParsing="false" onAction="#setEditDeliveryPerson" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />

@@ -124,19 +124,72 @@ public class AddCookController extends ControllerWrapper{
 
 	@FXML
     public void initialize() {
-		init();
+		initCookTab();
+		initDeliveryPersonTab();
     }
 	
-	private void init() {
+	private void initCookTab() {
 		editCookBtn.setDisable(true);
-		editDeliveryPersonBtn.setDisable(true);
-		
 		expertiseBox.getItems().clear();
-		
 		ObservableList<Expertise> expertise = FXCollections.observableArrayList(Expertise.values());
 		expertiseBox.getItems().clear();				
 		expertiseBox.setItems(FXCollections.observableArrayList(expertise));
 		
+		//Add all cooks
+		cookIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
+		
+		cookNameCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getFirstName() + " " + cook.getValue().getLastName()));	
+		
+		cookDobCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getBirthDay().toString()));
+		
+		cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getGender().name()));
+		
+		expertiseCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getExpert().toString()));
+		
+		isChefCol.setCellValueFactory(cook -> {
+            boolean isChef = cook.getValue().isChef();
+            String isChefAsString;
+            if(isChef == true)
+            {
+                isChefAsString = "Yes";
+            }
+            else
+            {
+                isChefAsString = "No";
+            }
+
+         return new ReadOnlyStringWrapper(isChefAsString);
+        });
+		
+		List<Cook> allCooks = new ArrayList<Cook>();
+		allCooks = Restaurant.getInstance().getCooks().values().stream()
+				.collect(Collectors.toList());
+		
+		allCooksTable.getItems().addAll(allCooks);
+		
+		 searchCookField.textProperty().addListener((observable, oldValue, newValue) -> {
+			 searchCookByID();
+			});	
+	}
+	
+	private void searchCookByID() {
+		String keyword = searchCookField.getText();
+		ObservableList<Cook> filteredData = FXCollections.observableArrayList();
+		  if (keyword.isEmpty()) {
+			  filteredData.addAll(Restaurant.getInstance().getCooks().values());
+			  allCooksTable.setItems(filteredData);
+		  }
+		  else {
+			  Cook cook = Restaurant.getInstance().getRealCook(Integer.parseInt(searchCookField.getText()));
+			  if(cook != null)
+				  filteredData.add(cook);
+		     allCooksTable.setItems(filteredData);
+		  }
+		
+	}
+
+	private void initDeliveryPersonTab() {
+		editDeliveryPersonBtn.setDisable(true);	
 		vehicleBox.getItems().clear();
 		ObservableList<Vehicle> vehicles = FXCollections.observableArrayList(Vehicle.values());
 		vehicleBox.getItems().clear();				
@@ -144,59 +197,23 @@ public class AddCookController extends ControllerWrapper{
 		
 		//add areas list
 		//Set the cell factory to show the delivery areas
-			deliveryAreaBox.setCellFactory(param -> new ListCell<DeliveryArea>() {
-				    @Override
-				    protected void updateItem(DeliveryArea item, boolean empty) {
-				        super.updateItem(item, empty);
+		deliveryAreaBox.setCellFactory(param -> new ListCell<DeliveryArea>() {
+				   @Override
+				   protected void updateItem(DeliveryArea item, boolean empty) {
+				       super.updateItem(item, empty);
 
-				        if (empty || item == null) {
-				            setText(null);
-				        } else {
-				            setText(item.getAreaName() + " (id= " + item.getId() + ")");
-				        }
-				    }
-				});
+				       if (empty || item == null) {
+				           setText(null);
+				       } else {
+				           setText(item.getAreaName() + " (id= " + item.getId() + ")");
+				       }
+				   }
+			});
 						
 			//Add all areas
 			deliveryAreaBox.getItems().addAll(FXCollections.observableArrayList(
 					Restaurant.getInstance().getAreas().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			
-			
-			//Add all cooks
-			cookIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));	
-			
-			cookNameCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getFirstName() + " " + cook.getValue().getLastName()));	
-			
-			cookDobCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getBirthDay().toString()));
-			
-			cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getGender().name()));
-			
-			expertiseCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getExpert().toString()));
-			
-			isChefCol.setCellValueFactory(cook -> {
-	            boolean isChef = cook.getValue().isChef();
-	            String isChefAsString;
-	            if(isChef == true)
-	            {
-	                isChefAsString = "Yes";
-	            }
-	            else
-	            {
-	                isChefAsString = "No";
-	            }
-
-	         return new ReadOnlyStringWrapper(isChefAsString);
-	        });
-			
-			List<Cook> allCooks = new ArrayList<Cook>();
-			allCooks = Restaurant.getInstance().getCooks().values().stream()
-					.collect(Collectors.toList());
-			
-			allCooksTable.getItems().addAll(allCooks);
-			
-			 searchCookField.textProperty().addListener((observable, oldValue, newValue) -> {
-				 searchCookByID();
-				});
 			
 					
 			//Add all delivery people
@@ -221,22 +238,6 @@ public class AddCookController extends ControllerWrapper{
 			 searchDPField.textProperty().addListener((observable, oldValue, newValue) -> {
 				 searchDPByID();
 				});
-	}
-
-	private void searchCookByID() {
-		String keyword = searchCookField.getText();
-		ObservableList<Cook> filteredData = FXCollections.observableArrayList();
-		  if (keyword.isEmpty()) {
-			  filteredData.addAll(Restaurant.getInstance().getCooks().values());
-			  allCooksTable.setItems(filteredData);
-		  }
-		  else {
-			  Cook cook = Restaurant.getInstance().getRealCook(Integer.parseInt(searchCookField.getText()));
-			  if(cook != null)
-				  filteredData.add(cook);
-		     allCooksTable.setItems(filteredData);
-		  }
-		
 	}
 	
 	private void searchDPByID() {

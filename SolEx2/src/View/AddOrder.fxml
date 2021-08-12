@@ -138,7 +138,7 @@
             </Tab>
             <Tab text="Delivery Area">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="694.0" prefWidth="877.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="988.0">
                      <children>
                         <AnchorPane layoutX="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="336.0" prefWidth="1240.0">
                            <children>
@@ -149,30 +149,29 @@
                               <Label layoutX="11.0" layoutY="100.0" prefHeight="26.0" prefWidth="113.0" styleClass="managerAllText" text="Delivery Time" />
                               <Button fx:id="editDeliveryAreaBtn" layoutX="850.0" layoutY="120.0" mnemonicParsing="false" onAction="#setEditDeliveryArea" prefHeight="26.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />
                               <Pane fx:id="neighberhood_pane" layoutX="405.0" layoutY="63.0" prefHeight="166.0" prefWidth="425.0" />
-                              <Text fx:id="messageToUser" layoutX="74.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="421.21630859375" />
-                              <Label fx:id="editDelPersonsLbl" layoutX="41.0" layoutY="147.0" prefHeight="17.0" prefWidth="95.0" styleClass="managerAllText" text="Delivery Persons" visible="false" />
-                              <ListView fx:id="deliveryPersonsList" layoutX="93.0" layoutY="165.0" prefHeight="179.0" prefWidth="200.0" visible="false" />
-                              <Label fx:id="editDeliveriesLbl" layoutX="311.0" layoutY="146.0" prefHeight="17.0" prefWidth="95.0" styleClass="managerAllText" text="Deliveries" visible="false" />
-                              <ListView fx:id="deliveriesToAddList" layoutX="302.0" layoutY="167.0" prefHeight="179.0" prefWidth="200.0" visible="false" />
+                              <Text fx:id="messageToUser" layoutX="830.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="421.21630859375" />
+                              <Label fx:id="editDelPersonsLbl" layoutX="33.0" layoutY="176.0" prefHeight="26.0" prefWidth="130.0" styleClass="managerAllText" text="Delivery Persons" visible="false" />
+                              <Label fx:id="editDeliveriesLbl" layoutX="248.0" layoutY="176.0" prefHeight="26.0" prefWidth="120.0" styleClass="managerAllText" text="Deliveries" visible="false" />
                               <Button fx:id="addDeliveryAreaBtn" layoutX="850.0" layoutY="65.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addDeliveryArea" prefHeight="38.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
+                              <ListView fx:id="deliveryPersonsList" layoutX="13.0" layoutY="206.0" prefHeight="142.0" prefWidth="171.0" visible="false" />
                            </children>
                         </AnchorPane>
-                        <Pane layoutX="128.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="716.0">
+                        <Pane layoutX="128.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="716.0">
                            <children>
-                              <Button layoutX="44.0" layoutY="304.0" mnemonicParsing="false" onAction="#removeDeliveryArea" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                              <Text fx:id="deliveryTimeField" fill="#c88021" layoutX="313.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-                              <ComboBox fx:id="newAreaBox" layoutX="516.0" layoutY="302.0" prefWidth="150.0" />
-                              <Label fx:id="removeLbl" layoutX="162.0" layoutY="306.0" prefHeight="17.0" prefWidth="362.0" text="Please choose new area in order to remove the area you chose:" textFill="RED" />
-                              <Button layoutX="42.0" layoutY="359.0" mnemonicParsing="false" onAction="#editDeliveryArea" prefHeight="48.0" prefWidth="117.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                              <TableView fx:id="allAreasTable" layoutX="48.0" layoutY="92.0" prefHeight="200.0" prefWidth="438.0">
+                              <Button layoutX="37.0" layoutY="369.0" mnemonicParsing="false" onAction="#removeDeliveryArea" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+                              <ComboBox fx:id="newAreaBox" layoutX="384.0" layoutY="413.0" prefWidth="150.0" />
+                              <Label fx:id="removeLbl" layoutX="38.0" layoutY="417.0" prefHeight="17.0" prefWidth="362.0" text="Please choose new area in order to remove the area you chose:" textFill="RED" />
+                              <Button layoutX="161.0" layoutY="369.0" mnemonicParsing="false" onAction="#editDeliveryArea" prefHeight="48.0" prefWidth="117.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                              <TableView fx:id="allAreasTable" layoutX="37.0" layoutY="135.0" prefHeight="227.0" prefWidth="374.0">
                                  <columns>
-                                    <TableColumn fx:id="areaIdCol" prefWidth="75.0" text="Area ID" />
-                                    <TableColumn fx:id="areaNameCol" prefWidth="75.0" text="Area Name" />
-                                    <TableColumn fx:id="neighborhoodsCol" prefWidth="151.0" text="Neighborhoods" />
-                                    <TableColumn fx:id="deliveryTimeCol" prefWidth="135.5999755859375" text="Delivery Time" />
+                                    <TableColumn fx:id="areaIdCol" prefWidth="63.0" text="Area ID" />
+                                    <TableColumn fx:id="areaNameCol" prefWidth="105.0" text="Area Name" />
+                                    <TableColumn fx:id="neighborhoodsCol" prefWidth="110.0" text="Neighborhoods" />
+                                    <TableColumn fx:id="deliveryTimeCol" prefWidth="94.0" text="Delivery Time" />
                                  </columns>
                               </TableView>
-                              <TextField fx:id="searchAreaField" layoutX="48.0" layoutY="60.0" promptText="Search By Id" />
+                              <TextField fx:id="searchAreaField" layoutX="37.0" layoutY="103.0" promptText="Search By Id" />
+                              <ListView fx:id="deliveriesToAddList" layoutX="69.0" layoutY="-57.0" prefHeight="142.0" prefWidth="171.0" visible="false" />
                            </children>
                         </Pane>
                      </children>
