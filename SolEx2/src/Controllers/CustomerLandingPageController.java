@@ -72,6 +72,9 @@ public class CustomerLandingPageController extends ControllerWrapper{
 
     @FXML
     private AnchorPane navList;
+    
+    @FXML
+    private AnchorPane sideMenu;
     private ArrayList<Pair<CheckBox, Component>> componentList;
     @FXML
     private Pane componentsContainer;
@@ -99,6 +102,11 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	
 	@FXML
 	public void initialize() {
+		toReplacePane.setPrefHeight(Consts.defaultHeight);
+		toReplacePane.setPrefWidth(Consts.defaultWidth);
+		navList.setPrefHeight(Consts.defaultHeight - 78);
+		sideMenu.setPrefHeight(Consts.defaultHeight);
+		
 		messageLbl.setText("Hello " + current.getFirstName());
 		componentList = new ArrayList<Pair<CheckBox, Component>>();
 		messageDishLbl.setText("");
@@ -106,14 +114,14 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		messageDishLbl.setLayoutY(566);
 		messageDishLbl.getStyleClass().add("managerAllText"); 
 		navList.getChildren().add(messageDishLbl);
-		
+	/*	
 		try {
 			replacePane(toReplacePane, "/View/Video.fxml");
 		} catch (IOException ex) {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
 		}
-		
+		*/
 		cartScrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		cartScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		cartVbox.setFillWidth(true);
