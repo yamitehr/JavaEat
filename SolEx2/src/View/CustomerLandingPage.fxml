@@ -15,7 +15,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerLandingPageController">
    <children>
       <AnchorPane fx:id="toReplacePane" prefHeight="770.0" prefWidth="1430.0" />
-      <AnchorPane layoutY="-34.0" prefHeight="804.0" prefWidth="343.0" styleClass="sidePane">
+      <AnchorPane fx:id="sideMenu" layoutY="-34.0" prefHeight="804.0" prefWidth="343.0" styleClass="sidePane">
          <children>
            <Button fx:id="videoButton" layoutX="42.0" layoutY="35.0" mnemonicParsing="false" onAction="#moveToVideoScene" prefHeight="184.0" prefWidth="251.0" style="-fx-background-color: #3D201C;" text="">
                <font>
