@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -53,6 +54,8 @@ public class CustomerOrdersHistoryController {
 	@FXML
 	private Text message;
 	
+	private final ObservableList<Order> orders = FXCollections.observableArrayList();
+	
 	@FXML
     public void initialize() {
 		init();
@@ -60,8 +63,10 @@ public class CustomerOrdersHistoryController {
 		allOrdersTable.setOnMouseClicked(e -> {
 			message.setText("");
 		});
-		
+		initData();
+		allOrdersTable.setItems(orders);
     }
+
 	
 	private void init() {
 		orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -94,6 +99,7 @@ public class CustomerOrdersHistoryController {
 		
 		deliveryStatusCol.setCellValueFactory(orderProperty -> {
             String isDeliveredAsString = "";
+
 			if (orderProperty.getValue().getDelivery() != null) {
 	            boolean isDelivered = orderProperty.getValue().getDelivery().isDelivered();
 	            if(isDelivered == true)
@@ -119,17 +125,14 @@ public class CustomerOrdersHistoryController {
 				
 				return new ReadOnlyObjectWrapper<String>(isDeliveredAsString);
 			}
+			
 		});
 		
-		
-		///////////////////////
 		
 		deliveryStatusCol.setCellFactory(new Callback<TableColumn<Order, String>, TableCell<Order, String>>()
 	        {
 	            public TableCell<Order, String> call(TableColumn<Order, String> column)
 	            {
-	                final FlashingLabel flashingLabel = new FlashingLabel();
-	                
 	                TableCell<Order, String> cell = new TableCell<Order, String>()
 	                {
 	                    protected void updateItem(String value, boolean empty)
@@ -137,6 +140,7 @@ public class CustomerOrdersHistoryController {
 	                        super.updateItem(value, empty);
 	                        if (value != null) {
 		                        if (!value.equals("Delivered") && !value.equals("Cancelled")) {
+		        	                final FlashingLabel flashingLabel = new FlashingLabel();
 			                        flashingLabel.setText(value);
 			                        flashingLabel.setVisible(!empty);
 			                        switch(value) {
@@ -151,8 +155,8 @@ public class CustomerOrdersHistoryController {
 		                        			break;
 	                        			default:
 	                        				break;
-	                        	}
-			    	                this.setGraphic(flashingLabel);
+			                        }
+			                        this.setGraphic(flashingLabel);
 		                        } else {
 		                        	Label regularLabel = new Label(value);
 		                        	switch(value) {
@@ -171,12 +175,10 @@ public class CustomerOrdersHistoryController {
 	                        }
 	                    }
 	                };
-
+	                
 	                return cell;
 	            }
-	        });
-		
-		///////////////////////
+	        }); 
 		
 		etaCol.setCellValueFactory(orderProperty ->
 		{
@@ -193,19 +195,15 @@ public class CustomerOrdersHistoryController {
 			}
 		});
 		
-		initData();
-		
 	}
+	
 	
 	private void initData() {
 		message.setText("");
-		List<Order> orders = new ArrayList<Order>();
-		orders = Restaurant.getInstance().getOrders().values().stream()
-				.filter(o -> o.getCustomer().equals(State.getCurrentCustomer()))
-				.collect(Collectors.toList());
 		
-		allOrdersTable.getItems().clear();
-		allOrdersTable.getItems().addAll(orders);
+		orders.setAll(Restaurant.getInstance().getOrders().values().stream()
+				.filter(o -> o.getCustomer().equals(State.getCurrentCustomer()))
+				.collect(Collectors.toList()));	
 	}
 	
 	 public class FlashingLabel extends Label
