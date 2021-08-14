@@ -33,11 +33,15 @@ public class ControllerWrapper {
 		}
 	}
 	
-	public void replacePane(AnchorPane toReplacePane, String path) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-		AnchorPane pane = loader.load();
-		toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
-		toReplacePane.getChildren().add(pane);
+	public void replacePane(AnchorPane toReplacePane, String path) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+			AnchorPane pane = loader.load();
+			toReplacePane.getChildren().removeAll(toReplacePane.getChildren());
+			toReplacePane.getChildren().add(pane);
+		}catch (IOException e1) {
+				e1.printStackTrace();
+			}
 	}
 	
 	public void moveToScene(String fxmlName, Stage primaryStage) {

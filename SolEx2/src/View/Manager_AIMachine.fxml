@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" styleClass="addCustomerPane" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManagerAIMachineController">
+   <children>
+      <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.4" pickOnBounds="true">
+         <image>
+            <Image url="@../../img/main9.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="334.0" layoutY="21.0" prefHeight="705.0" prefWidth="991.0">
+         <children>
+            <ComboBox fx:id="dpBox" layoutX="172.0" layoutY="71.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+            <TextField fx:id="areaField" disable="true" layoutX="504.0" layoutY="71.0" styleClass="textFields" stylesheets="@decoration.css" />
+            <ListView fx:id="ordersList" layoutX="322.0" layoutY="136.0" prefHeight="200.0" prefWidth="200.0" />
+            <Button layoutX="758.0" layoutY="120.0" mnemonicParsing="false" onAction="#getResults" styleClass="addBtns" stylesheets="@decoration.css" text="Get Results" />
+            <TableView fx:id="allDeliveriesTable" layoutX="139.0" layoutY="418.0" prefHeight="200.0" prefWidth="676.0" visible="false">
+               <columns>
+                  <TableColumn fx:id="deliveryIdCol" prefWidth="68.80001831054688" text="Delivery ID" />
+                  <TableColumn fx:id="deliveryTypeCol" prefWidth="94.39997863769531" text="Delivery Type" />
+                  <TableColumn fx:id="deliveryPersonCol" prefWidth="98.4000244140625" text="Delivery Person" />
+                  <TableColumn fx:id="areaCol" prefWidth="55.20001220703125" text="Area" />
+                  <TableColumn fx:id="deliveryDateCol" prefWidth="97.5999755859375" text="dateOfDelivery" />
+                  <TableColumn fx:id="isDeliveredCol" prefWidth="94.4000244140625" text="isDelivered" />
+                  <TableColumn fx:id="ordersCol" prefWidth="75.0" text="Orders" />
+                  <TableColumn fx:id="postageCol" prefWidth="88.0" text="Postage" />
+               </columns>
+            </TableView>
+            <Label layoutX="19.0" layoutY="73.0" styleClass="managerAllText" text="Delivery Person:" />
+            <Label layoutX="371.0" layoutY="73.0" styleClass="managerAllText" text="Delivery Area:" />
+            <Label layoutX="228.0" layoutY="132.0" prefHeight="26.0" prefWidth="69.0" styleClass="managerAllText" text="Orders:" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

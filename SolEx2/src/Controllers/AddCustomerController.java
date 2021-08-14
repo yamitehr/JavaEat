@@ -72,11 +72,15 @@ public class AddCustomerController extends ControllerWrapper{
 	@FXML
 	private TableColumn<Customer, String> customerDobCol;
 	@FXML
-	private TableColumn<Customer, String> customerGenderCol;
+	private TableColumn<Customer, Gender> customerGenderCol;
 	@FXML
 	private TableColumn<Customer, String> neighberhoodCol;
 	@FXML
 	private TableColumn<Customer, String> sensitivitiesCol;
+	@FXML
+	private TableColumn<Customer, String> userNameCol;
+	@FXML
+	private TableColumn<Customer, String> passwordCol;
 	@FXML
 	private ListView<Customer> blackList;
 	@FXML
@@ -102,7 +106,7 @@ public class AddCustomerController extends ControllerWrapper{
 		
 		customerDobCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getBirthDay().toString()));
 		
-		customerGenderCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getGender().name()));
+		customerGenderCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<Gender>(cust.getValue().getGender()));
 		
 		neighberhoodCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getNeighberhood().toString()));
 		
@@ -121,6 +125,10 @@ public class AddCustomerController extends ControllerWrapper{
 
 	         return new ReadOnlyStringWrapper(isSensitiveToAsString);
         });
+		
+		userNameCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getUserName()));
+		
+		passwordCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getPassword()));
 		
 		List<Customer> allCustomers = new ArrayList<Customer>();
 		allCustomers = Restaurant.getInstance().getCustomers().values().stream()
@@ -203,8 +211,16 @@ public class AddCustomerController extends ControllerWrapper{
 					throw new InvalidInputException("Last Name cannot be empty");
 				selectedCustomer.setLastName(last_Name.getText());
 			}
-			if(!selectedCustomer.getGender().equals(Gender_group.getUserData()))
-				selectedCustomer.setGender((Gender)Gender_group.getUserData());
+			Gender gender = null;
+			//get gender
+			RadioButton selectedRadioButton = (RadioButton) Gender_group.getSelectedToggle();
+			String toogleGroupValue = selectedRadioButton.getText();
+			for(Gender g : Gender.values()) {
+				if(g.name().equals(toogleGroupValue)) {
+					gender = g;
+				}
+			}
+			selectedCustomer.setGender(gender);
 				
 		if(!selectedCustomer.getNeighberhood().equals(neighberhoodsBox.getValue())) {
 			if(neighberhoodsBox.getValue() == null)
@@ -228,7 +244,7 @@ public class AddCustomerController extends ControllerWrapper{
 		last_Name.clear();
 		date.setValue(null);
 		
-		Toggle selectedGender =Gender_group.getSelectedToggle(); 
+		Toggle selectedGender = Gender_group.getSelectedToggle(); 
 		if (selectedGender != null) {
 			selectedGender.setSelected(false);	
 		}
@@ -236,7 +252,7 @@ public class AddCustomerController extends ControllerWrapper{
 		isGluten.setSelected(false);
 		isLactose.setSelected(false);
 		allCustomersTable.getItems().clear();
-		Gender_group.getSelectedToggle().setSelected(false);
+//		Gender_group.getSelectedToggle().setSelected(false);
 		allCustomersTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getCustomers().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		editCustomerBtn.setDisable(true);

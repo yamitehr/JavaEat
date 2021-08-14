@@ -35,7 +35,7 @@ public class Customer extends Person{
 		this.neighberhood = neighberhood;
 		this.isSensitiveToLactose = isSensitiveToLactose;
 		this.isSensitiveToGluten = isSensitiveToGluten;
-		this.userName = firstName + lastName;
+		this.userName = firstName + lastName + this.id;
 		Random rand = new Random();
 		this.password = String.valueOf(rand.nextInt(1000000));
 		

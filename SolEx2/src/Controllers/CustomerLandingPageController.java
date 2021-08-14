@@ -135,12 +135,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	public void moveToVideoScene(ActionEvent e) {
 
 		messageLbl.setText("Hello " + current.getFirstName());
-		try {
-			replacePane(toReplacePane, "/View/Video.fxml");
-		} catch (IOException ex) {
-			// TODO Auto-generated catch block
-			ex.printStackTrace();
-		}
+		replacePane(toReplacePane, "/View/Video.fxml");
 	}
 
 	public void moveToDashboardScene(ActionEvent e) {
@@ -176,21 +171,11 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	public void moveToOrdersHistoryScene(ActionEvent e) {
 		messageLbl.setText("Orders History");
-		try {
-			replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
-		} catch (IOException ex) {
-			// TODO Auto-generated catch block
-			ex.printStackTrace();
-		}
+		replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
 	}
 	public void moveToPersonalDetailsScene(ActionEvent e) {
 		messageLbl.setText("Personal Detalis");
-		try {
 			replacePane(toReplacePane, "/View/Customer_UpdatePersonalDetails.fxml");
-		} catch (IOException ex) {
-			// TODO Auto-generated catch block
-			ex.printStackTrace();
-		}
 	}
 	
 	public void MoveToLoginScene(ActionEvent e) {
@@ -498,12 +483,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 				State.setCurrentOrder(null);
 				initShoppingCart();
 				
-				try {
-					replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
 				
 				
 				

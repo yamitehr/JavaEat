@@ -1,12 +1,9 @@
 package Controllers;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -58,14 +55,12 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	@FXML
 	private Label totalSell;
 	
-	private Image image;
-	
 	@FXML
-    public void initialize() throws Exception {
+    public void initialize() {
 		init();
     }
 	
-	private void init() throws Exception {
+	private void init() {
 //		dashboardBtn.setAlignment(Pos.BASELINE_LEFT);
 //		addFoodbtn.setAlignment(Pos.BASELINE_LEFT);
 //		addEmployeeBtn.setAlignment(Pos.BASELINE_LEFT);
@@ -84,58 +79,39 @@ public class ManagerLandingPageController extends ControllerWrapper {
 //		}
 //		totalSell.setText(String.valueOf(totalPrice));
 		
-	
-		
-		//		messageLbl.setText("Dashboard");
-				image = new Image("file:///C:/Users/li493/OneDrive/������/JavaEat/SolEx2/icons/tachometer-alt-solid.png");
-		//		icon.setImage(image);
-				replacePane(toReplacePane, "/View/Manager_Dashboard.fxml"); 
+		replacePane(toReplacePane, "/View/Manager_Dashboard.fxml"); 
 				
 	}
 
-	public void MoveToAddDishScene(ActionEvent e) throws IOException {
-	//	messageLbl.setText("Food Items");
-		image = new Image("file:///C:/Users/li493/OneDrive/������/JavaEat/SolEx2/icons/utensils-solid-white.png");
-	//	icon.setImage(image);
+	public void MoveToAddDishScene(ActionEvent e) {
 		replacePane(toReplacePane, "/View/AddDish.fxml");
 	}
 	
-	public void MoveToAddCookScene(ActionEvent e) throws Exception {
-	//	messageLbl.setText("Employees");
-		image = new Image("file:///C:/Users/li493/OneDrive/������/JavaEat/SolEx2/icons/users-solid white.png");
-	//	icon.setImage(image);
+	public void MoveToAddCookScene(ActionEvent e) {
 		replacePane(toReplacePane, "/View/AddCook.fxml");
 	}
 	
-	public void MoveToAddOrderScene(ActionEvent e) throws Exception {
-	//	messageLbl.setText("Orders & Deliveries");
-		image = new Image("file:///C:/Users/li493/OneDrive/������/JavaEat/SolEx2/icons/truck-solid-white.png");
-	//	icon.setImage(image);
+	public void MoveToAddOrderScene(ActionEvent e) {
 		replacePane(toReplacePane, "/View/AddOrder.fxml");
 	}
 	
-	public void MoveToAddCustomerScene(ActionEvent e) throws Exception {
-	//	messageLbl.setText("Customers");
-		image = new Image("file:///C:/Users/li493/OneDrive/������/JavaEat/SolEx2/icons/users-solid white.png");
-	//	icon.setImage(image);
+	public void MoveToAddCustomerScene(ActionEvent e) {
 		replacePane(toReplacePane, "/View/AddCustomer.fxml");
 	}
 	
-	public void moveToStatisticsScene(ActionEvent e) throws Exception {
-	//	messageLbl.setText("Statistics");
-		image = new Image("file:///C:/Users/li493/OneDrive/������/JavaEat/SolEx2/icons/chart-line-solid-white.png");
-	//	icon.setImage(image);
+	public void moveToStatisticsScene(ActionEvent e) {
 		replacePane(toReplacePane, "/View/Manager_Statistics.fxml");
 	}
 	
-	public void moveToDashboardScene(ActionEvent e) throws Exception {
-	//	messageLbl.setText("Dashboard");
-		image = new Image("file:///C:/Users/li493/OneDrive/������/JavaEat/SolEx2/icons/tachometer-alt-solid.png");
-	//	icon.setImage(image);
+	public void moveToDashboardScene(ActionEvent e) {
 		replacePane(toReplacePane, "/View/Manager_Dashboard.fxml");
 	}
 	
 	public void MoveToLoginScene(ActionEvent e) {
 		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow());
+	}
+	
+	public void moveToAIMachineScene(ActionEvent e) {
+		replacePane(toReplacePane, "/View/Manager_AIMachine.fxml");
 	}
 }

@@ -58,33 +58,35 @@
       <ComboBox fx:id="neighberhoodsBox" layoutX="173.0" layoutY="143.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
       <Button fx:id="addCustomerBtn" layoutX="689.0" layoutY="62.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
       <Text fx:id="messageToUser" layoutX="600.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
-      <RadioButton layoutX="556.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
+      <RadioButton layoutX="566.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
          <effect>
             <SepiaTone level="0.25" />
          </effect></RadioButton>
-      <Pane layoutX="134.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="996.0" stylesheets="@decoration.css">
+      <Pane layoutX="35.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1095.0" stylesheets="@decoration.css">
          <children>
             <Button fx:id="removeCustomerBtn" layoutX="147.0" layoutY="298.0" mnemonicParsing="false" onAction="#removeCustomer" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
             <Button layoutX="307.0" layoutY="298.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
-            <Label layoutX="569.0" layoutY="43.0" styleClass="managerAllText" text="Black list" />
-            <ListView fx:id="blackList" layoutX="569.0" layoutY="74.0" prefHeight="211.0" prefWidth="156.0" style="-fx-border-color: PeachPuff;" />
+            <Label layoutX="633.0" layoutY="36.0" styleClass="managerAllText" text="Black list" />
+            <ListView fx:id="blackList" layoutX="633.0" layoutY="76.0" prefHeight="211.0" prefWidth="156.0" style="-fx-border-color: PeachPuff;" />
             <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <Text fx:id="sensitivitiesField" fill="#c88021" layoutX="285.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <TableView fx:id="allCustomersTable" layoutX="25.0" layoutY="80.0" prefHeight="200.0" prefWidth="473.0">
+            <TableView fx:id="allCustomersTable" layoutX="14.0" layoutY="81.0" prefHeight="200.0" prefWidth="568.0">
                <columns>
-                  <TableColumn fx:id="customerIdCol" prefWidth="80.79998779296875" text="Customer ID" />
-                  <TableColumn fx:id="customerNameCol" minWidth="0.0" prefWidth="102.40007019042969" text="Customer Name" />
-                  <TableColumn fx:id="customerDobCol" prefWidth="42.4000244140625" text="DOB" />
-                  <TableColumn fx:id="customerGenderCol" prefWidth="54.4000244140625" text="Gender" />
+                  <TableColumn fx:id="customerIdCol" prefWidth="33.0" text="ID" />
+                  <TableColumn fx:id="customerNameCol" minWidth="0.0" prefWidth="99.0" text="Customer Name" />
+                  <TableColumn fx:id="customerDobCol" prefWidth="68.0" text="DOB" />
+                  <TableColumn fx:id="customerGenderCol" prefWidth="50.0" text="Gender" />
                   <TableColumn fx:id="neighberhoodCol" prefWidth="88.0" text="Neighberhood" />
-                  <TableColumn fx:id="sensitivitiesCol" prefWidth="76.79998779296875" text="Sensitivities" />
+                  <TableColumn fx:id="sensitivitiesCol" prefWidth="75.0" text="Sensitivities" />
+                        <TableColumn fx:id="userNameCol" prefWidth="79.0" text="User Name" />
+                        <TableColumn fx:id="passwordCol" prefWidth="75.0" text="Password" />
                </columns>
             </TableView>
             <Button layoutX="25.0" layoutY="298.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="56.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                  <TextField fx:id="searchCustomerField" layoutX="25.0" layoutY="49.0" promptText="Search By Id" />
+                  <TextField fx:id="searchCustomerField" layoutX="14.0" layoutY="50.0" promptText="Search By Id" />
          </children>
       </Pane>
-      <Button fx:id="editCustomerBtn" disable="true" layoutX="689.0" layoutY="106.0" mnemonicParsing="false" onAction="#setEditCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />
+      <Button fx:id="editCustomerBtn" disable="true" layoutX="689.0" layoutY="116.0" mnemonicParsing="false" onAction="#setEditCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />
       </children>
             </AnchorPane>
    </children>
