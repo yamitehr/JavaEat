@@ -154,6 +154,7 @@
                               <Label fx:id="editDeliveriesLbl" layoutX="248.0" layoutY="176.0" prefHeight="26.0" prefWidth="120.0" styleClass="managerAllText" text="Deliveries" visible="false" />
                               <Button fx:id="addDeliveryAreaBtn" layoutX="850.0" layoutY="65.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addDeliveryArea" prefHeight="38.0" prefWidth="134.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
                               <ListView fx:id="deliveryPersonsList" layoutX="13.0" layoutY="206.0" prefHeight="142.0" prefWidth="171.0" visible="false" />
+                              <Text fx:id="timeMessage" layoutX="124.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" />
                            </children>
                         </AnchorPane>
                         <Pane layoutX="128.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="716.0">
