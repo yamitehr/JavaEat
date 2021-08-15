@@ -65,6 +65,8 @@ public class CustomerOrdersHistoryController {
 		});
 		initData();
 		allOrdersTable.setItems(orders);
+		setTableHeight();
+		allOrdersTable.getSortOrder().add(orderIdCol);
     }
 
 	
@@ -204,8 +206,25 @@ public class CustomerOrdersHistoryController {
 		orders.setAll(Restaurant.getInstance().getOrders().values().stream()
 				.filter(o -> o.getCustomer().equals(State.getCurrentCustomer()))
 				.collect(Collectors.toList()));	
+		
+		setTableHeight();
 	}
 	
+	private void setTableHeight() {
+		int maxHeight = 487;
+		int minHeight = 83;
+		
+		int neededHeight = (orders.size() * 50) + 52;
+		
+		if (neededHeight <= maxHeight && neededHeight >= minHeight) {
+			allOrdersTable.setPrefHeight(neededHeight);
+		} else if (neededHeight > maxHeight) {
+			allOrdersTable.setPrefHeight(maxHeight);
+		} else {
+			allOrdersTable.setPrefHeight(minHeight);
+		}
+		
+	}
 	 public class FlashingLabel extends Label
 	    {
 	        private FadeTransition animation;

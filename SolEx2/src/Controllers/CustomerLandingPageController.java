@@ -102,11 +102,6 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	
 	@FXML
 	public void initialize() {
-		toReplacePane.setPrefHeight(Consts.defaultHeight);
-		toReplacePane.setPrefWidth(Consts.defaultWidth);
-		navList.setPrefHeight(Consts.defaultHeight - 78);
-		sideMenu.setPrefHeight(Consts.defaultHeight);
-		
 		messageLbl.setText("Hello " + current.getFirstName());
 		componentList = new ArrayList<Pair<CheckBox, Component>>();
 		messageDishLbl.setText("");
