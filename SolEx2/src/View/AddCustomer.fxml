@@ -27,8 +27,8 @@
       </ImageView>
       <AnchorPane layoutX="334.0" layoutY="21.0" prefHeight="705.0" prefWidth="991.0" stylesheets="@decoration.css">
                <children>
-      <Label layoutX="64.0" layoutY="66.0" styleClass="managerAllText" text="First Name" />
-      <Label layoutX="336.0" layoutY="66.0" styleClass="managerAllText" text="Last Name" />
+      <Label layoutX="64.0" layoutY="64.0" styleClass="managerAllText" text="First Name" />
+      <Label layoutX="337.0" layoutY="64.0" styleClass="managerAllText" text="Last Name" />
       <Label layoutX="56.0" layoutY="105.0" styleClass="managerAllText" text="Date Of Birth" />
       <Label layoutX="336.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
       <RadioButton layoutX="396.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Male">
@@ -39,7 +39,7 @@
             <SepiaTone level="0.25" />
          </effect></RadioButton>
       <TextField fx:id="first_Name" layoutX="173.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
-      <TextField fx:id="last_Name" layoutX="421.0" layoutY="64.0" styleClass="textFields" stylesheets="@decoration.css" />
+      <TextField fx:id="last_Name" layoutX="430.0" layoutY="62.0" styleClass="textFields" stylesheets="@decoration.css" />
       <DatePicker fx:id="date" layoutX="173.0" layoutY="101.0" styleClass="textFields" stylesheets="@decoration.css" />
       <RadioButton layoutX="470.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
          <effect>
@@ -56,7 +56,14 @@
             <SepiaTone level="0.25" />
          </effect></CheckBox>
       <ComboBox fx:id="neighberhoodsBox" layoutX="173.0" layoutY="143.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-      <Button fx:id="addCustomerBtn" layoutX="689.0" layoutY="62.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add" />
+      <Button fx:id="addCustomerBtn" layoutX="689.0" layoutY="62.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/plus-circle-solid.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
       <Text fx:id="messageToUser" layoutX="600.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
       <RadioButton layoutX="566.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
          <effect>
@@ -64,8 +71,8 @@
          </effect></RadioButton>
       <Pane layoutX="35.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1095.0" stylesheets="@decoration.css">
          <children>
-            <Button fx:id="removeCustomerBtn" layoutX="147.0" layoutY="298.0" mnemonicParsing="false" onAction="#removeCustomer" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-            <Button layoutX="307.0" layoutY="298.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
+            <Button fx:id="removeCustomerBtn" layoutX="14.0" layoutY="298.0" mnemonicParsing="false" onAction="#removeCustomer" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+            <Button layoutX="407.0" layoutY="298.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
             <Label layoutX="633.0" layoutY="36.0" styleClass="managerAllText" text="Black list" />
             <ListView fx:id="blackList" layoutX="633.0" layoutY="76.0" prefHeight="211.0" prefWidth="156.0" style="-fx-border-color: PeachPuff;" />
             <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
@@ -82,11 +89,38 @@
                         <TableColumn fx:id="passwordCol" prefWidth="75.0" text="Password" />
                </columns>
             </TableView>
-            <Button layoutX="25.0" layoutY="298.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="56.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                  <TextField fx:id="searchCustomerField" layoutX="14.0" layoutY="50.0" promptText="Search By Id" />
+            <Button layoutX="147.0" layoutY="298.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                  <TextField fx:id="searchCustomerField" alignment="CENTER" layoutX="14.0" layoutY="50.0" prefWidth="148.0" promptText="Search By Id" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="163.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/edit-solid-2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="19.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/trash-alt-solid.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="413.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/plus-square-solid.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="29.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/search-solid.png" />
+                     </image>
+                  </ImageView>
          </children>
       </Pane>
-      <Button fx:id="editCustomerBtn" disable="true" layoutX="689.0" layoutY="116.0" mnemonicParsing="false" onAction="#setEditCustomer" prefHeight="26.0" prefWidth="109.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save" />
+      <Button fx:id="editCustomerBtn" disable="true" layoutX="689.0" layoutY="119.0" mnemonicParsing="false" onAction="#setEditCustomer" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/save-solid.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
       </children>
             </AnchorPane>
    </children>
