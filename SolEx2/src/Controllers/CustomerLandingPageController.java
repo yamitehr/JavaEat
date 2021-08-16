@@ -176,7 +176,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	public void MoveToLoginScene(ActionEvent e) {
 		//clean current customer and order
 		State.cleanState();
-		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow());
+		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow(), 700, 550);
 	}
 	
 	private void prepareSlideMenuAnimation() {

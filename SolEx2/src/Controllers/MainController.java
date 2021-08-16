@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainController extends ControllerWrapper{
@@ -26,12 +27,15 @@ public class MainController extends ControllerWrapper{
 	private Button loginBtn;
     @FXML
     private Button signInBtn;
+    @FXML
+    private AnchorPane loginPane;
+    
     
     public void login(ActionEvent e) throws Exception {
     	boolean isExist = false;
     	if(txtUserName.getText().equals("manager") && txtPassword.getText().equals("manager")) {
     		moveToScene("/View/Manager_LandingPage.fxml", (Stage)txtUserName.getScene().getWindow());
-    		lblStatus.setText("Welcome manager");
+    	//	lblStatus.setText("Welcome manager");
     		isExist = true;
     	}
     	
@@ -49,8 +53,10 @@ public class MainController extends ControllerWrapper{
     				moveToScene("/view/CustomerLandingPage.fxml", (Stage)loginBtn.getScene().getWindow());
     		}
     	}
+    	
     	if(!isExist)
-    		lblStatus.setText("Oops!");	    		
+    		lblStatus.setText("Oops!");	
+    		    		
     }	
     
     public void signIn(ActionEvent e) throws Exception {

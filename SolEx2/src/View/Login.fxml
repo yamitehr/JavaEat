@@ -4,24 +4,64 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="519.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
+<AnchorPane stylesheets="@decoration.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
    <children>
-      <Button fx:id="loginBtn" layoutX="63.0" layoutY="150.0" mnemonicParsing="false" onAction="#login" text="Login" />
-      <TextField fx:id="txtUserName" layoutX="45.0" layoutY="55.0" promptText="UserName">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TextField>
-      <PasswordField fx:id="txtPassword" layoutX="45.0" layoutY="100.0" prefHeight="26.0" prefWidth="174.0" promptText="Password">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </PasswordField>
-      <Label fx:id="lblStatus" layoutX="48.0" layoutY="29.0" prefHeight="18.0" prefWidth="166.0" text="Label" textFill="#b9401b" />
-      <Label layoutX="25.0" layoutY="200.0" prefHeight="26.0" prefWidth="151.0" text="Not have an account yet? " />
-      <Button fx:id="signInBtn" layoutX="25.0" layoutY="226.0" mnemonicParsing="false" onAction="#signIn" text="Sign in" />
+      <AnchorPane style="-fx-background-color: black;">
+         <children>
+            <ImageView fitHeight="550.0" fitWidth="641.0" opacity="0.53" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/delight1.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="345.0" prefHeight="550.0" prefWidth="357.0" style="-fx-background-color: #3c0b01;">
+         <children>
+            <Button fx:id="signInBtn" layoutX="145.0" layoutY="506.0" mnemonicParsing="false" onAction="#signIn" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign Up" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft JhengHei" size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="186.0" fitWidth="220.0" layoutX="80.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/JavaEat.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="85.0" layoutY="202.0" text="Username" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft JhengHei" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="85.0" layoutY="292.0" text="Password" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft JhengHei" size="14.0" />
+               </font>
+            </Label>
+             <Label fx:id="lblStatus" layoutX="85.0" layoutY="370.0" text="" textFill="RED">
+               <font>
+                  <Font name="Microsoft JhengHei" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="81.0" layoutY="478.0" text="New Member? Sign Up right now!" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft JhengHei" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="loginBtn" layoutX="145.0" layoutY="426.0" mnemonicParsing="false" onAction="#login" prefHeight="29.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign In" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft JhengHei" size="14.0" />
+               </font>
+            </Button>
+            <Pane layoutX="56.0" layoutY="131.0" opacity="0.15" prefHeight="287.0" prefWidth="258.0" style="-fx-background-color: white; -fx-background-radius: 45;" styleClass="managerAllText" stylesheets="@decoration.css" />
+            <TextField fx:id="txtUserName" layoutX="75.0" layoutY="228.0" prefHeight="25.0" prefWidth="219.0" />
+            <PasswordField fx:id="txtPassword" layoutX="75.0" layoutY="317.0" prefHeight="25.0" prefWidth="219.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

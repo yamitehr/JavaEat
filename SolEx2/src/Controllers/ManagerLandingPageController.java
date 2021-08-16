@@ -108,7 +108,7 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	}
 	
 	public void MoveToLoginScene(ActionEvent e) {
-		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow());
+		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow(), 700, 550);
 	}
 	
 	public void moveToAIMachineScene(ActionEvent e) {
