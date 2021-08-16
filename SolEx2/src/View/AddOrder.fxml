@@ -238,6 +238,7 @@
                                     </ImageView>
                                  </graphic></Button>
                               <ListView fx:id="deliveryPersonsList" layoutX="13.0" layoutY="206.0" prefHeight="142.0" prefWidth="171.0" visible="false" />
+                              <Text fx:id="timeMessage" layoutX="124.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" />
                            </children>
                         </AnchorPane>
                         <Pane layoutX="128.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="716.0">

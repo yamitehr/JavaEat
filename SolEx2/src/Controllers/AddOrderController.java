@@ -213,6 +213,9 @@ public class AddOrderController extends ControllerWrapper {
 	private TabPane tabPane;
 	
 	@FXML
+	private Text timeMessage;
+	
+	@FXML
     public void initialize() {
 		init();
 		generateNeighborhoodGrid();
@@ -377,15 +380,18 @@ public class AddOrderController extends ControllerWrapper {
 		}
 			
 		public void addDeliveryTimeEventListener() {
+			timeMessage.setFill(Color.RED);
 			deliveryTime.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, 
 					String newValue) {
 				    	if (newValue != "") {
 					    	try {
+					    		timeMessage.setText("");
 								Integer.parseInt(newValue);
 							} catch(NumberFormatException nfe) {
 								deliveryTime.setText(oldValue);
+								timeMessage.setText("Numbers only!");
 							}	
 				    	}
 				    }

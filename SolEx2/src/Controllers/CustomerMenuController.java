@@ -32,19 +32,11 @@ public class CustomerMenuController extends ControllerWrapper{
 	@FXML
 	private VBox menuItemsVbox;
 	
-	@FXML
-	private ImageView backgroundImage;
 	
 	private CustomerLandingPageController landingController;
 	
 	@FXML
     public void initialize() {
-
-		mainPane.setPrefHeight(Consts.defaultHeight);
-		mainPane.setPrefWidth(Consts.defaultWidth);
-		backgroundImage.setFitHeight(Consts.defaultHeight);
-		backgroundImage.setFitWidth(Consts.defaultWidth);
-		
 		initMenu();
     }
 	
