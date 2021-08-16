@@ -31,7 +31,7 @@ public class Main extends Application {
 		DeliveryManager.getInstance().startDeliveriesTask();
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
-		Scene scene = new Scene(root, Consts.defaultWidth, Consts.defaultHeight);
+		Scene scene = new Scene(root, 700, 550);
 		scene.getStylesheets().add(getClass().getResource("/View/decoration.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("JavaEat");
