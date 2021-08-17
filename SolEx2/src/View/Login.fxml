@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@decoration.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
    <children>
       <AnchorPane style="-fx-background-color: black;">
          <children>
@@ -30,7 +30,7 @@
             </Button>
             <ImageView fitHeight="186.0" fitWidth="220.0" layoutX="80.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/JavaEat.png" />
+                  <Image url="@../../img/JavaEat.png" />
                </image>
             </ImageView>
             <Label layoutX="85.0" layoutY="202.0" text="Username" textFill="WHITE">

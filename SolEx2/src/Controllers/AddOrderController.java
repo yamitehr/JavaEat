@@ -6,11 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-
 import Exceptions.InvalidInputException;
 import Exceptions.InvalidPersonInputException;
 import Model.Component;
-import Model.Cook;
 import Model.Customer;
 import Model.Delivery;
 import Model.DeliveryArea;
@@ -38,7 +36,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -138,25 +135,11 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private Button addExpressDeliveryBtn;
 	@FXML
-	private Text deliveryPersonField;
-	@FXML
-	private Text deliveryAreaField;
-	@FXML
-	private Text isDeliveredField;
-	@FXML
-	private Text dateField;
-	@FXML
-	private Text ordersField;
-	@FXML 
-	private Text orderTitle;
-	@FXML
-	private Text postageTitle;
-	@FXML
-	private Text postageText;
-	@FXML
 	private Button editDeliveryBtn;
 	@FXML
 	private TextField searchDeliveryField;
+	@FXML
+	private Text postageMessage;
 	
 	//delivery area
 	@FXML
@@ -167,7 +150,9 @@ public class AddOrderController extends ControllerWrapper {
 	private TextField deliveryAreaName;
 	@FXML
 	private TextField deliveryTime;	
+	
 	private ArrayList<Pair<CheckBox, Neighberhood>> neighberhoodList;
+	
 	@FXML
 	private Text messageToUser;
 	@FXML
@@ -185,12 +170,6 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private TableColumn<DeliveryArea, Integer> deliveryTimeCol;
 	@FXML
-	private Text areaNameField;
-	@FXML
-	private Text deliveryTimeField;
-	@FXML
-	private Text neighborhoodField;
-	@FXML
 	private ComboBox<DeliveryArea> newAreaBox;
 	@FXML
 	private Label removeLbl;
@@ -203,39 +182,21 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private ListView<Delivery> deliveriesToAddList;
 	@FXML
-	private TextField searchAreaField;
-	
-	
-	@FXML
-	private AnchorPane toReplacePane;
-	
-	@FXML
-	private TabPane tabPane;
-	
+	private TextField searchAreaField;	
 	@FXML
 	private Text timeMessage;
 	
 	@FXML
     public void initialize() {
-		init();
+		initOrderTab();
+		initDeliveryTab();
+		initAreaTab();
 		generateNeighborhoodGrid();
 		addDeliveryTimeEventListener();
     }
-	
-	private void init() {
-		newAreaBox.setVisible(false);
-		removeLbl.setVisible(false);
-		
-		
+
+	private void initOrderTab() {
 		editOrderBtn.setDisable(true);
-		
-		orderBox.setVisible(false);
-		ordersList.setVisible(false);
-		postageField.setVisible(false);
-		postageLbl.setVisible(false);
-		regularPane.setVisible(false);
-		addRegularBtn.setVisible(false);
-		addExpressBtn.setVisible(false);
 		ObservableList<Customer> customers = FXCollections.observableArrayList(Restaurant.getInstance().getCustomers().values());
 		customerBox.getItems().clear();				
 		customerBox.setItems(FXCollections.observableArrayList(customers));
@@ -244,18 +205,45 @@ public class AddOrderController extends ControllerWrapper {
 		dishesList.setItems(dishes);
 		dishesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
+		//Add all orders
+		orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+	
+		customerCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<String>(o.getValue().getCustomer().toString()));
+			
+		dishesCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<String>(
+				o.getValue().getDishes()
+				.stream()
+				.map(d -> d.toString())
+				.reduce((a, b) -> a + ", " + b).get()
+				));
+	
+		statusCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<OrderStatus>(o.getValue().getStatus()));
+			
+			
+		List<Order> allOrders = new ArrayList<Order>();
+		allOrders = Restaurant.getInstance().getOrders().values().stream()
+				.collect(Collectors.toList());
+			
+		allOrdersTable.getItems().addAll(allOrders);
+	
+		searchOrderField.textProperty().addListener((observable, oldValue, newValue) -> {
+			searchOrderByID();
+		});
+		
+	}
+	
+	private void initDeliveryTab() {
+		orderBox.setVisible(false);
+		ordersList.setVisible(false);
+		postageField.setVisible(false);
+		postageLbl.setVisible(false);
+		regularPane.setVisible(false);
+		addRegularBtn.setVisible(false);
+		addExpressBtn.setVisible(false);
 		
 		ObservableList<DeliveryPerson> deliveryPersons = FXCollections.observableArrayList(Restaurant.getInstance().getDeliveryPersons().values());
 		DeliveryPersonBox.getItems().clear();				
 		DeliveryPersonBox.setItems(FXCollections.observableArrayList(deliveryPersons));
-		
-		//for delivery area edit
-		deliveryPersonsList.setItems(deliveryPersons);
-		deliveryPersonsList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		
-		ObservableList<Delivery> deliveries = FXCollections.observableArrayList(Restaurant.getInstance().getDeliveries().values());
-		deliveriesToAddList.setItems(deliveries);
-		deliveriesToAddList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		ObservableList<DeliveryArea> deliveryAreas = FXCollections.observableArrayList(Restaurant.getInstance().getAreas().values());
 		deliveryAreaBox.getItems().clear();				
@@ -269,34 +257,9 @@ public class AddOrderController extends ControllerWrapper {
 		ordersList.setItems(order);
 		ordersList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
-		
-		//Add all orders
-			orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-		
-		customerCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<String>(o.getValue().getCustomer().toString()));
-				
-		dishesCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<String>(
-				o.getValue().getDishes()
-				.stream()
-				.map(d -> d.toString())
-				.reduce((a, b) -> a + ", " + b).get()
-				));
-		
-		statusCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<OrderStatus>(o.getValue().getStatus()));
-				
-				
-		List<Order> allOrders = new ArrayList<Order>();
-		allOrders = Restaurant.getInstance().getOrders().values().stream()
-				.collect(Collectors.toList());
-				
-		allOrdersTable.getItems().addAll(allOrders);
-		
-		searchOrderField.textProperty().addListener((observable, oldValue, newValue) -> {
-			 searchOrderByID();
-			});
 			
-			//Add all deliveries
-			List<Delivery> allDeliveries = new ArrayList<Delivery>();
+		//Add all deliveries
+		List<Delivery> allDeliveries = new ArrayList<Delivery>();
 		allDeliveries = Restaurant.getInstance().getDeliveries().values().stream()
 				.collect(Collectors.toList());
 
@@ -345,7 +308,39 @@ public class AddOrderController extends ControllerWrapper {
 		
 		searchDeliveryField.textProperty().addListener((observable, oldValue, newValue) -> {
 			 searchDeliveryByID();
-			});
+		});
+		
+		postageMessage.setFill(Color.RED);
+		postageField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, 
+					String newValue) {
+				    	if (newValue != "") {
+					    	try {
+					    		postageMessage.setText("");
+								Double.parseDouble(newValue);
+							} catch(NumberFormatException nfe) {
+								postageField.setText(oldValue);
+								postageMessage.setText("Numbers only!");
+							}	
+				    	}
+				    }
+				});
+		
+	}
+
+	private void initAreaTab() {
+		newAreaBox.setVisible(false);
+		removeLbl.setVisible(false);
+		
+		//for delivery area edit
+		ObservableList<DeliveryPerson> deliveryPersons = FXCollections.observableArrayList(Restaurant.getInstance().getDeliveryPersons().values());
+		deliveryPersonsList.setItems(deliveryPersons);
+		deliveryPersonsList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
+		ObservableList<Delivery> deliveries = FXCollections.observableArrayList(Restaurant.getInstance().getDeliveries().values());
+		deliveriesToAddList.setItems(deliveries);
+		deliveriesToAddList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
 
 		private void generateNeighborhoodGrid() {
@@ -397,7 +392,7 @@ public class AddOrderController extends ControllerWrapper {
 				    }
 				});
 				
-					//Add all delivery areas
+			//Add all delivery areas
 			areaIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 			
 			areaNameCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getAreaName()));
@@ -872,6 +867,8 @@ public class AddOrderController extends ControllerWrapper {
 		postageField.setVisible(true);
 	}
 	
+	//delivery area
+	
 	public void addDeliveryArea(ActionEvent e) {
 		try {
 			
@@ -1031,8 +1028,7 @@ public class AddOrderController extends ControllerWrapper {
 					if(!selectedArea.getDelivers().contains(d))
 						selectedArea.addDelivery(d);
 				}
-				
-		
+					
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setHeaderText("Area edited successfully!");
 		alert.showAndWait();

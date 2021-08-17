@@ -30,7 +30,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-public class AddDeliveryAreaController extends ControllerWrapper{
+public class AddDeliveryAreaController_DELETE extends ControllerWrapper{
 	@FXML
 	private Pane neighberhood_pane;
 	@FXML

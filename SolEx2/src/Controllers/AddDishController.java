@@ -2,7 +2,6 @@ package Controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.stream.Collectors;
 import Exceptions.InvalidInputException;
 import Model.Component;
@@ -11,9 +10,10 @@ import Model.Restaurant;
 import Utils.DishType;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -22,7 +22,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -58,6 +57,8 @@ public class AddDishController extends ControllerWrapper {
 	private TableColumn<Dish, Double> priceCol;
 	@FXML
 	private TextField searchDishField;
+	@FXML
+	private Text timeMessage;
 	
 	
 	//components
@@ -86,6 +87,8 @@ public class AddDishController extends ControllerWrapper {
 	private AnchorPane toReplacePane;
 	@FXML
 	private TextField searchCompField;
+	@FXML
+	private Text priceMessage;
 	
 	
 	//to check
@@ -95,20 +98,16 @@ public class AddDishController extends ControllerWrapper {
 	private Button editDishbtn;
 	@FXML
 	private Button editComponentBtn;
-	
-	@FXML
-	private TabPane tabPane;
 
 	
 	@FXML
     public void initialize() {
-		init();
+		initDishTab();
+		initCpmpTab();
     }
 	
-	private void init() {
+	private void initDishTab() {
 		editDishbtn.setDisable(true);
-		editComponentBtn.setDisable(true);
-		
 		ObservableList<DishType> types = FXCollections.observableArrayList(DishType.values());
 		typesBox.getItems().clear();				
 		typesBox.setItems(FXCollections.observableArrayList(types));
@@ -141,9 +140,31 @@ public class AddDishController extends ControllerWrapper {
 		 searchDishField.textProperty().addListener((observable, oldValue, newValue) -> {
 			 searchDishByID();
 			});
+		 
+		timeMessage.setFill(Color.RED);
+		timeToMake.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, 
+					String newValue) {
+				    	if (newValue != "") {
+					    	try {
+					    		timeMessage.setText("");
+								Integer.parseInt(newValue);
+							} catch(NumberFormatException nfe) {
+								timeToMake.setText(oldValue);
+								timeMessage.setText("Numbers only!");
+							}	
+				    	}
+				    }
+				});
 		
-						
-			//Add all components
+	}
+
+	private void initCpmpTab() {
+		
+		editComponentBtn.setDisable(true);
+							
+		//Add all components to the table
 		componentIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		
 		comonentNameCol.setCellValueFactory(comp -> new ReadOnlyObjectWrapper<String>(comp.getValue().getComponentName()));
@@ -176,6 +197,23 @@ public class AddDishController extends ControllerWrapper {
 		 searchCompField.textProperty().addListener((observable, oldValue, newValue) -> {
 			 searchCompByID();
 			});
+		 
+		 priceMessage.setFill(Color.RED);
+		 price.textProperty().addListener(new ChangeListener<String>() {
+			 	@Override
+			 	public void changed(ObservableValue<? extends String> observable, String oldValue, 
+			 		String newValue) {
+					    	if (newValue != "") {
+					    		try {
+					    			priceMessage.setText("");
+					    			Double.parseDouble(newValue);
+					    		} catch(NumberFormatException nfe) {
+					    			price.setText(oldValue);
+					    			priceMessage.setText("Numbers only!");
+					    		}	
+					    	}
+			 		}
+		 });
 	}
 	
 	private void searchDishByID() {
@@ -206,9 +244,7 @@ public class AddDishController extends ControllerWrapper {
 			  if(comp != null)
 				  filteredData.add(comp);
 		     allComponentsTable.setItems(filteredData);
-		  }
-		   
-		
+		  }	
 	}
 
 	public void removeDish(ActionEvent e) {
