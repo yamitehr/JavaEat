@@ -35,7 +35,7 @@ public class SignInController extends ControllerWrapper {
 	private void initialize() {
 		NeighberhoodBox.setItems(neighberhood);
 		returnBtn.setOnAction(e -> {
-			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow(), 700, 550);
+			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow(), Consts.defaultWidthLogin, Consts.defaultHeightLogin);
 		});
 	}
 	@FXML
@@ -127,7 +127,7 @@ public class SignInController extends ControllerWrapper {
 			alert.setHeaderText("Welcome " + firstName.getText() + ". \n Please log in to continue.");
 			alert.showAndWait();
 		
-			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow(), 700, 550);
+			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow(), Consts.defaultWidthLogin, Consts.defaultHeightLogin);
 		}catch(InvalidInputException iie) {
 			resultConcole.setText(iie.getMessage());
 		}catch(InvalidPersonInputException ipe) {

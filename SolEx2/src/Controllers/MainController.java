@@ -60,7 +60,7 @@ public class MainController extends ControllerWrapper{
     }	
     
     public void signIn(ActionEvent e) throws Exception {
-        moveToScene("/View/Register.fxml", (Stage)signInBtn.getScene().getWindow(), 801, 550);
+        moveToScene("/View/Register.fxml", (Stage)signInBtn.getScene().getWindow(), Consts.defaultWidthRegistration, Consts.defaultHeightRegistration);
     	/*FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
 		AnchorPane pane = loader.load();
 		mainScreen.getChildren().removeAll(mainScreen.getChildren());
