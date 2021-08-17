@@ -97,11 +97,15 @@ public class CustomerLandingPageController extends ControllerWrapper{
     private Button confirmOrderBtn;
     @FXML
     private Button videoButton;
+    @FXML
+    private Button closeBtn;
+    
     
     Label messageDishLbl = new Label();
 	
 	@FXML
 	public void initialize() {
+		closeBtn.setOnAction(e -> toggleEditDish());
 		messageLbl.setText("Hello " + current.getFirstName());
 		componentList = new ArrayList<Pair<CheckBox, Component>>();
 		messageDishLbl.setText("");

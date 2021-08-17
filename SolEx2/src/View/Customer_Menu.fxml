@@ -13,6 +13,6 @@
             <Image url="@../../img/27.jpg" />
          </image>
       </ImageView>
-      <VBox fx:id="menuItemsVbox" layoutX="347.0" layoutY="164.0" prefHeight="367.0" prefWidth="281.0" styleClass="vBox" stylesheets="@menu.css" />
+      <VBox fx:id="menuItemsVbox" layoutX="380.0" layoutY="164.0" prefHeight="367.0" prefWidth="281.0" styleClass="vBox" stylesheets="@menu.css" />
    </children>
 </AnchorPane>
