@@ -7,6 +7,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
 
 .labelHeader{
 	-fx-font-family: 'Sarina', cursive;
@@ -207,4 +209,29 @@
 	-fx-max-height:2.5em;
 	 -fx-font-family: 'Yusei Magic', sans-serif;
 	-fx-font-size: 17px;
+}
+
+.registration{
+	-fx-font-family: 'Poppins', sans-serif;
+	-fx-font-size: 14px;
+	-fx-text-fill: white;
+}
+
+.registrationHeader{
+	-fx-text-fill: white;
+	-fx-font-family: 'Knewave', cursive;
+	-fx-font-size: 27px;
+}
+
+.registrationBtns{
+	-fx-text-fill: white;
+	-fx-font-family: 'Knewave', cursive;
+	
+	-fx-font-size: 16px;
+}
+.registrationBtns2{
+	-fx-text-fill: white;
+	-fx-font-family: 'Poppins', sans-serif;
+	-fx-font-weight: bold;
+	-fx-font-size: 16px;
 }

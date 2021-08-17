@@ -23,7 +23,7 @@
       </AnchorPane>
       <AnchorPane layoutX="345.0" prefHeight="550.0" prefWidth="357.0" style="-fx-background-color: #3c0b01;">
          <children>
-            <Button fx:id="signInBtn" layoutX="145.0" layoutY="506.0" mnemonicParsing="false" onAction="#signIn" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign Up" textFill="WHITE">
+            <Button fx:id="signInBtn" layoutX="145.0" layoutY="506.0" mnemonicParsing="false" onAction="#signIn" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign Up" textFill="WHITE" styleClass="registrationBtns">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
@@ -33,12 +33,12 @@
                   <Image url="@../../icons/JavaEat.png" />
                </image>
             </ImageView>
-            <Label layoutX="85.0" layoutY="202.0" text="Username" textFill="WHITE">
+            <Label layoutX="85.0" layoutY="202.0" text="Username" textFill="WHITE" styleClass="registration">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="85.0" layoutY="292.0" text="Password" textFill="WHITE">
+            <Label layoutX="85.0" layoutY="292.0" text="Password" textFill="WHITE" styleClass="registration">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
@@ -48,12 +48,12 @@
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="81.0" layoutY="478.0" text="New Member? Sign Up right now!" textFill="WHITE">
+            <Label layoutX="81.0" layoutY="478.0" text="New Member? Sign Up right now!" textFill="WHITE" styleClass="registration">
                <font>
                   <Font name="Microsoft JhengHei" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="loginBtn" layoutX="145.0" layoutY="426.0" mnemonicParsing="false" onAction="#login" prefHeight="29.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign In" textFill="WHITE">
+            <Button fx:id="loginBtn" layoutX="145.0" layoutY="426.0" mnemonicParsing="false" onAction="#login" prefHeight="29.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign In" textFill="WHITE" styleClass="registrationBtns">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
