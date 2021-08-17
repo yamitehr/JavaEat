@@ -403,7 +403,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		//Creating an image 
 	      Image imageTrash = null;
 		try {
-			imageTrash = new Image(new FileInputStream("icons/trash-alt-solid.png"));
+			imageTrash = new Image(new FileInputStream("icons/trash-alt-solid-gray.png"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}  
