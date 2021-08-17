@@ -72,7 +72,7 @@
             <Label layoutX="42.0" layoutY="348.0" prefHeight="26.0" prefWidth="90.0" styleClass="registration" text="Sensitivies" />
             <CheckBox fx:id="gluten" layoutX="156.0" layoutY="353.0" mnemonicParsing="false" styleClass="registration" text="Gluten" />
             <CheckBox fx:id="lactose" layoutX="234.0" layoutY="353.0" mnemonicParsing="false" styleClass="registration" text="Lactose" />
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Return" textFill="WHITE" styleClass="registrationBtns">
+            <Button fx:id="returnBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Return" textFill="WHITE" styleClass="registrationBtns">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
