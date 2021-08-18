@@ -7,10 +7,12 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,7 +37,7 @@
                   <Font name="Microsoft JhengHei" size="26.0" />
                </font>
             </Label>
-            <Button fx:id="signInBtn" layoutX="196.0" layoutY="434.0" mnemonicParsing="false" onAction="#register" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign Up" textFill="WHITE" styleClass="registrationBtns">
+            <Button fx:id="signInBtn" layoutX="196.0" layoutY="434.0" mnemonicParsing="false" onAction="#register" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" styleClass="registrationBtns" text="Sign Up" textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
@@ -67,12 +69,19 @@
             </HBox>
             <ChoiceBox fx:id="NeighberhoodBox" layoutX="156.0" layoutY="307.0" prefHeight="28.0" prefWidth="179.0" />
             <Label layoutX="42.0" layoutY="308.0" prefHeight="26.0" prefWidth="90.0" styleClass="registration" text="Neighborhood" />
-            <PasswordField fx:id="password" layoutX="156.0" layoutY="386.0" />
+            <PasswordField fx:id="password" layoutX="156.0" layoutY="386.0" onKeyTyped="#setPasswordMeter">
+               <tooltip>
+                  <Tooltip fx:id="tooltip">
+                     <graphic>
+                        <ProgressBar fx:id="passwordMeter" prefHeight="18.0" prefWidth="155.0" progress="0.0" style="-fx-accent: red;" />
+                     </graphic>
+                  </Tooltip>
+               </tooltip></PasswordField>
             <Label layoutX="42.0" layoutY="385.0" prefHeight="26.0" prefWidth="90.0" styleClass="registration" text="Password" />
             <Label layoutX="42.0" layoutY="348.0" prefHeight="26.0" prefWidth="90.0" styleClass="registration" text="Sensitivies" />
             <CheckBox fx:id="gluten" layoutX="156.0" layoutY="353.0" mnemonicParsing="false" styleClass="registration" text="Gluten" />
             <CheckBox fx:id="lactose" layoutX="234.0" layoutY="353.0" mnemonicParsing="false" styleClass="registration" text="Lactose" />
-            <Button fx:id="returnBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Return" textFill="WHITE" styleClass="registrationBtns">
+            <Button fx:id="returnBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" styleClass="registrationBtns" text="Return" textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
