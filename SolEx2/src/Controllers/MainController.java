@@ -34,37 +34,30 @@ public class MainController extends ControllerWrapper{
     public void login(ActionEvent e) throws Exception {
     	boolean isExist = false;
     	if(txtUserName.getText().equals("manager") && txtPassword.getText().equals("manager")) {
+    		soundOfButton("welcome.mp3");
     		moveToScene("/View/Manager_LandingPage.fxml", (Stage)txtUserName.getScene().getWindow());
-    	//	lblStatus.setText("Welcome manager");
     		isExist = true;
     	}
     	
     	for(Customer cust: rest.getCustomers().values()) {
     		if(txtUserName.getText().equals(cust.getUserName()) &&
     				txtPassword.getText().equals(cust.getPassword())) {
+    				isExist = true;
     				State.setCurrentCustomer(cust);
-//    				Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerMenu.fxml"));
-//    				Scene scene = new Scene(root);
-//    				Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-//    				stage.setScene(scene);
-//    				stage.centerOnScreen();
-//    				stage.setTitle("Menu");
-//    				stage.show();
+    				soundOfButton("welcome.mp3");
     				moveToScene("/view/CustomerLandingPage.fxml", (Stage)loginBtn.getScene().getWindow());
     		}
     	}
     	
-    	if(!isExist)
-    		lblStatus.setText("Oops!");	
+    	if(!isExist) {
+    		lblStatus.setText("User name or password incorrect!");	
+    		soundOfButton("error.mp3");
+    	}
     		    		
     }	
     
     public void signIn(ActionEvent e) throws Exception {
         moveToScene("/View/Register.fxml", (Stage)signInBtn.getScene().getWindow(), Consts.defaultWidthRegistration, Consts.defaultHeightRegistration);
-    	/*FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
-		AnchorPane pane = loader.load();
-		mainScreen.getChildren().removeAll(mainScreen.getChildren());
-		mainScreen.getChildren().add(pane);*/
     }
 
 }

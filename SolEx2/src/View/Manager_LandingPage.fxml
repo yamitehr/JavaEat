@@ -76,7 +76,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="statisticsBtn1" alignment="CENTER" layoutX="6.0" layoutY="601.0" mnemonicParsing="false" onAction="#moveToAIMachineScene" prefHeight="48.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="AI Machine">
+            <Button fx:id="statisticsBtn1" alignment="CENTER" layoutX="6.0" layoutY="611.0" mnemonicParsing="false" onAction="#moveToAIMachineScene" prefHeight="48.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="AI Machine">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

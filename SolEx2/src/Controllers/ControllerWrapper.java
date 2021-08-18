@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.beans.value.ChangeListener;
@@ -11,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -50,5 +53,12 @@ public class ControllerWrapper {
 	
 	public void moveToScene(String fxmlName, Stage primaryStage) {
 		moveToScene(fxmlName, primaryStage, Consts.defaultWidth, Consts.defaultHeight);
+	}
+	
+	public void soundOfButton(String path) {
+		String musicFile = path;  
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
 	}
 }
