@@ -19,7 +19,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -32,6 +34,9 @@ public class SignInController extends ControllerWrapper {
 	@FXML
 	private void initialize() {
 		NeighberhoodBox.setItems(neighberhood);
+		returnBtn.setOnAction(e -> {
+			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow(), Consts.defaultWidthLogin, Consts.defaultHeightLogin);
+		});
 	}
 	@FXML
 	private TextField userName;
@@ -54,9 +59,14 @@ public class SignInController extends ControllerWrapper {
 	@FXML
 	private PasswordField password;
 	@FXML
-	private Text messageToUser;
+	private TextArea resultConcole;
 	@FXML
 	private Button signInBtn;
+	@FXML
+	private ToggleGroup gender;
+	@FXML
+	private Button returnBtn;
+	
 	
 	public void register(ActionEvent e) throws Exception {
 		try {
@@ -117,13 +127,13 @@ public class SignInController extends ControllerWrapper {
 			alert.setHeaderText("Welcome " + firstName.getText() + ". \n Please log in to continue.");
 			alert.showAndWait();
 		
-			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow());
+			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow(), Consts.defaultWidthLogin, Consts.defaultHeightLogin);
+		}catch(InvalidInputException iie) {
+			resultConcole.setText(iie.getMessage());
 		}catch(InvalidPersonInputException ipe) {
-			messageToUser.setFill(Color.RED);
-			messageToUser.setText(ipe.getMessage());
+			resultConcole.setText(ipe.getMessage());
 		} catch(Exception exc) {
-			messageToUser.setFill(Color.RED);
-			messageToUser.setText("an error has accured please try again");
+			resultConcole.setText("an error has accured please try again");
 		}
 	}
 	

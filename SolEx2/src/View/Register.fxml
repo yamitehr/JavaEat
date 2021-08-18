@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="801.0" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SignInController">
+   <children>
+      <AnchorPane style="-fx-background-color: black;">
+         <children>
+            <ImageView fitHeight="550.0" fitWidth="641.0" opacity="0.53" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/delight2.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="345.0" prefHeight="550.0" prefWidth="461.0" style="-fx-background-color: #3c0b01;">
+         <children>
+            <Label layoutX="183.0" layoutY="26.0" styleClass="registrationHeader" text="Registration" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft JhengHei" size="26.0" />
+               </font>
+            </Label>
+            <Button fx:id="signInBtn" layoutX="196.0" layoutY="434.0" mnemonicParsing="false" onAction="#register" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign Up" textFill="WHITE" styleClass="registrationBtns">
+               <font>
+                  <Font name="Microsoft JhengHei" size="14.0" />
+               </font>
+            </Button>
+            <TextArea fx:id="resultConcole" layoutX="87.0" layoutY="482.0" prefHeight="36.0" prefWidth="298.0" />
+            <DatePicker fx:id="birthDate" layoutX="156.0" layoutY="213.0" />
+            <Label layoutX="42.0" layoutY="100.0" prefHeight="18.0" prefWidth="89.0" styleClass="registration" text="username" />
+            <TextField fx:id="userName" layoutX="156.0" layoutY="96.0" />
+            <Label layoutX="42.0" layoutY="134.0" prefHeight="26.0" prefWidth="90.0" styleClass="registration" text="First name" />
+            <TextField fx:id="firstName" layoutX="156.0" layoutY="134.0" />
+            <Label layoutX="42.0" layoutY="173.0" prefHeight="26.0" prefWidth="80.0" styleClass="registration" text="Last name" />
+            <TextField fx:id="lastName" layoutX="156.0" layoutY="173.0" />
+            <Label layoutX="42.0" layoutY="213.0" prefHeight="26.0" prefWidth="80.0" styleClass="registration" text="birthDate" />
+            <Label layoutX="42.0" layoutY="264.0" prefHeight="26.0" prefWidth="80.0" styleClass="registration" text="Gender" />
+            <HBox layoutX="156.0" layoutY="264.0" prefHeight="54.0" prefWidth="291.0" spacing="20.0">
+               <children>
+                  <RadioButton fx:id="male" mnemonicParsing="false" prefHeight="19.0" prefWidth="73.0" selected="true" styleClass="registration" text="Male">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </RadioButton>
+                  <RadioButton fx:id="female" mnemonicParsing="false" prefHeight="19.0" prefWidth="80.0" styleClass="registration" text="Female" />
+                  <RadioButton fx:id="unknown" mnemonicParsing="false" prefHeight="19.0" prefWidth="99.0" styleClass="registration" text="Unknown">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="gender" />
+                     </toggleGroup>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <ChoiceBox fx:id="NeighberhoodBox" layoutX="156.0" layoutY="307.0" prefHeight="28.0" prefWidth="179.0" />
+            <Label layoutX="42.0" layoutY="308.0" prefHeight="26.0" prefWidth="90.0" styleClass="registration" text="Neighborhood" />
+            <PasswordField fx:id="password" layoutX="156.0" layoutY="386.0" />
+            <Label layoutX="42.0" layoutY="385.0" prefHeight="26.0" prefWidth="90.0" styleClass="registration" text="Password" />
+            <Label layoutX="42.0" layoutY="348.0" prefHeight="26.0" prefWidth="90.0" styleClass="registration" text="Sensitivies" />
+            <CheckBox fx:id="gluten" layoutX="156.0" layoutY="353.0" mnemonicParsing="false" styleClass="registration" text="Gluten" />
+            <CheckBox fx:id="lactose" layoutX="234.0" layoutY="353.0" mnemonicParsing="false" styleClass="registration" text="Lactose" />
+            <Button fx:id="returnBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Return" textFill="WHITE" styleClass="registrationBtns">
+               <font>
+                  <Font name="Microsoft JhengHei" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

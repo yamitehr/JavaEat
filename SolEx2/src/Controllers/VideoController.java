@@ -22,6 +22,7 @@ public class VideoController {
 		mediaPlayer.play();
 		restaurantVideo.setMediaPlayer(mediaPlayer);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		mediaPlayer.setMute(true);
 	}
 	
 	

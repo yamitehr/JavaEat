@@ -12,9 +12,11 @@
 .menuItem {
    -fx-border-color: white;
    -fx-border-radius: 20px;
+   -fx-background-radius: 20px;
    -fx-padding: 10 10 10 10;
    -fx-min-width:25em;
 	-fx-max-width:25em;
+	-fx-background-color: rgba(61, 28, 32, 0.4);
    
 }
 
@@ -102,5 +104,14 @@
 	-fx-background-color: white;
 	 -fx-font-family: 'Concert One', cursive;
     -fx-font-size: 18px;
+}
+
+.closeEditBtn{
+	
+	-fx-text-fill: white;
+	 -fx-font-family: 'Concert One', cursive;
+    -fx-font-size: 21px;
+    
+	-fx-background-color: transparent;
 }
 

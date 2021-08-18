@@ -91,6 +91,7 @@
                   </GridPane>
                </children></Pane>
             <Button fx:id="addDishToOrder" layoutX="106.0" layoutY="468.0" mnemonicParsing="false" styleClass="addDishButton" stylesheets="@menu.css" text="Add dish" />
+            <Button fx:id="closeBtn" layoutX="2.0" layoutY="1.0" mnemonicParsing="false" styleClass="closeEditBtn" stylesheets="@menu.css" text="x" />
             </children>
         </AnchorPane>
                   <Button fx:id="logOutBtn" layoutX="1237.0" mnemonicParsing="false" onAction="#MoveToLoginScene" opacity="0.82" prefHeight="47.0" prefWidth="193.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Log Out" textFill="#020227">
