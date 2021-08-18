@@ -147,6 +147,7 @@
                                              </image>
                                           </ImageView>
                                        </graphic></Button>
+                                    <Text fx:id="postageMessage" layoutX="487.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.53668212890625" />
                                  </children>
                               </AnchorPane>
                               <Pane layoutX="121.0" layoutY="281.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="670.0">
@@ -173,19 +174,19 @@
                                           <TableColumn fx:id="postageCol" prefWidth="88.0" text="Postage" />
                                        </columns>
                                     </TableView>
-                                    <Button layoutX="479.0" layoutY="339.0" maxHeight="38.0" mnemonicParsing="false" onAction="#signAsDelivered" prefHeight="48.0" prefWidth="193.0" styleClass="addBtns" stylesheets="@decoration.css" text="Sign As Delivered" />
+                                    <Button layoutX="461.0" layoutY="339.0" maxHeight="38.0" mnemonicParsing="false" onAction="#signAsDelivered" prefHeight="48.0" prefWidth="211.0" styleClass="addBtns" stylesheets="@decoration.css" text="Sign As Delivered" />
                                     <TextField fx:id="searchDeliveryField" alignment="CENTER" layoutX="-4.0" layoutY="92.0" prefWidth="148.0" promptText="Search By Id" />
                                     <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="4.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../icons/trash-alt-solid.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="152.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="144.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../icons/edit-solid-2.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="489.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="475.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../icons/check-square-solid.png" />
                                        </image>
