@@ -4,7 +4,7 @@ import java.io.File;
 import java.time.LocalDate;
 
 import Exceptions.InvalidInputException;
-import Exceptions.InvalidPersonInputException;
+import Exceptions.InvalidInputException;
 import Model.Customer;
 import Model.Restaurant;
 import Utils.Gender;
@@ -97,7 +97,7 @@ public class SignInController extends ControllerWrapper {
 		try {
 			String user_Name = userName.getText();
 			if(user_Name.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill User Name");
+				throw new InvalidInputException("Please fill User Name");
 			}
 			for(Customer c : Restaurant.getInstance().getCustomers().values()) {
 				if(c.getUserName().equals(user_Name)) {
@@ -106,23 +106,23 @@ public class SignInController extends ControllerWrapper {
 			}
 			String first_Name = firstName.getText();
 			if(first_Name.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill First Name");
+				throw new InvalidInputException("Please fill First Name");
 			}			
 			String last_Name = lastName.getText();
 			if(last_Name.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill Last Name");
+				throw new InvalidInputException("Please fill Last Name");
 			}
 			LocalDate date;
 			date = birthDate.getValue();
 			if(birthDate == null) {
-				throw new InvalidPersonInputException("Please select Date of Birth");
+				throw new InvalidInputException("Please select Date of Birth");
 			}
 			if(date.isAfter(LocalDate.now())) {
-				throw new InvalidPersonInputException("Date of birth can't be in the future");
+				throw new InvalidInputException("Date of birth can't be in the future");
 			}
 			Neighberhood neighberhood = NeighberhoodBox.getValue();
 			if(neighberhood == null) {
-				throw new InvalidPersonInputException("Please select Neighborhood");
+				throw new InvalidInputException("Please select Neighborhood");
 			}
 			Gender gender;
 			boolean sensitiveLactose = false;
@@ -155,8 +155,6 @@ public class SignInController extends ControllerWrapper {
 			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow(), Consts.defaultWidthLogin, Consts.defaultHeightLogin);
 		}catch(InvalidInputException iie) {
 			resultConcole.setText(iie.getMessage());
-		}catch(InvalidPersonInputException ipe) {
-			resultConcole.setText(ipe.getMessage());
 		} catch(Exception exc) {
 			resultConcole.setText("an error has accured please try again");
 		}

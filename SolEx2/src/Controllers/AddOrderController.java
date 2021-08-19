@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import Exceptions.InvalidInputException;
-import Exceptions.InvalidPersonInputException;
+import Exceptions.InvalidInputException;
 import Model.Component;
 import Model.Customer;
 import Model.Delivery;
@@ -353,6 +353,7 @@ public class AddOrderController extends ControllerWrapper {
 				
 			for (Neighberhood n : Neighberhood.values()) {
 				CheckBox cb = new CheckBox(n.name());
+				cb.getStylesheets().add(getClass().getResource("/View/checkBox.css").toExternalForm());
 				neighberhoodList.add(new Pair<CheckBox, Neighberhood>(cb, n));
 			}
 				
@@ -870,7 +871,7 @@ public class AddOrderController extends ControllerWrapper {
 			
 			String daName = deliveryAreaName.getText();
 			if(daName.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill Area Name");
+				throw new InvalidInputException("Please fill Area Name");
 			}
 			
 			HashSet<Neighberhood> selectedNeighberhoods = new HashSet<Neighberhood>();
@@ -888,14 +889,14 @@ public class AddOrderController extends ControllerWrapper {
 			}
 			
 			if(selectedNeighberhoods.isEmpty()) {
-				throw new InvalidPersonInputException("Please select Neighberhoods");
+				throw new InvalidInputException("Please select Neighberhoods");
 			}
 			
 			int daTime = 0;
 			try {
 				daTime = Integer.parseInt(deliveryTime.getText()); 
 			} catch(Exception exc) {
-				throw new InvalidPersonInputException("Please fill Devliery Time");
+				throw new InvalidInputException("Please fill Devliery Time");
 			}
 			
 			DeliveryArea da = new DeliveryArea(daName, selectedNeighberhoods, daTime);
@@ -916,7 +917,7 @@ public class AddOrderController extends ControllerWrapper {
 			} else {
 				messageToUser.setText("an error has accured please try again");
 			}
-		} catch(InvalidPersonInputException ipe) {
+		}catch(InvalidInputException ipe) {
 			messageToUser.setText(ipe.getMessage());
 		} catch(Exception exc) {
 			messageToUser.setText("an error has accured please try again");

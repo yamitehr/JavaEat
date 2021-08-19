@@ -131,7 +131,7 @@ public class DeliveryManager {
 		};
 
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-		executor.scheduleAtFixedRate(ordersTask, 0, 15, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(ordersTask, 0, 60, TimeUnit.SECONDS);
 		Restaurant.getInstance().getDeliveryPersons().values().forEach(dp -> dp.getNewDelivery());
 	}
 	

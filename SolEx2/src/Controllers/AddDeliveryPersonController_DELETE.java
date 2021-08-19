@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
-import Exceptions.InvalidPersonInputException;
+import Exceptions.InvalidInputException;
 import Model.Cook;
 import Model.DeliveryArea;
 import Model.DeliveryPerson;
@@ -91,22 +91,22 @@ public class AddDeliveryPersonController_DELETE extends ControllerWrapper{
 			
 			String firstName = first_Name.getText();
 			if(firstName.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill First Name");
+				throw new InvalidInputException("Please fill First Name");
 			}
 			
 			String lastName = last_Name.getText();
 			if(lastName.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill Last Name");
+				throw new InvalidInputException("Please fill Last Name");
 			}
 			
 			//get DOB
 			LocalDate birthDate;
 			birthDate = date.getValue();
 			if(birthDate == null) {
-				throw new InvalidPersonInputException("Please select Date of Birth");
+				throw new InvalidInputException("Please select Date of Birth");
 			}
 			if(birthDate.isAfter(LocalDate.now())) {
-				throw new InvalidPersonInputException("Date of birth can't be in the future");
+				throw new InvalidInputException("Date of birth can't be in the future");
 			}
 			
 			Gender gender = null;
@@ -120,7 +120,7 @@ public class AddDeliveryPersonController_DELETE extends ControllerWrapper{
 					}
 				}
 			} catch(Exception exc) {
-				throw new InvalidPersonInputException("Please fill Gender");
+				throw new InvalidInputException("Please fill Gender");
 			}
 			
 			//get Vehicle
@@ -131,12 +131,12 @@ public class AddDeliveryPersonController_DELETE extends ControllerWrapper{
 				}
 			}
 			if(vehicle == null) {
-				throw new InvalidPersonInputException("Please select Vehicle");
+				throw new InvalidInputException("Please select Vehicle");
 			}
 	
 			DeliveryArea selectedDeliveryArea = deliveryAreaBox.getSelectionModel().getSelectedItem();
 			if(selectedDeliveryArea == null) {
-				throw new InvalidPersonInputException("Please select Delivery Area");
+				throw new InvalidInputException("Please select Delivery Area");
 			}
 			
 			
@@ -159,7 +159,7 @@ public class AddDeliveryPersonController_DELETE extends ControllerWrapper{
 				messageToUser.setText("an error has accured please try again");
 			}
 			
-		} catch(InvalidPersonInputException ipe) {
+		} catch(InvalidInputException ipe) {
 			messageToUser.setFill(Color.RED);
 			messageToUser.setText(ipe.getMessage());
 		} catch(Exception exc) {

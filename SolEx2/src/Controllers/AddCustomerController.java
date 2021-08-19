@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import Exceptions.InvalidInputException;
-import Exceptions.InvalidPersonInputException;
+import Exceptions.InvalidInputException;
 import Model.Cook;
 import Model.Customer;
 import Model.Dish;
@@ -271,22 +271,22 @@ public class AddCustomerController extends ControllerWrapper{
 			
 			String firstName = first_Name.getText();
 			if(firstName.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill First Name");
+				throw new InvalidInputException("Please fill First Name");
 			}
 			
 			String lastName = last_Name.getText();
 			if(lastName.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill Last Name");
+				throw new InvalidInputException("Please fill Last Name");
 			}
 			
 			//get DOB
 			LocalDate birthDate;
 			birthDate = date.getValue();
 			if(birthDate == null) {
-				throw new InvalidPersonInputException("Please select Date of Birth");
+				throw new InvalidInputException("Please select Date of Birth");
 			}
 			if(birthDate.isAfter(LocalDate.now())) {
-				throw new InvalidPersonInputException("Date of birth can't be in the future");
+				throw new InvalidInputException("Date of birth can't be in the future");
 			}
 			
 			Gender gender = null;
@@ -300,14 +300,14 @@ public class AddCustomerController extends ControllerWrapper{
 					}
 				}
 			} catch(Exception exc) {
-				throw new InvalidPersonInputException("Please fill Gender");
+				throw new InvalidInputException("Please fill Gender");
 			}
 			
 			//get Neighborhood
 			Neighberhood neighberhood = neighberhoodsBox.getValue();
 				
 			if(neighberhood == null) {
-				throw new InvalidPersonInputException("Please select Neighborhood");
+				throw new InvalidInputException("Please select Neighborhood");
 			}
 	
 			boolean isSensitiveToLactose = isLactose.isSelected();
@@ -340,7 +340,7 @@ public class AddCustomerController extends ControllerWrapper{
 				messageToUser.setText("an error has accured please try again");
 			}
 			
-		} catch(InvalidPersonInputException ipe) {
+		}  catch(InvalidInputException ipe) {
 			messageToUser.setText(ipe.getMessage());
 		} catch(Exception exc) {
 			messageToUser.setText("an error has accured please try again");

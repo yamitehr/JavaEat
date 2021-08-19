@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import Exceptions.InvalidInputException;
-import Exceptions.InvalidPersonInputException;
+import Exceptions.InvalidInputException;
 import Model.Cook;
 import Model.DeliveryArea;
 import Model.DeliveryPerson;
@@ -423,22 +423,22 @@ public class AddCookController extends ControllerWrapper{
 			
 			String firstName = first_Name.getText();
 			if(firstName.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill First Name");
+				throw new InvalidInputException("Please fill First Name");
 			}
 			
 			String lastName = last_Name.getText();
 			if(lastName.isEmpty()) {
-				throw new InvalidPersonInputException("Please fill Last Name");
+				throw new InvalidInputException("Please fill Last Name");
 			}
 			
 			//get DOB
 			LocalDate birthDate;
 			birthDate = date.getValue();
 			if(birthDate == null) {
-				throw new InvalidPersonInputException("Please select Date of Birth");
+				throw new InvalidInputException("Please select Date of Birth");
 			}
 			if(birthDate.isAfter(LocalDate.now())) {
-				throw new InvalidPersonInputException("Date of birth can't be in the future");
+				throw new InvalidInputException("Date of birth can't be in the future");
 			}
 			
 			Gender gender = null;
@@ -452,7 +452,7 @@ public class AddCookController extends ControllerWrapper{
 					}
 				}
 			} catch(Exception exc) {
-				throw new InvalidPersonInputException("Please fill Gender");
+				throw new InvalidInputException("Please fill Gender");
 			}
 			
 			//get Expertise
@@ -463,7 +463,7 @@ public class AddCookController extends ControllerWrapper{
 				}
 			}
 			if(expertise == null) {
-				throw new InvalidPersonInputException("Please select Expertise");
+				throw new InvalidInputException("Please select Expertise");
 			}
 	
 			boolean isChefChoice = isChef.isSelected();
@@ -487,8 +487,7 @@ public class AddCookController extends ControllerWrapper{
 			}else {
 				messageToUserCook.setText("an error has accured please try again");
 			}
-			
-		} catch(InvalidPersonInputException ipe) {
+		} catch(InvalidInputException ipe) {
 			messageToUserCook.setText(ipe.getMessage());
 		} catch(Exception exc) {
 			messageToUserCook.setText("an error has accured please try again");
@@ -595,22 +594,22 @@ public class AddCookController extends ControllerWrapper{
 				
 				String firstName = first_Name_DP.getText();
 				if(firstName.isEmpty()) {
-					throw new InvalidPersonInputException("Please fill First Name");
+					throw new InvalidInputException("Please fill First Name");
 				}
 				
 				String lastName = last_Name_DP.getText();
 				if(lastName.isEmpty()) {
-					throw new InvalidPersonInputException("Please fill Last Name");
+					throw new InvalidInputException("Please fill Last Name");
 				}
 				
 				//get DOB
 				LocalDate birthDate;
 				birthDate = dateDP.getValue();
 				if(birthDate == null) {
-					throw new InvalidPersonInputException("Please select Date of Birth");
+					throw new InvalidInputException("Please select Date of Birth");
 				}
 				if(birthDate.isAfter(LocalDate.now())) {
-					throw new InvalidPersonInputException("Date of birth can't be in the future");
+					throw new InvalidInputException("Date of birth can't be in the future");
 				}
 				
 				Gender gender = null;
@@ -624,7 +623,7 @@ public class AddCookController extends ControllerWrapper{
 						}
 					}
 				} catch(Exception exc) {
-					throw new InvalidPersonInputException("Please fill Gender");
+					throw new InvalidInputException("Please fill Gender");
 				}
 				
 				//get Vehicle
@@ -635,12 +634,12 @@ public class AddCookController extends ControllerWrapper{
 					}
 				}
 				if(vehicle == null) {
-					throw new InvalidPersonInputException("Please select Vehicle");
+					throw new InvalidInputException("Please select Vehicle");
 				}
 		
 				DeliveryArea selectedDeliveryArea = deliveryAreaBox.getSelectionModel().getSelectedItem();
 				if(selectedDeliveryArea == null) {
-					throw new InvalidPersonInputException("Please select Delivery Area");
+					throw new InvalidInputException("Please select Delivery Area");
 				}
 				
 				
@@ -664,7 +663,7 @@ public class AddCookController extends ControllerWrapper{
 					messageToUserDeliveryPerson.setText("an error has accured please try again");
 				}
 				
-			} catch(InvalidPersonInputException ipe) {
+			} catch(InvalidInputException ipe) {
 				messageToUserDeliveryPerson.setText(ipe.getMessage());
 			} catch(Exception exc) {
 				messageToUserDeliveryPerson.setText("an error has accured please try again");
