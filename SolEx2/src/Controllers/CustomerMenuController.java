@@ -13,9 +13,11 @@ import Model.Dish;
 import Model.Restaurant;
 import Model.State;
 import Utils.DishType;
+import Utils.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -65,6 +67,7 @@ public class CustomerMenuController extends ControllerWrapper{
 		if (starters.size() > 0) {
 			Pane starterPane = new Pane();
 			Label starterLabel = new Label("Starters");
+			starterLabel.setLayoutX(110);
 			starterLabel.getStyleClass().add("headersLabel");
 			starterPane.setMinSize(55, 55);
 			
@@ -78,6 +81,7 @@ public class CustomerMenuController extends ControllerWrapper{
 		if (main.size() > 0) {
 			Pane mainPane = new Pane();
 			Label mainLabel = new Label("Main Courses");
+			mainLabel.setLayoutX(90);
 			mainLabel.getStyleClass().add("headersLabel");
 			mainPane.setMinSize(55, 55);
 			
@@ -91,6 +95,7 @@ public class CustomerMenuController extends ControllerWrapper{
 		if (deserts.size() > 0) {
 			Pane desertsPane = new Pane();
 			Label desertsLabel = new Label("Desserts");
+			desertsLabel.setLayoutX(110);
 			desertsLabel.getStyleClass().add("headersLabel");
 			desertsPane.setMinSize(55, 55);
 			
@@ -167,6 +172,7 @@ public class CustomerMenuController extends ControllerWrapper{
 		compsLa.relocate(dishLa.getLayoutX(), dishLa.getLayoutY() +20);
 		priceLa.relocate(dishLa.getLayoutX()+252, dishLa.getLayoutY());
 		addBtn.relocate(priceLa.getLayoutX() + 7, priceLa.getLayoutY()+50);
+		
 		return newMenuItem;
 	}
 }

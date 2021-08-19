@@ -16,7 +16,8 @@
    -fx-padding: 10 10 10 10;
    -fx-min-width:25em;
 	-fx-max-width:25em;
-	-fx-background-color: rgba(61, 28, 32, 0.4);
+	-fx-background-color: rgba(184, 155, 95, 0.1);
+	
    
 }
 
@@ -55,7 +56,7 @@
 .headersLabel{
 	 -fx-text-fill: white;
        -fx-font-size: 21px;
-   -fx-background-color: #3D201C;
+   -fx-background-color: #b89b5f;
    -fx-font-family: 'Concert One', cursive;
    -fx-padding: 15 15 15 15;
 }
@@ -114,4 +115,28 @@
     
 	-fx-background-color: transparent;
 }
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}
 
+/* The main scrollbar **track** CSS class  */
+.scroll-pane .scroll-bar:horizontal .track,
+.scroll-pane .scroll-bar:vertical .track{
+	-fx-background-color: transparent;
+	-fx-border-color:derive( #3D201C,80%);
+
+	-fx-background-radius: 2em;
+	-fx-border-radius:2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.scroll-pane .scroll-bar:horizontal .thumb,
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color:derive( #3D201C,90%);
+	-fx-background-insets: 2, 0, 0;
+	-fx-background-radius: 2em;
+
+}
