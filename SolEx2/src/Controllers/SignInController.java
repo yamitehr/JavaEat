@@ -76,8 +76,6 @@ public class SignInController extends ControllerWrapper {
     
     @FXML
     private ProgressBar passwordMeter;
-   
-    public boolean SHOW_TOOLTIP = false;
     
     public static double WEEK = 0.33;
     public static double MEDIUM = 0.66;

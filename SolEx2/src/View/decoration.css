@@ -235,3 +235,10 @@
 	-fx-font-weight: bold;
 	-fx-font-size: 16px;
 }
+
+#tooltip{
+	
+	-fx-font-family: 'Poppins', sans-serif;
+	
+	-fx-font-size: 12px;
+}
