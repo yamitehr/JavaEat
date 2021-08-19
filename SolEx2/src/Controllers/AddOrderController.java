@@ -38,6 +38,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -66,7 +67,7 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private ListView<Dish> finalDishesList;
 	@FXML
-	private Text messageToUserOrder;
+	private TextArea messageToUserOrder;
 	@FXML
 	private TableView<Order> allOrdersTable;
 	@FXML
@@ -102,9 +103,7 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private ListView<Order> ordersList;
 	@FXML
-	private Text messageToUserRegular;
-	@FXML
-	private Text messageToUserExpress;	
+	private TextArea messageToUserRegular;
 	@FXML
 	private AnchorPane regularPane;
 	@FXML
@@ -154,7 +153,7 @@ public class AddOrderController extends ControllerWrapper {
 	private ArrayList<Pair<CheckBox, Neighberhood>> neighberhoodList;
 	
 	@FXML
-	private Text messageToUser;
+	private TextArea messageToUser;
 	@FXML
 	private Button addDeliveryAreaBtn;
 	@FXML
@@ -533,7 +532,7 @@ public class AddOrderController extends ControllerWrapper {
 		editOrderBtn.setDisable(true);
 		addOrderBtn.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			messageToUserOrder.setFill(Color.RED);
+			//messageToUserOrder.setFill(Color.RED);
 			messageToUserOrder.setText(inputE.getMessage());
 		}
 	}
@@ -582,7 +581,7 @@ public class AddOrderController extends ControllerWrapper {
 			///		
 	
 			Restaurant.getInstance().addOrder(newOrder); 
-			messageToUserOrder.setFill(Color.BLUE);
+			//messageToUserOrder.setFill(Color.BLUE);
 			messageToUserOrder.setText("Order added successfully");
 			customerBox.getSelectionModel().clearSelection();
 			deliveryBox.getSelectionModel().clearSelection();
@@ -594,10 +593,10 @@ public class AddOrderController extends ControllerWrapper {
 			ordersList.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
-			messageToUserOrder.setFill(Color.RED);
+			//messageToUserOrder.setFill(Color.RED);
 			messageToUserOrder.setText(inputE.getMessage());
 		}catch(Exception ex) {
-			messageToUserOrder.setFill(Color.RED);
+			//messageToUserOrder.setFill(Color.RED);
 			messageToUserOrder.setText("an error has accured please try again");
 		}
 	}
@@ -707,7 +706,7 @@ public class AddOrderController extends ControllerWrapper {
 		addRegularBtn.setDisable(false);
 		addExpressBtn.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			messageToUserRegular.setFill(Color.RED);
+			//messageToUserRegular.setFill(Color.RED);
 			messageToUserRegular.setText(inputE.getMessage());
 		}
 	}
@@ -746,7 +745,7 @@ public class AddOrderController extends ControllerWrapper {
 			///		
 	
 			Restaurant.getInstance().addDelivery(newExpressDelivery); 
-			messageToUserRegular.setFill(Color.BLUE);
+			//messageToUserRegular.setFill(Color.BLUE);
 			messageToUserRegular.setText("Express Delivery added successfully");
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
@@ -759,13 +758,13 @@ public class AddOrderController extends ControllerWrapper {
 			allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
-			messageToUserRegular.setFill(Color.RED);
+			//messageToUserRegular.setFill(Color.RED);
 			messageToUserRegular.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
-			messageToUserRegular.setFill(Color.RED);
+			//messageToUserRegular.setFill(Color.RED);
 			messageToUserRegular.setText("Wrong Input!");
 		}catch(Exception ex) {
-			messageToUserRegular.setFill(Color.RED);
+			//messageToUserRegular.setFill(Color.RED);
 			messageToUserRegular.setText("an error has accured please try again");
 		}
 	}
@@ -806,7 +805,6 @@ public class AddOrderController extends ControllerWrapper {
 			///		
 	
 			Restaurant.getInstance().addDelivery(newRegularDelivery); 
-			messageToUserRegular.setFill(Color.BLUE);
 			messageToUserRegular.setText("Delivery added successfully");
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
@@ -817,10 +815,8 @@ public class AddOrderController extends ControllerWrapper {
 			allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
-			messageToUserRegular.setFill(Color.RED);
 			messageToUserRegular.setText(inputE.getMessage());
 		}catch(Exception ex) {
-			messageToUserRegular.setFill(Color.RED);
 			messageToUserRegular.setText("an error has accured please try again");
 		}
 	}
@@ -905,7 +901,6 @@ public class AddOrderController extends ControllerWrapper {
 			DeliveryArea da = new DeliveryArea(daName, selectedNeighberhoods, daTime);
 			//Add delivery area to the restaurant and clear fields
 			if(Restaurant.getInstance().addDeliveryArea(da)) {
-				messageToUser.setFill(Color.BLUE);
 				messageToUser.setText("Cook added successfully");
 				deliveryAreaName.clear();
 				deliveryTime.clear();
@@ -919,14 +914,11 @@ public class AddOrderController extends ControllerWrapper {
 						Restaurant.getInstance().getAreas().entrySet().stream().map(a -> a.getValue()).collect(Collectors.toList())));
 				newAreaBox.getSelectionModel().clearSelection();
 			} else {
-				messageToUser.setFill(Color.RED);
 				messageToUser.setText("an error has accured please try again");
 			}
 		} catch(InvalidPersonInputException ipe) {
-			messageToUser.setFill(Color.RED);
 			messageToUser.setText(ipe.getMessage());
 		} catch(Exception exc) {
-			messageToUser.setFill(Color.RED);
 			messageToUser.setText("an error has accured please try again");
 		}
 		
@@ -1049,7 +1041,6 @@ public class AddOrderController extends ControllerWrapper {
 		editDeliveryAreaBtn.setDisable(true);
 		addDeliveryAreaBtn.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			messageToUserRegular.setFill(Color.RED);
 			messageToUserRegular.setText(inputE.getMessage());
 		}
 	}

@@ -9,6 +9,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.SepiaTone?>
@@ -64,7 +65,6 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-      <Text fx:id="messageToUser" layoutX="600.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
       <RadioButton layoutX="566.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
          <effect>
             <SepiaTone level="0.25" />
@@ -74,7 +74,7 @@
             <Button fx:id="removeCustomerBtn" layoutX="14.0" layoutY="298.0" mnemonicParsing="false" onAction="#removeCustomer" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
             <Button layoutX="407.0" layoutY="298.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
             <Label layoutX="633.0" layoutY="36.0" styleClass="managerAllText" text="Black list" />
-            <ListView fx:id="blackList" layoutX="633.0" layoutY="76.0" prefHeight="211.0" prefWidth="156.0" style="-fx-border-color: PeachPuff;" />
+            <ListView fx:id="blackList" layoutX="633.0" layoutY="76.0" prefHeight="211.0" prefWidth="166.0" style="-fx-border-color: Black;" />
             <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <Text fx:id="sensitivitiesField" fill="#c88021" layoutX="285.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <TableView fx:id="allCustomersTable" layoutX="14.0" layoutY="81.0" prefHeight="200.0" prefWidth="568.0">
@@ -121,6 +121,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
+            <TextArea fx:id="messageToUser" editable="false" layoutX="650.0" layoutY="180.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
       </children>
             </AnchorPane>
    </children>
