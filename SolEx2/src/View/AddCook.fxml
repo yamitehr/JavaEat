@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.SepiaTone?>
@@ -62,7 +63,6 @@
                                  </effect>
                               </CheckBox>
                               <ComboBox fx:id="expertiseBox" layoutX="193.0" layoutY="140.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                              <Text fx:id="messageToUserCook" layoutX="675.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                               <RadioButton layoutX="650.0" layoutY="104.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
                                  <effect>
                                     <SepiaTone level="0.25" />
@@ -122,6 +122,8 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
+                              <TextArea fx:id="messageToUserCook" editable="false" layoutX="718.0" layoutY="166.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
+                              <Text fx:id="messageCook" fill="RED" layoutX="178.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="186.13671875" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -163,17 +165,12 @@
                               </RadioButton>
                               <Label layoutX="345.0" layoutY="146.0" styleClass="managerAllText" text="Delivery Area" />
                               <ComboBox fx:id="deliveryAreaBox" layoutX="457.0" layoutY="143.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+                              <Text fx:id="messageDP" layoutX="142.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.93670654296875" />
                            </children>
                         </AnchorPane>
                         <Pane layoutX="242.0" layoutY="215.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="600.0">
                            <children>
                               <Button layoutY="380.0" mnemonicParsing="false" onAction="#removeDeliveryPerson" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                              <Text fx:id="firstNameFieldDP" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                              <Text fx:id="lastNameFieldDP" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                              <Text fx:id="dobFieldDP" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-                              <Text fx:id="genderFieldDP" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                              <Text fx:id="vehicleField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                              <Text fx:id="deliveryAreaField" fill="#c88021" layoutX="300.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                               <Button layoutX="124.0" layoutY="380.0" mnemonicParsing="false" onAction="#editDeliveryPerson" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                               <TableView fx:id="allDeliveryPersonsTable" layoutX="2.0" layoutY="93.0" prefHeight="278.0" prefWidth="564.0">
                                  <columns>
@@ -211,7 +208,6 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Text fx:id="messageToUserDeliveryPerson" layoutX="632.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                         <Button fx:id="addDeliveryPersonBtn" layoutX="737.0" layoutY="63.0" mnemonicParsing="false" onAction="#addDeliveryPerson" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -220,6 +216,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
+                        <TextArea fx:id="messageToUserDeliveryPerson" editable="false" layoutX="698.0" layoutY="177.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
                      </children>
                   </AnchorPane>
             </content>

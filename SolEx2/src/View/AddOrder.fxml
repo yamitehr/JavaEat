@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.image.Image?>
@@ -43,7 +44,6 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
-                              <Text fx:id="messageToUserOrder" layoutX="587.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                               <ComboBox fx:id="deliveryBox" layoutX="437.0" layoutY="48.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                               <ListView fx:id="dishesList" layoutX="141.0" layoutY="98.0" prefHeight="156.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
                               <Label layoutX="72.0" layoutY="98.0" styleClass="managerAllText" text="Dishes:" />
@@ -92,6 +92,8 @@
                               <ListView fx:id="finalDishesList" layoutX="377.0" layoutY="98.0" prefHeight="156.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
                               <Button layoutX="309.0" layoutY="164.0" mnemonicParsing="false" onAction="#addDishesToOrder" text="Add" />
                               <TextField fx:id="quantityField" layoutX="298.0" layoutY="132.0" prefHeight="25.0" prefWidth="72.0" text="1" />
+                              <TextArea fx:id="messageToUserOrder" editable="false" layoutX="639.0" layoutY="170.0" prefHeight="38.0" prefWidth="245.0" style="-fx-text-fill: Red;" />
+                              <Label alignment="CENTER" layoutX="289.0" layoutY="107.0" prefHeight="26.0" prefWidth="78.0" styleClass="managerAllText" text="Qty:" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -116,7 +118,6 @@
                                              </image>
                                           </ImageView>
                                        </graphic></Button>
-                                    <Text fx:id="messageToUserRegular" layoutX="654.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                                     <ComboBox fx:id="deliveryAreaBox" layoutX="486.0" layoutY="62.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                                     <ListView fx:id="ordersList" layoutX="202.0" layoutY="134.0" prefHeight="156.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
                                     <Label layoutX="72.0" layoutY="135.0" prefHeight="26.0" prefWidth="64.0" styleClass="managerAllText" text="Orders:" />
@@ -148,19 +149,12 @@
                                           </ImageView>
                                        </graphic></Button>
                                     <Text fx:id="postageMessage" layoutX="487.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.53668212890625" />
+                                    <TextArea fx:id="messageToUserRegular" editable="false" layoutX="656.0" layoutY="193.0" prefHeight="38.0" prefWidth="245.0" style="-fx-text-fill: Red;" />
                                  </children>
                               </AnchorPane>
                               <Pane layoutX="121.0" layoutY="281.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="670.0">
                                  <children>
                                     <Button layoutY="339.0" mnemonicParsing="false" onAction="#removeDelivery" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                                    <Text fx:id="deliveryPersonField" fill="#c88021" layoutX="347.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Text fx:id="deliveryAreaField" fill="#c88021" layoutX="347.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Text fx:id="isDeliveredField" fill="#c88021" layoutX="347.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-                                    <Text fx:id="dateField" fill="#c88021" layoutX="347.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
-                                    <Text fx:id="orderTitle" layoutX="252.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
-                                    <Text fx:id="ordersField" fill="#c88021" layoutX="347.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-                                    <Text fx:id="postageTitle" layoutX="251.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="73.25390625" />
-                                    <Text fx:id="postageText" fill="#c88021" layoutX="347.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
                                     <Button layoutX="126.0" layoutY="339.0" mnemonicParsing="false" onAction="#editDelivery" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                                     <TableView fx:id="allDeliveriesTable" layoutX="-4.0" layoutY="119.0" prefHeight="200.0" prefWidth="676.0">
                                        <columns>
@@ -207,9 +201,9 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Delivery Area">
+            <Tab style="-fx-text-fill: Red;" text="Delivery Area">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="988.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="694.0" prefWidth="1010.0">
                      <children>
                         <AnchorPane layoutX="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="336.0" prefWidth="1240.0">
                            <children>
@@ -227,7 +221,6 @@
                                     </ImageView>
                                  </graphic></Button>
                               <Pane fx:id="neighberhood_pane" layoutX="405.0" layoutY="63.0" prefHeight="166.0" prefWidth="425.0" />
-                              <Text fx:id="messageToUser" layoutX="830.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="421.21630859375" />
                               <Label fx:id="editDelPersonsLbl" layoutX="33.0" layoutY="176.0" prefHeight="26.0" prefWidth="130.0" styleClass="managerAllText" text="Delivery Persons" visible="false" />
                               <Label fx:id="editDeliveriesLbl" layoutX="248.0" layoutY="176.0" prefHeight="26.0" prefWidth="120.0" styleClass="managerAllText" text="Deliveries" visible="false" />
                               <Button fx:id="addDeliveryAreaBtn" layoutX="850.0" layoutY="65.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addDeliveryArea" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
@@ -240,6 +233,7 @@
                                  </graphic></Button>
                               <ListView fx:id="deliveryPersonsList" layoutX="13.0" layoutY="206.0" prefHeight="142.0" prefWidth="171.0" visible="false" />
                               <Text fx:id="timeMessage" layoutX="124.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" />
+                              <TextArea fx:id="messageToUser" editable="false" layoutX="817.0" layoutY="239.0" prefHeight="37.0" prefWidth="169.0" />
                            </children>
                         </AnchorPane>
                         <Pane layoutX="128.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="716.0">

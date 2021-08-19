@@ -24,6 +24,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -41,9 +42,9 @@ public class AddDishController extends ControllerWrapper {
 	@FXML
 	private ListView<Component> componentsList;
 	@FXML
-	private Text messageToUserDish;
+	private TextArea messageToUserDish;
 	@FXML
-	private Text messageToUserComp;
+	private TextArea messageToUserComp;
 	
 	@FXML 
 	private TableView<Dish> allDishesTable;
@@ -158,6 +159,20 @@ public class AddDishController extends ControllerWrapper {
 				    }
 				});
 		
+		dish_Name.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, 
+					String newValue) {
+				    	if (newValue != "") {
+					    	timeMessage.setText("");
+					    	if(!newValue.matches("[a-zA-Z\s]+")) {
+					    		dish_Name.setText(newValue.substring(0, newValue.length()-1));
+					    		timeMessage.setText("Letters Only!");
+					    	}
+				    	}
+				    }
+				});
+		
 	}
 
 	private void initCpmpTab() {
@@ -214,6 +229,20 @@ public class AddDishController extends ControllerWrapper {
 					    	}
 			 		}
 		 });
+		 
+		 component_Name.textProperty().addListener(new ChangeListener<String>() {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, 
+						String newValue) {
+					    	if (newValue != "") {
+					    		priceMessage.setText("");
+						    	if(!newValue.matches("[a-zA-Z\s]+")) {
+						    		component_Name.setText(newValue.substring(0, newValue.length()-1));
+						    		priceMessage.setText("Letters Only!");
+						    	}
+					    	}
+					    }
+					});
 	}
 	
 	private void searchDishByID() {
@@ -316,10 +345,8 @@ public class AddDishController extends ControllerWrapper {
 		editDishbtn.setDisable(true);
 		addDishBtn.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			messageToUserDish.setFill(Color.RED);
 			messageToUserDish.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
-			messageToUserDish.setFill(Color.RED);
 			messageToUserDish.setText("Wrong Input!");
 		}
 		
@@ -351,7 +378,6 @@ public class AddDishController extends ControllerWrapper {
 			///		
 		
 			if(Restaurant.getInstance().addDish(newDish)) {
-				messageToUserDish.setFill(Color.BLUE);
 				messageToUserDish.setText("Dish added successfully");
 				dish_Name.clear();
 				timeToMake.clear();
@@ -360,17 +386,13 @@ public class AddDishController extends ControllerWrapper {
 				allDishesTable.getItems().addAll(FXCollections.observableArrayList(
 				Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 			}else {
-				messageToUserDish.setFill(Color.RED);
 				messageToUserDish.setText("an error has accured, please try again.");
 			}
 		}catch(InvalidInputException inputE) {
-			messageToUserDish.setFill(Color.RED);
 			messageToUserDish.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
-			messageToUserDish.setFill(Color.RED);
 			messageToUserDish.setText("Wrong Input!");
 		}catch(Exception ex) {
-			messageToUserDish.setFill(Color.RED);
 			messageToUserDish.setText("an error has accured please try again");
 		}
 	}
@@ -419,10 +441,8 @@ public class AddDishController extends ControllerWrapper {
 			addComponentBtn.setDisable(false);
 		}
 		catch(InvalidInputException inputE) {
-			messageToUserComp.setFill(Color.RED);
 			messageToUserComp.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
-			messageToUserComp.setFill(Color.RED);
 			messageToUserComp.setText("Wrong Input!");
 		}
 		
@@ -446,7 +466,6 @@ public class AddDishController extends ControllerWrapper {
 			Component newComponent = new Component(componentName, isHasLactose, isHasGluten, priceOfComp);
 		
 			if(Restaurant.getInstance().addComponent(newComponent)) {
-				messageToUserComp.setFill(Color.BLUE);
 				messageToUserComp.setText("Component added successfully");
 				component_Name.clear();
 				price.clear();
@@ -459,17 +478,13 @@ public class AddDishController extends ControllerWrapper {
 				componentsList.getItems().addAll(FXCollections.observableArrayList(
 				Restaurant.getInstance().getComponenets().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			}else {
-				messageToUserComp.setFill(Color.RED);
 				messageToUserComp.setText("an error has accured, please try again.");
 			}
 		}catch(InvalidInputException inputE) {
-			messageToUserComp.setFill(Color.RED);
 			messageToUserComp.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
-			messageToUserComp.setFill(Color.RED);
 			messageToUserComp.setText("Wrong Input!");
 		}catch(Exception ex) {
-			messageToUserComp.setFill(Color.RED);
 			messageToUserComp.setText("an error has accured please try again");
 		}
 	}

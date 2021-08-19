@@ -16,6 +16,8 @@ import Utils.Gender;
 import Utils.Vehicle;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +32,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -53,7 +56,7 @@ public class AddCookController extends ControllerWrapper{
 	@FXML
 	private CheckBox isChef;
 	@FXML
-	private Text messageToUserCook;
+	private TextArea messageToUserCook;
 	@FXML
 	private Button addCookBtn;
 	@FXML
@@ -78,6 +81,8 @@ public class AddCookController extends ControllerWrapper{
 	private TabPane tabPane;
 	@FXML
 	private TextField searchCookField;
+	@FXML
+	private Text messageCook;
 	
 	
 	//delivery person
@@ -94,7 +99,7 @@ public class AddCookController extends ControllerWrapper{
 	@FXML
 	private ComboBox<DeliveryArea> deliveryAreaBox;
 	@FXML
-	private Text messageToUserDeliveryPerson;
+	private TextArea messageToUserDeliveryPerson;
 	@FXML
 	private Button addDeliveryPersonBtn;
 	@FXML
@@ -117,6 +122,8 @@ public class AddCookController extends ControllerWrapper{
 	private Button editDeliveryPersonBtn;
 	@FXML
 	private TextField searchDPField;
+	@FXML
+	private Text messageDP;
 	
 	@FXML
 	private AnchorPane toReplacePane;
@@ -170,6 +177,43 @@ public class AddCookController extends ControllerWrapper{
 		 searchCookField.textProperty().addListener((observable, oldValue, newValue) -> {
 			 searchCookByID();
 			});	
+		 
+		 first_Name.textProperty().addListener(new ChangeListener<String>() {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, 
+						String newValue) {
+					    	if (newValue != "") {
+						    	messageCook.setText("");
+						    	if(!newValue.matches("[a-zA-Z\s]+")) {
+						    		first_Name.setText(newValue.substring(0, newValue.length()-1));
+						    		messageCook.setText("Letters Only!");
+						    	}
+					    	}
+					    }
+					});
+		 
+		 last_Name.textProperty().addListener(new ChangeListener<String>() {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, 
+						String newValue) {
+					    	if (newValue != "") {
+						    	messageCook.setText("");
+						    	if(!newValue.matches("[a-zA-Z\s]+")) {
+						    		last_Name.setText(newValue.substring(0, newValue.length()-1));
+						    		messageCook.setText("Letters Only!");
+						    	}
+					    	}
+					    }
+					});
+		 
+		 date.setOnAction(d -> {
+			 if(date.getValue() != null) {
+				 messageCook.setText("");
+				 if(date.getValue().isAfter(LocalDate.now())) {
+					 messageCook.setText("Date cannot be in the future!");
+				 }
+			 }
+		 });
 	}
 	
 	private void searchCookByID() {
@@ -238,6 +282,43 @@ public class AddCookController extends ControllerWrapper{
 			 searchDPField.textProperty().addListener((observable, oldValue, newValue) -> {
 				 searchDPByID();
 				});
+			 
+			 first_Name_DP.textProperty().addListener(new ChangeListener<String>() {
+					@Override
+					public void changed(ObservableValue<? extends String> observable, String oldValue, 
+							String newValue) {
+						    	if (newValue != "") {
+							    	messageDP.setText("");
+							    	if(!newValue.matches("[a-zA-Z\s]+")) {
+							    		first_Name_DP.setText(newValue.substring(0, newValue.length()-1));
+							    		messageDP.setText("Letters Only!");
+							    	}
+						    	}
+						    }
+						});
+			 
+			 last_Name_DP.textProperty().addListener(new ChangeListener<String>() {
+					@Override
+					public void changed(ObservableValue<? extends String> observable, String oldValue, 
+							String newValue) {
+						    	if (newValue != "") {
+						    		messageDP.setText("");
+							    	if(!newValue.matches("[a-zA-Z\s]+")) {
+							    		last_Name_DP.setText(newValue.substring(0, newValue.length()-1));
+							    		messageDP.setText("Letters Only!");
+							    	}
+						    	}
+						    }
+						});
+			 
+			 dateDP.setOnAction(d -> {
+				 if(dateDP.getValue() != null) {
+					 messageDP.setText("");
+					 if(dateDP.getValue().isAfter(LocalDate.now())) {
+						 messageDP.setText("Date cannot be in the future!");
+					 }
+				 }
+			 });
 	}
 	
 	private void searchDPByID() {
@@ -330,7 +411,6 @@ public class AddCookController extends ControllerWrapper{
 		date.setDisable(false);
 		isChef.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			messageToUserCook.setFill(Color.RED);
 			messageToUserCook.setText(inputE.getMessage());
 		}
 	}
@@ -394,7 +474,6 @@ public class AddCookController extends ControllerWrapper{
 			
 			//add customer to the restaurant
 			if(Restaurant.getInstance().addCook(newCook)) {
-				messageToUserCook.setFill(Color.BLUE);
 				messageToUserCook.setText("Cook added successfully");
 				first_Name.clear();
 				last_Name.clear();
@@ -406,15 +485,11 @@ public class AddCookController extends ControllerWrapper{
 				allCooksTable.getItems().addAll(FXCollections.observableArrayList(
 						Restaurant.getInstance().getCooks().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			}else {
-				messageToUserCook.setFill(Color.RED);
 				messageToUserCook.setText("an error has accured please try again");
 			}
-			
 		} catch(InvalidInputException ipe) {
-			messageToUserCook.setFill(Color.RED);
 			messageToUserCook.setText(ipe.getMessage());
 		} catch(Exception exc) {
-			messageToUserCook.setFill(Color.RED);
 			messageToUserCook.setText("an error has accured please try again");
 		}
 	}
@@ -505,7 +580,6 @@ public class AddCookController extends ControllerWrapper{
 		addDeliveryPersonBtn.setDisable(false);
 		date.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			messageToUserDeliveryPerson.setFill(Color.RED);
 			messageToUserDeliveryPerson.setText(inputE.getMessage());
 		}
 	}
@@ -576,7 +650,6 @@ public class AddCookController extends ControllerWrapper{
 				
 				//add deliveryPerson to the restaurant
 				if(Restaurant.getInstance().addDeliveryPerson(newDeliveryPerson, selectedDeliveryArea)) {
-					messageToUserDeliveryPerson.setFill(Color.BLUE);
 					messageToUserDeliveryPerson.setText("Delivery Person added successfully");
 					first_Name_DP.clear();
 					last_Name_DP.clear();
@@ -587,15 +660,12 @@ public class AddCookController extends ControllerWrapper{
 					allDeliveryPersonsTable.getItems().addAll(FXCollections.observableArrayList(
 							Restaurant.getInstance().getDeliveryPersons().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 				}else {
-					messageToUserDeliveryPerson.setFill(Color.RED);
 					messageToUserDeliveryPerson.setText("an error has accured please try again");
 				}
 				
 			} catch(InvalidInputException ipe) {
-				messageToUserDeliveryPerson.setFill(Color.RED);
 				messageToUserDeliveryPerson.setText(ipe.getMessage());
 			} catch(Exception exc) {
-				messageToUserDeliveryPerson.setFill(Color.RED);
 				messageToUserDeliveryPerson.setText("an error has accured please try again");
 			}
 		}

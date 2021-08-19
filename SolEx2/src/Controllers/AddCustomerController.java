@@ -32,6 +32,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -56,7 +57,7 @@ public class AddCustomerController extends ControllerWrapper{
 	@FXML
 	private CheckBox isGluten;
 	@FXML
-	private Text messageToUser;
+	private TextArea messageToUser;
 	@FXML
 	private Button addCustomerBtn;
 	@FXML
@@ -259,7 +260,6 @@ public class AddCustomerController extends ControllerWrapper{
 		addCustomerBtn.setDisable(false);
 		date.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			messageToUser.setFill(Color.RED);
 			messageToUser.setText(inputE.getMessage());
 		}
 	}
@@ -319,7 +319,6 @@ public class AddCustomerController extends ControllerWrapper{
 			
 			//add customer to the restaurant
 			if(Restaurant.getInstance().addCustomer(newCustomer)) {
-				messageToUser.setFill(Color.BLUE);
 				messageToUser.setText("Customer added successfully");
 				first_Name.clear();
 				last_Name.clear();
@@ -338,15 +337,12 @@ public class AddCustomerController extends ControllerWrapper{
 				blackList.getItems().addAll(FXCollections.observableArrayList(
 						Restaurant.getInstance().getBlackList().stream().collect(Collectors.toList())));
 			}else {
-				messageToUser.setFill(Color.RED);
 				messageToUser.setText("an error has accured please try again");
 			}
 			
-		} catch(InvalidInputException ipe) {
-			messageToUser.setFill(Color.RED);
+		}  catch(InvalidInputException ipe) {
 			messageToUser.setText(ipe.getMessage());
 		} catch(Exception exc) {
-			messageToUser.setFill(Color.RED);
 			messageToUser.setText("an error has accured please try again");
 		}
 	}

@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.image.Image?>
@@ -42,7 +43,6 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
-                              <Text fx:id="messageToUserDish" layoutX="701.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                               <Label layoutX="69.0" layoutY="96.0" styleClass="managerAllText" text="Time To Make:" />
                               <TextField fx:id="timeToMake" layoutX="193.0" layoutY="94.0" prefHeight="29.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <ComboBox fx:id="typesBox" layoutX="492.0" layoutY="47.0" prefHeight="31.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
@@ -91,7 +91,8 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
-                              <Text fx:id="timeMessage" layoutX="193.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.93670654296875" />
+                              <Text fx:id="timeMessage" fill="RED" layoutX="193.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.93670654296875" />
+                              <TextArea fx:id="messageToUserDish" editable="false" layoutX="727.0" layoutY="151.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -123,7 +124,6 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
-                              <Text fx:id="messageToUserComp" layoutX="729.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.21630859375" />
                               <Label layoutX="72.0" layoutY="113.0" styleClass="managerAllText" text="Price" />
                               <TextField fx:id="price" layoutX="220.0" layoutY="110.0" maxHeight="33.0" minWidth="105.0" prefHeight="33.0" prefWidth="71.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <AnchorPane layoutX="134.0" layoutY="207.0" minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="1002.0">
@@ -131,9 +131,6 @@
                                     <AnchorPane layoutX="81.0" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="1003.0">
                                        <children>
                                           <Button layoutX="14.0" layoutY="377.0" mnemonicParsing="false" onAction="#removeComponent" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                                          <Text fx:id="componentNameField" fill="#c88021" layoutX="408.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                          <Text fx:id="sensitivitiesField" fill="#c88021" layoutX="410.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                          <Text fx:id="priceCompField" fill="#c88021" layoutX="410.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
                                           <Button layoutX="146.0" layoutY="377.0" mnemonicParsing="false" onAction="#editComponent" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                                           <TableView fx:id="allComponentsTable" layoutX="14.0" layoutY="89.0" prefHeight="278.0" prefWidth="530.0">
                                              <columns>
@@ -172,6 +169,7 @@
                                     </ImageView>
                                  </graphic></Button>
                               <Text fx:id="priceMessage" layoutX="174.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.93670654296875" />
+                              <TextArea fx:id="messageToUserComp" editable="false" layoutX="690.0" layoutY="169.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
                            </children>
                         </AnchorPane>
                      </children>
