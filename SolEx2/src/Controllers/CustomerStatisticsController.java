@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import Exceptions.InvalidPersonInputException;
+import Exceptions.InvalidInputException;
 import Model.Component;
 import Model.Cook;
 import Model.Dish;

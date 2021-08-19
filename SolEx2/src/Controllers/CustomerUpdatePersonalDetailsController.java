@@ -3,7 +3,7 @@ package Controllers;
 import java.util.stream.Collectors;
 
 import Exceptions.InvalidInputException;
-import Exceptions.InvalidPersonInputException;
+import Exceptions.InvalidInputException;
 import Model.Customer;
 import Model.Restaurant;
 import Model.State;
