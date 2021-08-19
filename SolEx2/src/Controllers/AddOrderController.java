@@ -354,6 +354,7 @@ public class AddOrderController extends ControllerWrapper {
 				
 			for (Neighberhood n : Neighberhood.values()) {
 				CheckBox cb = new CheckBox(n.name());
+				cb.getStylesheets().add(getClass().getResource("/View/checkBox.css").toExternalForm());
 				neighberhoodList.add(new Pair<CheckBox, Neighberhood>(cb, n));
 			}
 				
