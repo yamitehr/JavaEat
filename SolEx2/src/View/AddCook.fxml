@@ -123,7 +123,7 @@
                                     </ImageView>
                                  </graphic></Button>
                               <TextArea fx:id="messageToUserCook" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
-                              <Text fx:id="messageCook" fill="RED" layoutX="178.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="186.13671875" />
+                              <Text fx:id="messageCook" fill="RED" layoutX="178.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" wrappingWidth="186.13671875" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -165,7 +165,7 @@
                               </RadioButton>
                               <Label layoutX="406.0" layoutY="147.0" styleClass="managerAllText" text="Delivery Area" />
                               <ComboBox fx:id="deliveryAreaBox" layoutX="521.0" layoutY="144.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                              <Text fx:id="messageDP" layoutX="142.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.93670654296875" />
+                              <Text fx:id="messageDP" fill="RED" layoutX="192.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" wrappingWidth="150.93670654296875" />
                            </children>
                         </AnchorPane>
                         <Pane layoutX="193.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="600.0">

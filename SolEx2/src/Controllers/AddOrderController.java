@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import Exceptions.InvalidInputException;
@@ -331,15 +332,7 @@ public class AddOrderController extends ControllerWrapper {
 	private void initAreaTab() {
 		newAreaBox.setVisible(false);
 		removeLbl.setVisible(false);
-		
-		//for delivery area edit
-		ObservableList<DeliveryPerson> deliveryPersons = FXCollections.observableArrayList(Restaurant.getInstance().getDeliveryPersons().values());
-		deliveryPersonsList.setItems(deliveryPersons);
-		deliveryPersonsList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		
-		ObservableList<Delivery> deliveries = FXCollections.observableArrayList(Restaurant.getInstance().getDeliveries().values());
-		deliveriesToAddList.setItems(deliveries);
-		deliveriesToAddList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
 	}
 
 		private void generateNeighborhoodGrid() {
@@ -953,13 +946,15 @@ public class AddOrderController extends ControllerWrapper {
 			deliveryTime.setText(String.valueOf(selectedDeliveryArea.getDeliverTime()));
 			deliveryTime.setDisable(true);
 			deliveryAreaName.setText(selectedDeliveryArea.getAreaName());
-			editDelPersonsLbl.setVisible(true);
-			deliveryPersonsList.setVisible(true);
-			editDeliveriesLbl.setVisible(true);
-			deliveriesToAddList.setVisible(true);
-			for(Delivery d: selectedDeliveryArea.getDelivers()) {
-				deliveriesToAddList.getSelectionModel().select(d);
-			}			
+			
+			Set<Neighberhood> selectedNeighberhoods = selectedDeliveryArea.getNeighberhoods();
+			for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
+				CheckBox cb = cbp.getKey();
+				Neighberhood n = cbp.getValue();
+				if (selectedNeighberhoods.contains(n)) {
+					cb.setSelected(true);
+				}
+			}
 		}
 	}
 	
@@ -997,30 +992,6 @@ public class AddOrderController extends ControllerWrapper {
 					if(!selectedArea.getNeighberhoods().contains(n))
 						selectedArea.addNeighberhood(n);
 				}	
-				
-				//deliveries
-				ArrayList<DeliveryPerson> changedDP = new ArrayList<DeliveryPerson>();
-				changedDP.addAll(deliveryPersonsList.getSelectionModel().getSelectedItems());
-				for(DeliveryPerson dp: selectedArea.getDelPersons()) {
-					if(!changedDP.contains(dp))
-						selectedArea.removeDelPerson(dp);			
-				}
-				for(DeliveryPerson dp: changedDP) {
-					if(!selectedArea.getDelPersons().contains(dp))
-						selectedArea.addDelPerson(dp);
-				}
-				
-				//delivery person
-				ArrayList<Delivery> changedDeliveries = new ArrayList<Delivery>();
-				changedDeliveries.addAll(deliveriesToAddList.getSelectionModel().getSelectedItems());
-				for(Delivery d: selectedArea.getDelivers()) {
-					if(!changedDeliveries.contains(d))
-						selectedArea.removeDelivery(d);			
-				}
-				for(Delivery d: changedDeliveries) {
-					if(!selectedArea.getDelivers().contains(d))
-						selectedArea.addDelivery(d);
-				}
 					
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setHeaderText("Area edited successfully!");
@@ -1028,14 +999,11 @@ public class AddOrderController extends ControllerWrapper {
 		messageToUser.setText("");
 		deliveryAreaName.clear();
 		deliveryTime.clear();
-		deliveryPersonsList.getItems().clear();
-		deliveriesToAddList.getItems().clear();
+		deliveryTime.setDisable(false);
 		for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
 			CheckBox cb = cbp.getKey();
 			cb.setSelected(false);
 		}
-		deliveriesToAddList.setVisible(false);
-		deliveryPersonsList.setVisible(false);
 		allAreasTable.getItems().clear();
 		allAreasTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getAreas().entrySet().stream().map(a -> a.getValue()).collect(Collectors.toList())));
