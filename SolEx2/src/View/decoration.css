@@ -64,12 +64,13 @@
 }
 
 .comboBox {
-/* 	-fx-border-color: PeachPuff;*/
 	-fx-background-color: White;
 	-fx-min-width:7em;
 	-fx-max-width:16em;
 	-fx-min-height:2.5em;
 	-fx-max-height:2.5em;
+	 -fx-font-family: 'Poppins', sans-serif;
+	 -fx-font-size: 15px;
 }
 
 .shoppingCartItem{
