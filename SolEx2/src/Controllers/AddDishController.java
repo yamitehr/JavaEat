@@ -27,7 +27,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -43,9 +42,6 @@ public class AddDishController extends ControllerWrapper {
 	private ListView<Component> componentsList;
 	@FXML
 	private TextArea messageToUserDish;
-	@FXML
-	private TextArea messageToUserComp;
-	
 	@FXML 
 	private TableView<Dish> allDishesTable;
 	@FXML
@@ -60,6 +56,10 @@ public class AddDishController extends ControllerWrapper {
 	private TextField searchDishField;
 	@FXML
 	private Text timeMessage;
+	@FXML
+	private Button addDishBtn;
+	@FXML
+	private Button editDishbtn;
 	
 	
 	//components
@@ -73,7 +73,6 @@ public class AddDishController extends ControllerWrapper {
 	private CheckBox isGluten;
 	@FXML
 	private Button addComponentBtn;
-
 	@FXML
 	private TableView<Component> allComponentsTable;
 	@FXML
@@ -85,18 +84,11 @@ public class AddDishController extends ControllerWrapper {
 	@FXML
 	private TableColumn<Component, Double> compPriceCol;
 	@FXML
-	private AnchorPane toReplacePane;
-	@FXML
 	private TextField searchCompField;
 	@FXML
 	private Text priceMessage;
-	
-	
-	//to check
 	@FXML
-	private Button addDishBtn;
-	@FXML
-	private Button editDishbtn;
+	private TextArea messageToUserComp;	
 	@FXML
 	private Button editComponentBtn;
 
@@ -142,6 +134,7 @@ public class AddDishController extends ControllerWrapper {
 			 searchDishByID();
 			});
 		 
+		 //limit text fields		 
 		timeMessage.setFill(Color.RED);
 		timeToMake.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -213,6 +206,7 @@ public class AddDishController extends ControllerWrapper {
 			 searchCompByID();
 			});
 		 
+		 //limit text fields
 		 priceMessage.setFill(Color.RED);
 		 price.textProperty().addListener(new ChangeListener<String>() {
 			 	@Override
@@ -307,14 +301,16 @@ public class AddDishController extends ControllerWrapper {
 		try {
 			if(!selectedDish.getDishName().equals(dish_Name.getText())) {
 				if(dish_Name.getText().isEmpty())
-					throw new InvalidInputException("Dish Name cannot be empty");
+					throw new InvalidInputException("Please fill Dish Name");
 				selectedDish.setDishName(dish_Name.getText());
 		}
 		if(!selectedDish.getType().equals(typesBox.getValue())) {
 			if(typesBox.getValue() == null)
-				throw new InvalidInputException("you must choose Dish Type");
+				throw new InvalidInputException("Please choose Dish Type");
 			selectedDish.setType(typesBox.getValue());
 		}
+		if(timeToMake.getText().isEmpty()) 
+			throw new InvalidInputException("Please fill dish time to make");
 		if(selectedDish.getTimeToMake() != Integer.parseInt(timeToMake.getText()))
 			selectedDish.setTimeToMake(Integer.parseInt(timeToMake.getText()));
 		
@@ -378,7 +374,10 @@ public class AddDishController extends ControllerWrapper {
 			///		
 		
 			if(Restaurant.getInstance().addDish(newDish)) {
-				messageToUserDish.setText("Dish added successfully");
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.setHeaderText("Dish added successfully!");
+				alert.showAndWait();
+				messageToUserDish.setText("");
 				dish_Name.clear();
 				timeToMake.clear();
 				typesBox.getSelectionModel().clearSelection();
@@ -418,9 +417,11 @@ public class AddDishController extends ControllerWrapper {
 		try {
 			if(!selectedComponent.getComponentName().equals(component_Name.getText())) {
 				if(component_Name.getText().isEmpty())
-					throw new InvalidInputException("Component Name cannot be empty");
+					throw new InvalidInputException("Please fill Component Name");
 				selectedComponent.setComponentName(component_Name.getText());
 			}
+			if(price.getText().isEmpty())
+				throw new InvalidInputException("Please fill component price");
 			if(selectedComponent.getPrice() != Double.parseDouble(price.getText()))
 				selectedComponent.setPrice(Double.parseDouble(price.getText()));
 			
@@ -466,7 +467,10 @@ public class AddDishController extends ControllerWrapper {
 			Component newComponent = new Component(componentName, isHasLactose, isHasGluten, priceOfComp);
 		
 			if(Restaurant.getInstance().addComponent(newComponent)) {
-				messageToUserComp.setText("Component added successfully");
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.setHeaderText("Component added successfully!");
+				alert.showAndWait();
+				messageToUserComp.setText("");
 				component_Name.clear();
 				price.clear();
 				isLactose.setSelected(false);

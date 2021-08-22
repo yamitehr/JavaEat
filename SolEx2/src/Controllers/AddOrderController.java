@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+
+import Exceptions.IllegalCustomerException;
 import Exceptions.InvalidInputException;
-import Exceptions.InvalidInputException;
+import Exceptions.SensitiveException;
 import Model.Component;
 import Model.Customer;
 import Model.Delivery;
@@ -110,8 +112,7 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private Button addExpressBtn;
 	@FXML
-	private Button addRegularBtn;
-	
+	private Button addRegularBtn;	
 	@FXML
 	private TableView<Delivery> allDeliveriesTable;
 	@FXML
@@ -185,10 +186,6 @@ public class AddOrderController extends ControllerWrapper {
 	private TextField searchAreaField;	
 	@FXML
 	private Text timeMessage;
-	@FXML
-	private Button expressDeliveryBtn;
-	@FXML
-	private Button regularDeliveryBtn;
 	
 	@FXML
     public void initialize() {
@@ -196,10 +193,16 @@ public class AddOrderController extends ControllerWrapper {
 		initDeliveryTab();
 		initAreaTab();
 		generateNeighborhoodGrid();
-		addDeliveryTimeEventListener();
     }
 
 	private void initOrderTab() {
+		ObservableList<Delivery> deliveries = FXCollections.observableArrayList(Restaurant.getInstance().getDeliveries().values());
+		deliveryBox.getItems().clear();				
+		deliveryBox.setItems(FXCollections.observableArrayList(deliveries));
+		
+		deliveryBox.setDisable(true);
+		
+		finalDishesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		editOrderBtn.setDisable(true);
 		ObservableList<Customer> customers = FXCollections.observableArrayList(Restaurant.getInstance().getCustomers().values());
 		customerBox.getItems().clear();				
@@ -321,11 +324,11 @@ public class AddOrderController extends ControllerWrapper {
 					String newValue) {
 				    	if (newValue != "") {
 					    	try {
-					    		messageToUserRegular.setText("");
+					    		postageMessage.setText("");
 								Double.parseDouble(newValue);
 							} catch(NumberFormatException nfe) {
 								postageField.setText(oldValue);
-								messageToUserRegular.setText("Numbers only!");
+								postageMessage.setText("Numbers only!");
 							}	
 				    	}
 				    }
@@ -336,6 +339,49 @@ public class AddOrderController extends ControllerWrapper {
 	private void initAreaTab() {
 		newAreaBox.setVisible(false);
 		removeLbl.setVisible(false);
+		
+		//Add all delivery areas
+		areaIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+				
+		areaNameCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getAreaName()));
+						
+		neighborhoodsCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(
+				area.getValue().getNeighberhoods()
+				.stream()
+				.map(d -> d.toString())
+				.reduce((a, b) -> a + ", " + b).get()
+				));
+				
+		deliveryTimeCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<Integer>(area.getValue().getDeliverTime()));
+						
+						
+		List<DeliveryArea> allAres = new ArrayList<DeliveryArea>();
+		allAres = Restaurant.getInstance().getAreas().values().stream()
+						.collect(Collectors.toList());
+						
+		allAreasTable.getItems().addAll(allAres);
+				
+		searchAreaField.textProperty().addListener((observable, oldValue, newValue) -> {
+			 searchAreaByID();
+		});
+		
+		//limit text fields
+		deliveryTime.textProperty().addListener(new ChangeListener<String>() {
+		@Override
+		public void changed(ObservableValue<? extends String> observable, String oldValue, 
+				String newValue) {
+			    	if (newValue != "") {
+				    	try {
+				    		timeMessage.setText("");
+							Integer.parseInt(newValue);
+						} catch(NumberFormatException nfe) {
+							deliveryTime.setText(oldValue);
+							timeMessage.setText("Numbers only!");
+						}	
+			    	}
+			    }
+			});
+			
 
 	}
 
@@ -358,7 +404,7 @@ public class AddOrderController extends ControllerWrapper {
 			int j = 0;
 			for (Pair<CheckBox, Neighberhood> cb : neighberhoodList) {
 				grid.add(cb.getKey(), j, i, 1, 1);
-				if (j == 4) {
+				if (j == 3) {
 					j = 0;
 					i ++;
 				} else {
@@ -370,51 +416,6 @@ public class AddOrderController extends ControllerWrapper {
 				
 			neighberhood_pane.getChildren().add(grid);
 		}
-			
-		public void addDeliveryTimeEventListener() {
-			timeMessage.setFill(Color.RED);
-			deliveryTime.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, 
-					String newValue) {
-				    	if (newValue != "") {
-					    	try {
-					    		messageToUser.setText("");
-								Integer.parseInt(newValue);
-							} catch(NumberFormatException nfe) {
-								deliveryTime.setText(oldValue);
-								messageToUser.setText("Numbers only!");
-							}	
-				    	}
-				    }
-				});
-				
-			//Add all delivery areas
-			areaIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-			
-			areaNameCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getAreaName()));
-					
-			neighborhoodsCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(
-					area.getValue().getNeighberhoods()
-					.stream()
-					.map(d -> d.toString())
-					.reduce((a, b) -> a + ", " + b).get()
-					));
-			
-			deliveryTimeCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<Integer>(area.getValue().getDeliverTime()));
-					
-					
-			List<DeliveryArea> allAres = new ArrayList<DeliveryArea>();
-			allAres = Restaurant.getInstance().getAreas().values().stream()
-					.collect(Collectors.toList());
-					
-			allAreasTable.getItems().addAll(allAres);
-			
-			searchAreaField.textProperty().addListener((observable, oldValue, newValue) -> {
-				 searchAreaByID();
-				});
-						
-			}
 	
 	private void searchOrderByID() {
 		String keyword = searchOrderField.getText();
@@ -428,8 +429,7 @@ public class AddOrderController extends ControllerWrapper {
 			  if(order != null)
 				  filteredData.add(order);
 		     allOrdersTable.setItems(filteredData);
-		  }
-			
+		  }			
 	}
 				
 	private void searchDeliveryByID() {
@@ -444,9 +444,9 @@ public class AddOrderController extends ControllerWrapper {
 			  if(delivery != null)
 				  filteredData.add(delivery);
 		     allDeliveriesTable.setItems(filteredData);
-		  }
-			
+		  }			
 	}
+	
 	private void searchAreaByID() {
 		String keyword = searchAreaField.getText();
 		ObservableList<DeliveryArea> filteredData = FXCollections.observableArrayList();
@@ -461,22 +461,32 @@ public class AddOrderController extends ControllerWrapper {
 		     allAreasTable.setItems(filteredData);
 		  }
 			
-		}
+	}
 
 	public void editOrder(ActionEvent e) {
 		Order selectedOrder = allOrdersTable.getSelectionModel().getSelectedItem();
 		if(selectedOrder !=  null) {
-			addOrderBtn.setDisable(true);
-			editOrderBtn.setDisable(false);
-			customerBox.setValue(selectedOrder.getCustomer());
-			customerBox.setEditable(false);
-			if(selectedOrder.getDelivery() != null)
-				deliveryBox.setValue(selectedOrder.getDelivery());
-			for(int i = 0; i < selectedOrder.getDishes().size(); i++) {
-				dishesList.getSelectionModel().select(selectedOrder.getDishes().get(i));
+			if(selectedOrder.getDelivery().isDelivered()) {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setHeaderText("Can't edit order that linked to delivery that is already delivered");
+				alert.showAndWait();
 			}
-			customerBox.setDisable(true);
-		}
+			else {
+				deliveryBox.setDisable(false);
+				addOrderBtn.setDisable(true);
+				editOrderBtn.setDisable(false);
+				customerBox.setValue(selectedOrder.getCustomer());
+				customerBox.setEditable(false);
+				if(selectedOrder.getDelivery() != null)
+					deliveryBox.setValue(selectedOrder.getDelivery());
+				finalDishes.addAll(selectedOrder.getDishes());
+				finalDishesList.setItems(finalDishes);
+//				for(int i = 0; i < selectedOrder.getDishes().size(); i++) {
+//					finalDishesList.getSelectionModel().select(selectedOrder.getDishes().get(i));
+//				}
+				customerBox.setDisable(true);
+				}
+			}
 	}
 	
 	public void setEditOrder(ActionEvent e) {
@@ -484,7 +494,9 @@ public class AddOrderController extends ControllerWrapper {
 		try {
 			if(!selectedOrder.getCustomer().equals(customerBox.getValue())) {
 				if(customerBox.getValue() == null)
-					throw new InvalidInputException("You must choose Customer");
+					throw new InvalidInputException("Please select Customer");
+				if(Restaurant.getInstance().getBlackList().contains(customerBox.getValue()))
+						throw new IllegalCustomerException();
 				selectedOrder.setCustomer(customerBox.getValue());
 		}
 			if(selectedOrder.getDelivery() != null) {
@@ -495,16 +507,16 @@ public class AddOrderController extends ControllerWrapper {
 				}
 		}
 		ArrayList<Dish> changedDishes = new ArrayList<Dish>();
-		changedDishes.addAll(dishesList.getSelectionModel().getSelectedItems());
+		changedDishes.addAll(finalDishesList.getItems());
 		if(changedDishes.isEmpty()) 
 			throw new InvalidInputException("You must choose at least one dish");
 		for(Dish d: changedDishes) {
 			for(Component c: d.getComponenets()) {
 				if(selectedOrder.getCustomer().isSensitiveToGluten() && c.isHasGluten()) {
-					throw new InvalidInputException(selectedOrder.getCustomer() + " is sensitive to " + c);
+					throw new SensitiveException(selectedOrder.getCustomer().toString(), d.getDishName());
 				}
 				else if(selectedOrder.getCustomer().isSensitiveToLactose() && c.isHasLactose()) {
-					throw new InvalidInputException(selectedOrder.getCustomer() + " is sensitive to " + c);
+					throw new SensitiveException(selectedOrder.getCustomer().toString(), d.getDishName());
 				}
 			}
 		}
@@ -524,6 +536,7 @@ public class AddOrderController extends ControllerWrapper {
 		customerBox.getSelectionModel().clearSelection();
 		deliveryBox.getSelectionModel().clearSelection();
 		dishesList.getSelectionModel().clearSelection();
+		finalDishesList.getItems().clear();
 		allOrdersTable.getItems().clear();
 		allOrdersTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
@@ -532,6 +545,10 @@ public class AddOrderController extends ControllerWrapper {
 		}catch(InvalidInputException inputE) {
 			//messageToUserOrder.setFill(Color.RED);
 			messageToUserOrder.setText(inputE.getMessage());
+		} catch(IllegalCustomerException ce) {
+			messageToUserOrder.setText(ce.getMessage());
+		} catch(SensitiveException se) {
+			messageToUserOrder.setText(se.getMessage());
 		}
 	}
 	
@@ -541,10 +558,6 @@ public class AddOrderController extends ControllerWrapper {
 			finalDishes.add(dishesList.getSelectionModel().getSelectedItem());
 		}
 		finalDishesList.setItems(finalDishes);
-		
-		ObservableList<Dish> dishes = FXCollections.observableArrayList(Restaurant.getInstance().getDishes().values());
-		dishes.remove(dishesList.getSelectionModel().getSelectedItem());
-		dishesList.setItems(dishes);
 	}
 	
 	
@@ -555,7 +568,7 @@ public class AddOrderController extends ControllerWrapper {
 				throw new InvalidInputException("Please select Customer");
 			}
 			if(Restaurant.getInstance().getBlackList().contains(customer)) {
-				throw new InvalidInputException("This customer is in the black list!!");
+				throw new IllegalCustomerException();
 			}
 			
 			Delivery delivery = deliveryBox.getValue();
@@ -579,10 +592,12 @@ public class AddOrderController extends ControllerWrapper {
 			///		
 	
 			Restaurant.getInstance().addOrder(newOrder); 
-			//messageToUserOrder.setFill(Color.BLUE);
-			messageToUserOrder.setText("Order added successfully");
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setHeaderText("Order added successfully!");
+			alert.showAndWait();
 			customerBox.getSelectionModel().clearSelection();
 			deliveryBox.getSelectionModel().clearSelection();
+			finalDishesList.getItems().clear();
 			//update the list
 			allOrdersTable.getItems().clear();
 			allOrdersTable.getItems().addAll(FXCollections.observableArrayList(
@@ -591,10 +606,10 @@ public class AddOrderController extends ControllerWrapper {
 			ordersList.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
-			//messageToUserOrder.setFill(Color.RED);
 			messageToUserOrder.setText(inputE.getMessage());
+		}catch(IllegalCustomerException ce) {
+			messageToUserOrder.setText(ce.getMessage());
 		}catch(Exception ex) {
-			//messageToUserOrder.setFill(Color.RED);
 			messageToUserOrder.setText("an error has accured please try again");
 		}
 	}
