@@ -90,21 +90,6 @@ public class ManagerDashboardController extends ControllerWrapper {
 		proFit();
     }
 	
-	private void proFit() {
-		//profit relation
-		dishNameCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(dish.getValue().getDishName()));
-						
-		timeToMakeCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Integer>(dish.getValue().getTimeToMake()));
-				
-		dishPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-					
-		List<Dish> profitRelation = new ArrayList<Dish>();
-		profitRelation = Restaurant.getInstance().getProfitRelation().stream()
-				.collect(Collectors.toList());
-						
-		profitRelationTable.getItems().addAll(profitRelation);
-
-	}
 		
 
 	private void init() {
@@ -224,6 +209,21 @@ public class ManagerDashboardController extends ControllerWrapper {
 		return SellDate;
 	}
 	
+	private void proFit() {
+		//profit relation
+		dishNameCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(dish.getValue().getDishName()));
+						
+		timeToMakeCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Integer>(dish.getValue().getTimeToMake()));
+				
+		dishPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+					
+		List<Dish> profitRelation = new ArrayList<Dish>();
+		profitRelation = Restaurant.getInstance().getProfitRelation().stream()
+				.collect(Collectors.toList());
+						
+		profitRelationTable.getItems().addAll(profitRelation);
+
+	}
 	
 	public void export(ActionEvent e) {
 		 try {
@@ -243,6 +243,7 @@ public class ManagerDashboardController extends ControllerWrapper {
 
 			XWPFRun run = paragraph.createRun();  
 			run.setText("ProFit Relation");
+			paragraph.setIndentationLeft(4000);
 
 			XWPFParagraph para = document.createParagraph();
 			XWPFRun run1 = para.createRun();
@@ -292,6 +293,7 @@ public class ManagerDashboardController extends ControllerWrapper {
 
 			document.write(out);
 			
+			//open the file
 			if (Desktop.isDesktopSupported()) {
 				File myFile = new File("ProFit.docx");
 				Desktop.getDesktop().open(myFile);
@@ -299,9 +301,9 @@ public class ManagerDashboardController extends ControllerWrapper {
 			
 			out.close();
 			document.close();
-			 System.out.println("WorkBook.docx written successully");
+			 System.out.println("ProFit.docx written successully");
 		 } catch (FileNotFoundException e1) {
-		e1.printStackTrace();
+			 	e1.printStackTrace();
 		 } catch (IOException e1) {
 				e1.printStackTrace();
 		 }

@@ -91,7 +91,7 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
-                              <Text fx:id="timeMessage" fill="RED" layoutX="193.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.93670654296875" />
+                              <Text fx:id="timeMessage" fill="RED" layoutX="193.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" wrappingWidth="150.93670654296875" />
                               <TextArea fx:id="messageToUserDish" editable="false" layoutX="727.0" layoutY="151.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
                            </children>
                         </AnchorPane>
@@ -110,11 +110,11 @@
                               <Label layoutX="405.0" layoutY="64.0" styleClass="managerAllText" text="contains" />
                               <CheckBox fx:id="isGluten" layoutX="490.0" layoutY="66.0" mnemonicParsing="false" styleClass="managerAllText" text="Gluten" textFill="WHITE">
                                  <effect>
-                                    <SepiaTone level="0.25" />
+                                    <SepiaTone level="0.0" />
                                  </effect></CheckBox>
                               <CheckBox fx:id="isLactose" layoutX="585.0" layoutY="66.0" mnemonicParsing="false" styleClass="managerAllText" text="Lactose" textFill="WHITE">
                                  <effect>
-                                    <SepiaTone level="0.25" />
+                                    <SepiaTone level="0.0" />
                                  </effect></CheckBox>
                               <Button fx:id="addComponentBtn" layoutX="729.0" layoutY="55.0" mnemonicParsing="false" onAction="#addComponent" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
                                  <graphic>
@@ -131,7 +131,7 @@
                                     <AnchorPane layoutX="81.0" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="1003.0">
                                        <children>
                                           <Button layoutX="14.0" layoutY="377.0" mnemonicParsing="false" onAction="#removeComponent" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                                          <Button layoutX="146.0" layoutY="377.0" mnemonicParsing="false" onAction="#editComponent" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+                                          <Button layoutX="154.0" layoutY="377.0" mnemonicParsing="false" onAction="#editComponent" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                                           <TableView fx:id="allComponentsTable" layoutX="14.0" layoutY="89.0" prefHeight="278.0" prefWidth="530.0">
                                              <columns>
                                                 <TableColumn fx:id="componentIdCol" prefWidth="112.0" text="Component ID" />
@@ -141,7 +141,7 @@
                                              </columns>
                                           </TableView>
                                           <TextField fx:id="searchCompField" alignment="CENTER" layoutX="14.0" layoutY="60.0" prefWidth="148.0" promptText="Search By Id" />
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="163.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="178.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../icons/edit-solid-2.png" />
                                              </image>
@@ -168,7 +168,7 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
-                              <Text fx:id="priceMessage" layoutX="174.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.93670654296875" />
+                              <Text fx:id="priceMessage" fill="RED" layoutX="174.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" wrappingWidth="150.93670654296875" />
                               <TextArea fx:id="messageToUserComp" editable="false" layoutX="690.0" layoutY="169.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
                            </children>
                         </AnchorPane>

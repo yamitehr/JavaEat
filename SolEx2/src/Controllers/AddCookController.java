@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import Exceptions.InvalidInputException;
-import Exceptions.InvalidInputException;
 import Model.Cook;
 import Model.DeliveryArea;
 import Model.DeliveryPerson;
-import Model.Dish;
 import Model.Restaurant;
 import Utils.Expertise;
 import Utils.Gender;
@@ -34,11 +32,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class AddCookController extends ControllerWrapper{

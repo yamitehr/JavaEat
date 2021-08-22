@@ -6,12 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import Exceptions.InvalidInputException;
-import Exceptions.InvalidInputException;
-import Model.Cook;
 import Model.Customer;
-import Model.Dish;
 import Model.Restaurant;
-import Utils.Expertise;
 import Utils.Gender;
 import Utils.Neighberhood;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -37,9 +33,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class AddCustomerController extends ControllerWrapper{
 	@FXML
@@ -86,6 +80,8 @@ public class AddCustomerController extends ControllerWrapper{
 	private ListView<Customer> blackList;
 	@FXML
 	private TextField searchCustomerField;
+	@FXML
+	private Text messageCustomer;
 	
 
 	@FXML
@@ -140,6 +136,43 @@ public class AddCustomerController extends ControllerWrapper{
 		searchCustomerField.textProperty().addListener((observable, oldValue, newValue) -> {
 			 searchCustomerByID();
 			});
+		
+		first_Name.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, 
+					String newValue) {
+				    	if (newValue != "") {
+				    		messageCustomer.setText("");
+					    	if(!newValue.matches("[a-zA-Z\s]+")) {
+					    		first_Name.setText(newValue.substring(0, newValue.length()-1));
+					    		messageCustomer.setText("Letters Only!");
+					    	}
+				    	}
+				    }
+				});
+	 
+	 last_Name.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, 
+					String newValue) {
+				    	if (newValue != "") {
+				    		messageCustomer.setText("");
+					    	if(!newValue.matches("[a-zA-Z\s]+")) {
+					    		last_Name.setText(newValue.substring(0, newValue.length()-1));
+					    		messageCustomer.setText("Letters Only!");
+					    	}
+				    	}
+				    }
+				});
+	 
+	 date.setOnAction(d -> {
+		 if(date.getValue() != null) {
+			 messageCustomer.setText("");
+			 if(date.getValue().isAfter(LocalDate.now())) {
+				 messageCustomer.setText("Date cannot be in the future!");
+			 }
+		 }
+	 });
 		
 		////////BlackList list view
 		//Set the listview cell factory for black list

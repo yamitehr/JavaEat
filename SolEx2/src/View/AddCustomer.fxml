@@ -37,24 +37,24 @@
             <ToggleGroup fx:id="Gender_group" />
          </toggleGroup>
          <effect>
-            <SepiaTone level="0.25" />
+            <SepiaTone level="0.0" />
          </effect></RadioButton>
       <TextField fx:id="first_Name" layoutX="193.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
       <TextField fx:id="last_Name" layoutX="521.0" layoutY="57.0" styleClass="textFields" stylesheets="@decoration.css" />
       <DatePicker fx:id="date" layoutX="193.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
       <RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
          <effect>
-            <SepiaTone level="0.25" />
+            <SepiaTone level="0.0" />
          </effect></RadioButton>
       <Label layoutX="66.0" layoutY="147.0" styleClass="managerAllText" text="Neighberhood" />
       <Label layoutX="406.0" layoutY="147.0" styleClass="managerAllText" text="Sensitivities" />
       <CheckBox fx:id="isGluten" layoutX="521.0" layoutY="147.0" mnemonicParsing="false" styleClass="managerAllText" text="Gluten">
          <effect>
-            <SepiaTone level="0.25" />
+            <SepiaTone level="0.0" />
          </effect></CheckBox>
       <CheckBox fx:id="isLactose" layoutX="609.0" layoutY="147.0" mnemonicParsing="false" styleClass="managerAllText" text="Lactose">
          <effect>
-            <SepiaTone level="0.25" />
+            <SepiaTone level="0.0" />
          </effect></CheckBox>
       <ComboBox fx:id="neighberhoodsBox" layoutX="193.0" layoutY="144.0" maxHeight="33.0" prefHeight="33.0" prefWidth="160.0" styleClass="comboBox" stylesheets="@decoration.css" />
       <Button fx:id="addCustomerBtn" layoutX="853.0" layoutY="52.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
@@ -67,7 +67,7 @@
                </graphic></Button>
       <RadioButton layoutX="697.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
          <effect>
-            <SepiaTone level="0.25" />
+            <SepiaTone level="0.0" />
          </effect></RadioButton>
       <Pane layoutX="66.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="1008.0" stylesheets="@decoration.css">
          <children>
@@ -126,6 +126,7 @@
                   </ImageView>
                </graphic></Button>
             <TextArea fx:id="messageToUser" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
+            <Text fx:id="messageCustomer" fill="RED" layoutX="174.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" wrappingWidth="186.13671875" />
       </children>
             </AnchorPane>
    </children>
