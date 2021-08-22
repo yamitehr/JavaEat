@@ -359,3 +359,66 @@
  -fx-font-size: 16px;
  -fx-font-family: 'Poppins', sans-serif;
 }
+
+.managerStatisticsHeaders{
+	-fx-text-fill: white;
+	 -fx-font-family: 'Pacifico', cursive;
+	-fx-font-size: 27px;
+}
+
+.managerStatisticsGetDelBtn{
+	-fx-text-fill: white;
+	-fx-background-color: #b89b5f;
+ -fx-font-family: 'Concert One', cursive;
+	-fx-font-size: 17px;	
+	-fx-padding: 5 5 5 5;
+}
+
+.managerStatsComboBox {
+	-fx-background-color: White;
+	 -fx-font-family: 'Poppins', sans-serif;
+	 -fx-font-size: 15px;
+}
+
+.managerStatsPane{
+	
+/* -fx-background-color: rgba(184, 155, 95, 0.1);*/	
+-fx-background-color: transparent;
+	
+}
+
+/* ****** TABS for Manager STATISTICS***** */
+#tabPaneStats{
+	-fx-tab-min-width:2em;
+	-fx-tab-max-width:2em;
+	-fx-tab-min-height:5em;
+	-fx-tab-max-height:5em;
+	-fx-background-color: transparent;
+}
+
+#tabPaneStats .tab{
+	-fx-background-color: #3D201C;
+	-fx-opacity:0.82;
+	-fx-text-base-color: white;
+	 -fx-font-family: 'Concert One', cursive;
+	 -fx-font-size: 19px;
+}
+
+#tabPaneStats .tab:selected{
+	-fx-border-width: 5 0 0 0;
+	-fx-border-color: white;
+	-fx-background-radius: 0;
+	-fx-background-insets: 0;
+}
+
+#tabPaneStats .tab:selected .focus-indicator{
+	-fx-focus-color: transparent;
+}
+
+#tabPaneStats .tab:focused{
+	-fx-focus-color: transparent;
+}
+
+#tabPaneStats .tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
