@@ -24,7 +24,7 @@
                <graphic>
             <ImageView fitHeight="184.0" fitWidth="227.0" layoutX="42.0" layoutY="35.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../icons/JavaEat.png" />
+                  <Image url="@../../img/JavaEat.png" />
                </image>
             </ImageView>
              </graphic>

@@ -17,10 +17,19 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.Map.Entry;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import Model.Delivery;
 import Model.DeliveryArea;
+import Model.DeliveryPerson;
 import Model.Order;
 import Model.OrderStatus;
 import Model.Restaurant;
@@ -59,10 +68,12 @@ public class CustomerOrdersHistoryController {
 	@FXML
     public void initialize() {
 		init();
+		ordersAutoRefresh();
 		refreshBtn.setOnAction(e -> initData());
 		allOrdersTable.setOnMouseClicked(e -> {
 			message.setText("");
 		});
+		message.setText("");
 		initData();
 		allOrdersTable.setItems(orders);
 		setTableHeight();
@@ -201,8 +212,6 @@ public class CustomerOrdersHistoryController {
 	
 	
 	private void initData() {
-		message.setText("");
-		
 		orders.setAll(Restaurant.getInstance().getOrders().values().stream()
 				.filter(o -> o.getCustomer().equals(State.getCurrentCustomer()))
 				.collect(Collectors.toList()));	
@@ -261,6 +270,7 @@ public class CustomerOrdersHistoryController {
 			if(selectedOrder !=  null) {
 				if(selectedOrder.getStatus().equals(OrderStatus.InProgress)) {
 					selectedOrder.setStatus(OrderStatus.cancelled);
+					message.setText("");
 					initData();
 				} else {
 					message.setText("can delete only in progress orders");
@@ -269,4 +279,16 @@ public class CustomerOrdersHistoryController {
 				message.setText("no selection was detected");
 			}
 		}
+	 
+		public void ordersAutoRefresh() {
+			Runnable ordersRefresh = new Runnable() {
+			    public void run() {
+			    	initData();
+			    }
+			};
+
+			ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+			executor.scheduleAtFixedRate(ordersRefresh, 0, 2, TimeUnit.SECONDS);
+		}
+	 
 }
