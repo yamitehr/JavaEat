@@ -32,7 +32,7 @@
       <Label layoutX="406.0" layoutY="62.0" styleClass="managerAllText" text="Last Name" />
       <Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Date Of Birth" />
       <Label layoutX="406.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
-      <RadioButton layoutX="521.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Male">
+      <RadioButton layoutX="521.0" layoutY="105.0" mnemonicParsing="false" selected="true" styleClass="managerAllText" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="Gender_group" />
          </toggleGroup>
@@ -42,7 +42,7 @@
       <TextField fx:id="first_Name" layoutX="193.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
       <TextField fx:id="last_Name" layoutX="521.0" layoutY="57.0" styleClass="textFields" stylesheets="@decoration.css" />
       <DatePicker fx:id="date" layoutX="193.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
-      <RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
+      <RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" selected="true" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
          <effect>
             <SepiaTone level="0.0" />
          </effect></RadioButton>
@@ -72,19 +72,19 @@
       <Pane layoutX="66.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="1008.0" stylesheets="@decoration.css">
          <children>
             <Button fx:id="removeCustomerBtn" layoutY="320.0" mnemonicParsing="false" onAction="#removeCustomer" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-            <Button layoutX="455.0" layoutY="320.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
+            <Button layoutX="560.0" layoutY="320.0" mnemonicParsing="false" onAction="#addCustomerToBlackList" styleClass="addBtns" stylesheets="@decoration.css" text="Add to black list" />
             <Label layoutX="791.0" layoutY="3.0" styleClass="managerAllText" text="Black list" />
             <ListView fx:id="blackList" layoutX="791.0" layoutY="32.0" prefHeight="278.0" prefWidth="190.0" style="-fx-border-color: Black;" />
             <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
             <Text fx:id="sensitivitiesField" fill="#c88021" layoutX="285.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-            <TableView fx:id="allCustomersTable" layoutY="32.0" prefHeight="278.0" prefWidth="781.0">
+            <TableView fx:id="allCustomersTable" layoutY="32.0" prefHeight="278.0" prefWidth="756.0">
                <columns>
                   <TableColumn fx:id="customerIdCol" prefWidth="33.0" text="ID" />
-                  <TableColumn fx:id="customerNameCol" minWidth="0.0" prefWidth="120.0" text="Customer Name" />
-                  <TableColumn fx:id="customerDobCol" prefWidth="112.0" text="DOB" />
-                  <TableColumn fx:id="customerGenderCol" prefWidth="88.0" text="Gender" />
-                  <TableColumn fx:id="neighberhoodCol" prefWidth="115.0" text="Neighberhood" />
-                  <TableColumn fx:id="sensitivitiesCol" prefWidth="94.0" text="Sensitivities" />
+                  <TableColumn fx:id="customerNameCol" minWidth="0.0" prefWidth="120.0" text="Name" />
+                  <TableColumn fx:id="customerDobCol" prefWidth="105.0" text="DOB" />
+                  <TableColumn fx:id="customerGenderCol" prefWidth="76.0" text="Gender" />
+                  <TableColumn fx:id="neighberhoodCol" prefWidth="126.0" text="Neighberhood" />
+                  <TableColumn fx:id="sensitivitiesCol" prefWidth="102.0" text="Sensitivities" />
                         <TableColumn fx:id="userNameCol" prefWidth="95.0" text="User Name" />
                         <TableColumn fx:id="passwordCol" prefWidth="97.0" text="Password" />
                </columns>
@@ -105,7 +105,7 @@
                         <Image url="@../../icons/trash-alt-solid.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="461.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="566.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../icons/plus-square-solid.png" />
                      </image>

@@ -88,42 +88,42 @@ public class ManagerLandingPageController extends ControllerWrapper {
 	}
 
 	public void MoveToAddDishScene(ActionEvent e) {
-		soundOfButton("button2.mp3");
+		soundOfButton("button.mp3");
 		replacePane(toReplacePane, "/View/AddDish.fxml");
 	}
 	
 	public void MoveToAddCookScene(ActionEvent e) {
-		soundOfButton("button2.mp3");
+		soundOfButton("button.mp3");
 		replacePane(toReplacePane, "/View/AddCook.fxml");
 	}
 	
 	public void MoveToAddOrderScene(ActionEvent e) {
-		soundOfButton("button2.mp3");
+		soundOfButton("button.mp3");
 		replacePane(toReplacePane, "/View/AddOrder.fxml");
 	}
 	
 	public void MoveToAddCustomerScene(ActionEvent e) {
-		soundOfButton("button2.mp3");
+		soundOfButton("button.mp3");
 		replacePane(toReplacePane, "/View/AddCustomer.fxml");
 	}
 	
 	public void moveToStatisticsScene(ActionEvent e) {
-		soundOfButton("button2.mp3");
+		soundOfButton("button.mp3");
 		replacePane(toReplacePane, "/View/Manager_Statistics.fxml");
 	}
 	
 	public void moveToDashboardScene(ActionEvent e) {
-		soundOfButton("button2.mp3");
+		soundOfButton("button.mp3");
 		replacePane(toReplacePane, "/View/Manager_Dashboard.fxml");
 	}
 	
 	public void MoveToLoginScene(ActionEvent e) {
-		soundOfButton("button2.mp3");
+		soundOfButton("button.mp3");
 		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow(), 700, 550);
 	}
 	
 	public void moveToAIMachineScene(ActionEvent e) {
-		soundOfButton("button2.mp3");
+		soundOfButton("button.mp3");
 		replacePane(toReplacePane, "/View/Manager_AIMachine.fxml");
 	}
 }

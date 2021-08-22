@@ -2,11 +2,9 @@ package Controllers;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import Exceptions.NoComponentsExceptions;
 import Exceptions.SensitiveException;
 import Model.Component;
@@ -19,7 +17,6 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -29,15 +26,9 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -139,6 +130,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 
 	public void moveToDashboardScene(ActionEvent e) {
 		messageLbl.setText("Dashboard");
+		soundOfButton("button.mp3");
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Customer_Statistics.fxml"));
 			AnchorPane pane = loader.load();
@@ -154,6 +146,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	
 	public void moveToMenuScene(ActionEvent e) {
 		messageLbl.setText("Menu");
+		soundOfButton("button.mp3");
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Customer_Menu.fxml"));
 			AnchorPane pane = loader.load();
@@ -170,16 +163,19 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	}
 	public void moveToOrdersHistoryScene(ActionEvent e) {
 		messageLbl.setText("Orders History");
+		soundOfButton("button.mp3");
 		replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
 	}
 	public void moveToPersonalDetailsScene(ActionEvent e) {
 		messageLbl.setText("Personal Detalis");
-			replacePane(toReplacePane, "/View/Customer_UpdatePersonalDetails.fxml");
+		soundOfButton("button.mp3");
+		replacePane(toReplacePane, "/View/Customer_UpdatePersonalDetails.fxml");
 	}
 	
 	public void MoveToLoginScene(ActionEvent e) {
 		//clean current customer and order
 		State.cleanState();
+		soundOfButton("button.mp3");
 		moveToScene("/View/Login.fxml", (Stage)logOutBtn.getScene().getWindow(), 700, 550);
 	}
 	

@@ -361,25 +361,32 @@ public class AddCookController extends ControllerWrapper{
 		Cook selectedCook = allCooksTable.getSelectionModel().getSelectedItem();
 		try {
 			if(!selectedCook.getFirstName().equals(first_Name.getText())) {
-				if(first_Name.getText().isEmpty())
-					throw new InvalidInputException("First Name cannot be empty");
+				if(first_Name.getText().isEmpty()) {
+					throw new InvalidInputException("Please fill First Name");
+				}
 				selectedCook.setFirstName(first_Name.getText());
 			}
+			
 			if(!selectedCook.getLastName().equals(last_Name.getText())) {
-				if(last_Name.getText().isEmpty())
-					throw new InvalidInputException("Last Name cannot be empty");
+				if(last_Name.getText().isEmpty()) {
+					throw new InvalidInputException("Please fill Last Name");
+				}
 				selectedCook.setLastName(last_Name.getText());
 			}
-			Gender gender = null;
-			//get gender
-			RadioButton selectedRadioButton = (RadioButton) Gender_group.getSelectedToggle();
-			String toogleGroupValue = selectedRadioButton.getText();
-			for(Gender g : Gender.values()) {
-				if(g.name().equals(toogleGroupValue)) {
-					gender = g;
+			try {
+				Gender gender = null;
+				//get gender
+				RadioButton selectedRadioButton = (RadioButton) Gender_group.getSelectedToggle();
+				String toogleGroupValue = selectedRadioButton.getText();
+				for(Gender g : Gender.values()) {
+					if(g.name().equals(toogleGroupValue)) {
+						gender = g;
+					}
 				}
+				selectedCook.setGender(gender);
+			} catch(Exception exc) {
+				throw new InvalidInputException("Please fill Gender");
 			}
-			selectedCook.setGender(gender);
 				
 		if(!selectedCook.getExpert().equals(expertiseBox.getValue())) {
 			if(expertiseBox.getValue() == null)
@@ -470,7 +477,10 @@ public class AddCookController extends ControllerWrapper{
 			
 			//add customer to the restaurant
 			if(Restaurant.getInstance().addCook(newCook)) {
-				messageToUserCook.setText("Cook added successfully");
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.setHeaderText("Cook added successfully!");
+				alert.showAndWait();
+				messageToUserCook.setText("");
 				first_Name.clear();
 				last_Name.clear();
 				Gender_group.getSelectedToggle().setSelected(false);
@@ -481,11 +491,14 @@ public class AddCookController extends ControllerWrapper{
 				allCooksTable.getItems().addAll(FXCollections.observableArrayList(
 						Restaurant.getInstance().getCooks().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 			}else {
+				soundOfButton("error.mp3");
 				messageToUserCook.setText("an error has accured please try again");
 			}
 		} catch(InvalidInputException ipe) {
+			soundOfButton("error.mp3");
 			messageToUserCook.setText(ipe.getMessage());
 		} catch(Exception exc) {
+			soundOfButton("error.mp3");
 			messageToUserCook.setText("an error has accured please try again");
 		}
 	}
@@ -529,33 +542,37 @@ public class AddCookController extends ControllerWrapper{
 		try {
 			if(!selectedDeliveryPerson.getFirstName().equals(first_Name_DP.getText())) {
 				if(first_Name_DP.getText().isEmpty())
-					throw new InvalidInputException("First Name cannot be empty");
+					throw new InvalidInputException("Please fill First Name");
 				selectedDeliveryPerson.setFirstName(first_Name_DP.getText());
 			}
 			if(!selectedDeliveryPerson.getLastName().equals(last_Name_DP.getText())) {
 				if(last_Name_DP.getText().isEmpty())
-					throw new InvalidInputException("Last Name cannot be empty");
+					throw new InvalidInputException("Please fill Last Name");
 				selectedDeliveryPerson.setLastName(last_Name_DP.getText());
 			}
-			Gender gender = null;
-			//get gender
-			RadioButton selectedRadioButton = (RadioButton) Gender_group.getSelectedToggle();
-			String toogleGroupValue = selectedRadioButton.getText();
-			for(Gender g : Gender.values()) {
-				if(g.name().equals(toogleGroupValue)) {
-					gender = g;
+			try {
+				Gender gender = null;
+				//get gender
+				RadioButton selectedRadioButton = (RadioButton) Gender_group.getSelectedToggle();
+				String toogleGroupValue = selectedRadioButton.getText();
+				for(Gender g : Gender.values()) {
+					if(g.name().equals(toogleGroupValue)) {
+						gender = g;
+					}
 				}
-			}
 			selectedDeliveryPerson.setGender(gender);
+			} catch(Exception exc) {
+				throw new InvalidInputException("Please fill Gender");
+			}
 				
 		if(!selectedDeliveryPerson.getVehicle().equals(vehicleBox.getValue())) {
 			if(vehicleBox.getValue() == null)
-				throw new InvalidInputException("you must choose Vehicle");
+				throw new InvalidInputException("Please select Vehicle");
 			selectedDeliveryPerson.setVehicle(vehicleBox.getValue());
 		}
 		if(!selectedDeliveryPerson.getArea().equals(deliveryAreaBox.getValue())) {
 				if(deliveryAreaBox.getValue() == null)
-					throw new InvalidInputException("You must choose delivery area");
+					throw new InvalidInputException("Please select Delivery Area");
 				selectedDeliveryPerson.setArea(deliveryAreaBox.getValue());
 		}
 				
@@ -646,7 +663,10 @@ public class AddCookController extends ControllerWrapper{
 				
 				//add deliveryPerson to the restaurant
 				if(Restaurant.getInstance().addDeliveryPerson(newDeliveryPerson, selectedDeliveryArea)) {
-					messageToUserDeliveryPerson.setText("Delivery Person added successfully");
+					Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+					alert.setHeaderText("Delivery Person added successfully!");
+					alert.showAndWait();
+					messageToUserDeliveryPerson.setText("");
 					first_Name_DP.clear();
 					last_Name_DP.clear();
 					Gender_group_DP.getSelectedToggle().setSelected(false);

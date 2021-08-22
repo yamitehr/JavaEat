@@ -237,28 +237,32 @@ public class AddCustomerController extends ControllerWrapper{
 		try {
 			if(!selectedCustomer.getFirstName().equals(first_Name.getText())) {
 				if(first_Name.getText().isEmpty())
-					throw new InvalidInputException("First Name cannot be empty");
+					throw new InvalidInputException("Please fill First Name");
 				selectedCustomer.setFirstName(first_Name.getText());
 			}
 			if(!selectedCustomer.getLastName().equals(last_Name.getText())) {
 				if(last_Name.getText().isEmpty())
-					throw new InvalidInputException("Last Name cannot be empty");
+					throw new InvalidInputException("Please fill Last Name");
 				selectedCustomer.setLastName(last_Name.getText());
 			}
-			Gender gender = null;
-			//get gender
-			RadioButton selectedRadioButton = (RadioButton) Gender_group.getSelectedToggle();
-			String toogleGroupValue = selectedRadioButton.getText();
-			for(Gender g : Gender.values()) {
-				if(g.name().equals(toogleGroupValue)) {
-					gender = g;
+			try {
+				Gender gender = null;
+				//get gender
+				RadioButton selectedRadioButton = (RadioButton) Gender_group.getSelectedToggle();
+				String toogleGroupValue = selectedRadioButton.getText();
+				for(Gender g : Gender.values()) {
+					if(g.name().equals(toogleGroupValue)) {
+						gender = g;
+					}
 				}
-			}
 			selectedCustomer.setGender(gender);
+		}catch(Exception exc) {
+			throw new InvalidInputException("Please fill Gender");
+		}
 				
 		if(!selectedCustomer.getNeighberhood().equals(neighberhoodsBox.getValue())) {
 			if(neighberhoodsBox.getValue() == null)
-				throw new InvalidInputException("you must choose Neighberhood");
+				throw new InvalidInputException("Please choose Neighberhood");
 			selectedCustomer.setNeighberhood(neighberhoodsBox.getValue());
 		}
 		if(!selectedCustomer.isSensitiveToGluten() && isGluten.isSelected())
@@ -352,7 +356,10 @@ public class AddCustomerController extends ControllerWrapper{
 			
 			//add customer to the restaurant
 			if(Restaurant.getInstance().addCustomer(newCustomer)) {
-				messageToUser.setText("Customer added successfully");
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.setHeaderText("Customer added successfully!");
+				alert.showAndWait();
+				messageToUser.setText("");
 				first_Name.clear();
 				last_Name.clear();
 				Gender_group.getSelectedToggle().setSelected(false);
