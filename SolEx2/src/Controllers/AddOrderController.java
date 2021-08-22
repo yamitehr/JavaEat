@@ -186,6 +186,10 @@ public class AddOrderController extends ControllerWrapper {
 	private TextField searchAreaField;	
 	@FXML
 	private Text timeMessage;
+	@FXML
+	private Button expressDeliveryBtn;
+	@FXML
+	private Button regularDeliveryBtn;
 	
 	@FXML
     public void initialize() {
@@ -404,7 +408,7 @@ public class AddOrderController extends ControllerWrapper {
 			int j = 0;
 			for (Pair<CheckBox, Neighberhood> cb : neighberhoodList) {
 				grid.add(cb.getKey(), j, i, 1, 1);
-				if (j == 3) {
+				if (j == 4) {
 					j = 0;
 					i ++;
 				} else {
@@ -466,10 +470,12 @@ public class AddOrderController extends ControllerWrapper {
 	public void editOrder(ActionEvent e) {
 		Order selectedOrder = allOrdersTable.getSelectionModel().getSelectedItem();
 		if(selectedOrder !=  null) {
-			if(selectedOrder.getDelivery().isDelivered()) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setHeaderText("Can't edit order that linked to delivery that is already delivered");
-				alert.showAndWait();
+			if(selectedOrder.getDelivery() != null) {
+				if(selectedOrder.getDelivery().isDelivered()) {
+					Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText("Can't edit order that linked to delivery that is already delivered");
+					alert.showAndWait();
+				}
 			}
 			else {
 				deliveryBox.setDisable(false);
@@ -481,12 +487,9 @@ public class AddOrderController extends ControllerWrapper {
 					deliveryBox.setValue(selectedOrder.getDelivery());
 				finalDishes.addAll(selectedOrder.getDishes());
 				finalDishesList.setItems(finalDishes);
-//				for(int i = 0; i < selectedOrder.getDishes().size(); i++) {
-//					finalDishesList.getSelectionModel().select(selectedOrder.getDishes().get(i));
-//				}
 				customerBox.setDisable(true);
 				}
-			}
+		}
 	}
 	
 	public void setEditOrder(ActionEvent e) {
@@ -631,32 +634,39 @@ public class AddOrderController extends ControllerWrapper {
 	public void editDelivery(ActionEvent e) {
 		Delivery selectedDelivery = allDeliveriesTable.getSelectionModel().getSelectedItem();
 		if(selectedDelivery !=  null) {
-			addExpressBtn.setDisable(true);
-			addRegularBtn.setDisable(true);
-			editDeliveryBtn.setDisable(false);
-			DeliveryPersonBox.setValue(selectedDelivery.getDeliveryPerson());
-			deliveryAreaBox.setValue(selectedDelivery.getArea());
-			yesChoice.setSelected(selectedDelivery.isDelivered());
-			deliveryDate.setValue(selectedDelivery.getDeliveredDate());
-			deliveryDate.setDisable(true);
-			if(selectedDelivery instanceof RegularDelivery) {
-				orderBox.setVisible(false);
-				postageLbl.setVisible(false);
-				postageField.setVisible(false);
-				regularPane.setVisible(true);
-				ordersList.setVisible(true);
-				for(Order o: ((RegularDelivery) selectedDelivery).getOrders()) {
-					ordersList.getSelectionModel().select(o);
-				}
+			if(selectedDelivery.isDelivered()) {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setHeaderText("Can't edit delivery that is already delivered");
+				alert.showAndWait();
 			}
-			else { //express
-				ordersList.setVisible(false);
-				regularPane.setVisible(true);
-				orderBox.setVisible(true);
-				postageLbl.setVisible(true);
-				postageField.setVisible(true);
-				orderBox.setValue(((ExpressDelivery) selectedDelivery).getOrder());
-				postageField.setText(String.valueOf(((ExpressDelivery) selectedDelivery).getPostage()));
+			else {
+				addExpressBtn.setDisable(true);
+				addRegularBtn.setDisable(true);
+				editDeliveryBtn.setDisable(false);
+				DeliveryPersonBox.setValue(selectedDelivery.getDeliveryPerson());
+				deliveryAreaBox.setValue(selectedDelivery.getArea());
+				yesChoice.setSelected(selectedDelivery.isDelivered());
+				deliveryDate.setValue(selectedDelivery.getDeliveredDate());
+				deliveryDate.setDisable(true);
+				if(selectedDelivery instanceof RegularDelivery) {
+					orderBox.setVisible(false);
+					postageLbl.setVisible(false);
+					postageField.setVisible(false);
+					regularPane.setVisible(true);
+					ordersList.setVisible(true);
+					for(Order o: ((RegularDelivery) selectedDelivery).getOrders()) {
+						ordersList.getSelectionModel().select(o);
+					}
+				}
+				else { //express
+					ordersList.setVisible(false);
+					regularPane.setVisible(true);
+					orderBox.setVisible(true);
+					postageLbl.setVisible(true);
+					postageField.setVisible(true);
+					orderBox.setValue(((ExpressDelivery) selectedDelivery).getOrder());
+					postageField.setText(String.valueOf(((ExpressDelivery) selectedDelivery).getPostage()));
+				}
 			}
 		}
 	}
@@ -665,12 +675,12 @@ public class AddOrderController extends ControllerWrapper {
 		try {
 			if(!selectedDelivery.getDeliveryPerson().equals(DeliveryPersonBox.getValue())) {
 				if(DeliveryPersonBox.getValue() == null)
-					throw new InvalidInputException("You must choose Delivery Person");
+					throw new InvalidInputException("Please choose Delivery Person");
 				selectedDelivery.setDeliveryPerson(DeliveryPersonBox.getValue());
 			}
 			if(!selectedDelivery.getArea().equals(deliveryAreaBox.getValue())) {
 				if(deliveryAreaBox.getValue() == null)
-					throw new InvalidInputException("You must choose Area");
+					throw new InvalidInputException("Please choose Area");
 				selectedDelivery.setArea(deliveryAreaBox.getValue());
 			}
 			if(!selectedDelivery.isDelivered() && yesChoice.isSelected())
@@ -682,7 +692,7 @@ public class AddOrderController extends ControllerWrapper {
 				ArrayList<Order> changedOrders = new ArrayList<Order>();
 				changedOrders.addAll(ordersList.getSelectionModel().getSelectedItems());
 				if(changedOrders.isEmpty()) 
-					throw new InvalidInputException("You must choose at least one order");
+					throw new InvalidInputException("Please choose at least one order");
 				for(Order o: ((RegularDelivery) selectedDelivery).getOrders()) {
 					if(!changedOrders.contains(o))
 						((RegularDelivery)selectedDelivery).removeOrder(o);			
@@ -712,6 +722,7 @@ public class AddOrderController extends ControllerWrapper {
 		yesChoice.setSelected(false);
 		orderBox.getSelectionModel().clearSelection();
 		postageField.clear();
+		deliveryDate.setValue(null);
 		allDeliveriesTable.getItems().clear();
 		allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
@@ -758,8 +769,9 @@ public class AddOrderController extends ControllerWrapper {
 			///		
 	
 			Restaurant.getInstance().addDelivery(newExpressDelivery); 
-			//messageToUserRegular.setFill(Color.BLUE);
-			messageToUserRegular.setText("Express Delivery added successfully");
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setHeaderText("Delivery added successfully!");
+			alert.showAndWait();
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
 			orderBox.getSelectionModel().clearSelection();
@@ -818,7 +830,9 @@ public class AddOrderController extends ControllerWrapper {
 			///		
 	
 			Restaurant.getInstance().addDelivery(newRegularDelivery); 
-			messageToUserRegular.setText("Delivery added successfully");
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setHeaderText("Delivery added successfully!");
+			alert.showAndWait();
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
 			deliveryDate.setValue(null);
