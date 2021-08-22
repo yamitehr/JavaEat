@@ -354,7 +354,7 @@ public class AddOrderController extends ControllerWrapper {
 			int j = 0;
 			for (Pair<CheckBox, Neighberhood> cb : neighberhoodList) {
 				grid.add(cb.getKey(), j, i, 1, 1);
-				if (j == 3) {
+				if (j == 4) {
 					j = 0;
 					i ++;
 				} else {
