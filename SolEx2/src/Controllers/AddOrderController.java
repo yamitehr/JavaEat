@@ -185,6 +185,10 @@ public class AddOrderController extends ControllerWrapper {
 	private TextField searchAreaField;	
 	@FXML
 	private Text timeMessage;
+	@FXML
+	private Button expressDeliveryBtn;
+	@FXML
+	private Button regularDeliveryBtn;
 	
 	@FXML
     public void initialize() {
@@ -317,11 +321,11 @@ public class AddOrderController extends ControllerWrapper {
 					String newValue) {
 				    	if (newValue != "") {
 					    	try {
-					    		postageMessage.setText("");
+					    		messageToUserRegular.setText("");
 								Double.parseDouble(newValue);
 							} catch(NumberFormatException nfe) {
 								postageField.setText(oldValue);
-								postageMessage.setText("Numbers only!");
+								messageToUserRegular.setText("Numbers only!");
 							}	
 				    	}
 				    }
@@ -375,11 +379,11 @@ public class AddOrderController extends ControllerWrapper {
 					String newValue) {
 				    	if (newValue != "") {
 					    	try {
-					    		timeMessage.setText("");
+					    		messageToUser.setText("");
 								Integer.parseInt(newValue);
 							} catch(NumberFormatException nfe) {
 								deliveryTime.setText(oldValue);
-								timeMessage.setText("Numbers only!");
+								messageToUser.setText("Numbers only!");
 							}	
 				    	}
 				    }
