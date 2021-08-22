@@ -4,8 +4,8 @@
 <?import javafx.scene.media.MediaView?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VideoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VideoController">
    <children>
-      <MediaView fx:id="restaurantVideo" fitHeight="770.0" fitWidth="1430.0" />
+      <MediaView fx:id="restaurantVideo" fitHeight="850.0" fitWidth="1600.0" />
    </children>
 </AnchorPane>

@@ -142,11 +142,11 @@ public class AddDishController extends ControllerWrapper {
 					String newValue) {
 				    	if (newValue != "") {
 					    	try {
-					    		timeMessage.setText("");
+					    		messageToUserDish.setText("");
 								Integer.parseInt(newValue);
 							} catch(NumberFormatException nfe) {
 								timeToMake.setText(oldValue);
-								timeMessage.setText("Numbers only!");
+								messageToUserDish.setText("Numbers only!");
 							}	
 				    	}
 				    }
@@ -214,11 +214,11 @@ public class AddDishController extends ControllerWrapper {
 			 		String newValue) {
 					    	if (newValue != "") {
 					    		try {
-					    			priceMessage.setText("");
+					    			messageToUserComp.setText("");
 					    			Double.parseDouble(newValue);
 					    		} catch(NumberFormatException nfe) {
 					    			price.setText(oldValue);
-					    			priceMessage.setText("Numbers only!");
+					    			messageToUserComp.setText("Numbers only!");
 					    		}	
 					    	}
 			 		}

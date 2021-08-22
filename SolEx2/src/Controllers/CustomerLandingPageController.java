@@ -104,14 +104,9 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		messageDishLbl.setLayoutY(566);
 		messageDishLbl.getStyleClass().add("managerAllText"); 
 		navList.getChildren().add(messageDishLbl);
-	/*	
-		try {
-			replacePane(toReplacePane, "/View/Video.fxml");
-		} catch (IOException ex) {
-			// TODO Auto-generated catch block
-			ex.printStackTrace();
-		}
-		*/
+		
+		replacePane(toReplacePane, "/View/Video.fxml");
+		
 		cartScrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		cartScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		cartVbox.setFillWidth(true);

@@ -7,8 +7,8 @@
 
 .check-box{
     -fx-text-fill: white;
-    -fx-font-family: 'Yusei Magic', sans-serif;
-	-fx-font-size: 12px;
+    -fx-font-family: 'Poppins', sans-serif;
+	-fx-font-size: 14px;
 }
 
 .check-box .box {

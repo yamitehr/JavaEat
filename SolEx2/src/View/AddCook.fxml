@@ -94,7 +94,7 @@
                                           <Image url="@../../icons/trash-alt-solid.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../icons/edit-solid-2.png" />
                                        </image>
