@@ -179,10 +179,10 @@ public class AddCookController extends ControllerWrapper{
 				public void changed(ObservableValue<? extends String> observable, String oldValue, 
 						String newValue) {
 					    	if (newValue != "") {
-						    	messageCook.setText("");
+						    	messageToUserCook.setText("");
 						    	if(!newValue.matches("[a-zA-Z\s]+")) {
 						    		first_Name.setText(newValue.substring(0, newValue.length()-1));
-						    		messageCook.setText("Letters Only!");
+						    		messageToUserCook.setText("Letters Only!");
 						    	}
 					    	}
 					    }
@@ -193,10 +193,10 @@ public class AddCookController extends ControllerWrapper{
 				public void changed(ObservableValue<? extends String> observable, String oldValue, 
 						String newValue) {
 					    	if (newValue != "") {
-						    	messageCook.setText("");
+					    		messageToUserCook.setText("");
 						    	if(!newValue.matches("[a-zA-Z\s]+")) {
 						    		last_Name.setText(newValue.substring(0, newValue.length()-1));
-						    		messageCook.setText("Letters Only!");
+						    		messageToUserCook.setText("Letters Only!");
 						    	}
 					    	}
 					    }
@@ -204,9 +204,9 @@ public class AddCookController extends ControllerWrapper{
 		 
 		 date.setOnAction(d -> {
 			 if(date.getValue() != null) {
-				 messageCook.setText("");
+				 messageToUserCook.setText("");
 				 if(date.getValue().isAfter(LocalDate.now())) {
-					 messageCook.setText("Date cannot be in the future!");
+					 messageToUserCook.setText("Date cannot be in the future!");
 				 }
 			 }
 		 });
@@ -284,10 +284,10 @@ public class AddCookController extends ControllerWrapper{
 					public void changed(ObservableValue<? extends String> observable, String oldValue, 
 							String newValue) {
 						    	if (newValue != "") {
-							    	messageDP.setText("");
+							    	messageToUserDeliveryPerson.setText("");
 							    	if(!newValue.matches("[a-zA-Z\s]+")) {
 							    		first_Name_DP.setText(newValue.substring(0, newValue.length()-1));
-							    		messageDP.setText("Letters Only!");
+							    		messageToUserDeliveryPerson.setText("Letters Only!");
 							    	}
 						    	}
 						    }
@@ -298,10 +298,10 @@ public class AddCookController extends ControllerWrapper{
 					public void changed(ObservableValue<? extends String> observable, String oldValue, 
 							String newValue) {
 						    	if (newValue != "") {
-						    		messageDP.setText("");
+						    		messageToUserDeliveryPerson.setText("");
 							    	if(!newValue.matches("[a-zA-Z\s]+")) {
 							    		last_Name_DP.setText(newValue.substring(0, newValue.length()-1));
-							    		messageDP.setText("Letters Only!");
+							    		messageToUserDeliveryPerson.setText("Letters Only!");
 							    	}
 						    	}
 						    }
@@ -309,9 +309,9 @@ public class AddCookController extends ControllerWrapper{
 			 
 			 dateDP.setOnAction(d -> {
 				 if(dateDP.getValue() != null) {
-					 messageDP.setText("");
+					 messageToUserDeliveryPerson.setText("");
 					 if(dateDP.getValue().isAfter(LocalDate.now())) {
-						 messageDP.setText("Date cannot be in the future!");
+						 messageToUserDeliveryPerson.setText("Date cannot be in the future!");
 					 }
 				 }
 			 });
@@ -414,6 +414,7 @@ public class AddCookController extends ControllerWrapper{
 		date.setDisable(false);
 		isChef.setDisable(false);
 		}catch(InvalidInputException inputE) {
+			soundOfButton("error.mp3");
 			messageToUserCook.setText(inputE.getMessage());
 		}
 	}

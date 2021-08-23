@@ -240,6 +240,17 @@ public class AddOrderController extends ControllerWrapper {
 			searchOrderByID();
 		});
 		
+		customerBox.setOnAction(c -> {
+			try {
+				if(Restaurant.getInstance().getBlackList().contains(customerBox.getValue())) 
+					throw new IllegalCustomerException();
+				else
+					messageToUserOrder.setText("");
+			} catch (IllegalCustomerException ce) {
+				messageToUserOrder.setText(ce.getMessage());
+			}
+		});
+		
 	}
 	
 	private void initDeliveryTab() {
@@ -250,6 +261,7 @@ public class AddOrderController extends ControllerWrapper {
 		regularPane.setVisible(false);
 		addRegularBtn.setVisible(false);
 		addExpressBtn.setVisible(false);
+		editDeliveryBtn.setDisable(true);
 		
 		ObservableList<DeliveryPerson> deliveryPersons = FXCollections.observableArrayList(Restaurant.getInstance().getDeliveryPersons().values());
 		DeliveryPersonBox.getItems().clear();				
@@ -341,6 +353,7 @@ public class AddOrderController extends ControllerWrapper {
 	private void initAreaTab() {
 		newAreaBox.setVisible(false);
 		removeLbl.setVisible(false);
+		editDeliveryAreaBtn.setDisable(true);
 		
 		//Add all delivery areas
 		areaIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -383,6 +396,20 @@ public class AddOrderController extends ControllerWrapper {
 			    	}
 			    }
 			});
+		
+		deliveryAreaName.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, 
+					String newValue) {
+				    	if (newValue != "") {
+					    	messageToUser.setText("");
+					    	if(!newValue.matches("[a-zA-Z\s]+")) {
+					    		deliveryAreaName.setText(newValue.substring(0, newValue.length()-1));
+					    		messageToUser.setText("Letters Only!");
+					    	}
+				    	}
+				    }
+				});
 			
 
 	}
@@ -544,11 +571,13 @@ public class AddOrderController extends ControllerWrapper {
 		editOrderBtn.setDisable(true);
 		addOrderBtn.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			//messageToUserOrder.setFill(Color.RED);
+			soundOfButton("error.mp3");
 			messageToUserOrder.setText(inputE.getMessage());
 		} catch(IllegalCustomerException ce) {
+			soundOfButton("error.mp3");
 			messageToUserOrder.setText(ce.getMessage());
 		} catch(SensitiveException se) {
+			soundOfButton("error.mp3");
 			messageToUserOrder.setText(se.getMessage());
 		}
 	}
@@ -596,6 +625,7 @@ public class AddOrderController extends ControllerWrapper {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setHeaderText("Order added successfully!");
 			alert.showAndWait();
+			messageToUserOrder.setText("");
 			customerBox.getSelectionModel().clearSelection();
 			deliveryBox.getSelectionModel().clearSelection();
 			finalDishesList.getItems().clear();
@@ -607,10 +637,13 @@ public class AddOrderController extends ControllerWrapper {
 			ordersList.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getOrders().entrySet().stream().map(o -> o.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
+			soundOfButton("error.mp3");
 			messageToUserOrder.setText(inputE.getMessage());
 		}catch(IllegalCustomerException ce) {
+			soundOfButton("error.mp3");
 			messageToUserOrder.setText(ce.getMessage());
 		}catch(Exception ex) {
+			soundOfButton("error.mp3");
 			messageToUserOrder.setText("an error has accured please try again");
 		}
 	}
@@ -714,7 +747,7 @@ public class AddOrderController extends ControllerWrapper {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setHeaderText("Delivery edited successfully!");
 		alert.showAndWait();
-		messageToUserOrder.setText("");
+		messageToUserRegular.setText("");
 		DeliveryPersonBox.getSelectionModel().clearSelection();
 		deliveryAreaBox.getSelectionModel().clearSelection();
 		yesChoice.setSelected(false);
@@ -728,7 +761,7 @@ public class AddOrderController extends ControllerWrapper {
 		addRegularBtn.setDisable(false);
 		addExpressBtn.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			//messageToUserRegular.setFill(Color.RED);
+			soundOfButton("error.mp3");
 			messageToUserRegular.setText(inputE.getMessage());
 		}
 	}
@@ -770,6 +803,7 @@ public class AddOrderController extends ControllerWrapper {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setHeaderText("Delivery added successfully!");
 			alert.showAndWait();
+			messageToUserRegular.setText("");
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
 			orderBox.getSelectionModel().clearSelection();
@@ -781,13 +815,13 @@ public class AddOrderController extends ControllerWrapper {
 			allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
-			//messageToUserRegular.setFill(Color.RED);
+			soundOfButton("error.mp3");
 			messageToUserRegular.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
-			//messageToUserRegular.setFill(Color.RED);
+			soundOfButton("error.mp3");
 			messageToUserRegular.setText("Wrong Input!");
 		}catch(Exception ex) {
-			//messageToUserRegular.setFill(Color.RED);
+			soundOfButton("error.mp3");
 			messageToUserRegular.setText("an error has accured please try again");
 		}
 	}
@@ -831,6 +865,7 @@ public class AddOrderController extends ControllerWrapper {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setHeaderText("Delivery added successfully!");
 			alert.showAndWait();
+			messageToUserRegular.setText("");
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
 			deliveryDate.setValue(null);
@@ -840,8 +875,10 @@ public class AddOrderController extends ControllerWrapper {
 			allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
+			soundOfButton("error.mp3");
 			messageToUserRegular.setText(inputE.getMessage());
 		}catch(Exception ex) {
+			soundOfButton("error.mp3");
 			messageToUserRegular.setText("an error has accured please try again");
 		}
 	}
@@ -942,11 +979,14 @@ public class AddOrderController extends ControllerWrapper {
 						Restaurant.getInstance().getAreas().entrySet().stream().map(a -> a.getValue()).collect(Collectors.toList())));
 				newAreaBox.getSelectionModel().clearSelection();
 			} else {
+				soundOfButton("error.mp3");
 				messageToUser.setText("an error has accured please try again");
 			}
 		}catch(InvalidInputException ipe) {
+			soundOfButton("error.mp3");
 			messageToUser.setText(ipe.getMessage());
 		} catch(Exception exc) {
+			soundOfButton("error.mp3");
 			messageToUser.setText("an error has accured please try again");
 		}
 		
@@ -1052,7 +1092,8 @@ public class AddOrderController extends ControllerWrapper {
 		editDeliveryAreaBtn.setDisable(true);
 		addDeliveryAreaBtn.setDisable(false);
 		}catch(InvalidInputException inputE) {
-			messageToUserRegular.setText(inputE.getMessage());
+			soundOfButton("error.mp3");
+			messageToUser.setText(inputE.getMessage());
 		}
 	}
 	

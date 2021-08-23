@@ -88,6 +88,43 @@ public class SignInController extends ControllerWrapper {
 			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow(), Consts.defaultWidthLogin, Consts.defaultHeightLogin);
 		});
 		tooltip.setShowDuration(new Duration(100000));
+		
+		firstName.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, 
+					String newValue) {
+				    	if (newValue != "") {
+				    		resultConcole.setText("");
+					    	if(!newValue.matches("[a-zA-Z\s]+")) {
+					    		firstName.setText(newValue.substring(0, newValue.length()-1));
+					    		resultConcole.setText("Letters Only!");
+					    	}
+				    	}
+				    }
+				});
+		
+		 lastName.textProperty().addListener(new ChangeListener<String>() {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, 
+						String newValue) {
+					    	if (newValue != "") {
+					    		resultConcole.setText("");
+						    	if(!newValue.matches("[a-zA-Z\s]+")) {
+						    		lastName.setText(newValue.substring(0, newValue.length()-1));
+						    		resultConcole.setText("Letters Only!");
+						    	}
+					    	}
+					    }
+					});
+		 
+		 birthDate.setOnAction(d -> {
+			 if(birthDate.getValue() != null) {
+				 resultConcole.setText("");
+				 if(birthDate.getValue().isAfter(LocalDate.now())) {
+					 resultConcole.setText("Date cannot be in the future!");
+				 }
+			 }
+		 });
 	}
 
 	
