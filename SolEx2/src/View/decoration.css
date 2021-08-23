@@ -9,6 +9,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Dela+Gothic+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
 
 .labelHeader{
 	-fx-font-family: 'Sarina', cursive;
@@ -362,7 +365,7 @@
 
 .managerStatisticsHeaders{
 	-fx-text-fill: white;
-	 -fx-font-family: 'Pacifico', cursive;
+	 -fx-font-family: 'Fugaz One', cursive;
 	-fx-font-size: 27px;
 }
 
@@ -386,6 +389,12 @@
 -fx-background-color: transparent;
 	
 }
+
+.managerStatsReguExp{
+	 -fx-font-family: 'Poppins', sans-serif;
+	 -fx-font-size: 24px;
+}
+
 
 /* ****** TABS for Manager STATISTICS***** */
 #tabPaneStats{
