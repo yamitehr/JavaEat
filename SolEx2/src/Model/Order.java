@@ -144,8 +144,12 @@ public class Order implements Comparable<Order>, Serializable{
 		
 	    TimerTask task = new TimerTask() {
 	        public void run() {
-	        	status = OrderStatus.readyForDelivery;
-	    		Logger.Log("[startOrderTimer] order time done for " + getId());
+	        	if(!status.equals(OrderStatus.cancelled)) {
+		        	status = OrderStatus.readyForDelivery;
+		    		Logger.Log("[startOrderTimer] order time done for " + getId());
+	        	} else {
+	        		Logger.Log("[startOrderTimer] order was cancelled. id " + getId());
+	        	}
 	        }
 	    };
 	    
