@@ -366,8 +366,12 @@ public class CustomerLandingPageController extends ControllerWrapper{
 	private Pane getShoppingCartItem(Dish dish) {
 		String dishName = dish.getDishName();
 		double dishPrice = dish.calcDishPrice();
-		String dishDescription = dish.getComponenets().stream().filter(c -> c.isSelected()).collect(Collectors.toList()).toString();
-		
+		List<Component> dishDescriptionList = dish.getComponenets().stream().filter(c -> c.isSelected()).collect(Collectors.toList());
+		String dishDescription ="";
+		for(Component c : dishDescriptionList) {
+			dishDescription += c.getComponentName() + ", ";
+		}
+		dishDescription = dishDescription.substring(0, dishDescription.length() -2);
 		Pane newMenuItem = new Pane();
 		Label dishLa = new Label("Dish: " + dishName + "\nPrice: " + String.valueOf(dishPrice) + "\nContains: " + dishDescription);
 		dishLa.getStyleClass().add("dishInCart");
