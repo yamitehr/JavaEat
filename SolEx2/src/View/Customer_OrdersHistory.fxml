@@ -34,7 +34,15 @@
             </ImageView>
              </graphic>
          </Button>
-      <Button fx:id="removeBtn" layoutX="825.0" layoutY="691.0" mnemonicParsing="false" onAction="#cancelOrder" styleClass="menuBtns" stylesheets="@decoration.css" text="Cancel" />
+      <Button fx:id="removeBtn" layoutX="825.0" layoutY="691.0" mnemonicParsing="false" onAction="#cancelOrder" styleClass="menuBtns" stylesheets="@decoration.css" text="Cancel">
+     	 <graphic>
+            <ImageView fitHeight="23.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/ban-solid.png" />
+               </image>
+            </ImageView>
+             </graphic>
+         </Button>
       <Text fx:id="message" fill="WHITE" layoutX="960.0" layoutY="716.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="messageCancelOrder" text="Text" />
    </children>
 </AnchorPane>

@@ -472,7 +472,8 @@ public class CustomerLandingPageController extends ControllerWrapper{
 				State.setCurrentDish(null);
 				State.setCurrentOrder(null);
 				initShoppingCart();
-				
+
+				messageLbl.setText("Orders History");
 				replacePane(toReplacePane, "/View/Customer_OrdersHistory.fxml");
 				
 				
