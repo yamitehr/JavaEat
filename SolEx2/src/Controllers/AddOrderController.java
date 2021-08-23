@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-
 import Exceptions.IllegalCustomerException;
 import Exceptions.InvalidInputException;
 import Exceptions.SensitiveException;
@@ -321,18 +320,17 @@ public class AddOrderController extends ControllerWrapper {
 			 searchDeliveryByID();
 		});
 		
-		postageMessage.setFill(Color.RED);
 		postageField.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, 
 					String newValue) {
 				    	if (newValue != "") {
 					    	try {
-					    		postageMessage.setText("");
+					    		messageToUserRegular.setText("");
 								Double.parseDouble(newValue);
 							} catch(NumberFormatException nfe) {
 								postageField.setText(oldValue);
-								postageMessage.setText("Numbers only!");
+								messageToUserRegular.setText("Numbers only!");
 							}	
 				    	}
 				    }
@@ -376,11 +374,11 @@ public class AddOrderController extends ControllerWrapper {
 				String newValue) {
 			    	if (newValue != "") {
 				    	try {
-				    		timeMessage.setText("");
+				    		messageToUser.setText("");
 							Integer.parseInt(newValue);
 						} catch(NumberFormatException nfe) {
 							deliveryTime.setText(oldValue);
-							timeMessage.setText("Numbers only!");
+							messageToUser.setText("Numbers only!");
 						}	
 			    	}
 			    }
@@ -928,7 +926,10 @@ public class AddOrderController extends ControllerWrapper {
 			DeliveryArea da = new DeliveryArea(daName, selectedNeighberhoods, daTime);
 			//Add delivery area to the restaurant and clear fields
 			if(Restaurant.getInstance().addDeliveryArea(da)) {
-				messageToUser.setText("Cook added successfully");
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.setHeaderText("Area added successfully!");
+				alert.showAndWait();
+				messageToUser.setText("");
 				deliveryAreaName.clear();
 				deliveryTime.clear();
 				for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
@@ -1000,7 +1001,7 @@ public class AddOrderController extends ControllerWrapper {
 					throw new InvalidInputException("You must enter area name");
 				selectedArea.setAreaName(deliveryAreaName.getText());
 			}
-			//neighberhoods
+			//neighberhoods		
 			HashSet<Neighberhood> selectedNeighberhoods = new HashSet<Neighberhood>();
 			for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
 				CheckBox cb = cbp.getKey();
@@ -1013,6 +1014,14 @@ public class AddOrderController extends ControllerWrapper {
 			if(selectedNeighberhoods.isEmpty()) 
 				throw new InvalidInputException("You must choose at least one neighberhood");
 			
+			for(DeliveryArea area: Restaurant.getInstance().getAreas().values()) {
+				if(!area.equals(selectedArea)) {
+					for(Neighberhood n: area.getNeighberhoods()) {
+						if(selectedNeighberhoods.contains(n))
+							throw new InvalidInputException(n.name() + " is already in another delivery area.");
+					}
+				}
+			}			
 				for(Neighberhood n:  selectedArea.getNeighberhoods()) {
 					if(!selectedNeighberhoods.contains(n))
 						toRemove.add(n);	

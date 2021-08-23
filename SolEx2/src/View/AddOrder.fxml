@@ -168,7 +168,7 @@
                                           <TableColumn fx:id="postageCol" prefWidth="64.0" text="Postage" />
                                        </columns>
                                     </TableView>
-                                    <Button layoutX="570.0" layoutY="320.0" maxHeight="38.0" mnemonicParsing="false" onAction="#signAsDelivered" prefHeight="48.0" prefWidth="211.0" styleClass="addBtns" stylesheets="@decoration.css" text="Sign As Delivered" />
+                                    <Button layoutX="526.0" layoutY="322.0" maxHeight="38.0" mnemonicParsing="false" onAction="#signAsDelivered" prefHeight="48.0" prefWidth="211.0" styleClass="addBtns" stylesheets="@decoration.css" text="Sign As Delivered" />
                                     <TextField fx:id="searchDeliveryField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
                                     <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -222,7 +222,7 @@
                                     </ImageView>
                                  </graphic></Button>
                               <Text fx:id="timeMessage" fill="RED" layoutX="124.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" />
-                              <TextArea fx:id="messageToUser" editable="false" layoutX="834.0" layoutY="130.0" prefHeight="39.0" prefWidth="172.0" />
+                              <TextArea fx:id="messageToUser" editable="false" layoutX="834.0" layoutY="130.0" prefHeight="39.0" prefWidth="172.0" style="-fx-text-fill: Red;" />
                               <Button fx:id="editDeliveryAreaBtn" layoutX="835.0" layoutY="69.0" mnemonicParsing="false" onAction="#setEditDeliveryArea" prefHeight="26.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
