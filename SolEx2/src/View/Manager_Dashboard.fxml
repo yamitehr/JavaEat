@@ -18,7 +18,7 @@
       </ImageView>
       <AnchorPane layoutX="331.0" prefHeight="740.0" prefWidth="1015.0">
          <children>
-            <AnchorPane layoutX="243.0" layoutY="55.0" prefHeight="85.0" prefWidth="190.0" styleClass="button2" stylesheets="@decoration.css">
+            <AnchorPane layoutX="250.0" layoutY="95.0" prefHeight="85.0" prefWidth="190.0" styleClass="button2" stylesheets="@decoration.css">
                <children>
                   <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="203.0" text="Total Customers" textFill="WHITE">
                      <font>
@@ -39,7 +39,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="21.0" layoutY="55.0" prefHeight="85.0" prefWidth="190.0" styleClass="button2" stylesheets="@decoration.css">
+            <AnchorPane layoutX="40.0" layoutY="95.0" prefHeight="85.0" prefWidth="190.0" styleClass="button2" stylesheets="@decoration.css">
                <children>
                   <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="203.0" text="Total Employees" textFill="WHITE">
                      <font>
@@ -60,7 +60,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="462.0" layoutY="55.0" prefHeight="85.0" prefWidth="190.0" styleClass="button2" stylesheets="@decoration.css">
+            <AnchorPane layoutX="460.0" layoutY="95.0" prefHeight="85.0" prefWidth="203.0" styleClass="button2" stylesheets="@decoration.css">
                <children>
                   <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="190.0" text="Orders Sell" textFill="WHITE">
                      <font>
@@ -81,9 +81,9 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="667.0" layoutY="55.0" prefHeight="85.0" prefWidth="190.0" styleClass="button2" stylesheets="@decoration.css">
+            <AnchorPane layoutX="670.0" layoutY="95.0" prefHeight="85.0" prefWidth="190.0" styleClass="button2" stylesheets="@decoration.css">
                <children>
-                  <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="218.0" text="Orders Revenue" textFill="WHITE">
+                  <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="203.0" text="Orders Revenue" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -102,7 +102,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="906.0" layoutY="54.0" prefHeight="85.0" prefWidth="190.0" styleClass="button2" stylesheets="@decoration.css">
+            <AnchorPane layoutX="880.0" layoutY="94.0" prefHeight="85.0" prefWidth="203.0" styleClass="button2" stylesheets="@decoration.css">
                <children>
                   <Label alignment="CENTER" layoutY="-5.0" prefHeight="42.0" prefWidth="190.0" text="Revenue From Express" textFill="WHITE">
                      <font>
@@ -128,11 +128,11 @@
                   </Label>
                </children>
             </AnchorPane>
-            <TableView fx:id="popularComponentsTable" layoutX="54.0" layoutY="483.0" prefHeight="200.0" prefWidth="315.0">
+            <TableView fx:id="popularComponentsTable" layoutX="54.0" layoutY="483.0" prefHeight="200.0" prefWidth="350.0">
               <columns>
-                <TableColumn fx:id="compNameCol" prefWidth="125.0" text="Component Name" />
-                <TableColumn fx:id="containsCol" prefWidth="115.0" text="Contains" />
-                  <TableColumn fx:id="compPriceCol" prefWidth="75.0" text="Price" />
+                <TableColumn fx:id="compNameCol" prefWidth="149.5999755859375" text="Component Name" />
+                <TableColumn fx:id="containsCol" prefWidth="108.800048828125" text="Contains" />
+                  <TableColumn fx:id="compPriceCol" prefWidth="92.79998779296875" text="Price" />
               </columns>
             </TableView>
             <Label alignment="CENTER" layoutX="45.0" layoutY="447.0" prefHeight="35.0" prefWidth="315.0" text="Popular Components" textFill="WHITE">
@@ -147,19 +147,68 @@
                   </ImageView>
                </graphic>
             </Label>
-            <TableView fx:id="profitRelationTable" layoutX="431.0" layoutY="483.0" prefHeight="200.0" prefWidth="315.0">
+            <TableView fx:id="profitRelationTable" layoutX="588.0" layoutY="483.0" prefHeight="200.0" prefWidth="350.0">
                <columns>
                   <TableColumn fx:id="dishNameCol" prefWidth="125.0" text="Dish Name" />
-                  <TableColumn fx:id="timeToMakeCol" prefWidth="115.0" text="Time To Make" />
-                  <TableColumn fx:id="dishPriceCol" prefWidth="75.0" text="Price" />
+                  <TableColumn fx:id="timeToMakeCol" prefWidth="139.199951171875" text="Time To Make" />
+                  <TableColumn fx:id="dishPriceCol" prefWidth="85.5999755859375" text="Price" />
                </columns>
             </TableView>
-            <Label alignment="CENTER" layoutX="431.0" layoutY="448.0" prefHeight="35.0" prefWidth="315.0" text="Profit Relation" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="588.0" layoutY="447.0" prefHeight="35.0" prefWidth="315.0" text="Profit Relation" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/hand-holding-usd-solid.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Label>
-            <Button layoutX="507.0" layoutY="683.0" mnemonicParsing="false" onAction="#export" styleClass="addBtns" stylesheets="@decoration.css" text="Export to docx" />
+            <Button layoutX="652.0" layoutY="683.0" mnemonicParsing="false" onAction="#export" styleClass="addBtns" stylesheets="@decoration.css" text="Write to docx" />
+            <AnchorPane layoutX="309.0" layoutY="246.0" prefHeight="85.0" prefWidth="203.0" styleClass="button2" stylesheets="@decoration.css">
+               <children>
+                  <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="190.0" text="Today Sell" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/dollar-sign-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label fx:id="todaySell" alignment="CENTER" layoutX="59.0" layoutY="46.0" prefHeight="35.0" prefWidth="85.0" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="588.0" layoutY="246.0" prefHeight="85.0" prefWidth="190.0" styleClass="button2" stylesheets="@decoration.css">
+               <children>
+                  <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="203.0" text="Today Revenue" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/hand-holding-usd-solid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label fx:id="todayRevenue" alignment="CENTER" layoutX="59.0" layoutY="46.0" prefHeight="35.0" prefWidth="85.0" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

@@ -2,10 +2,13 @@ package Controllers;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -33,6 +36,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.util.Units;
 import org.apache.poi.wp.usermodel.HeaderFooterType;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
@@ -80,9 +85,9 @@ public class ManagerDashboardController extends ControllerWrapper {
 	@FXML
 	private DatePicker selectedDate;
 	@FXML
-	private Label sellByDate;
+	private Label todaySell;
 	@FXML
-	private Label revenueByDate;
+	private Label todayRevenue;
 	
 	@FXML
     public void initialize() {
@@ -141,6 +146,10 @@ public class ManagerDashboardController extends ControllerWrapper {
 				
 		popularComponentsTable.getItems().addAll(populaComponents);
 		
+		todaySell.setText(String.valueOf(dailySell()));
+		
+		todayRevenue.setText(String.valueOf(dailyRevenue()));
+		
 		
 //		selectedDate.setOnAction(d -> {
 //			double SellDate = 0;
@@ -171,10 +180,10 @@ public class ManagerDashboardController extends ControllerWrapper {
 		
 	}
 	
-	public double monthlyRevenue(int month) {
+	public double dailyRevenue() {
 		double revenueDate = 0;
 		for(Delivery delivery: Restaurant.getInstance().getDeliveries().values()) {
-			if(delivery.getDeliveredDate().getMonthValue() == month) {
+			if(delivery.getDeliveredDate().equals(LocalDate.now())) {
 				if(delivery instanceof RegularDelivery) {
 					for(Order o: ((RegularDelivery) delivery).getOrders()) {
 						revenueDate += o.calcOrderRevenue();
@@ -188,10 +197,10 @@ public class ManagerDashboardController extends ControllerWrapper {
 		return revenueDate;
 	}
 	
-	public double monthlySell(int month) {
+	public double dailySell() {
 		double SellDate = 0;
 		for(Delivery delivery: Restaurant.getInstance().getDeliveries().values()) {
-			if(delivery.getDeliveredDate().getMonthValue() == month) {
+			if(delivery.getDeliveredDate().equals(LocalDate.now())) {
 				if(delivery instanceof RegularDelivery) {
 					for(Order o: ((RegularDelivery) delivery).getOrders()) {
 						for(Dish dish: o.getDishes()) {
@@ -240,40 +249,44 @@ public class ManagerDashboardController extends ControllerWrapper {
 			XWPFHeader header = document.createHeader(HeaderFooterType.DEFAULT);
 
 			XWPFParagraph paragraph = header.createParagraph();
-
 			XWPFRun run = paragraph.createRun();  
-			run.setText("ProFit Relation");
+			run.setText("ProFit Relation JavaEat Restaurant");
 			paragraph.setIndentationLeft(4000);
 
-			XWPFParagraph para = document.createParagraph();
-			XWPFRun run1 = para.createRun();
-			para.setIndentationLeft(6500);
+
+			paragraph = document.createParagraph();
+			run = paragraph.createRun();
+			paragraph.setIndentationLeft(6500);
 			LocalDateTime myDateObj = LocalDateTime.now();
 			DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 			String formattedDate = myDateObj.format(myFormatObj);
-			run1.setText("Date: " + formattedDate);
+			run.setText("Date: " + formattedDate);
+			run.addBreak();
 			
-			para = document.createParagraph();
+			paragraph = document.createParagraph();
 			// set indentation of the paragraph
-			para.setIndentationLeft(720);
-			run1  = para.createRun();  
-			para.setIndentationLeft(4000);
-			run1.setText("To: JavaEat Manager\n");
-			run1.setBold(true);
-			run1.setItalic(true);
-			run1.setUnderline(UnderlinePatterns.SINGLE);
+			paragraph.setIndentationLeft(720);
+			run  = paragraph.createRun();
+			paragraph.setIndentationLeft(4000);
+			run.setText("To: JavaEat Manager\n");
+			run.setBold(true);
+			run.setItalic(true);
+			run.setUnderline(UnderlinePatterns.SINGLE);
+			run.addBreak();
 			
 			
 			//create table
 			XWPFTable table = document.createTable();
 			
+			//create first row of the table
 			XWPFTableRow tableRowOne = table.getRow(0);
 			tableRowOne.getCell(0).setText("Dish Name");
 			tableRowOne.addNewTableCell().setText("Time To Make");
 			tableRowOne.addNewTableCell().setText("Price");
 			tableRowOne.addNewTableCell().setText("Relation");
 			
-			for (int i=0; i<profitRelationTable.getItems().size();i++) {
+			//insert data to the table according to the amount of the data
+			for (int i = 0; i < profitRelationTable.getItems().size(); i++) {
 				XWPFTableRow tableRow = table.createRow();
 				tableRow.getCell(0).setText(profitRelationTable.getItems().get(i).getDishName());
 				tableRow.getCell(1).setText(String.valueOf(profitRelationTable.getItems().get(i).getTimeToMake()));
@@ -285,11 +298,11 @@ public class ManagerDashboardController extends ControllerWrapper {
 				table.getRow(i).getCell(3).getCTTc().addNewTcPr().addNewTcW().setW(BigInteger.valueOf(2000));
 			}
 
-			//Write second Text after the table (by creating a new paragraph)
-			XWPFParagraph para2 = document.createParagraph();
-			XWPFRun run3 = para2.createRun();
-			para2.setAlignment(ParagraphAlignment.LEFT);
-			run3.setText("Bye");
+			//Write second Text after the table
+			paragraph = document.createParagraph();
+			run = paragraph.createRun();
+			run.addBreak();
+			run.setText("Best Regards");
 
 			document.write(out);
 			
@@ -301,7 +314,7 @@ public class ManagerDashboardController extends ControllerWrapper {
 			
 			out.close();
 			document.close();
-			 System.out.println("ProFit.docx written successully");
+			System.out.println("ProFit.docx written successully");
 		 } catch (FileNotFoundException e1) {
 			 	e1.printStackTrace();
 		 } catch (IOException e1) {

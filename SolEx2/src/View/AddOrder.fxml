@@ -159,18 +159,18 @@
                                     <TableView fx:id="allDeliveriesTable" layoutY="32.0" prefHeight="278.0" prefWidth="781.0">
                                        <columns>
                                           <TableColumn fx:id="deliveryIdCol" prefWidth="52.0" text="ID" />
-                                          <TableColumn fx:id="deliveryTypeCol" prefWidth="112.0" text="Delivery Type" />
+                                          <TableColumn fx:id="deliveryTypeCol" prefWidth="112.0" text="Type" />
                                           <TableColumn fx:id="deliveryPersonCol" prefWidth="128.0" text="Delivery Person" />
                                           <TableColumn fx:id="areaCol" prefWidth="74.0" text="Area" />
-                                          <TableColumn fx:id="deliveryDateCol" prefWidth="106.0" text="DOD" />
-                                          <TableColumn fx:id="isDeliveredCol" prefWidth="85.0" text="isDelivered" />
+                                          <TableColumn fx:id="deliveryDateCol" prefWidth="98.0" text="DOD" />
+                                          <TableColumn fx:id="isDeliveredCol" prefWidth="93.0" text="isDelivered" />
                                           <TableColumn fx:id="ordersCol" prefWidth="151.0" text="Orders" />
-                                          <TableColumn fx:id="postageCol" prefWidth="64.0" text="Postage" />
+                                          <TableColumn fx:id="postageCol" prefWidth="72.0" text="Postage" />
                                        </columns>
                                     </TableView>
                                     <Button layoutX="526.0" layoutY="322.0" maxHeight="38.0" mnemonicParsing="false" onAction="#signAsDelivered" prefHeight="48.0" prefWidth="211.0" styleClass="addBtns" stylesheets="@decoration.css" text="Sign As Delivered" />
                                     <TextField fx:id="searchDeliveryField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../icons/trash-alt-solid.png" />
                                        </image>
@@ -239,12 +239,12 @@
                               <ComboBox fx:id="newAreaBox" layoutX="654.0" layoutY="32.0" prefWidth="150.0" styleClass="comboBox" />
                               <Label fx:id="removeLbl" layoutX="614.0" layoutY="3.0" style="-fx-text-fill: red;" styleClass="managerAllText" text="Please choose new area instead:" textFill="RED" />
                               <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editDeliveryArea" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                              <TableView fx:id="allAreasTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
+                              <TableView fx:id="allAreasTable" layoutY="32.0" prefHeight="278.0" prefWidth="551.0">
                                  <columns>
-                                    <TableColumn fx:id="areaIdCol" prefWidth="63.0" text="Area ID" />
-                                    <TableColumn fx:id="areaNameCol" prefWidth="97.5999755859375" text="Area Name" />
-                                    <TableColumn fx:id="neighborhoodsCol" prefWidth="220.800048828125" text="Neighborhoods" />
-                                    <TableColumn fx:id="deliveryTimeCol" prefWidth="124.00006103515625" text="Delivery Time" />
+                                    <TableColumn fx:id="areaIdCol" prefWidth="63.0" text="ID" />
+                                    <TableColumn fx:id="areaNameCol" prefWidth="107.0" text="Area Name" />
+                                    <TableColumn fx:id="neighborhoodsCol" prefWidth="249.0" text="Neighborhoods" />
+                                    <TableColumn fx:id="deliveryTimeCol" prefWidth="131.0" text="Delivery Time" />
                                  </columns>
                               </TableView>
                               <TextField fx:id="searchAreaField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />

@@ -70,7 +70,7 @@ public class AddCookController extends ControllerWrapper{
 	@FXML
 	private TableColumn<Cook, String> isChefCol;
 	@FXML
-	private TableColumn<Cook, String> expertiseCol;
+	private TableColumn<Cook, Expertise> expertiseCol;
 	@FXML
 	private Button editCookBtn;
 	@FXML
@@ -147,7 +147,7 @@ public class AddCookController extends ControllerWrapper{
 		
 		cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getGender().name()));
 		
-		expertiseCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getExpert().toString()));
+		expertiseCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<Expertise>(cook.getValue().getExpert()));
 		
 		isChefCol.setCellValueFactory(cook -> {
             boolean isChef = cook.getValue().isChef();

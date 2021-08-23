@@ -59,10 +59,11 @@
                                     <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editDish" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                                     <TableView fx:id="allDishesTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
                                        <columns>
-                                          <TableColumn fx:id="dishIdCol" prefWidth="75.0" text="Dish ID" />
-                                          <TableColumn fx:id="dishNameCol" prefWidth="123.0" text="Dish Name" />
-                                          <TableColumn fx:id="componentsCol" prefWidth="206.0" text="Components" />
-                                          <TableColumn fx:id="priceCol" prefWidth="92.0" text="Price" />
+                                          <TableColumn fx:id="dishIdCol" prefWidth="49.5999755859375" text="ID" />
+                                          <TableColumn fx:id="dishNameCol" prefWidth="115.199951171875" text="Dish Name" />
+                                          <TableColumn fx:id="componentsCol" prefWidth="240.800048828125" text="Components" />
+                                          <TableColumn fx:id="priceCol" prefWidth="72.800048828125" text="Price" />
+                                          <TableColumn fx:id="dishTypeCol" prefWidth="83.199951171875" text="Type" />
                                        </columns>
                                     </TableView>
                                     <TextField fx:id="searchDishField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
@@ -134,10 +135,10 @@
                                           <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editComponent" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                                           <TableView fx:id="allComponentsTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
                                              <columns>
-                                                <TableColumn fx:id="componentIdCol" prefWidth="112.0" text="Component ID" />
-                                                <TableColumn fx:id="comonentNameCol" prefWidth="170.0" text="Component Name" />
-                                                <TableColumn fx:id="sensitivitiesCol" prefWidth="143.0" text="Sensitivities" />
-                                                <TableColumn fx:id="compPriceCol" prefWidth="104.0" text="Price" />
+                                                <TableColumn fx:id="componentIdCol" prefWidth="70.4000244140625" text="ID" />
+                                                <TableColumn fx:id="comonentNameCol" prefWidth="212.0" text="Component Name" />
+                                                <TableColumn fx:id="sensitivitiesCol" prefWidth="172.0" text="Sensitivities" />
+                                                <TableColumn fx:id="compPriceCol" prefWidth="108.0" text="Price" />
                                              </columns>
                                           </TableView>
                                           <TextField fx:id="searchCompField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />

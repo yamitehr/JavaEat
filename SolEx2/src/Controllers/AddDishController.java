@@ -53,6 +53,8 @@ public class AddDishController extends ControllerWrapper {
 	@FXML
 	private TableColumn<Dish, Double> priceCol;
 	@FXML
+	private TableColumn<Dish, DishType> dishTypeCol;
+	@FXML
 	private TextField searchDishField;
 	@FXML
 	private Text timeMessage;
@@ -122,6 +124,8 @@ public class AddDishController extends ControllerWrapper {
 				.reduce((a, b) -> a + ", " + b).get()
 				));
 		priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+		
+		dishTypeCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<DishType>(dish.getValue().getType()));
 				
 				
 		List<Dish> allDishes = new ArrayList<Dish>();
