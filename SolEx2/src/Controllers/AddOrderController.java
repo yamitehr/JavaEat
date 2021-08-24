@@ -22,8 +22,12 @@ import Model.OrderStatus;
 import Model.RegularDelivery;
 import Model.Restaurant;
 import Utils.Neighberhood;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -38,7 +42,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -53,6 +59,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import javafx.util.Pair;
 
 public class AddOrderController extends ControllerWrapper {
@@ -129,7 +136,7 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private TableColumn<Delivery, String> ordersCol;
 	@FXML
-	private TableColumn<Delivery, Double> postageCol;
+	private TableColumn<Delivery, String> postageCol;
 	@FXML
 	private Button addRegularDeliveryBtn;
 	@FXML
@@ -279,6 +286,13 @@ public class AddOrderController extends ControllerWrapper {
 		ordersList.setItems(order);
 		ordersList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
+//		DeliveryPersonBox.setOnAction(dp -> {
+//			if(deliveryAreaBox.getValue() != null) {
+//				deliveryAreaBox.setValue(DeliveryPersonBox.getValue().getArea());
+//				deliveryAreaBox.setDisable(true);
+//			}
+//		});
+		
 			
 		//Add all deliveries
 		List<Delivery> allDeliveries = new ArrayList<Delivery>();
@@ -310,21 +324,47 @@ public class AddOrderController extends ControllerWrapper {
          return new ReadOnlyStringWrapper(isDeliveredAsString);
         });
 		
-		for(Delivery del: allDeliveries) {
-			if(del instanceof RegularDelivery) {
-				postageCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<Double>(0.0));
-				ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
-					((RegularDelivery) delivery.getValue()).getOrders()
-					.stream()
-					.map(d -> d.toString())
-					.reduce((a, b) -> a + ", " + b).get()
-				));
-			}
-			if(del instanceof ExpressDelivery) {
-				postageCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<Double>(((ExpressDelivery) delivery.getValue()).getPostage()));
-				ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
-			}
-		}
+		//for(Delivery del: allDeliveries) {
+		//	if(del instanceof RegularDelivery) {
+				//postageCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<Double>(0.0));
+//				ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
+//						((RegularDelivery) delivery.getValue()).getOrders()
+//						.stream()
+//						.map(d -> d.toString())
+//						.reduce((a, b) -> a + ", " + b).get()
+//				));
+				
+			//}
+			//else if(del instanceof ExpressDelivery) {	
+				ordersCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Delivery, String>, ObservableValue<String>>() {
+				    @Override
+				    public ObservableValue<String> call(TableColumn.CellDataFeatures<Delivery, String> p) {
+				        if (p.getValue() instanceof ExpressDelivery) {
+				            return new SimpleStringProperty(((ExpressDelivery) p.getValue()).getOrder().toString());
+				        } else {
+				        	 return new SimpleStringProperty(((RegularDelivery) p.getValue()).getOrders()
+				        			 .stream()
+										.map(d -> d.toString())
+										.reduce((a, b) -> a + ", " + b).get());
+				        }
+				    }
+				});
+				
+				postageCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Delivery, String>, ObservableValue<String>>() {
+				    @Override
+				    public ObservableValue<String> call(TableColumn.CellDataFeatures<Delivery, String> p) {
+				        if (p.getValue() instanceof ExpressDelivery) {
+				            return new SimpleStringProperty(String.valueOf(((ExpressDelivery) p.getValue()).getPostage()));
+				        } else {
+				        	 return null;
+				        }
+				    }
+				});
+				
+				//postageCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<Double>(((ExpressDelivery) delivery.getValue()).getPostage()));
+				//ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
+		//	}
+		//}
 				
 		allDeliveriesTable.getItems().addAll(allDeliveries);
 		
@@ -502,7 +542,7 @@ public class AddOrderController extends ControllerWrapper {
 					alert.showAndWait();
 				}
 			}
-			else {
+			else if(selectedOrder.getDelivery() == null || !selectedOrder.getDelivery().isDelivered()) {
 				deliveryBox.setDisable(false);
 				addOrderBtn.setDisable(true);
 				editOrderBtn.setDisable(false);
@@ -513,7 +553,7 @@ public class AddOrderController extends ControllerWrapper {
 				finalDishes.addAll(selectedOrder.getDishes());
 				finalDishesList.setItems(finalDishes);
 				customerBox.setDisable(true);
-				}
+			}
 		}
 	}
 	
@@ -629,6 +669,7 @@ public class AddOrderController extends ControllerWrapper {
 			customerBox.getSelectionModel().clearSelection();
 			deliveryBox.getSelectionModel().clearSelection();
 			finalDishesList.getItems().clear();
+			initDeliveryTab();
 			//update the list
 			allOrdersTable.getItems().clear();
 			allOrdersTable.getItems().addAll(FXCollections.observableArrayList(
@@ -752,6 +793,7 @@ public class AddOrderController extends ControllerWrapper {
 		deliveryAreaBox.getSelectionModel().clearSelection();
 		yesChoice.setSelected(false);
 		orderBox.getSelectionModel().clearSelection();
+		deliveryAreaBox.setDisable(false);
 		postageField.clear();
 		deliveryDate.setValue(null);
 		allDeliveriesTable.getItems().clear();
@@ -807,6 +849,7 @@ public class AddOrderController extends ControllerWrapper {
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
 			orderBox.getSelectionModel().clearSelection();
+			deliveryAreaBox.setDisable(false);
 			deliveryDate.setValue(null);
 			yesChoice.setSelected(false);
 			postageField.setText("");

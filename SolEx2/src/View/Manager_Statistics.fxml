@@ -51,9 +51,9 @@
             </Label>
             <TableView fx:id="deliveriesByPersonTable" layoutX="68.0" layoutY="232.0" prefHeight="295.0" prefWidth="586.0">
                <columns>
-                  <TableColumn fx:id="deliveryIdCol" prefWidth="82.0" text="Delivery ID" />
-                  <TableColumn fx:id="deliveryPersonCol" prefWidth="113.0" text="Delivery Person" />
-                  <TableColumn fx:id="areaCol" prefWidth="56.0" text="Area" />
+                  <TableColumn fx:id="deliveryIdCol" prefWidth="59.99999237060547" text="ID" />
+                  <TableColumn fx:id="deliveryPersonCol" prefWidth="128.0" text="Delivery Person" />
+                  <TableColumn fx:id="areaCol" prefWidth="64.0" text="Area" />
                   <TableColumn fx:id="deliveryDateCol" prefWidth="132.0" text="dateOfDelivery" />
                   <TableColumn fx:id="isDeliveredCol" prefWidth="88.5" text="isDelivered" />
                   <TableColumn fx:id="ordersCol" prefWidth="110.5" text="Orders" />
@@ -153,7 +153,7 @@
                <content>
       <AnchorPane layoutX="915.0" prefHeight="347.0" prefWidth="655.0" styleClass="managerStatsPane">
          <children>
-            <Label layoutX="220.0" prefHeight="46.0" prefWidth="321.0" styleClass="managerStatisticsHeaders" text="Customer's Relevent Dishes" textFill="#5b231b">
+            <Label layoutX="220.0" prefHeight="46.0" prefWidth="352.0" styleClass="managerStatisticsHeaders" text="Customer's Relevent Dishes" textFill="#5b231b">
                <font>
                   <Font name="System Bold Italic" size="31.0" />
                </font>

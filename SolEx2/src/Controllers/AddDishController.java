@@ -161,10 +161,10 @@ public class AddDishController extends ControllerWrapper {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, 
 					String newValue) {
 				    	if (newValue != "") {
-					    	timeMessage.setText("");
+				    		messageToUserDish.setText("");
 					    	if(!newValue.matches("[a-zA-Z\s]+")) {
 					    		dish_Name.setText(newValue.substring(0, newValue.length()-1));
-					    		timeMessage.setText("Letters Only!");
+					    		messageToUserDish.setText("Letters Only!");
 					    	}
 				    	}
 				    }
@@ -233,10 +233,10 @@ public class AddDishController extends ControllerWrapper {
 				public void changed(ObservableValue<? extends String> observable, String oldValue, 
 						String newValue) {
 					    	if (newValue != "") {
-					    		priceMessage.setText("");
+					    		messageToUserComp.setText("");
 						    	if(!newValue.matches("[a-zA-Z\s]+")) {
 						    		component_Name.setText(newValue.substring(0, newValue.length()-1));
-						    		priceMessage.setText("Letters Only!");
+						    		messageToUserComp.setText("Letters Only!");
 						    	}
 					    	}
 					    }
@@ -385,6 +385,7 @@ public class AddDishController extends ControllerWrapper {
 				dish_Name.clear();
 				timeToMake.clear();
 				typesBox.getSelectionModel().clearSelection();
+				componentsList.getSelectionModel().clearSelection();
 				allDishesTable.getItems().clear();
 				allDishesTable.getItems().addAll(FXCollections.observableArrayList(
 				Restaurant.getInstance().getDishes().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
@@ -475,6 +476,7 @@ public class AddDishController extends ControllerWrapper {
 				alert.setHeaderText("Component added successfully!");
 				alert.showAndWait();
 				messageToUserComp.setText("");
+				initDishTab();
 				component_Name.clear();
 				price.clear();
 				isLactose.setSelected(false);

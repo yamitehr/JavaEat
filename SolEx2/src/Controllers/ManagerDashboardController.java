@@ -93,9 +93,41 @@ public class ManagerDashboardController extends ControllerWrapper {
     public void initialize() {
 		init();
 		proFit();
+		popularComponents();
     }
 	
 		
+
+	private void popularComponents() {
+		//popular Components
+		compNameCol.setCellValueFactory(comp -> new ReadOnlyObjectWrapper<String>(comp.getValue().getComponentName()));
+						
+		containsCol.setCellValueFactory(component -> {
+		          boolean isGluten = component.getValue().isHasGluten();
+		          boolean isLactose = component.getValue().isHasLactose();
+		          String isSensitiveAsString = "";
+		          if(isGluten == true)
+		          {
+		        	  isSensitiveAsString += "Gluten ";
+		          }
+		          if(isLactose == true)
+		          {
+		        	  isSensitiveAsString += "Lactose";
+		          }
+		          return new ReadOnlyStringWrapper(isSensitiveAsString);
+		  	});
+				
+		compPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+						
+						
+		List<Component> populaComponents = new ArrayList<Component>();
+		populaComponents = Restaurant.getInstance().getPopularComponents().stream()
+				.collect(Collectors.toList());
+						
+		popularComponentsTable.getItems().addAll(populaComponents);		
+	}
+
+
 
 	private void init() {
 		totalCustomers.setText(String.valueOf(Restaurant.getInstance().getCustomers().size()));
@@ -117,67 +149,25 @@ public class ManagerDashboardController extends ControllerWrapper {
 		
 		revenueFromExpress.setText(String.valueOf(Restaurant.getInstance().revenueFromExpressDeliveries()));
 		
-		
-		//popular Components
-		compNameCol.setCellValueFactory(comp -> new ReadOnlyObjectWrapper<String>(comp.getValue().getComponentName()));
-				
-		containsCol.setCellValueFactory(component -> {
-            boolean isGluten = component.getValue().isHasGluten();
-            boolean isLactose = component.getValue().isHasLactose();
-            String isSensitiveAsString = "";
-            if(isGluten == true)
-            {
-            	isSensitiveAsString += "Gluten ";
-            }
-            if(isLactose == true)
-            {
-            	isSensitiveAsString += "Lactose";
-            }
-
-         return new ReadOnlyStringWrapper(isSensitiveAsString);
-        });
-		
-		compPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-				
-				
-		List<Component> populaComponents = new ArrayList<Component>();
-		populaComponents = Restaurant.getInstance().getPopularComponents().stream()
-				.collect(Collectors.toList());
-				
-		popularComponentsTable.getItems().addAll(populaComponents);
-		
 		todaySell.setText(String.valueOf(dailySell()));
 		
-		todayRevenue.setText(String.valueOf(dailyRevenue()));
-		
-		
-//		selectedDate.setOnAction(d -> {
-//			double SellDate = 0;
-//			double revenueDate = 0;
-//			for(Delivery delivery: Restaurant.getInstance().getDeliveries().values()) {
-//				if(delivery.getDeliveredDate().equals(selectedDate.getValue())) {
-//					if(delivery instanceof RegularDelivery) {
-//						for(Order o: ((RegularDelivery) delivery).getOrders()) {
-//							revenueDate += o.calcOrderRevenue();
-//							for(Dish dish: o.getDishes()) {
-//								SellDate += dish.getPrice();
-//							}
-//						}
-//					}
-//					else { //express
-//						revenueDate += ((ExpressDelivery) delivery).getOrder().calcOrderRevenue();
-//						for(Dish dish: ((ExpressDelivery) delivery).getOrder().getDishes()) {
-//							SellDate += dish.getPrice();
-//						}
-//					}
-//				}
-//			}
-//			sellByDate.setText(String.valueOf(SellDate));
-//			revenueByDate.setText(String.valueOf(revenueDate));
-//		});
-	        
-		
-		
+		todayRevenue.setText(String.valueOf(dailyRevenue()));		
+	}
+	
+	
+	private void proFit() {
+		dishNameCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(dish.getValue().getDishName()));
+						
+		timeToMakeCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Integer>(dish.getValue().getTimeToMake()));
+				
+		dishPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+					
+		List<Dish> profitRelation = new ArrayList<Dish>();
+		profitRelation = Restaurant.getInstance().getProfitRelation().stream()
+				.collect(Collectors.toList());
+						
+		profitRelationTable.getItems().addAll(profitRelation);
+
 	}
 	
 	public double dailyRevenue() {
@@ -216,22 +206,6 @@ public class ManagerDashboardController extends ControllerWrapper {
 			}
 		}
 		return SellDate;
-	}
-	
-	private void proFit() {
-		//profit relation
-		dishNameCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(dish.getValue().getDishName()));
-						
-		timeToMakeCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Integer>(dish.getValue().getTimeToMake()));
-				
-		dishPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-					
-		List<Dish> profitRelation = new ArrayList<Dish>();
-		profitRelation = Restaurant.getInstance().getProfitRelation().stream()
-				.collect(Collectors.toList());
-						
-		profitRelationTable.getItems().addAll(profitRelation);
-
 	}
 	
 	public void export(ActionEvent e) {

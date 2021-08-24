@@ -34,8 +34,8 @@
                      <children>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1235.0">
                            <children>
-                              <Label layoutX="66.0" layoutY="66.0" styleClass="managerAllText" text="Customer:" />
-                              <Label layoutX="381.0" layoutY="66.0" styleClass="managerAllText" text="Delivery:" />
+                              <Label layoutX="66.0" layoutY="66.0" styleClass="managerAllText" text="Customer" />
+                              <Label layoutX="381.0" layoutY="66.0" styleClass="managerAllText" text="Delivery" />
                               <Button fx:id="addOrderBtn" layoutX="853.0" layoutY="52.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
                                  <graphic>
                                     <ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
@@ -46,7 +46,7 @@
                                  </graphic></Button>
                               <ComboBox fx:id="deliveryBox" layoutX="489.0" layoutY="61.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                               <ListView fx:id="dishesList" layoutX="193.0" layoutY="106.0" prefHeight="156.0" prefWidth="150.0" />
-                              <Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Dishes:" />
+                              <Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Dishes" />
                               <ComboBox fx:id="customerBox" layoutX="193.0" layoutY="61.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                               <Pane layoutX="193.0" layoutY="326.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="667.0">
                                  <children>
@@ -108,8 +108,8 @@
                            <children>
                               <AnchorPane fx:id="regularPane" layoutX="66.0" layoutY="56.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="1016.0">
                                  <children>
-                                    <Label layoutY="10.0" styleClass="managerAllText" text="Delivery Person:" />
-                                    <Label layoutX="366.0" layoutY="10.0" styleClass="managerAllText" text="Delivery Area:" />
+                                    <Label layoutY="10.0" styleClass="managerAllText" text="Delivery Person" />
+                                    <Label layoutX="366.0" layoutY="10.0" styleClass="managerAllText" text="Delivery Area" />
                                     <Button fx:id="addRegularBtn" layoutX="815.0" layoutY="10.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addRegularDelivery" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
                                        <graphic>
                                           <ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
@@ -120,17 +120,17 @@
                                        </graphic></Button>
                                     <ComboBox fx:id="deliveryAreaBox" layoutX="488.0" layoutY="5.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                                     <ListView fx:id="ordersList" layoutX="127.0" layoutY="93.0" prefHeight="134.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
-                                    <Label layoutY="95.0" prefHeight="26.0" prefWidth="64.0" styleClass="managerAllText" text="Orders:" />
-                                    <ComboBox fx:id="DeliveryPersonBox" layoutX="127.0" layoutY="5.0" prefWidth="150.0" styleClass="textFields" stylesheets="@decoration.css" />
+                                    <Label layoutY="95.0" prefHeight="26.0" prefWidth="64.0" styleClass="managerAllText" text="Orders" />
+                                    <ComboBox fx:id="DeliveryPersonBox" layoutX="127.0" layoutY="5.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
                                     <CheckBox fx:id="yesChoice" layoutX="127.0" layoutY="53.0" mnemonicParsing="false" text="Yes">
                                        <effect>
                                           <SepiaTone level="0.0" />
                                        </effect></CheckBox>
                                     <Label layoutY="51.0" prefHeight="19.0" prefWidth="107.0" styleClass="managerAllText" text="Is Delivered?" />
-                                    <Label layoutX="366.0" layoutY="51.0" prefHeight="26.0" prefWidth="117.0" styleClass="managerAllText" text="Delivery Date:" />
+                                    <Label layoutX="366.0" layoutY="51.0" prefHeight="26.0" prefWidth="117.0" styleClass="managerAllText" text="Delivery Date" />
                                     <DatePicker fx:id="deliveryDate" layoutX="488.0" layoutY="53.0" styleClass="textFields" stylesheets="@decoration.css" />
                                     <ComboBox fx:id="orderBox" layoutX="127.0" layoutY="93.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                                    <Label fx:id="postageLbl" layoutX="366.0" layoutY="95.0" prefHeight="22.0" prefWidth="93.0" styleClass="managerAllText" text="Postage:" />
+                                    <Label fx:id="postageLbl" layoutX="366.0" layoutY="95.0" prefHeight="22.0" prefWidth="93.0" styleClass="managerAllText" text="Postage" />
                                     <TextField fx:id="postageField" layoutX="488.0" layoutY="93.0" styleClass="textFields" stylesheets="@decoration.css" />
                                     <Button fx:id="addExpressBtn" layoutX="815.0" layoutY="10.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addExpressDelivery" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
                                        <graphic>

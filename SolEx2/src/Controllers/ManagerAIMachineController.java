@@ -11,6 +11,8 @@ import Model.RegularDelivery;
 import Model.Restaurant;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class ManagerAIMachineController extends ControllerWrapper {
 	@FXML
@@ -47,7 +50,7 @@ public class ManagerAIMachineController extends ControllerWrapper {
 	@FXML
 	private TableColumn<Delivery, String> ordersCol;
 	@FXML
-	private TableColumn<Delivery, Double> postageCol;
+	private TableColumn<Delivery, String> postageCol;
 	
 	@FXML
 	public void initialize() {
@@ -111,21 +114,30 @@ public class ManagerAIMachineController extends ControllerWrapper {
 	         return new ReadOnlyStringWrapper(isDeliveredAsString);
 	        });
 			
-			for(Delivery del: results) {
-				if(del instanceof RegularDelivery) {
-					postageCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<Double>(0.0));
-					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
-						((RegularDelivery) delivery.getValue()).getOrders()
-						.stream()
-						.map(d -> d.toString())
-						.reduce((a, b) -> a + ", " + b).get()
-					));
-				}
-				if(del instanceof ExpressDelivery) {
-					postageCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<Double>(((ExpressDelivery) delivery.getValue()).getPostage()));
-					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
-				}
-			}
+			ordersCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Delivery, String>, ObservableValue<String>>() {
+			    @Override
+			    public ObservableValue<String> call(TableColumn.CellDataFeatures<Delivery, String> p) {
+			        if (p.getValue() instanceof ExpressDelivery) {
+			            return new SimpleStringProperty(((ExpressDelivery) p.getValue()).getOrder().toString());
+			        } else {
+			        	 return new SimpleStringProperty(((RegularDelivery) p.getValue()).getOrders()
+			        			 .stream()
+									.map(d -> d.toString())
+									.reduce((a, b) -> a + ", " + b).get());
+			        }
+			    }
+			});
+			
+			postageCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Delivery, String>, ObservableValue<String>>() {
+			    @Override
+			    public ObservableValue<String> call(TableColumn.CellDataFeatures<Delivery, String> p) {
+			        if (p.getValue() instanceof ExpressDelivery) {
+			            return new SimpleStringProperty(String.valueOf(((ExpressDelivery) p.getValue()).getPostage()));
+			        } else {
+			        	 return null;
+			        }
+			    }
+			});
 					
 			allDeliveriesTable.getItems().addAll(results);
 			

@@ -17,6 +17,8 @@ import Model.State;
 import Utils.Expertise;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +29,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class ManagerStatisticsController extends ControllerWrapper {
 	@FXML
@@ -221,19 +224,19 @@ public class ManagerStatisticsController extends ControllerWrapper {
 
 	         return new ReadOnlyStringWrapper(isDeliveredAsString);
 	        });
-			for(Delivery del: deliveriesByPerson) {
-				if(del instanceof RegularDelivery) {
-					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(
-						((RegularDelivery) delivery.getValue()).getOrders()
-						.stream()
-						.map(d -> d.toString())
-						.reduce((a, b) -> a + ", " + b).get()
-					));
-				}
-				if(del instanceof ExpressDelivery) {
-					ordersCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(((ExpressDelivery) delivery.getValue()).getOrder().toString()));
-				}
-			}
+			ordersCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Delivery, String>, ObservableValue<String>>() {
+			    @Override
+			    public ObservableValue<String> call(TableColumn.CellDataFeatures<Delivery, String> p) {
+			        if (p.getValue() instanceof ExpressDelivery) {
+			            return new SimpleStringProperty(((ExpressDelivery) p.getValue()).getOrder().toString());
+			        } else {
+			        	 return new SimpleStringProperty(((RegularDelivery) p.getValue()).getOrders()
+			        			 .stream()
+									.map(d -> d.toString())
+									.reduce((a, b) -> a + ", " + b).get());
+			        }
+			    }
+			});
 					
 			deliveriesByPersonTable.getItems().addAll(deliveriesByPerson);
 		}
