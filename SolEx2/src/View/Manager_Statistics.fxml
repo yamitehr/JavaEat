@@ -59,7 +59,7 @@
                   <TableColumn fx:id="ordersCol" prefWidth="110.5" text="Orders" />
                </columns>
             </TableView>
-            <Button layoutX="465.0" layoutY="100.0" mnemonicParsing="false" onAction="#getDeliveries" styleClass="addBtns" text="Get Deliveries" />
+            <Button layoutX="465.0" layoutY="100.0" mnemonicParsing="false" onAction="#getDeliveries" styleClass="managerStatisticsGetDelBtn" text="Get Deliveries" />
          </children>
       </AnchorPane>
       </content>
