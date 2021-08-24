@@ -24,7 +24,7 @@
             <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/burger.png" />
+                  <Image url="@../../icons/cupcake.png" />
                </image>
             </ImageView>
              </graphic>
@@ -51,7 +51,7 @@
             <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/cheese.png" />
+                  <Image url="@../../icons/macaroon.png" />
                </image>
             </ImageView>
              </graphic>
@@ -76,7 +76,7 @@
               <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/chef.png" />
+                  <Image url="@../../icons/coffee.png" />
                </image>
             </ImageView>
              </graphic>
