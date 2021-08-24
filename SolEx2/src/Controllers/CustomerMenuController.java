@@ -115,7 +115,11 @@ public class CustomerMenuController extends ControllerWrapper{
 	private Pane getMenuItem(Dish dish) {
 		String dishName = dish.getDishName();
 		double dishPrice = dish.calcDishPrice();
-		String dishDescription = dish.getComponenets().toString();
+		String dishDescription = "";
+		for(Component c : dish.getComponenets()) {
+			dishDescription += c.getComponentName() + ", ";
+		}
+		dishDescription = dishDescription.substring(0, dishDescription.length() -2);
 		
 		Pane newMenuItem = new Pane();
 		Label dishLa = new Label(dishName);
