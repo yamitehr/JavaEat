@@ -160,8 +160,6 @@ public class SignInController extends ControllerWrapper {
 				throw new InvalidInputException("Please select Neighborhood");
 			}
 			Gender gender;
-			boolean sensitiveLactose = false;
-			boolean sensitiveGluten = false;
 			if(male.isSelected()) {
 				gender = Gender.Male;
 			}
@@ -171,7 +169,9 @@ public class SignInController extends ControllerWrapper {
 			else {
 				gender = Gender.Unknown;
 			}
-		
+			
+			boolean sensitiveLactose = false;
+			boolean sensitiveGluten = false;
 			if(lactose.isSelected())
 				sensitiveLactose = true;
 			if(gluten.isSelected())
@@ -181,7 +181,6 @@ public class SignInController extends ControllerWrapper {
 					gender, NeighberhoodBox.getValue(), sensitiveLactose, sensitiveGluten, userName.getText(), password.getText());	
 			MainController.rest.addCustomer(customer);
 		
-			//new Alert(Alert.AlertType.INFORMATION, "Welcome " + firstName.getText() + ".\n Please log in.").showAndWait();
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Welcome " + firstName.getText());
 			alert.setHeaderText("Welcome " + firstName.getText() + ". \n Please log in to continue.");
@@ -189,8 +188,10 @@ public class SignInController extends ControllerWrapper {
 		
 			moveToScene("/View/Login.fxml", (Stage)signInBtn.getScene().getWindow(), Consts.defaultWidthLogin, Consts.defaultHeightLogin);
 		}catch(InvalidInputException iie) {
+			soundOfButton("error.mp3");
 			resultConcole.setText(iie.getMessage());
 		} catch(Exception exc) {
+			soundOfButton("error.mp3");
 			resultConcole.setText("an error has accured please try again");
 		}
 	}

@@ -95,7 +95,7 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private ComboBox<DeliveryArea> deliveryAreaBox;
 	@FXML
-	private CheckBox yesChoice;
+	private CheckBox delivered;
 	@FXML
 	private DatePicker deliveryDate;
 	@FXML
@@ -696,7 +696,7 @@ public class AddOrderController extends ControllerWrapper {
 				editDeliveryBtn.setDisable(false);
 				DeliveryPersonBox.setValue(selectedDelivery.getDeliveryPerson());
 				deliveryAreaBox.setValue(selectedDelivery.getArea());
-				yesChoice.setSelected(selectedDelivery.isDelivered());
+				delivered.setSelected(selectedDelivery.isDelivered());
 				deliveryDate.setValue(selectedDelivery.getDeliveredDate());
 				deliveryDate.setDisable(true);
 				if(selectedDelivery instanceof RegularDelivery) {
@@ -734,7 +734,7 @@ public class AddOrderController extends ControllerWrapper {
 					throw new InvalidInputException("Please choose Area");
 				selectedDelivery.setArea(deliveryAreaBox.getValue());
 			}
-			if(!selectedDelivery.isDelivered() && yesChoice.isSelected())
+			if(!selectedDelivery.isDelivered() && delivered.isSelected())
 				selectedDelivery.setDelivered(true);
 
 			
@@ -770,7 +770,7 @@ public class AddOrderController extends ControllerWrapper {
 		messageToUserRegular.setText("");
 		DeliveryPersonBox.getSelectionModel().clearSelection();
 		deliveryAreaBox.getSelectionModel().clearSelection();
-		yesChoice.setSelected(false);
+		delivered.setSelected(false);
 		orderBox.getSelectionModel().clearSelection();
 		deliveryAreaBox.setDisable(false);
 		postageField.clear();
@@ -815,7 +815,7 @@ public class AddOrderController extends ControllerWrapper {
 				throw new InvalidInputException("Please fill postage");
 			postage = Double.parseDouble(postageField.getText());
 			boolean isDelivered;
-			isDelivered = yesChoice.isSelected() ? true : false;
+			isDelivered = delivered.isSelected() ? true : false;
 			
 			Delivery newExpressDelivery = new ExpressDelivery(dp, da, isDelivered, order, postage, dateOfDelivery);
 			///		
@@ -830,7 +830,7 @@ public class AddOrderController extends ControllerWrapper {
 			orderBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.setDisable(false);
 			deliveryDate.setValue(null);
-			yesChoice.setSelected(false);
+			delivered.setSelected(false);
 			postageField.setText("");
 			//update the list
 			allDeliveriesTable.getItems().clear();
@@ -878,7 +878,7 @@ public class AddOrderController extends ControllerWrapper {
 				throw new InvalidInputException("Please select Date of Delivery");
 			}
 			boolean isDelivered;
-			isDelivered = yesChoice.isSelected() ? true : false;
+			isDelivered = delivered.isSelected() ? true : false;
 			
 			Delivery newRegularDelivery = new RegularDelivery(deliveryOrders, dp, da, isDelivered, dateOfDelivery);
 			///		
@@ -892,7 +892,7 @@ public class AddOrderController extends ControllerWrapper {
 			deliveryAreaBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.setDisable(false);
 			deliveryDate.setValue(null);
-			yesChoice.setSelected(false);
+			delivered.setSelected(false);
 			//update the list
 			allDeliveriesTable.getItems().clear();
 			allDeliveriesTable.getItems().addAll(FXCollections.observableArrayList(
