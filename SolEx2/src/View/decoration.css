@@ -232,6 +232,13 @@
 	
 	-fx-font-size: 16px;
 }
+
+.registrationBtns:hover{
+	-fx-text-fill: white;
+	-fx-font-family: 'Knewave', cursive;
+  	-fx-underline: true;    
+	-fx-font-size: 16px;
+}
 .registrationBtns2{
 	-fx-text-fill: white;
 	-fx-font-family: 'Poppins', sans-serif;
