@@ -10,7 +10,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" stylesheets="@ordersHistory.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerStatisticsController">
    <children>
@@ -19,13 +18,20 @@
             <Image url="@../../img/86.jpg" />
          </image>
       </ImageView>
-      <TabPane fx:id="tabPane" layoutX="354.0" prefHeight="770.0" prefWidth="1079.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPaneStats" layoutX="460.0" layoutY="180.0" prefHeight="579.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="relevantDishes">
+          <Tab>
+            <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/burger.png" />
+               </image>
+            </ImageView>
+             </graphic>
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="relevantDishesTable" layoutX="189.0" layoutY="210.0" prefHeight="326.0" prefWidth="654.0">
+                        <TableView fx:id="relevantDishesTable" layoutX="20.0" layoutY="43.0" prefHeight="326.0" prefWidth="654.0">
                           <columns>
                             <TableColumn fx:id="dishIdCol" prefWidth="94.0" text="Dish ID" />
                             <TableColumn fx:id="dishNameCol" prefWidth="182.0" text="Dish Name" />
@@ -35,17 +41,24 @@
                               <TableColumn fx:id="dishTimeCol" prefWidth="64.0" text="Time" />
                           </columns>
                         </TableView>
-                        <Label layoutX="189.0" layoutY="167.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Recommended For You..." />
-                        <Button fx:id="addDishBtn" layoutX="454.0" layoutY="543.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="172.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Add to order" />
+                        <Label layoutX="20.0" layoutY="0.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Recommended For You..." />
+                        <Button fx:id="addDishBtn" layoutX="265.0" layoutY="400.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="172.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Add to order" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="popularComponents">
+          <Tab>
+            <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/cheese.png" />
+               </image>
+            </ImageView>
+             </graphic>
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="popularComponentsTable" layoutX="189.0" layoutY="210.0" prefHeight="326.0" prefWidth="654.0">
+                        <TableView fx:id="popularComponentsTable" layoutX="20.0" layoutY="43.0" prefHeight="326.0" prefWidth="654.0">
                            <columns>
                               <TableColumn fx:id="componentIdCol" prefWidth="129.0" text="Component ID" />
                               <TableColumn fx:id="componentNameCol" prefWidth="155.0" text="Component Name" />
@@ -54,17 +67,23 @@
                               <TableColumn fx:id="popularityCol" prefWidth="104.0" text="#Popularity" />
                            </columns>
                         </TableView>
-                        <Label layoutX="189.0" layoutY="167.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Components' Rating" />
+                        <Label layoutX="20.0" layoutY="0.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Components' Rating" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="cooks">
+            <Tab>
+              <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/chef.png" />
+               </image>
+            </ImageView>
+             </graphic>
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text fx:id="messageToUser" layoutX="247.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.0" y="400.0" />
-                        <TableView fx:id="cookByExpertiseTable" layoutX="189.0" layoutY="210.0" prefHeight="326.0" prefWidth="654.0">
+                        <TableView fx:id="cookByExpertiseTable" layoutX="20.0" layoutY="43.0" prefHeight="326.0" prefWidth="654.0">
                           <columns>
                             <TableColumn fx:id="cookIdCol" prefWidth="75.0" text="Cook ID" />
                             <TableColumn fx:id="cookNameCol" prefWidth="153.0" text="Cook Name" />
@@ -73,8 +92,8 @@
                               <TableColumn fx:id="isChefCol" prefWidth="78.0" text="isChef" />
                           </columns>
                         </TableView>
-                        <ComboBox fx:id="expertiseBox" layoutX="489.0" layoutY="167.0" prefWidth="150.0" styleClass="comboBoxDashCust" stylesheets="@decoration.css" />
-                        <Label layoutX="189.0" layoutY="167.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Select expertise:" />
+                        <ComboBox fx:id="expertiseBox" layoutX="320.0" layoutY="0.0" prefWidth="150.0" styleClass="comboBoxDashCust" stylesheets="@decoration.css" />
+                        <Label layoutX="20.0" layoutY="0.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Select expertise:" />
                      </children>
                   </AnchorPane>
               </content>

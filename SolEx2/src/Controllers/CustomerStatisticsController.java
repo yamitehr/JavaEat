@@ -27,8 +27,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
 public class CustomerStatisticsController {
-	@FXML
-	private Text messageToUser;
 	//getRelevantDish
 	@FXML
 	private TableView<Dish> relevantDishesTable;
