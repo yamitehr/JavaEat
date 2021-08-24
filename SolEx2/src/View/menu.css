@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sarina&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap');
 .menuHeader{
 	-fx-font-family: 'Sarina', cursive;
     -fx-text-fill: white;
@@ -57,8 +58,10 @@
 	 -fx-text-fill: white;
        -fx-font-size: 21px;
    -fx-background-color: #b89b5f;
-   -fx-font-family: 'Fugaz One', cursive;
-   -fx-padding: 15 15 15 15;
+   -fx-font-family: 'Pacifico', cursive;
+   -fx-padding: 5 15 5 15;
+   
+   -fx-background-radius: 20px;
 }
 
 .compsEditor{
