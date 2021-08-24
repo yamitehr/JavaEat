@@ -17,12 +17,12 @@
       <AnchorPane fx:id="toReplacePane" prefHeight="770.0" prefWidth="1430.0" />
       <AnchorPane fx:id="sideMenu" layoutY="-34.0" prefHeight="804.0" prefWidth="343.0" styleClass="sidePane">
          <children>
-           <Button fx:id="videoButton" layoutX="42.0" layoutY="35.0" mnemonicParsing="false" onAction="#moveToVideoScene" prefHeight="184.0" prefWidth="251.0" style="-fx-background-color: #3D201C;" text="">
+           <Button fx:id="videoButton" layoutX="0.0" layoutY="-20.0" mnemonicParsing="false" onAction="#moveToVideoScene" prefHeight="184.0" prefWidth="251.0" style="-fx-background-color: #3D201C;" text="">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <graphic>
-            <ImageView fitHeight="184.0" fitWidth="227.0" layoutX="42.0" layoutY="35.0" pickOnBounds="true">
+            <ImageView fitHeight="300" fitWidth="353" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/JavaEat.png" />
                </image>

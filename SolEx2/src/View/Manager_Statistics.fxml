@@ -65,47 +65,6 @@
       </content>
             </Tab>
             
-            <Tab>
-             <graphic>
-            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../icons/motorcycle.png" />
-               </image>
-            </ImageView>
-             </graphic>
-               <content>
-      <AnchorPane layoutX="343.0" prefHeight="224.0" prefWidth="419.0" styleClass="managerStatsPane">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="14.0" prefHeight="46.0" prefWidth="411.0" styleClass="managerStatisticsHeaders" text="Number Of Deliveries Per Type" textFill="#5b231b">
-               <font>
-                  <Font name="System Bold Italic" size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="regularDeliveries" layoutX="370.0" layoutY="142.0" prefHeight="38.0" prefWidth="210.0" textFill="WHITE">
-               <font>
-                  <Font name="System Bold Italic" size="25.0" />
-               </font>
-            </Label>
-            <Label layoutX="88.0" layoutY="142.0" styleClass="managerStatsReguExp" text="Regular Delivery" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="expressDeliveries" layoutX="370.0" layoutY="242.0" prefHeight="38.0" prefWidth="210.0" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <Label layoutX="88.0" layoutY="242.0" prefHeight="46.0" prefWidth="194.0" styleClass="managerStatsReguExp" text="Express Delivery" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      </content>
-            </Tab>
-            
                  <Tab>
                   <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -130,10 +89,10 @@
             <ComboBox fx:id="expertiseBox" layoutX="275.0" layoutY="136.0" prefWidth="150.0" styleClass="comboBox" />
             <TableView fx:id="cookByExpertiseTable" layoutX="64.0" layoutY="232.0" prefHeight="238.0" prefWidth="462.0" visible="false">
                <columns>
-                  <TableColumn fx:id="cookIdCol" prefWidth="55.0" text="Cook ID" />
-                  <TableColumn fx:id="cookNameCol" prefWidth="81.0" text="Cook Name" />
-                  <TableColumn fx:id="cookDobCol" prefWidth="71.0" text="DOB" />
-                  <TableColumn fx:id="cookGenderCol" prefWidth="183.0" text="Gender" />
+                  <TableColumn fx:id="cookIdCol" prefWidth="64.0" text="Cook ID" />
+                  <TableColumn fx:id="cookNameCol" prefWidth="126.0" text="Cook Name" />
+                  <TableColumn fx:id="cookDobCol" prefWidth="115.0" text="DOB" />
+                  <TableColumn fx:id="cookGenderCol" prefWidth="85.0" text="Gender" />
                   <TableColumn fx:id="isChefCol" prefWidth="55.0" text="isChef" />
                </columns>
             </TableView>
@@ -167,14 +126,55 @@
             <TableView fx:id="relevantDishesTable" layoutX="62.0" layoutY="232.0" prefHeight="238.0" prefWidth="462.0" visible="false">
                <columns>
                   <TableColumn fx:id="dishIdCol" prefWidth="75.0" text="Dish ID" />
-                  <TableColumn fx:id="dishNameCol" prefWidth="75.0" text="Dish Name" />
-                  <TableColumn fx:id="componentsCol" prefWidth="151.0" text="Components" />
-                  <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
+                  <TableColumn fx:id="dishNameCol" prefWidth="99.0" text="Dish Name" />
+                  <TableColumn fx:id="componentsCol" prefWidth="194.0" text="Components" />
+                  <TableColumn fx:id="priceCol" prefWidth="67.0" text="Price" />
                </columns>
             </TableView>
          </children>
       </AnchorPane>
            </content>
+            </Tab>
+            
+            <Tab>
+             <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/motorcycle.png" />
+               </image>
+            </ImageView>
+             </graphic>
+               <content>
+      <AnchorPane layoutX="343.0" prefHeight="224.0" prefWidth="419.0" styleClass="managerStatsPane">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="14.0" prefHeight="46.0" prefWidth="411.0" styleClass="managerStatisticsHeaders" text="Number Of Deliveries Per Type" textFill="#5b231b">
+               <font>
+                  <Font name="System Bold Italic" size="31.0" />
+               </font>
+            </Label>
+            <Label fx:id="regularDeliveries" layoutX="370.0" layoutY="142.0" textFill="WHITE" styleClass="managerStatsReguExpNum">
+               <font>
+                  <Font name="System Bold Italic" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="88.0" layoutY="142.0" styleClass="managerStatsReguExp" text="Regular Delivery" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="expressDeliveries" layoutX="370.0" layoutY="242.0" textFill="WHITE" styleClass="managerStatsReguExpNum">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="88.0" layoutY="242.0" prefHeight="46.0" prefWidth="194.0" styleClass="managerStatsReguExp" text="Express Delivery" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      </content>
             </Tab>
              </tabs>
       </TabPane>

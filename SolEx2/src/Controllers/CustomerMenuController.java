@@ -125,6 +125,8 @@ public class CustomerMenuController extends ControllerWrapper{
 		Label dishLa = new Label(dishName);
 		Label priceLa = new Label(String.valueOf(dishPrice) + "$");
 		Label compsLa = new Label("Contains: " + dishDescription);
+		compsLa.setWrapText(true);
+		compsLa.setMaxWidth(250);
 		Button addBtn = new Button();
 		
 		InputStream is = null;

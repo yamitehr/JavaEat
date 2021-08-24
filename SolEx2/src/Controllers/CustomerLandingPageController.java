@@ -219,7 +219,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		int j = 0;
 		for (Pair<CheckBox, Component> cb : componentList) {
 			componentGrid.add(cb.getKey(), j, i, 1, 1);
-			if (j == 3) {
+			if (j == 2) {
 				j = 0;
 				i ++;
 			} else {
@@ -331,7 +331,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 			
 			double totalTime = 0;
 			for(Dish d : dishes) {
-				totalTime += d.getTimeToMake(); //TODO: add the delivery time to the total time
+				totalTime += d.getTimeToMake(); 
 			}
 			
 			priceText.setText(String.valueOf(totalPrice) + " $");
