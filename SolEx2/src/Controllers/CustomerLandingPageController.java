@@ -331,7 +331,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 			
 			double totalTime = 0;
 			for(Dish d : dishes) {
-				totalTime += d.getTimeToMake(); //TODO: add the delivery time to the total time
+				totalTime += d.getTimeToMake(); 
 			}
 			
 			priceText.setText(String.valueOf(totalPrice) + " $");

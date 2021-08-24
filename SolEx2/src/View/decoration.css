@@ -12,6 +12,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Dela+Gothic+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
 
 .labelHeader{
 	-fx-font-family: 'Sarina', cursive;
@@ -398,8 +399,14 @@
 }
 
 .managerStatsReguExp{
-	 -fx-font-family: 'Poppins', sans-serif;
+	 -fx-font-family: 'Carter One', cursive;
 	 -fx-font-size: 24px;
+}
+
+.managerStatsReguExpNum{
+	 -fx-font-family: 'Carter One', cursive;
+	 -fx-font-size: 28px;
+	 -fx-text-fill: orange;
 }
 
 
