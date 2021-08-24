@@ -2,17 +2,14 @@ package Controllers;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import Model.Component;
@@ -26,27 +23,19 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.util.Units;
 import org.apache.poi.wp.usermodel.HeaderFooterType;
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFHeader;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 
@@ -82,6 +71,8 @@ public class ManagerDashboardController extends ControllerWrapper {
 	private TableColumn<Dish, Integer> timeToMakeCol;
 	@FXML
 	private TableColumn<Dish, Double> dishPriceCol;
+	@FXML
+	private TableColumn<Dish, Double> relationCol;
 	@FXML
 	private DatePicker selectedDate;
 	@FXML
@@ -133,19 +124,10 @@ public class ManagerDashboardController extends ControllerWrapper {
 		totalCustomers.setText(String.valueOf(Restaurant.getInstance().getCustomers().size()));
 		totalEmployees.setText(String.valueOf(Restaurant.getInstance().getCooks().size() + 
 				Restaurant.getInstance().getDeliveryPersons().size()));
-		double totalPrice = 0.0;
-		for(Order o: Restaurant.getInstance().getOrders().values()) {
-			for(Dish d: o.getDishes()) {
-				totalPrice += d.getPrice();
-			}
-		}
-		totalSell.setText(String.valueOf(totalPrice));
+
+		totalSell.setText(String.valueOf(totalSell()));
 		
-		double revenue = 0;
-		for(Order o: Restaurant.getInstance().getOrders().values()) {
-			revenue += o.calcOrderRevenue();
-		}
-		totalRevenue.setText(String.valueOf(revenue));
+		totalRevenue.setText(String.valueOf(totalRevenue()));
 		
 		revenueFromExpress.setText(String.valueOf(Restaurant.getInstance().revenueFromExpressDeliveries()));
 		
@@ -161,6 +143,8 @@ public class ManagerDashboardController extends ControllerWrapper {
 		timeToMakeCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Integer>(dish.getValue().getTimeToMake()));
 				
 		dishPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+		
+		relationCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Double>(dish.getValue().getPrice() / dish.getValue().getTimeToMake()));
 					
 		List<Dish> profitRelation = new ArrayList<Dish>();
 		profitRelation = Restaurant.getInstance().getProfitRelation().stream()
@@ -208,6 +192,40 @@ public class ManagerDashboardController extends ControllerWrapper {
 		return SellDate;
 	}
 	
+	public double totalSell() {
+		double totalSell = 0;
+		for(Delivery delivery: Restaurant.getInstance().getDeliveries().values()) {
+			if(delivery instanceof RegularDelivery) {
+				for(Order o: ((RegularDelivery) delivery).getOrders()) {
+					for(Dish dish: o.getDishes()) {
+						totalSell += dish.getPrice();
+					}
+				}
+			}
+			else { //express
+				for(Dish dish: ((ExpressDelivery) delivery).getOrder().getDishes()) {
+					totalSell += dish.getPrice();
+				}
+			}
+		}
+		return totalSell;
+	}
+	
+	public double totalRevenue() {
+		double totalRevenue = 0;
+		for(Delivery delivery: Restaurant.getInstance().getDeliveries().values()) {
+			if(delivery instanceof RegularDelivery) {
+				for(Order o: ((RegularDelivery) delivery).getOrders()) {
+					totalRevenue += o.calcOrderRevenue();
+				}
+			}
+			else { //express
+				totalRevenue += ((ExpressDelivery) delivery).getOrder().calcOrderRevenue();
+			}
+		}
+		return totalRevenue;
+	}
+	
 	public void export(ActionEvent e) {
 		 try {
 			 //Blank Document
@@ -230,7 +248,6 @@ public class ManagerDashboardController extends ControllerWrapper {
 
 			paragraph = document.createParagraph();
 			run = paragraph.createRun();
-			paragraph.setIndentationLeft(6500);
 			LocalDateTime myDateObj = LocalDateTime.now();
 			DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 			String formattedDate = myDateObj.format(myFormatObj);
@@ -272,7 +289,6 @@ public class ManagerDashboardController extends ControllerWrapper {
 				table.getRow(i).getCell(3).getCTTc().addNewTcPr().addNewTcW().setW(BigInteger.valueOf(2000));
 			}
 
-			//Write second Text after the table
 			paragraph = document.createParagraph();
 			run = paragraph.createRun();
 			run.addBreak();

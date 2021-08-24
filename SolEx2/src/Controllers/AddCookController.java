@@ -77,8 +77,6 @@ public class AddCookController extends ControllerWrapper{
 	private TabPane tabPane;
 	@FXML
 	private TextField searchCookField;
-	@FXML
-	private Text messageCook;
 	
 	
 	//delivery person
@@ -118,8 +116,6 @@ public class AddCookController extends ControllerWrapper{
 	private Button editDeliveryPersonBtn;
 	@FXML
 	private TextField searchDPField;
-	@FXML
-	private Text messageDP;
 	
 	@FXML
 	private AnchorPane toReplacePane;

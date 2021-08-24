@@ -57,8 +57,6 @@ public class AddDishController extends ControllerWrapper {
 	@FXML
 	private TextField searchDishField;
 	@FXML
-	private Text timeMessage;
-	@FXML
 	private Button addDishBtn;
 	@FXML
 	private Button editDishbtn;
@@ -87,8 +85,6 @@ public class AddDishController extends ControllerWrapper {
 	private TableColumn<Component, Double> compPriceCol;
 	@FXML
 	private TextField searchCompField;
-	@FXML
-	private Text priceMessage;
 	@FXML
 	private TextArea messageToUserComp;	
 	@FXML
@@ -139,7 +135,6 @@ public class AddDishController extends ControllerWrapper {
 			});
 		 
 		 //limit text fields		 
-		timeMessage.setFill(Color.RED);
 		timeToMake.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, 
@@ -211,7 +206,6 @@ public class AddDishController extends ControllerWrapper {
 			});
 		 
 		 //limit text fields
-		 priceMessage.setFill(Color.RED);
 		 price.textProperty().addListener(new ChangeListener<String>() {
 			 	@Override
 			 	public void changed(ObservableValue<? extends String> observable, String oldValue, 

@@ -80,8 +80,6 @@ public class AddCustomerController extends ControllerWrapper{
 	private ListView<Customer> blackList;
 	@FXML
 	private TextField searchCustomerField;
-	@FXML
-	private Text messageCustomer;
 	
 
 	@FXML
@@ -142,34 +140,34 @@ public class AddCustomerController extends ControllerWrapper{
 			public void changed(ObservableValue<? extends String> observable, String oldValue, 
 					String newValue) {
 				    	if (newValue != "") {
-				    		messageCustomer.setText("");
+				    		messageToUser.setText("");
 					    	if(!newValue.matches("[a-zA-Z\s]+")) {
 					    		first_Name.setText(newValue.substring(0, newValue.length()-1));
-					    		messageCustomer.setText("Letters Only!");
+					    		messageToUser.setText("Letters Only!");
 					    	}
 				    	}
 				    }
 				});
 	 
-	 last_Name.textProperty().addListener(new ChangeListener<String>() {
+		last_Name.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, 
 					String newValue) {
 				    	if (newValue != "") {
-				    		messageCustomer.setText("");
+				    		messageToUser.setText("");
 					    	if(!newValue.matches("[a-zA-Z\s]+")) {
 					    		last_Name.setText(newValue.substring(0, newValue.length()-1));
-					    		messageCustomer.setText("Letters Only!");
+					    		messageToUser.setText("Letters Only!");
 					    	}
 				    	}
 				    }
 				});
 	 
-	 date.setOnAction(d -> {
+		date.setOnAction(d -> {
 		 if(date.getValue() != null) {
-			 messageCustomer.setText("");
+			 messageToUser.setText("");
 			 if(date.getValue().isAfter(LocalDate.now())) {
-				 messageCustomer.setText("Date cannot be in the future!");
+				 messageToUser.setText("Date cannot be in the future!");
 			 }
 		 }
 	 });
@@ -290,13 +288,13 @@ public class AddCustomerController extends ControllerWrapper{
 		isGluten.setSelected(false);
 		isLactose.setSelected(false);
 		allCustomersTable.getItems().clear();
-//		Gender_group.getSelectedToggle().setSelected(false);
 		allCustomersTable.getItems().addAll(FXCollections.observableArrayList(
 		Restaurant.getInstance().getCustomers().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		editCustomerBtn.setDisable(true);
 		addCustomerBtn.setDisable(false);
 		date.setDisable(false);
 		}catch(InvalidInputException inputE) {
+			soundOfButton("error.mp3");
 			messageToUser.setText(inputE.getMessage());
 		}
 	}
@@ -377,12 +375,15 @@ public class AddCustomerController extends ControllerWrapper{
 				blackList.getItems().addAll(FXCollections.observableArrayList(
 						Restaurant.getInstance().getBlackList().stream().collect(Collectors.toList())));
 			}else {
+				soundOfButton("error.mp3");
 				messageToUser.setText("an error has accured please try again");
 			}
 			
 		}  catch(InvalidInputException ipe) {
+			soundOfButton("error.mp3");
 			messageToUser.setText(ipe.getMessage());
 		} catch(Exception exc) {
+			soundOfButton("error.mp3");
 			messageToUser.setText("an error has accured please try again");
 		}
 	}

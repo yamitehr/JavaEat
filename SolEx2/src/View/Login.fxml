@@ -23,7 +23,7 @@
       </AnchorPane>
       <AnchorPane layoutX="345.0" prefHeight="550.0" prefWidth="357.0" style="-fx-background-color: #3c0b01;">
          <children>
-            <Button fx:id="signInBtn" layoutX="145.0" layoutY="506.0" mnemonicParsing="false" onAction="#signIn" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign Up" textFill="WHITE" styleClass="registrationBtns">
+            <Button fx:id="signInBtn" layoutX="145.0" layoutY="505.0" mnemonicParsing="false" onAction="#signIn" prefHeight="37.0" prefWidth="87.0" style="-fx-background-color: b89b5f;" styleClass="registrationBtns" text="Sign Up" textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
@@ -33,12 +33,12 @@
                   <Image url="@../../img/JavaEat.png" />
                </image>
             </ImageView>
-            <Label layoutX="85.0" layoutY="202.0" text="Username" textFill="WHITE" styleClass="registration">
+            <Label layoutX="85.0" layoutY="202.0" styleClass="registration" text="Username" textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="85.0" layoutY="292.0" text="Password" textFill="WHITE" styleClass="registration">
+            <Label layoutX="85.0" layoutY="292.0" styleClass="registration" text="Password" textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
@@ -48,12 +48,12 @@
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="81.0" layoutY="478.0" text="New Member? Sign Up right now!" textFill="WHITE" styleClass="registration">
+            <Label layoutX="81.0" layoutY="478.0" styleClass="registration" text="New Member? Sign Up right now!" textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="loginBtn" layoutX="145.0" layoutY="426.0" mnemonicParsing="false" onAction="#login" prefHeight="29.0" prefWidth="80.0" style="-fx-background-color: b89b5f;" text="Sign In" textFill="WHITE" styleClass="registrationBtns">
+            <Button fx:id="loginBtn" layoutX="145.0" layoutY="426.0" mnemonicParsing="false" onAction="#login" prefHeight="37.6" prefWidth="87.2" style="-fx-background-color: b89b5f;" styleClass="registrationBtns" text="Sign In" textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="14.0" />
                </font>
