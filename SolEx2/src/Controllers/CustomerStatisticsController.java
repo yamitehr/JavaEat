@@ -78,7 +78,7 @@ public class CustomerStatisticsController {
 	private CustomerLandingPageController landingController;
 
 	@FXML
-	private TabPane tabPane;
+	private TabPane tabPaneStats;
 	@FXML
 	private Button addDishBtn;
 	
@@ -190,33 +190,35 @@ public class CustomerStatisticsController {
 		addDishBtn.setOnAction(e -> {
 		Dish dish = relevantDishesTable.getSelectionModel().getSelectedItem();
 		
-		ArrayList<Component> newComps = new ArrayList<Component>();
-		for(Component c : dish.getComponenets()) {
-			newComps.add(new Component(c.getComponentName(), c.isHasLactose(), c.isHasGluten(), c.getPrice()));
+		if(dish != null) {
+			ArrayList<Component> newComps = new ArrayList<Component>();
+			for(Component c : dish.getComponenets()) {
+				newComps.add(new Component(c.getComponentName(), c.isHasLactose(), c.isHasGluten(), c.getPrice()));
+			}
+			Dish newDish = new Dish(dish.getId());
+			newDish.setDishName(dish.getDishName());
+			newDish.setType(dish.getType());
+			newComps.forEach(c -> newDish.addComponent(c));
+			newDish.setTimeToMake(dish.getTimeToMake());
+			
+			CurrentDishModel newCurrentDishModel = new CurrentDishModel(newDish, true);
+			
+			State.setCurrentDish(newCurrentDishModel);
+			
+			Order order = State.getCurrentOrder();
+	    	
+	    	if(State.getCurrentDish().isNew()) {
+	    		//If order exists, add dish. otherwise create a new order
+	        	if (order != null) {
+	        		order.addDish(newDish);
+	        	} else {
+	            	ArrayList<Dish> dishes = new ArrayList<Dish>();
+	            	dishes.add(newDish);
+	        		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
+	        	}
+	    	}
 		}
-		Dish newDish = new Dish(dish.getId());
-		newDish.setDishName(dish.getDishName());
-		newDish.setType(dish.getType());
-		newComps.forEach(c -> newDish.addComponent(c));
-		newDish.setTimeToMake(dish.getTimeToMake());
 		
-		CurrentDishModel newCurrentDishModel = new CurrentDishModel(newDish, true);
-		
-		State.setCurrentDish(newCurrentDishModel);
-		
-		Order order = State.getCurrentOrder();
-    	
-    	if(State.getCurrentDish().isNew()) {
-    		//If order exists, add dish. otherwise create a new order
-        	if (order != null) {
-        		order.addDish(newDish);
-        	} else {
-            	ArrayList<Dish> dishes = new ArrayList<Dish>();
-            	dishes.add(newDish);
-        		State.setCurrentOrder(new Order(State.getCurrentCustomer(), dishes, null));
-        	}
-    	}
-    	
     	landingController.initShoppingCart();
 		});
 	}
