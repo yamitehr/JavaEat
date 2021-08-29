@@ -114,7 +114,8 @@ public class CustomerMenuController extends ControllerWrapper{
 	
 	private Pane getMenuItem(Dish dish) {
 		String dishName = dish.getDishName();
-		double dishPrice = dish.calcDishPrice();
+		double dishPriceDoub = dish.calcDishPrice();
+		String dishPrice = String.format("%.1f", dishPriceDoub);
 		String dishDescription = "";
 		for(Component c : dish.getComponenets()) {
 			dishDescription += c.getComponentName() + ", ";
@@ -166,7 +167,7 @@ public class CustomerMenuController extends ControllerWrapper{
 		newMenuItem.getStyleClass().add("menuItem");
 		addBtn.getStyleClass().add("addButton");
 		
-		newMenuItem.setMinSize(100, 100);
+		newMenuItem.setMinSize(100, 120);
 		newMenuItem.setMaxSize(200, 200);
 		
 		newMenuItem.getChildren().addAll(dishLa);
