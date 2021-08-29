@@ -82,7 +82,7 @@
          </children>
       </AnchorPane>
          <!-- NAV BAR -->
-        <AnchorPane fx:id="navList" prefHeight="721.5" prefWidth="360.0" styleClass="compsEditor" stylesheets="@menu.css" translateX="1000.0" AnchorPane.bottomAnchor="0.0">
+        <AnchorPane fx:id="navList" prefHeight="721.5" prefWidth="400.0" styleClass="compsEditor" stylesheets="@menu.css" translateX="1000.0" AnchorPane.bottomAnchor="0.0">
             <children>
                 <Label fx:id="dishName" text="left side menu" />
             <Pane fx:id="componentsContainer" layoutX="20.0" layoutY="120.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@menu.css">
@@ -109,7 +109,7 @@
       <Label fx:id="messageLbl" layoutX="616.0" layoutY="50.0" styleClass="labelHeader" text="Label" />
       <ScrollPane fx:id="cartScrollPane" layoutY="405.0" prefHeight="257.0" prefWidth="343.0">
          <content>
-            <VBox fx:id="cartVbox" prefWidth="330.0" />
+            <VBox fx:id="cartVbox"/>
          </content>
       </ScrollPane>
          <!-- NAV BAR -->

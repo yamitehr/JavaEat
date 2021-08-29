@@ -108,7 +108,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		replacePane(toReplacePane, "/View/Video.fxml");
 		
 		cartScrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-		cartScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+		cartScrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		cartVbox.setFillWidth(true);
 		initializeCompGrid();
         prepareSlideMenuAnimation();
