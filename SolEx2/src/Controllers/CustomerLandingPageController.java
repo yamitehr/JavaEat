@@ -219,7 +219,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		int j = 0;
 		for (Pair<CheckBox, Component> cb : componentList) {
 			componentGrid.add(cb.getKey(), j, i, 1, 1);
-			if (j == 2) {
+			if (j == 1) {
 				j = 0;
 				i ++;
 			} else {
