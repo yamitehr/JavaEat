@@ -109,7 +109,7 @@
       <Label fx:id="messageLbl" layoutX="616.0" layoutY="50.0" styleClass="labelHeader" text="Label" />
       <ScrollPane fx:id="cartScrollPane" layoutY="405.0" prefHeight="257.0" prefWidth="343.0">
          <content>
-            <VBox fx:id="cartVbox" prefWidth="330.0" />
+            <VBox fx:id="cartVbox"/>
          </content>
       </ScrollPane>
          <!-- NAV BAR -->
