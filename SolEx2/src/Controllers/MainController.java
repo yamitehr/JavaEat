@@ -45,7 +45,7 @@ public class MainController extends ControllerWrapper{
     				isExist = true;
     				State.setCurrentCustomer(cust);
     				soundOfButton("welcome.mp3");
-    				moveToScene("/view/CustomerLandingPage.fxml", (Stage)loginBtn.getScene().getWindow());
+    				moveToScene("/View/CustomerLandingPage.fxml", (Stage)txtUserName.getScene().getWindow());
     		}
     	}
     	
