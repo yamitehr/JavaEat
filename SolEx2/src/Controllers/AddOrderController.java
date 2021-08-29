@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -53,7 +54,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.Pair;
 
@@ -77,7 +77,7 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private TableColumn<Order, Integer> orderIdCol;
 	@FXML
-	private TableColumn<Order, String> customerCol;
+	private TableColumn<Order, Customer> customerCol;
 	@FXML
 	private TableColumn<Order, String> dishesCol;
 	@FXML
@@ -121,11 +121,11 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private TableColumn<Delivery, String> deliveryTypeCol;
 	@FXML
-	private TableColumn<Delivery, String> deliveryPersonCol;
+	private TableColumn<Delivery, DeliveryPerson> deliveryPersonCol;
 	@FXML
-	private TableColumn<Delivery, String> areaCol;
+	private TableColumn<Delivery, DeliveryArea> areaCol;
 	@FXML
-	private TableColumn<Delivery, String> deliveryDateCol;
+	private TableColumn<Delivery, LocalDate> deliveryDateCol;
 	@FXML
 	private TableColumn<Delivery, String> isDeliveredCol;
 	@FXML
@@ -221,7 +221,7 @@ public class AddOrderController extends ControllerWrapper {
 		//Add all orders
 		orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 	
-		customerCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<String>(o.getValue().getCustomer().toString()));
+		customerCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<Customer>(o.getValue().getCustomer()));
 			
 		dishesCol.setCellValueFactory(o -> new ReadOnlyObjectWrapper<String>(
 				o.getValue().getDishes()
@@ -238,7 +238,7 @@ public class AddOrderController extends ControllerWrapper {
 				.collect(Collectors.toList());
 			
 		allOrdersTable.getItems().addAll(allOrders);
-	
+		
 		searchOrderField.textProperty().addListener((observable, oldValue, newValue) -> {
 			searchOrderByID();
 		});
@@ -300,11 +300,11 @@ public class AddOrderController extends ControllerWrapper {
 		
 		deliveryTypeCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getClass().getSimpleName()));
 		
-		deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveryPerson().toString()));
+		deliveryPersonCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<DeliveryPerson>(delivery.getValue().getDeliveryPerson()));
 		
-		areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<String>(area.getValue().getArea().toString()));
+		areaCol.setCellValueFactory(area -> new ReadOnlyObjectWrapper<DeliveryArea>(area.getValue().getArea()));
 		
-		deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<String>(delivery.getValue().getDeliveredDate().toString()));
+		deliveryDateCol.setCellValueFactory(delivery -> new ReadOnlyObjectWrapper<LocalDate>(delivery.getValue().getDeliveredDate()));
 		
 		isDeliveredCol.setCellValueFactory(delivery -> {
             boolean isDelivered = delivery.getValue().isDelivered();
@@ -553,6 +553,9 @@ public class AddOrderController extends ControllerWrapper {
 					selectedOrder.setDelivery(deliveryBox.getValue());
 				}
 		}
+			ArrayList<Dish> orderDishes = new ArrayList<Dish>();
+			orderDishes.addAll(finalDishesList.getItems());		
+			
 		ArrayList<Dish> changedDishes = new ArrayList<Dish>();
 		changedDishes.addAll(finalDishesList.getItems());
 		if(changedDishes.isEmpty()) 
@@ -571,9 +574,9 @@ public class AddOrderController extends ControllerWrapper {
 			if(!changedDishes.contains(selectedOrder.getDishes().get(i)))
 				selectedOrder.removeDish(selectedOrder.getDishes().get(i));			
 		}
-		for(Dish d: changedDishes) {
-			if(!selectedOrder.getDishes().contains(d))
-				selectedOrder.addDish(d);
+		for(int i = 0; i < changedDishes.size(); i++) {
+			if(!selectedOrder.getDishes().contains(changedDishes.get(i)))
+				selectedOrder.addDish(changedDishes.get(i));
 		}
 		
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -607,6 +610,16 @@ public class AddOrderController extends ControllerWrapper {
 			finalDishes.add(dishesList.getSelectionModel().getSelectedItem());
 		}
 		finalDishesList.setItems(finalDishes);
+		quantityField.setText("1");
+	}
+	
+	public void removeDishFromOrder(ActionEvent e) {
+		List<Dish> dishes = finalDishesList.getSelectionModel().getSelectedItems();
+		if(!dishes.isEmpty()) {
+			for(int i = 0; i < dishes.size(); i++) {
+				finalDishesList.getItems().remove(dishes.get(i));
+			}
+		}
 	}
 	
 	
@@ -1022,16 +1035,16 @@ public class AddOrderController extends ControllerWrapper {
 			newAreaBox.setVisible(true);
 			ObservableList<DeliveryArea> deliveryAreas = FXCollections.observableArrayList(Restaurant.getInstance().getAreas().values());
 			newAreaBox.setItems(FXCollections.observableArrayList(deliveryAreas));	
-			if(newAreaBox.getSelectionModel().getSelectedItem() != null) {
-				removeLbl.setVisible(false);
-				newAreaBox.setVisible(false);
-				Restaurant.getInstance().removeDeliveryArea(selectedDeliveryArea, newAreaBox.getSelectionModel().getSelectedItem());
-				//update the list after removal
-				allAreasTable.getItems().clear();
-				allAreasTable.getItems().addAll(FXCollections.observableArrayList(
-						Restaurant.getInstance().getAreas().entrySet().stream().map(a -> a.getValue()).collect(Collectors.toList())));
-				newAreaBox.getSelectionModel().clearSelection();
-			}
+		}
+		if(newAreaBox.getSelectionModel().getSelectedItem() != null) {
+			removeLbl.setVisible(false);
+			newAreaBox.setVisible(false);
+			Restaurant.getInstance().removeDeliveryArea(selectedDeliveryArea, newAreaBox.getSelectionModel().getSelectedItem());
+			//update the list after removal
+			allAreasTable.getItems().clear();
+			allAreasTable.getItems().addAll(FXCollections.observableArrayList(
+					Restaurant.getInstance().getAreas().entrySet().stream().map(a -> a.getValue()).collect(Collectors.toList())));
+			newAreaBox.getSelectionModel().clearSelection();
 		}
 	}	
 	

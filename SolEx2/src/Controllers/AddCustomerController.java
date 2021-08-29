@@ -33,7 +33,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
 
 public class AddCustomerController extends ControllerWrapper{
 	@FXML
@@ -65,11 +64,11 @@ public class AddCustomerController extends ControllerWrapper{
 	@FXML
 	private TableColumn<Customer, String> customerNameCol;
 	@FXML
-	private TableColumn<Customer, String> customerDobCol;
+	private TableColumn<Customer, LocalDate> customerDobCol;
 	@FXML
 	private TableColumn<Customer, Gender> customerGenderCol;
 	@FXML
-	private TableColumn<Customer, String> neighberhoodCol;
+	private TableColumn<Customer, Neighberhood> neighberhoodCol;
 	@FXML
 	private TableColumn<Customer, String> sensitivitiesCol;
 	@FXML
@@ -99,11 +98,11 @@ public class AddCustomerController extends ControllerWrapper{
 		
 		customerNameCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getFirstName() + " " + cust.getValue().getLastName()));	
 		
-		customerDobCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getBirthDay().toString()));
+		customerDobCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<LocalDate>(cust.getValue().getBirthDay()));
 		
 		customerGenderCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<Gender>(cust.getValue().getGender()));
 		
-		neighberhoodCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<String>(cust.getValue().getNeighberhood().toString()));
+		neighberhoodCol.setCellValueFactory(cust -> new ReadOnlyObjectWrapper<Neighberhood>(cust.getValue().getNeighberhood()));
 		
 		sensitivitiesCol.setCellValueFactory(cust -> {
 			 boolean isSensitiveToGluten = cust.getValue().isSensitiveToGluten();

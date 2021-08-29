@@ -34,8 +34,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.skin.NestedTableColumnHeader;
+import javafx.scene.control.skin.TableColumnHeader;
+import javafx.scene.control.skin.TableHeaderRow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 
 public class AddCookController extends ControllerWrapper{
 	//cooks
@@ -64,9 +67,9 @@ public class AddCookController extends ControllerWrapper{
 	@FXML
 	private TableColumn<Cook, String> cookNameCol;
 	@FXML
-	private TableColumn<Cook, String> cookDobCol;
+	private TableColumn<Cook, LocalDate> cookDobCol;
 	@FXML
-	private TableColumn<Cook, String> cookGenderCol;
+	private TableColumn<Cook, Gender> cookGenderCol;
 	@FXML
 	private TableColumn<Cook, String> isChefCol;
 	@FXML
@@ -105,13 +108,13 @@ public class AddCookController extends ControllerWrapper{
 	@FXML
 	private TableColumn<DeliveryPerson, String> dpNameCol;
 	@FXML
-	private TableColumn<DeliveryPerson, String> dpDobCol;
+	private TableColumn<DeliveryPerson, LocalDate> dpDobCol;
 	@FXML
-	private TableColumn<DeliveryPerson, String> dpGenderCol;
+	private TableColumn<DeliveryPerson, Gender> dpGenderCol;
 	@FXML
-	private TableColumn<DeliveryPerson, String> vehicleCol;
+	private TableColumn<DeliveryPerson, Vehicle> vehicleCol;
 	@FXML
-	private TableColumn<DeliveryPerson, String> areaCol;
+	private TableColumn<DeliveryPerson, DeliveryArea> areaCol;
 	@FXML
 	private Button editDeliveryPersonBtn;
 	@FXML
@@ -139,9 +142,9 @@ public class AddCookController extends ControllerWrapper{
 		
 		cookNameCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getFirstName() + " " + cook.getValue().getLastName()));	
 		
-		cookDobCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getBirthDay().toString()));
+		cookDobCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<LocalDate>(cook.getValue().getBirthDay()));
 		
-		cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<String>(cook.getValue().getGender().name()));
+		cookGenderCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<Gender>(cook.getValue().getGender()));
 		
 		expertiseCol.setCellValueFactory(cook -> new ReadOnlyObjectWrapper<Expertise>(cook.getValue().getExpert()));
 		
@@ -257,19 +260,20 @@ public class AddCookController extends ControllerWrapper{
 			
 			dpNameCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getFirstName() + " " + dp.getValue().getLastName()));	
 			
-			dpDobCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getBirthDay().toString()));
+			dpDobCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<LocalDate>(dp.getValue().getBirthDay()));
 			
-			dpGenderCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getGender().name()));
+			dpGenderCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<Gender>(dp.getValue().getGender()));
 			
-			vehicleCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getVehicle().toString()));
+			vehicleCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<Vehicle>(dp.getValue().getVehicle()));
 			
-			areaCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<String>(dp.getValue().getArea().toString()));
+			areaCol.setCellValueFactory(dp -> new ReadOnlyObjectWrapper<DeliveryArea>(dp.getValue().getArea()));
 			
 			List<DeliveryPerson> allDeliveryPersons = new ArrayList<DeliveryPerson>();
 			allDeliveryPersons = Restaurant.getInstance().getDeliveryPersons().values().stream()
 					.collect(Collectors.toList());
 			
 			allDeliveryPersonsTable.getItems().addAll(allDeliveryPersons);
+
 			
 			 searchDPField.textProperty().addListener((observable, oldValue, newValue) -> {
 				 searchDPByID();

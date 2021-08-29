@@ -59,8 +59,8 @@
                                        <columns>
                                           <TableColumn fx:id="orderIdCol" prefWidth="97.5999755859375" text="Order ID" />
                                           <TableColumn fx:id="customerCol" prefWidth="108.79998779296875" text="Customer" />
-                                          <TableColumn fx:id="dishesCol" prefWidth="236.0" text="Dishes" />
-                                          <TableColumn fx:id="statusCol" prefWidth="102.0" text="status" />
+                                          <TableColumn fx:id="dishesCol" prefWidth="261.60003662109375" text="Dishes" />
+                                          <TableColumn fx:id="statusCol" prefWidth="95.199951171875" text="status" />
                                        </columns>
                                     </TableView>
                                     <TextField fx:id="searchOrderField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
@@ -94,6 +94,7 @@
                               <TextField fx:id="quantityField" alignment="CENTER" layoutX="384.0" layoutY="130.0" prefHeight="26.0" prefWidth="58.0" text="1" />
                               <TextArea fx:id="messageToUserOrder" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
                               <Label alignment="CENTER" layoutX="377.0" layoutY="104.0" prefHeight="26.0" prefWidth="78.0" styleClass="managerAllText" text="Qty:" />
+                              <Button layoutX="382.0" layoutY="198.0" maxHeight="54.0" minWidth="56.0" mnemonicParsing="false" onAction="#removeDishFromOrder" prefHeight="31.0" prefWidth="61.0" text="Remove" />
                            </children>
                         </AnchorPane>
                      </children>
