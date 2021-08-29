@@ -112,7 +112,7 @@
                <content>
       <AnchorPane layoutX="915.0" prefHeight="347.0" prefWidth="655.0" styleClass="managerStatsPane">
          <children>
-            <Label layoutX="220.0" prefHeight="46.0" prefWidth="352.0" styleClass="managerStatisticsHeaders" text="Customer's Relevent Dishes" textFill="#5b231b">
+            <Label layoutX="220.0" prefHeight="46.0" prefWidth="409.0" styleClass="managerStatisticsHeaders" text="Customer's Relevent Dishes" textFill="#5b231b">
                <font>
                   <Font name="System Bold Italic" size="31.0" />
                </font>
@@ -152,7 +152,7 @@
                   <Font name="System Bold Italic" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="regularDeliveries" layoutX="370.0" layoutY="142.0" textFill="WHITE" styleClass="managerStatsReguExpNum">
+            <Label fx:id="regularDeliveries" layoutX="370.0" layoutY="142.0" styleClass="managerStatsReguExpNum" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="25.0" />
                </font>
@@ -162,7 +162,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="expressDeliveries" layoutX="370.0" layoutY="242.0" textFill="WHITE" styleClass="managerStatsReguExpNum">
+            <Label fx:id="expressDeliveries" layoutX="370.0" layoutY="242.0" styleClass="managerStatsReguExpNum" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>

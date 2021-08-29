@@ -54,17 +54,16 @@
             <Label layoutX="42.0" layoutY="264.0" prefHeight="26.0" prefWidth="80.0" styleClass="registration" text="Gender" />
             <HBox layoutX="156.0" layoutY="264.0" prefHeight="54.0" prefWidth="291.0" spacing="20.0">
                <children>
-                  <RadioButton fx:id="male" mnemonicParsing="false" prefHeight="19.0" prefWidth="73.0" selected="true" styleClass="registration" text="Male">
+                  <RadioButton fx:id="male" mnemonicParsing="false" prefHeight="19.0" prefWidth="73.0" styleClass="registration" text="Male">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
-                  </RadioButton>
-                  <RadioButton fx:id="female" mnemonicParsing="false" prefHeight="19.0" prefWidth="80.0" styleClass="registration" text="Female" />
-                  <RadioButton fx:id="unknown" mnemonicParsing="false" prefHeight="19.0" prefWidth="99.0" styleClass="registration" text="Unknown">
                      <toggleGroup>
-                        <ToggleGroup fx:id="gender" />
+                        <ToggleGroup fx:id="gender_Group" />
                      </toggleGroup>
                   </RadioButton>
+                  <RadioButton fx:id="female" mnemonicParsing="false" prefHeight="19.0" prefWidth="80.0" styleClass="registration" text="Female" toggleGroup="$gender_Group" />
+                  <RadioButton fx:id="unknown" mnemonicParsing="false" prefHeight="19.0" prefWidth="99.0" styleClass="registration" text="Unknown" toggleGroup="$gender_Group" />
                </children>
             </HBox>
             <ChoiceBox fx:id="NeighberhoodBox" layoutX="156.0" layoutY="307.0" prefHeight="28.0" prefWidth="179.0" />

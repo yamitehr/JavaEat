@@ -57,7 +57,7 @@
                                     <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editOrder" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
                                     <TableView fx:id="allOrdersTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
                                        <columns>
-                                          <TableColumn fx:id="orderIdCol" prefWidth="97.5999755859375" text="Order ID" />
+                                          <TableColumn fx:id="orderIdCol" prefWidth="97.5999755859375" text="ID" />
                                           <TableColumn fx:id="customerCol" prefWidth="108.79998779296875" text="Customer" />
                                           <TableColumn fx:id="dishesCol" prefWidth="261.60003662109375" text="Dishes" />
                                           <TableColumn fx:id="statusCol" prefWidth="95.199951171875" text="status" />

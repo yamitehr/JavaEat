@@ -624,25 +624,25 @@ public class Restaurant implements Serializable{
 		TreeSet<Order> toRegularDelivery = new TreeSet<>();
 		if(orders.size()<=2) {
 			for(Order o: orders) {
-				ExpressDelivery ed = new ExpressDelivery(dp, da, false, o,LocalDate.of(2021,1,1));
+				ExpressDelivery ed = new ExpressDelivery(dp, da, false, o,LocalDate.now());
 				AIDecision.add(ed);
 			}
 		}
 		else {
 			for(Order o: orders) {
 				if(o.getCustomer().isSensitiveToGluten() || o.getCustomer().isSensitiveToLactose()) {
-					ExpressDelivery ed = new ExpressDelivery(dp, da, false, o,LocalDate.of(2021,1,1));
+					ExpressDelivery ed = new ExpressDelivery(dp, da, false, o,LocalDate.now());
 					AIDecision.add(ed);
 				}
 				else
 					toRegularDelivery.add(o);
 			}
 			if(toRegularDelivery.size()<2) {
-				ExpressDelivery ed = new ExpressDelivery(dp, da, false, toRegularDelivery.first(),LocalDate.of(2021, 1, 1));
+				ExpressDelivery ed = new ExpressDelivery(dp, da, false, toRegularDelivery.first(),LocalDate.now());
 				AIDecision.add(ed);
 			}
 			else {
-				RegularDelivery rd = new RegularDelivery(toRegularDelivery, dp, da, false, LocalDate.of(2021, 1, 1));
+				RegularDelivery rd = new RegularDelivery(toRegularDelivery, dp, da, false, LocalDate.now());
 				AIDecision.add(rd);
 			}
 		}

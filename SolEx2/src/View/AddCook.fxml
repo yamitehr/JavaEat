@@ -41,7 +41,7 @@
                               <Label layoutX="406.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
                               <RadioButton layoutX="521.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Male">
                                  <effect>
-                                    <SepiaTone level="0.25" />
+                                    <SepiaTone level="0.0" />
                                  </effect>
                                  <toggleGroup>
                                     <ToggleGroup fx:id="Gender_group" />
@@ -52,20 +52,20 @@
                               <DatePicker fx:id="date" layoutX="193.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
                               <RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
                                  <effect>
-                                    <SepiaTone level="0.25" />
+                                    <SepiaTone level="0.0" />
                                  </effect>
                               </RadioButton>
                               <Label layoutX="66.0" layoutY="147.0" styleClass="managerAllText" text="Expertise" />
                               <Label layoutX="406.0" layoutY="147.0" styleClass="managerAllText" text="is Chef" />
                               <CheckBox fx:id="isChef" layoutX="521.0" layoutY="144.0" mnemonicParsing="false" styleClass="managerAllText" text="Yes">
                                  <effect>
-                                    <SepiaTone level="0.25" />
+                                    <SepiaTone level="0.0" />
                                  </effect>
                               </CheckBox>
                               <ComboBox fx:id="expertiseBox" layoutX="193.0" layoutY="144.0" maxHeight="33.0" prefHeight="33.0" prefWidth="159.0" styleClass="comboBox" stylesheets="@decoration.css" />
                               <RadioButton layoutX="697.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
                                  <effect>
-                                    <SepiaTone level="0.25" />
+                                    <SepiaTone level="0.0" />
                                  </effect>
                               </RadioButton>
                               <Pane layoutX="193.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="600.0">
