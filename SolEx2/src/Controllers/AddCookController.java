@@ -34,10 +34,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.skin.NestedTableColumnHeader;
-import javafx.scene.control.skin.TableColumnHeader;
-import javafx.scene.control.skin.TableHeaderRow;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 
 public class AddCookController extends ControllerWrapper{
@@ -603,9 +599,7 @@ public class AddCookController extends ControllerWrapper{
 	
 	//Adds the delivery person to the restaurant
 		public void addDeliveryPerson(ActionEvent e) {
-			
-			try {
-				
+			try {			
 				String firstName = first_Name_DP.getText();
 				if(firstName.isEmpty()) {
 					throw new InvalidInputException("Please fill First Name");
@@ -672,6 +666,7 @@ public class AddCookController extends ControllerWrapper{
 					last_Name_DP.clear();
 					Gender_group_DP.getSelectedToggle().setSelected(false);
 					vehicleBox.getSelectionModel().clearSelection();
+					deliveryAreaBox.getSelectionModel().clearSelection();
 					dateDP.setValue(null);
 					allDeliveryPersonsTable.getItems().clear();
 					allDeliveryPersonsTable.getItems().addAll(FXCollections.observableArrayList(

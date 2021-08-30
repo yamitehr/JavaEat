@@ -49,7 +49,7 @@ public class AddDishController extends ControllerWrapper {
 	@FXML
 	private TableColumn<Dish, String> componentsCol;
 	@FXML
-	private TableColumn<Dish, Double> priceCol;
+	private TableColumn<Dish, String> priceCol;
 	@FXML
 	private TableColumn<Dish, DishType> dishTypeCol;
 	@FXML
@@ -117,7 +117,8 @@ public class AddDishController extends ControllerWrapper {
 				.map(d -> d.toString())
 				.reduce((a, b) -> a + ", " + b).get()
 				));
-		priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+		
+		priceCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(String.format("%.2f", dish.getValue().getPrice())));
 		
 		dishTypeCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<DishType>(dish.getValue().getType()));
 				
@@ -138,13 +139,11 @@ public class AddDishController extends ControllerWrapper {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, 
 					String newValue) {
 				    	if (newValue != "") {
-					    	try {
-					    		messageToUserDish.setText("");
-								Integer.parseInt(newValue);
-							} catch(NumberFormatException nfe) {
-								timeToMake.setText(oldValue);
-								messageToUserDish.setText("Numbers only!");
-							}	
+				    		messageToUserDish.setText("");
+				    		 if (!newValue.matches("\\d*")) {
+				    			 timeToMake.setText(oldValue);
+				    			 messageToUserDish.setText("Numbers only!");
+				    		 }	
 				    	}
 				    }
 				});
@@ -209,13 +208,11 @@ public class AddDishController extends ControllerWrapper {
 			 	public void changed(ObservableValue<? extends String> observable, String oldValue, 
 			 		String newValue) {
 					    	if (newValue != "") {
-					    		try {
-					    			messageToUserComp.setText("");
-					    			Double.parseDouble(newValue);
-					    		} catch(NumberFormatException nfe) {
-					    			price.setText(oldValue);
-					    			messageToUserComp.setText("Numbers only!");
-					    		}	
+					    		messageToUserComp.setText("");
+					    		 if(!newValue.matches("\\d*(\\.\\d*)?")) {
+					    			 price.setText(oldValue);
+					    			 messageToUserComp.setText("Numbers only!");
+					    		 }
 					    	}
 			 		}
 		 });

@@ -32,7 +32,7 @@
       <Label layoutX="406.0" layoutY="62.0" styleClass="managerAllText" text="Last Name" />
       <Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Date Of Birth" />
       <Label layoutX="406.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
-      <RadioButton layoutX="521.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Male">
+      <RadioButton layoutX="521.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" styleClass="managerAllText" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="Gender_group" />
          </toggleGroup>
@@ -42,7 +42,7 @@
       <TextField fx:id="first_Name" layoutX="193.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
       <TextField fx:id="last_Name" layoutX="521.0" layoutY="57.0" styleClass="textFields" stylesheets="@decoration.css" />
       <DatePicker fx:id="date" layoutX="193.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
-      <RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
+      <RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
          <effect>
             <SepiaTone level="0.0" />
          </effect></RadioButton>
@@ -65,7 +65,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-      <RadioButton layoutX="697.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
+      <RadioButton layoutX="697.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
          <effect>
             <SepiaTone level="0.0" />
          </effect></RadioButton>
@@ -80,12 +80,12 @@
             <TableView fx:id="allCustomersTable" layoutY="32.0" prefHeight="278.0" prefWidth="756.0">
                <columns>
                   <TableColumn fx:id="customerIdCol" prefWidth="33.0" text="ID" />
-                  <TableColumn fx:id="customerNameCol" minWidth="0.0" prefWidth="120.0" text="Name" />
-                  <TableColumn fx:id="customerDobCol" prefWidth="105.0" text="DOB" />
+                  <TableColumn fx:id="customerNameCol" minWidth="0.0" prefWidth="115.0" text="Name" />
+                  <TableColumn fx:id="customerDobCol" prefWidth="110.0" text="DOB" />
                   <TableColumn fx:id="customerGenderCol" prefWidth="76.0" text="Gender" />
                   <TableColumn fx:id="neighberhoodCol" prefWidth="126.0" text="Neighberhood" />
-                  <TableColumn fx:id="sensitivitiesCol" prefWidth="102.0" text="Sensitivities" />
-                        <TableColumn fx:id="userNameCol" prefWidth="95.0" text="User Name" />
+                  <TableColumn fx:id="sensitivitiesCol" prefWidth="104.0" text="Sensitivities" />
+                        <TableColumn fx:id="userNameCol" prefWidth="93.0" text="User Name" />
                         <TableColumn fx:id="passwordCol" prefWidth="97.0" text="Password" />
                </columns>
             </TableView>

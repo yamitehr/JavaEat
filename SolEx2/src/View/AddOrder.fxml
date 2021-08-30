@@ -20,257 +20,265 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddOrderController">
-   <children>
-   <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.4" pickOnBounds="true">
-         <image>
-            <Image url="@../../img/main4.jpg" />
-         </image>
-      </ImageView>
-      <TabPane fx:id="tabPane" layoutX="343.0" layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1071.0" tabClosingPolicy="UNAVAILABLE">
-         <tabs>
-            <Tab text="Order">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1235.0">
-                           <children>
-                              <Label layoutX="66.0" layoutY="66.0" styleClass="managerAllText" text="Customer" />
-                              <Label layoutX="381.0" layoutY="66.0" styleClass="managerAllText" text="Delivery" />
-                              <Button fx:id="addOrderBtn" layoutX="853.0" layoutY="52.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
-                                 <graphic>
-                                    <ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/plus-circle-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic></Button>
-                              <ComboBox fx:id="deliveryBox" layoutX="489.0" layoutY="61.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                              <ListView fx:id="dishesList" layoutX="193.0" layoutY="106.0" prefHeight="156.0" prefWidth="150.0" />
-                              <Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Dishes" />
-                              <ComboBox fx:id="customerBox" layoutX="193.0" layoutY="61.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                              <Pane layoutX="193.0" layoutY="326.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="667.0">
-                                 <children>
-                                    <Button layoutY="320.0" mnemonicParsing="false" onAction="#removeOrder" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                                    <Text fx:id="customerField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Text fx:id="dishesField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Text fx:id="deliveryField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-                                    <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editOrder" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                                    <TableView fx:id="allOrdersTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
-                                       <columns>
-                                          <TableColumn fx:id="orderIdCol" prefWidth="97.5999755859375" text="ID" />
-                                          <TableColumn fx:id="customerCol" prefWidth="108.79998779296875" text="Customer" />
-                                          <TableColumn fx:id="dishesCol" prefWidth="261.60003662109375" text="Dishes" />
-                                          <TableColumn fx:id="statusCol" prefWidth="95.199951171875" text="status" />
-                                       </columns>
-                                    </TableView>
-                                    <TextField fx:id="searchOrderField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/trash-alt-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/edit-solid-2.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/search-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <Button fx:id="editOrderBtn" layoutX="853.0" layoutY="111.0" mnemonicParsing="false" onAction="#setEditOrder" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
-                                 <graphic>
-                                    <ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/save-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic></Button>
-                              <ListView fx:id="finalDishesList" layoutX="489.0" layoutY="106.0" prefHeight="156.0" prefWidth="150.0" />
-                              <Button layoutX="383.0" layoutY="156.0" maxHeight="54.0" minWidth="56.0" mnemonicParsing="false" onAction="#addDishesToOrder" prefHeight="31.0" prefWidth="61.0" text="Add" />
-                              <TextField fx:id="quantityField" alignment="CENTER" layoutX="384.0" layoutY="130.0" prefHeight="26.0" prefWidth="58.0" text="1" />
-                              <TextArea fx:id="messageToUserOrder" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
-                              <Label alignment="CENTER" layoutX="377.0" layoutY="104.0" prefHeight="26.0" prefWidth="78.0" styleClass="managerAllText" text="Qty:" />
-                              <Button layoutX="382.0" layoutY="198.0" maxHeight="54.0" minWidth="56.0" mnemonicParsing="false" onAction="#removeDishFromOrder" prefHeight="31.0" prefWidth="61.0" text="Remove" />
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Delivery">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="719.0" prefWidth="1241.0">
-                     <children>
-                        <AnchorPane prefHeight="740.0" prefWidth="1247.0">
-                           <children>
-                              <AnchorPane fx:id="regularPane" layoutX="66.0" layoutY="56.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="1016.0">
-                                 <children>
-                                    <Label layoutY="10.0" styleClass="managerAllText" text="Delivery Person" />
-                                    <Label layoutX="366.0" layoutY="10.0" styleClass="managerAllText" text="Delivery Area" />
-                                    <Button fx:id="addRegularBtn" layoutX="815.0" layoutY="10.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addRegularDelivery" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
-                                       <graphic>
-                                          <ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../icons/plus-circle-solid.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></Button>
-                                    <ComboBox fx:id="deliveryAreaBox" layoutX="488.0" layoutY="5.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                                    <ListView fx:id="ordersList" layoutX="127.0" layoutY="93.0" prefHeight="134.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
-                                    <Label layoutY="95.0" prefHeight="26.0" prefWidth="64.0" styleClass="managerAllText" text="Orders" />
-                                    <ComboBox fx:id="DeliveryPersonBox" layoutX="127.0" layoutY="5.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                                    <CheckBox fx:id="delivered" layoutX="127.0" layoutY="53.0" mnemonicParsing="false">
-                                       <effect>
-                                          <SepiaTone level="0.0" />
-                                       </effect></CheckBox>
-                                    <Label layoutY="51.0" prefHeight="19.0" prefWidth="107.0" styleClass="managerAllText" text="Is Delivered?" />
-                                    <Label layoutX="366.0" layoutY="51.0" prefHeight="26.0" prefWidth="117.0" styleClass="managerAllText" text="Delivery Date" />
-                                    <DatePicker fx:id="deliveryDate" layoutX="488.0" layoutY="53.0" styleClass="textFields" stylesheets="@decoration.css" />
-                                    <ComboBox fx:id="orderBox" layoutX="127.0" layoutY="93.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                                    <Label fx:id="postageLbl" layoutX="366.0" layoutY="95.0" prefHeight="22.0" prefWidth="93.0" styleClass="managerAllText" text="Postage" />
-                                    <TextField fx:id="postageField" layoutX="488.0" layoutY="93.0" styleClass="textFields" stylesheets="@decoration.css" />
-                                    <Button fx:id="addExpressBtn" layoutX="815.0" layoutY="10.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addExpressDelivery" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
-                                       <graphic>
-                                          <ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../icons/plus-circle-solid.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></Button>
-                                    <Button fx:id="editDeliveryBtn" layoutX="815.0" layoutY="69.0" maxHeight="38.0" mnemonicParsing="false" onAction="#setEditDelivery" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
-                                       <graphic>
-                                          <ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../icons/save-solid.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></Button>
-                                    <Text fx:id="postageMessage" fill="RED" layoutX="487.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" wrappingWidth="148.53668212890625" />
-                                    <TextArea fx:id="messageToUserRegular" editable="false" layoutX="776.0" layoutY="130.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
-                                 </children>
-                              </AnchorPane>
-                              <Pane layoutX="66.0" layoutY="326.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="844.0">
-                                 <children>
-                                    <Button layoutY="320.0" mnemonicParsing="false" onAction="#removeDelivery" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                                    <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editDelivery" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                                    <TableView fx:id="allDeliveriesTable" layoutY="32.0" prefHeight="278.0" prefWidth="781.0">
-                                       <columns>
-                                          <TableColumn fx:id="deliveryIdCol" prefWidth="52.0" text="ID" />
-                                          <TableColumn fx:id="deliveryTypeCol" prefWidth="112.0" text="Type" />
-                                          <TableColumn fx:id="deliveryPersonCol" prefWidth="128.0" text="Delivery Person" />
-                                          <TableColumn fx:id="areaCol" prefWidth="74.0" text="Area" />
-                                          <TableColumn fx:id="deliveryDateCol" prefWidth="98.0" text="DOD" />
-                                          <TableColumn fx:id="isDeliveredCol" prefWidth="93.0" text="isDelivered" />
-                                          <TableColumn fx:id="ordersCol" prefWidth="151.0" text="Orders" />
-                                          <TableColumn fx:id="postageCol" prefWidth="72.0" text="Postage" />
-                                       </columns>
-                                    </TableView>
-                                    <Button layoutX="526.0" layoutY="322.0" maxHeight="38.0" mnemonicParsing="false" onAction="#signAsDelivered" prefHeight="48.0" prefWidth="211.0" styleClass="addBtns" stylesheets="@decoration.css" text="Sign As Delivered" />
-                                    <TextField fx:id="searchDeliveryField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/trash-alt-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/edit-solid-2.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="537.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/check-square-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/search-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <Label layoutX="7.0" layoutY="16.0" prefHeight="25.0" prefWidth="185.0" styleClass="managerAllText" text="Choose Delivey Type:" />
-                              <Button fx:id="regularDeliveryBtn" layoutX="192.0" layoutY="9.0" mnemonicParsing="false" onAction="#regularDeliveryChoice" text="Regular" />
-                              <Button fx:id="expressDeliveryBtn" layoutX="339.0" layoutY="9.0" mnemonicParsing="false" onAction="#expressDeliveryChoice" text="Express" />
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab style="-fx-text-fill: Red;" text="Delivery Area">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="718.0" prefWidth="980.0">
-                     <children>
-                        <AnchorPane layoutX="66.0" layoutY="56.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="1071.0">
-                           <children>
-                              <Label layoutY="10.0" styleClass="managerAllText" text="Area Name" />
-                              <TextField fx:id="deliveryAreaName" layoutX="135.0" layoutY="5.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <TextField fx:id="deliveryTime" layoutX="488.0" layoutY="5.0" maxHeight="33.0" prefHeight="33.0" prefWidth="76.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <Label layoutY="64.0" styleClass="managerAllText" text="Neighberhoods" />
-                              <Label layoutX="366.0" layoutY="10.0" prefHeight="26.0" prefWidth="113.0" styleClass="managerAllText" text="Delivery Time" />
-                              <Pane fx:id="neighberhood_pane" layoutX="135.0" layoutY="63.0" prefHeight="156.0" prefWidth="522.0" />
-                              <Button fx:id="addDeliveryAreaBtn" layoutX="835.0" layoutY="10.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addDeliveryArea" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
-                                 <graphic>
-                                    <ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/plus-circle-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic></Button>
-                              <Text fx:id="timeMessage" fill="RED" layoutX="124.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" />
-                              <TextArea fx:id="messageToUser" editable="false" layoutX="834.0" layoutY="130.0" prefHeight="39.0" prefWidth="172.0" style="-fx-text-fill: Red;" />
-                              <Button fx:id="editDeliveryAreaBtn" layoutX="835.0" layoutY="69.0" mnemonicParsing="false" onAction="#setEditDeliveryArea" prefHeight="26.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
-                                 <graphic>
-                                    <ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/save-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic></Button>
-                           </children>
-                        </AnchorPane>
-                        <Pane layoutX="66.0" layoutY="326.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="945.0">
-                           <children>
-                              <Button layoutY="320.0" mnemonicParsing="false" onAction="#removeDeliveryArea" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                              <ComboBox fx:id="newAreaBox" layoutX="654.0" layoutY="32.0" prefWidth="150.0" styleClass="comboBox" />
-                              <Label fx:id="removeLbl" layoutX="614.0" layoutY="3.0" style="-fx-text-fill: red;" styleClass="managerAllText" text="Please choose new area instead:" textFill="RED" />
-                              <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editDeliveryArea" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                              <TableView fx:id="allAreasTable" layoutY="32.0" prefHeight="278.0" prefWidth="551.0">
-                                 <columns>
-                                    <TableColumn fx:id="areaIdCol" prefWidth="63.0" text="ID" />
-                                    <TableColumn fx:id="areaNameCol" prefWidth="107.0" text="Area Name" />
-                                    <TableColumn fx:id="neighborhoodsCol" prefWidth="249.0" text="Neighborhoods" />
-                                    <TableColumn fx:id="deliveryTimeCol" prefWidth="131.0" text="Delivery Time" />
-                                 </columns>
-                              </TableView>
-                              <TextField fx:id="searchAreaField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/trash-alt-solid.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/edit-solid-2.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/search-solid.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-   </children>
+	<children>
+		<ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.4" pickOnBounds="true">
+			<image>
+				<Image url="@../../img/main4.jpg" />
+			</image>
+		</ImageView>
+		<TabPane fx:id="tabPane" layoutX="343.0" layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1071.0" tabClosingPolicy="UNAVAILABLE">
+			<tabs>
+				<Tab text="Order">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="1235.0">
+									<children>
+										<Label layoutX="66.0" layoutY="66.0" styleClass="managerAllText" text="Customer" />
+										<Label layoutX="381.0" layoutY="66.0" styleClass="managerAllText" text="Delivery" />
+										<Button fx:id="addOrderBtn" layoutX="853.0" layoutY="52.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
+											<graphic>
+												<ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/plus-circle-solid.png" />
+													</image>
+												</ImageView>
+											</graphic>
+										</Button>
+										<ComboBox fx:id="deliveryBox" layoutX="489.0" layoutY="61.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+										<ListView fx:id="dishesList" layoutX="193.0" layoutY="106.0" prefHeight="156.0" prefWidth="150.0" />
+										<Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Dishes" />
+										<ComboBox fx:id="customerBox" layoutX="193.0" layoutY="61.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+										<Pane layoutX="193.0" layoutY="326.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="667.0">
+											<children>
+												<Button layoutY="320.0" mnemonicParsing="false" onAction="#removeOrder" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+												<Text fx:id="customerField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+												<Text fx:id="dishesField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+												<Text fx:id="deliveryField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+												<Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editOrder" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+												<TableView fx:id="allOrdersTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
+													<columns>
+														<TableColumn fx:id="orderIdCol" prefWidth="97.5999755859375" text="ID" />
+														<TableColumn fx:id="customerCol" prefWidth="108.79998779296875" text="Customer" />
+														<TableColumn fx:id="dishesCol" prefWidth="261.60003662109375" text="Dishes" />
+														<TableColumn fx:id="statusCol" prefWidth="95.199951171875" text="status" />
+													</columns>
+												</TableView>
+												<TextField fx:id="searchOrderField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/trash-alt-solid.png" />
+													</image>
+												</ImageView>
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/edit-solid-2.png" />
+													</image>
+												</ImageView>
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/search-solid.png" />
+													</image>
+												</ImageView>
+											</children>
+										</Pane>
+										<Button fx:id="editOrderBtn" layoutX="853.0" layoutY="111.0" mnemonicParsing="false" onAction="#setEditOrder" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
+											<graphic>
+												<ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/save-solid.png" />
+													</image>
+												</ImageView>
+											</graphic>
+										</Button>
+										<ListView fx:id="finalDishesList" layoutX="489.0" layoutY="106.0" prefHeight="156.0" prefWidth="150.0" />
+										<Button layoutX="383.0" layoutY="156.0" maxHeight="54.0" minWidth="56.0" mnemonicParsing="false" onAction="#addDishesToOrder" prefHeight="31.0" prefWidth="61.0" text="Add" />
+										<TextField fx:id="quantityField" alignment="CENTER" layoutX="384.0" layoutY="130.0" prefHeight="26.0" prefWidth="58.0" text="1" />
+										<TextArea fx:id="messageToUserOrder" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
+										<Label alignment="CENTER" layoutX="377.0" layoutY="104.0" prefHeight="26.0" prefWidth="78.0" styleClass="managerAllText" text="Qty:" />
+										<Button layoutX="382.0" layoutY="198.0" maxHeight="54.0" minWidth="56.0" mnemonicParsing="false" onAction="#removeDishFromOrder" prefHeight="31.0" prefWidth="61.0" text="Remove" />
+									</children>
+								</AnchorPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Delivery">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="719.0" prefWidth="1241.0">
+							<children>
+								<AnchorPane prefHeight="740.0" prefWidth="1247.0">
+									<children>
+										<AnchorPane fx:id="regularPane" layoutX="66.0" layoutY="56.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="1016.0">
+											<children>
+												<Label layoutY="10.0" styleClass="managerAllText" text="Delivery Person" />
+												<Label layoutX="366.0" layoutY="10.0" styleClass="managerAllText" text="Delivery Area" />
+												<Button fx:id="addRegularBtn" layoutX="815.0" layoutY="10.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addRegularDelivery" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
+													<graphic>
+														<ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+															<image>
+																<Image url="@../../icons/plus-circle-solid.png" />
+															</image>
+														</ImageView>
+													</graphic>
+												</Button>
+												<ComboBox fx:id="deliveryAreaBox" layoutX="488.0" layoutY="5.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+												<ListView fx:id="ordersList" layoutX="127.0" layoutY="93.0" prefHeight="134.0" prefWidth="150.0" style="-fx-border-color: PeachPuff;" />
+												<Label layoutY="95.0" prefHeight="26.0" prefWidth="64.0" styleClass="managerAllText" text="Orders" />
+												<ComboBox fx:id="DeliveryPersonBox" layoutX="127.0" layoutY="5.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+												<CheckBox fx:id="delivered" layoutX="127.0" layoutY="53.0" mnemonicParsing="false">
+													<effect>
+														<SepiaTone level="0.0" />
+													</effect>
+												</CheckBox>
+												<Label layoutY="51.0" prefHeight="19.0" prefWidth="107.0" styleClass="managerAllText" text="Is Delivered?" />
+												<Label layoutX="366.0" layoutY="51.0" prefHeight="26.0" prefWidth="117.0" styleClass="managerAllText" text="Delivery Date" />
+												<DatePicker fx:id="deliveryDate" layoutX="488.0" layoutY="53.0" styleClass="textFields" stylesheets="@decoration.css" />
+												<ComboBox fx:id="orderBox" layoutX="127.0" layoutY="93.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+												<Label fx:id="postageLbl" layoutX="366.0" layoutY="95.0" prefHeight="22.0" prefWidth="93.0" styleClass="managerAllText" text="Postage" />
+												<TextField fx:id="postageField" layoutX="488.0" layoutY="93.0" styleClass="textFields" stylesheets="@decoration.css" />
+												<Button fx:id="addExpressBtn" layoutX="815.0" layoutY="10.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addExpressDelivery" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
+													<graphic>
+														<ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+															<image>
+																<Image url="@../../icons/plus-circle-solid.png" />
+															</image>
+														</ImageView>
+													</graphic>
+												</Button>
+												<Button fx:id="editDeliveryBtn" layoutX="815.0" layoutY="69.0" maxHeight="38.0" mnemonicParsing="false" onAction="#setEditDelivery" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
+													<graphic>
+														<ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+															<image>
+																<Image url="@../../icons/save-solid.png" />
+															</image>
+														</ImageView>
+													</graphic>
+												</Button>
+												<Text fx:id="postageMessage" fill="RED" layoutX="487.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" wrappingWidth="148.53668212890625" />
+												<TextArea fx:id="messageToUserDelivery" editable="false" layoutX="776.0" layoutY="130.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
+											</children>
+										</AnchorPane>
+										<Pane layoutX="66.0" layoutY="326.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="844.0">
+											<children>
+												<Button layoutY="320.0" mnemonicParsing="false" onAction="#removeDelivery" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+												<Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editDelivery" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+												<TableView fx:id="allDeliveriesTable" layoutY="32.0" prefHeight="278.0" prefWidth="781.0">
+													<columns>
+														<TableColumn fx:id="deliveryIdCol" prefWidth="52.0" text="ID" />
+														<TableColumn fx:id="deliveryTypeCol" prefWidth="112.0" text="Type" />
+														<TableColumn fx:id="deliveryPersonCol" prefWidth="128.0" text="Delivery Person" />
+														<TableColumn fx:id="areaCol" prefWidth="74.0" text="Area" />
+														<TableColumn fx:id="deliveryDateCol" prefWidth="98.0" text="DOD" />
+														<TableColumn fx:id="isDeliveredCol" prefWidth="93.0" text="isDelivered" />
+														<TableColumn fx:id="ordersCol" prefWidth="151.0" text="Orders" />
+														<TableColumn fx:id="postageCol" prefWidth="72.0" text="Postage" />
+													</columns>
+												</TableView>
+												<Button layoutX="526.0" layoutY="322.0" maxHeight="38.0" mnemonicParsing="false" onAction="#signAsDelivered" prefHeight="48.0" prefWidth="211.0" styleClass="addBtns" stylesheets="@decoration.css" text="Sign As Delivered" />
+												<TextField fx:id="searchDeliveryField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/trash-alt-solid.png" />
+													</image>
+												</ImageView>
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/edit-solid-2.png" />
+													</image>
+												</ImageView>
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="537.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/check-square-solid.png" />
+													</image>
+												</ImageView>
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/search-solid.png" />
+													</image>
+												</ImageView>
+											</children>
+										</Pane>
+										<Label layoutX="7.0" layoutY="16.0" prefHeight="25.0" prefWidth="185.0" styleClass="managerAllText" text="Choose Delivey Type:" />
+										<Button fx:id="regularDeliveryBtn" layoutX="192.0" layoutY="9.0" mnemonicParsing="false" onAction="#regularDeliveryChoice" text="Regular" />
+										<Button fx:id="expressDeliveryBtn" layoutX="339.0" layoutY="9.0" mnemonicParsing="false" onAction="#expressDeliveryChoice" text="Express" />
+									</children>
+								</AnchorPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab style="-fx-text-fill: Red;" text="Delivery Area">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="718.0" prefWidth="980.0">
+							<children>
+								<AnchorPane layoutX="66.0" layoutY="56.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="1071.0">
+									<children>
+										<Label layoutY="10.0" styleClass="managerAllText" text="Area Name" />
+										<TextField fx:id="deliveryAreaName" layoutX="135.0" layoutY="5.0" styleClass="textFields" stylesheets="@decoration.css" />
+										<TextField fx:id="deliveryTime" layoutX="488.0" layoutY="5.0" maxHeight="33.0" prefHeight="33.0" prefWidth="76.0" styleClass="textFields" stylesheets="@decoration.css" />
+										<Label layoutY="64.0" styleClass="managerAllText" text="Neighberhoods" />
+										<Label layoutX="366.0" layoutY="10.0" prefHeight="26.0" prefWidth="113.0" styleClass="managerAllText" text="Delivery Time" />
+										<Pane fx:id="neighberhood_pane" layoutX="135.0" layoutY="63.0" prefHeight="156.0" prefWidth="522.0" />
+										<Button fx:id="addDeliveryAreaBtn" layoutX="835.0" layoutY="10.0" maxHeight="38.0" mnemonicParsing="false" onAction="#addDeliveryArea" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
+											<graphic>
+												<ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/plus-circle-solid.png" />
+													</image>
+												</ImageView>
+											</graphic>
+										</Button>
+										<Text fx:id="timeMessage" fill="RED" layoutX="124.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="managerAllText" />
+										<TextArea fx:id="messageToUser" editable="false" layoutX="834.0" layoutY="130.0" prefHeight="39.0" prefWidth="172.0" style="-fx-text-fill: Red;" />
+										<Button fx:id="editDeliveryAreaBtn" layoutX="835.0" layoutY="69.0" mnemonicParsing="false" onAction="#setEditDeliveryArea" prefHeight="26.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
+											<graphic>
+												<ImageView fitHeight="30.0" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/save-solid.png" />
+													</image>
+												</ImageView>
+											</graphic>
+										</Button>
+									</children>
+								</AnchorPane>
+								<Pane layoutX="66.0" layoutY="326.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="945.0">
+									<children>
+										<Button layoutY="320.0" mnemonicParsing="false" onAction="#removeDeliveryArea" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+										<ComboBox fx:id="newAreaBox" layoutX="654.0" layoutY="32.0" prefWidth="150.0" styleClass="comboBox" />
+										<Label fx:id="removeLbl" layoutX="614.0" layoutY="3.0" style="-fx-text-fill: red;" styleClass="managerAllText" text="Please choose new area instead:" textFill="RED" />
+										<Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editDeliveryArea" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+										<TableView fx:id="allAreasTable" layoutY="32.0" prefHeight="278.0" prefWidth="551.0">
+											<columns>
+												<TableColumn fx:id="areaIdCol" prefWidth="63.0" text="ID" />
+												<TableColumn fx:id="areaNameCol" prefWidth="107.0" text="Area Name" />
+												<TableColumn fx:id="neighborhoodsCol" prefWidth="249.0" text="Neighborhoods" />
+												<TableColumn fx:id="deliveryTimeCol" prefWidth="131.0" text="Delivery Time" />
+											</columns>
+										</TableView>
+										<TextField fx:id="searchAreaField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
+										<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../../icons/trash-alt-solid.png" />
+											</image>
+										</ImageView>
+										<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../../icons/edit-solid-2.png" />
+											</image>
+										</ImageView>
+										<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../../icons/search-solid.png" />
+											</image>
+										</ImageView>
+									</children>
+								</Pane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
 </AnchorPane>

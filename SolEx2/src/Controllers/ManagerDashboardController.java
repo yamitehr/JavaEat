@@ -70,9 +70,9 @@ public class ManagerDashboardController extends ControllerWrapper {
 	@FXML
 	private TableColumn<Dish, Integer> timeToMakeCol;
 	@FXML
-	private TableColumn<Dish, Double> dishPriceCol;
+	private TableColumn<Dish, String> dishPriceCol;
 	@FXML
-	private TableColumn<Dish, Double> relationCol;
+	private TableColumn<Dish, String> relationCol;
 	@FXML
 	private DatePicker selectedDate;
 	@FXML
@@ -125,15 +125,15 @@ public class ManagerDashboardController extends ControllerWrapper {
 		totalEmployees.setText(String.valueOf(Restaurant.getInstance().getCooks().size() + 
 				Restaurant.getInstance().getDeliveryPersons().size()));
 
-		totalSell.setText(String.valueOf(totalSell()));
+		totalSell.setText(String.format("%.1f", totalSell()));
 		
-		totalRevenue.setText(String.valueOf(totalRevenue()));
+		totalRevenue.setText(String.format("%.1f", totalRevenue()));
 		
-		revenueFromExpress.setText(String.valueOf(Restaurant.getInstance().revenueFromExpressDeliveries()));
+		revenueFromExpress.setText(String.format("%.1f", Restaurant.getInstance().revenueFromExpressDeliveries()));
 		
-		todaySell.setText(String.valueOf(dailySell()));
+		todaySell.setText(String.format("%.1f", dailySell()));
 		
-		todayRevenue.setText(String.valueOf(dailyRevenue()));		
+		todayRevenue.setText(String.format("%.1f", dailyRevenue()));		
 	}
 	
 	
@@ -141,10 +141,10 @@ public class ManagerDashboardController extends ControllerWrapper {
 		dishNameCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(dish.getValue().getDishName()));
 						
 		timeToMakeCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Integer>(dish.getValue().getTimeToMake()));
-				
-		dishPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 		
-		relationCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Double>(dish.getValue().getPrice() / dish.getValue().getTimeToMake()));
+		dishPriceCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(String.format("%.2f", dish.getValue().getPrice())));
+		
+		relationCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(String.format("%.2f",dish.getValue().getPrice() / dish.getValue().getTimeToMake())));
 					
 		List<Dish> profitRelation = new ArrayList<Dish>();
 		profitRelation = Restaurant.getInstance().getProfitRelation().stream()
@@ -281,8 +281,8 @@ public class ManagerDashboardController extends ControllerWrapper {
 				XWPFTableRow tableRow = table.createRow();
 				tableRow.getCell(0).setText(profitRelationTable.getItems().get(i).getDishName());
 				tableRow.getCell(1).setText(String.valueOf(profitRelationTable.getItems().get(i).getTimeToMake()));
-				tableRow.getCell(2).setText(String.valueOf(profitRelationTable.getItems().get(i).getPrice()));
-				tableRow.getCell(3).setText(String.valueOf(profitRelationTable.getItems().get(i).getPrice() / profitRelationTable.getItems().get(i).getTimeToMake()));
+				tableRow.getCell(2).setText(String.format("%.2f",profitRelationTable.getItems().get(i).getPrice()));
+				tableRow.getCell(3).setText(String.format("%.2f",profitRelationTable.getItems().get(i).getPrice() / profitRelationTable.getItems().get(i).getTimeToMake()));
 				table.getRow(i).getCell(0).getCTTc().addNewTcPr().addNewTcW().setW(BigInteger.valueOf(2000));
 				table.getRow(i).getCell(1).getCTTc().addNewTcPr().addNewTcW().setW(BigInteger.valueOf(2000));
 				table.getRow(i).getCell(2).getCTTc().addNewTcPr().addNewTcW().setW(BigInteger.valueOf(2000));

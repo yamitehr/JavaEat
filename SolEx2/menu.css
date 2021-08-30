@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sarina&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap');
+.menuHeader{
+	-fx-font-family: 'Sarina', cursive;
+    -fx-text-fill: white;
+    -fx-font-size: 50px;
+}
+
+.menuItem {
+   -fx-border-color: white;
+   -fx-border-radius: 20px;
+   -fx-background-radius: 20px;
+   -fx-padding: 10 10 10 10;
+   -fx-min-width:25em;
+	-fx-max-width:25em;
+	-fx-background-color: rgba(184, 155, 95, 0.1);
+	
+   
+}
+
+.dishLabel{
+	
+	-fx-padding: 15 15 15 15;
+	-fx-font-family: 'Rubik Mono One', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+    
+}
+
+
+.vBox{
+
+}
+
+.compsLabel{
+	-fx-padding: 15 15 15 15;
+	-fx-font-family: 'Permanent Marker', cursive;
+    -fx-text-fill: white;
+     -fx-font-size: 17px;
+}
+
+.priceLabel{
+	-fx-padding: 15 15 15 15;
+	-fx-font-family: 'Permanent Marker', cursive;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+}
+
+.addButton{
+	-fx-background-color: transparent;
+}
+
+.headersLabel{
+	 -fx-text-fill: white;
+       -fx-font-size: 21px;
+   -fx-background-color: #b89b5f;
+   -fx-font-family: 'Pacifico', cursive;
+   -fx-padding: 5 15 5 15;
+   
+   -fx-background-radius: 20px;
+}
+
+.compsEditor{
+	-fx-background-color: #3D201C;
+	-fx-opacity:0.82;
+}
+
+.dishLabelEditDish{
+	-fx-padding: 70 20 30 20;
+	-fx-text-alignment:center;
+	-fx-font-family: 'Rubik Mono One', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    
+}
+
+.check-box{
+	-fx-font-family: 'Permanent Marker', cursive;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+}
+
+.check-box .box {
+
+-fx-background-color: white;
+-fx-border-color:grey;
+-fx-border-radius:3px; 
+
+}
+
+.check-box:selected .mark {
+
+-fx-background-color: white;
+
+}
+
+.check-box:selected .box {
+
+-fx-background-color: #28a3f4;
+}
+
+.addDishButton{
+	-fx-padding: 15 40 15 40;
+	-fx-background-color: white;
+	 -fx-font-family: 'Concert One', cursive;
+    -fx-font-size: 18px;
+}
+
+.closeEditBtn{
+	
+	-fx-text-fill: white;
+	 -fx-font-family: 'Concert One', cursive;
+    -fx-font-size: 21px;
+    
+	-fx-background-color: transparent;
+}
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}
+
+/* The main scrollbar **track** CSS class  */
+.scroll-pane .scroll-bar:horizontal .track,
+.scroll-pane .scroll-bar:vertical .track{
+	-fx-background-color: transparent;
+	-fx-border-color:derive( #3D201C,80%);
+
+	-fx-background-radius: 2em;
+	-fx-border-radius:2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.scroll-pane .scroll-bar:horizontal .thumb,
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color:derive( #3D201C,90%);
+	-fx-background-insets: 2, 0, 0;
+	-fx-background-radius: 2em;
+
+}

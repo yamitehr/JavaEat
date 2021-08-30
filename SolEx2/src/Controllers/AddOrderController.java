@@ -1,6 +1,5 @@
 package Controllers;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -107,7 +106,7 @@ public class AddOrderController extends ControllerWrapper {
 	@FXML
 	private ListView<Order> ordersList;
 	@FXML
-	private TextArea messageToUserRegular;
+	private TextArea messageToUserDelivery;
 	@FXML
 	private AnchorPane regularPane;
 	@FXML
@@ -216,7 +215,6 @@ public class AddOrderController extends ControllerWrapper {
 		
 		ObservableList<Dish> dishes = FXCollections.observableArrayList(Restaurant.getInstance().getDishes().values());
 		dishesList.setItems(dishes);
-		dishesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		//Add all orders
 		orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -356,13 +354,11 @@ public class AddOrderController extends ControllerWrapper {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, 
 					String newValue) {
 				    	if (newValue != "") {
-					    	try {
-					    		messageToUserRegular.setText("");
-								Double.parseDouble(newValue);
-							} catch(NumberFormatException nfe) {
-								postageField.setText(oldValue);
-								messageToUserRegular.setText("Numbers only!");
-							}	
+				    		messageToUserDelivery.setText("");
+				    		 if(!newValue.matches("\\d*(\\.\\d*)?")) {
+				    			 postageField.setText(oldValue);
+				    			 messageToUserDelivery.setText("Numbers only!");
+				    		 }
 				    	}
 				    }
 				});
@@ -405,13 +401,11 @@ public class AddOrderController extends ControllerWrapper {
 		public void changed(ObservableValue<? extends String> observable, String oldValue, 
 				String newValue) {
 			    	if (newValue != "") {
-				    	try {
-				    		messageToUser.setText("");
-							Integer.parseInt(newValue);
-						} catch(NumberFormatException nfe) {
-							deliveryTime.setText(oldValue);
-							messageToUser.setText("Numbers only!");
-						}	
+			    		messageToUser.setText("");
+			    		 if (!newValue.matches("\\d*")) {
+			    			 deliveryTime.setText(oldValue);
+			    			 messageToUser.setText("Numbers only!");
+			    		 }	
 			    	}
 			    }
 			});
@@ -661,6 +655,7 @@ public class AddOrderController extends ControllerWrapper {
 			customerBox.getSelectionModel().clearSelection();
 			deliveryBox.getSelectionModel().clearSelection();
 			finalDishesList.getItems().clear();
+			dishesList.getSelectionModel().clearSelection();
 			initDeliveryTab();
 			//update the list
 			allOrdersTable.getItems().clear();
@@ -780,7 +775,7 @@ public class AddOrderController extends ControllerWrapper {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setHeaderText("Delivery edited successfully!");
 		alert.showAndWait();
-		messageToUserRegular.setText("");
+		messageToUserDelivery.setText("");
 		DeliveryPersonBox.getSelectionModel().clearSelection();
 		deliveryAreaBox.getSelectionModel().clearSelection();
 		delivered.setSelected(false);
@@ -796,7 +791,7 @@ public class AddOrderController extends ControllerWrapper {
 		addExpressBtn.setDisable(false);
 		}catch(InvalidInputException inputE) {
 			soundOfButton("error.mp3");
-			messageToUserRegular.setText(inputE.getMessage());
+			messageToUserDelivery.setText(inputE.getMessage());
 		}
 	}
 	
@@ -837,7 +832,7 @@ public class AddOrderController extends ControllerWrapper {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setHeaderText("Delivery added successfully!");
 			alert.showAndWait();
-			messageToUserRegular.setText("");
+			messageToUserDelivery.setText("");
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
 			orderBox.getSelectionModel().clearSelection();
@@ -851,13 +846,13 @@ public class AddOrderController extends ControllerWrapper {
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
 			soundOfButton("error.mp3");
-			messageToUserRegular.setText(inputE.getMessage());
+			messageToUserDelivery.setText(inputE.getMessage());
 		}catch(NumberFormatException ne) {
 			soundOfButton("error.mp3");
-			messageToUserRegular.setText("Wrong Input!");
+			messageToUserDelivery.setText("Wrong Input!");
 		}catch(Exception ex) {
 			soundOfButton("error.mp3");
-			messageToUserRegular.setText("an error has accured please try again");
+			messageToUserDelivery.setText("an error has accured please try again");
 		}
 	}
 	
@@ -900,7 +895,7 @@ public class AddOrderController extends ControllerWrapper {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setHeaderText("Delivery added successfully!");
 			alert.showAndWait();
-			messageToUserRegular.setText("");
+			messageToUserDelivery.setText("");
 			DeliveryPersonBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.getSelectionModel().clearSelection();
 			deliveryAreaBox.setDisable(false);
@@ -912,10 +907,10 @@ public class AddOrderController extends ControllerWrapper {
 			Restaurant.getInstance().getDeliveries().entrySet().stream().map(d -> d.getValue()).collect(Collectors.toList())));
 		}catch(InvalidInputException inputE) {
 			soundOfButton("error.mp3");
-			messageToUserRegular.setText(inputE.getMessage());
+			messageToUserDelivery.setText(inputE.getMessage());
 		}catch(Exception ex) {
 			soundOfButton("error.mp3");
-			messageToUserRegular.setText("an error has accured please try again");
+			messageToUserDelivery.setText("an error has accured please try again");
 		}
 	}
 	
@@ -1049,6 +1044,10 @@ public class AddOrderController extends ControllerWrapper {
 	}	
 	
 	public void editDeliveryArea(ActionEvent e) {
+		for (Pair<CheckBox, Neighberhood> cbp : neighberhoodList) {
+			CheckBox cb = cbp.getKey();
+			cb.setSelected(false);
+		}
 		DeliveryArea selectedDeliveryArea = allAreasTable.getSelectionModel().getSelectedItem();
 		if(selectedDeliveryArea !=  null) {
 			addDeliveryAreaBtn.setDisable(true);

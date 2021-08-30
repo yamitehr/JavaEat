@@ -21,205 +21,209 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1430.0" style="-fx-background-color: black;" stylesheets="@decoration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCookController">
-   <children>
-    <ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.4" pickOnBounds="true">
-         <image>
-            <Image url="@../../img/main6.jpg" />
-         </image>
-      </ImageView>
-      <TabPane fx:id="tabPane" layoutX="343.0" layoutY="-3.0" prefHeight="770.0" prefWidth="1068.0" stylesheets="@decoration.css" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab styleClass="tab" text="Cook">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="925.0">
-                     <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1200.0">
-                           <children>
-                              <Label layoutX="66.0" layoutY="66.0" styleClass="managerAllText" text="First Name" />
-                              <Label layoutX="406.0" layoutY="62.0" styleClass="managerAllText" text="Last Name" />
-                              <Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Date Of Birth" />
-                              <Label layoutX="406.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
-                              <RadioButton layoutX="521.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Male">
-                                 <effect>
-                                    <SepiaTone level="0.0" />
-                                 </effect>
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Gender_group" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <TextField fx:id="first_Name" layoutX="193.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <TextField fx:id="last_Name" layoutX="521.0" layoutY="57.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <DatePicker fx:id="date" layoutX="193.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
-                                 <effect>
-                                    <SepiaTone level="0.0" />
-                                 </effect>
-                              </RadioButton>
-                              <Label layoutX="66.0" layoutY="147.0" styleClass="managerAllText" text="Expertise" />
-                              <Label layoutX="406.0" layoutY="147.0" styleClass="managerAllText" text="is Chef" />
-                              <CheckBox fx:id="isChef" layoutX="521.0" layoutY="144.0" mnemonicParsing="false" styleClass="managerAllText" text="Yes">
-                                 <effect>
-                                    <SepiaTone level="0.0" />
-                                 </effect>
-                              </CheckBox>
-                              <ComboBox fx:id="expertiseBox" layoutX="193.0" layoutY="144.0" maxHeight="33.0" prefHeight="33.0" prefWidth="159.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                              <RadioButton layoutX="697.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
-                                 <effect>
-                                    <SepiaTone level="0.0" />
-                                 </effect>
-                              </RadioButton>
-                              <Pane layoutX="193.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="600.0">
-                                 <children>
-                                    <Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Text fx:id="lastNameField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Text fx:id="dobField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
-                                    <Text fx:id="genderField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Text fx:id="expertiseField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
-                                    <Text fx:id="isChefFiled" fill="#c88021" layoutX="275.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="64.3525390625" />
-                                    <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editCook" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                                    <TableView fx:id="allCooksTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
-                                       <columns>
-                                          <TableColumn fx:id="cookIdCol" prefWidth="60.0" text="ID" />
-                                          <TableColumn fx:id="cookNameCol" prefWidth="115.0" text="Name" />
-                                          <TableColumn fx:id="cookDobCol" prefWidth="105.0" text="DOB" />
-                                          <TableColumn fx:id="cookGenderCol" prefWidth="102.0" text="Gender" />
-                                          <TableColumn fx:id="expertiseCol" prefWidth="99.0" text="Expertise" />
-                                          <TableColumn fx:id="isChefCol" prefWidth="90.0" text="isChef" />
-                                       </columns>
-                                    </TableView>
-                                    <TextField fx:id="searchCookField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
-                                    <Button layoutY="320.0" mnemonicParsing="false" onAction="#removeCook" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/trash-alt-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/edit-solid-2.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/search-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <Button fx:id="addCookBtn" layoutX="853.0" layoutY="52.0" mnemonicParsing="false" onAction="#addCook" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
-                                 <graphic>
-                                    <ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/plus-circle-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic></Button>
-                              <Button fx:id="editCookBtn" layoutX="853.0" layoutY="111.0" mnemonicParsing="false" onAction="#setEditCook" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
-                                 <graphic>
-                                    <ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../icons/save-solid.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic></Button>
-                              <TextArea fx:id="messageToUserCook" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab closable="false" text="Delivery Person">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="736.0">
-                           <children>
-                              <Label layoutX="66.0" layoutY="66.0" styleClass="managerAllText" text="First Name" />
-                              <Label layoutX="406.0" layoutY="62.0" styleClass="managerAllText" text="Last Name" />
-                              <Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Date Of Birth" />
-                              <Label layoutX="406.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
-                              <RadioButton layoutX="521.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Male">
-                                 <effect>
-                                    <SepiaTone level="0.0" />
-                                 </effect>
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Gender_group_DP" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <TextField fx:id="first_Name_DP" layoutX="193.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <TextField fx:id="last_Name_DP" layoutX="521.0" layoutY="57.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <DatePicker fx:id="dateDP" layoutX="193.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
-                              <RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group_DP">
-                                 <effect>
-                                    <SepiaTone level="0.0" />
-                                 </effect>
-                              </RadioButton>
-                              <Label layoutX="66.0" layoutY="147.0" styleClass="managerAllText" text="Vehicle" />
-                              <ComboBox fx:id="vehicleBox" layoutX="193.0" layoutY="144.0" prefWidth="159.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                              <RadioButton layoutX="697.0" layoutY="105.0" mnemonicParsing="false" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group_DP">
-                                 <effect>
-                                    <SepiaTone level="0.0" />
-                                 </effect>
-                              </RadioButton>
-                              <Label layoutX="406.0" layoutY="147.0" styleClass="managerAllText" text="Delivery Area" />
-                              <ComboBox fx:id="deliveryAreaBox" layoutX="521.0" layoutY="144.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
-                           </children>
-                        </AnchorPane>
-                        <Pane layoutX="193.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="600.0">
-                           <children>
-                              <Button layoutY="320.0" mnemonicParsing="false" onAction="#removeDeliveryPerson" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
-                              <Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editDeliveryPerson" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
-                              <TableView fx:id="allDeliveryPersonsTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
-                                 <columns>
-                                    <TableColumn fx:id="dpIdCol" prefWidth="60.0" text="ID" />
-                                    <TableColumn fx:id="dpNameCol" prefWidth="115.0" text="Name" />
-                                    <TableColumn fx:id="dpDobCol" prefWidth="105.0" text="DOB" />
-                                    <TableColumn fx:id="dpGenderCol" prefWidth="102.0" text="Gender" />
-                                    <TableColumn fx:id="vehicleCol" prefWidth="99.0" text="Vehicle" />
-                                    <TableColumn fx:id="areaCol" prefWidth="90.0" text="Area" />
-                                 </columns>
-                              </TableView>
-                              <TextField fx:id="searchDPField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/trash-alt-solid.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="172.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/edit-solid-2.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/search-solid.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Button fx:id="editDeliveryPersonBtn" layoutX="853.0" layoutY="111.0" mnemonicParsing="false" onAction="#setEditDeliveryPerson" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
-                           <graphic>
-                              <ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/save-solid.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></Button>
-                        <Button fx:id="addDeliveryPersonBtn" layoutX="853.0" layoutY="52.0" mnemonicParsing="false" onAction="#addDeliveryPerson" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
-                           <graphic>
-                              <ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/plus-circle-solid.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></Button>
-                        <TextArea fx:id="messageToUserDeliveryPerson" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+	<children>
+		<ImageView fitHeight="770.0" fitWidth="1430.0" opacity="0.4" pickOnBounds="true">
+			<image>
+				<Image url="@../../img/main6.jpg" />
+			</image>
+		</ImageView>
+		<TabPane fx:id="tabPane" layoutX="343.0" layoutY="-3.0" prefHeight="770.0" prefWidth="1068.0" stylesheets="@decoration.css" tabClosingPolicy="UNAVAILABLE">
+			<tabs>
+				<Tab styleClass="tab" text="Cook">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="925.0">
+							<children>
+								<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1200.0">
+									<children>
+										<Label layoutX="66.0" layoutY="66.0" styleClass="managerAllText" text="First Name" />
+										<Label layoutX="406.0" layoutY="62.0" styleClass="managerAllText" text="Last Name" />
+										<Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Date Of Birth" />
+										<Label layoutX="406.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
+										<RadioButton layoutX="521.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" styleClass="managerAllText" text="Male">
+											<effect>
+												<SepiaTone level="0.0" />
+											</effect>
+											<toggleGroup>
+												<ToggleGroup fx:id="Gender_group" />
+											</toggleGroup>
+										</RadioButton>
+										<TextField fx:id="first_Name" layoutX="193.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
+										<TextField fx:id="last_Name" layoutX="521.0" layoutY="57.0" styleClass="textFields" stylesheets="@decoration.css" />
+										<DatePicker fx:id="date" layoutX="193.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
+										<RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group">
+											<effect>
+												<SepiaTone level="0.0" />
+											</effect>
+										</RadioButton>
+										<Label layoutX="66.0" layoutY="147.0" styleClass="managerAllText" text="Expertise" />
+										<Label layoutX="406.0" layoutY="147.0" styleClass="managerAllText" text="is Chef" />
+										<CheckBox fx:id="isChef" layoutX="521.0" layoutY="144.0" mnemonicParsing="false" styleClass="managerAllText" text="Yes">
+											<effect>
+												<SepiaTone level="0.0" />
+											</effect>
+										</CheckBox>
+										<ComboBox fx:id="expertiseBox" layoutX="193.0" layoutY="144.0" maxHeight="33.0" prefHeight="33.0" prefWidth="159.0" styleClass="comboBox" stylesheets="@decoration.css" />
+										<RadioButton layoutX="697.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group">
+											<effect>
+												<SepiaTone level="0.0" />
+											</effect>
+										</RadioButton>
+										<Pane layoutX="193.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="600.0">
+											<children>
+												<Text fx:id="firstNameField" fill="#c88021" layoutX="273.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+												<Text fx:id="lastNameField" fill="#c88021" layoutX="273.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+												<Text fx:id="dobField" fill="#c88021" layoutX="286.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.71044921875" />
+												<Text fx:id="genderField" fill="#c88021" layoutX="290.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+												<Text fx:id="expertiseField" fill="#c88021" layoutX="279.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="119.12744140625" />
+												<Text fx:id="isChefFiled" fill="#c88021" layoutX="275.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="64.3525390625" />
+												<Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editCook" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+												<TableView fx:id="allCooksTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
+													<columns>
+														<TableColumn fx:id="cookIdCol" prefWidth="60.0" text="ID" />
+														<TableColumn fx:id="cookNameCol" prefWidth="115.0" text="Name" />
+														<TableColumn fx:id="cookDobCol" prefWidth="105.0" text="DOB" />
+														<TableColumn fx:id="cookGenderCol" prefWidth="102.0" text="Gender" />
+														<TableColumn fx:id="expertiseCol" prefWidth="99.0" text="Expertise" />
+														<TableColumn fx:id="isChefCol" prefWidth="90.0" text="isChef" />
+													</columns>
+												</TableView>
+												<TextField fx:id="searchCookField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
+												<Button layoutY="320.0" mnemonicParsing="false" onAction="#removeCook" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/trash-alt-solid.png" />
+													</image>
+												</ImageView>
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="171.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/edit-solid-2.png" />
+													</image>
+												</ImageView>
+												<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/search-solid.png" />
+													</image>
+												</ImageView>
+											</children>
+										</Pane>
+										<Button fx:id="addCookBtn" layoutX="853.0" layoutY="52.0" mnemonicParsing="false" onAction="#addCook" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
+											<graphic>
+												<ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/plus-circle-solid.png" />
+													</image>
+												</ImageView>
+											</graphic>
+										</Button>
+										<Button fx:id="editCookBtn" layoutX="853.0" layoutY="111.0" mnemonicParsing="false" onAction="#setEditCook" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
+											<graphic>
+												<ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@../../icons/save-solid.png" />
+													</image>
+												</ImageView>
+											</graphic>
+										</Button>
+										<TextArea fx:id="messageToUserCook" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
+									</children>
+								</AnchorPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab closable="false" text="Delivery Person">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="736.0">
+									<children>
+										<Label layoutX="66.0" layoutY="66.0" styleClass="managerAllText" text="First Name" />
+										<Label layoutX="406.0" layoutY="62.0" styleClass="managerAllText" text="Last Name" />
+										<Label layoutX="66.0" layoutY="104.0" styleClass="managerAllText" text="Date Of Birth" />
+										<Label layoutX="406.0" layoutY="105.0" styleClass="managerAllText" text="Gender" />
+										<RadioButton layoutX="521.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" styleClass="managerAllText" text="Male">
+											<effect>
+												<SepiaTone level="0.0" />
+											</effect>
+											<toggleGroup>
+												<ToggleGroup fx:id="Gender_group_DP" />
+											</toggleGroup>
+										</RadioButton>
+										<TextField fx:id="first_Name_DP" layoutX="193.0" layoutY="61.0" styleClass="textFields" stylesheets="@decoration.css" />
+										<TextField fx:id="last_Name_DP" layoutX="521.0" layoutY="57.0" styleClass="textFields" stylesheets="@decoration.css" />
+										<DatePicker fx:id="dateDP" layoutX="193.0" layoutY="102.0" styleClass="textFields" stylesheets="@decoration.css" />
+										<RadioButton layoutX="601.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="101.0" styleClass="managerAllText" text="Female" toggleGroup="$Gender_group_DP">
+											<effect>
+												<SepiaTone level="0.0" />
+											</effect>
+										</RadioButton>
+										<Label layoutX="66.0" layoutY="147.0" styleClass="managerAllText" text="Vehicle" />
+										<ComboBox fx:id="vehicleBox" layoutX="193.0" layoutY="144.0" prefWidth="159.0" styleClass="comboBox" stylesheets="@decoration.css" />
+										<RadioButton layoutX="697.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" styleClass="managerAllText" text="Unknown" toggleGroup="$Gender_group_DP">
+											<effect>
+												<SepiaTone level="0.0" />
+											</effect>
+										</RadioButton>
+										<Label layoutX="406.0" layoutY="147.0" styleClass="managerAllText" text="Delivery Area" />
+										<ComboBox fx:id="deliveryAreaBox" layoutX="521.0" layoutY="144.0" prefWidth="150.0" styleClass="comboBox" stylesheets="@decoration.css" />
+									</children>
+								</AnchorPane>
+								<Pane layoutX="193.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="600.0">
+									<children>
+										<Button layoutY="320.0" mnemonicParsing="false" onAction="#removeDeliveryPerson" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Remove" />
+										<Button layoutX="144.0" layoutY="320.0" mnemonicParsing="false" onAction="#editDeliveryPerson" prefHeight="48.0" prefWidth="119.0" styleClass="addBtns" stylesheets="@decoration.css" text="Edit" />
+										<TableView fx:id="allDeliveryPersonsTable" layoutY="32.0" prefHeight="278.0" prefWidth="564.0">
+											<columns>
+												<TableColumn fx:id="dpIdCol" prefWidth="60.0" text="ID" />
+												<TableColumn fx:id="dpNameCol" prefWidth="115.0" text="Name" />
+												<TableColumn fx:id="dpDobCol" prefWidth="105.0" text="DOB" />
+												<TableColumn fx:id="dpGenderCol" prefWidth="102.0" text="Gender" />
+												<TableColumn fx:id="vehicleCol" prefWidth="99.0" text="Vehicle" />
+												<TableColumn fx:id="areaCol" prefWidth="90.0" text="Area" />
+											</columns>
+										</TableView>
+										<TextField fx:id="searchDPField" alignment="CENTER" prefWidth="148.0" promptText="Search By Id" />
+										<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../../icons/trash-alt-solid.png" />
+											</image>
+										</ImageView>
+										<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="172.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../../icons/edit-solid-2.png" />
+											</image>
+										</ImageView>
+										<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../../icons/search-solid.png" />
+											</image>
+										</ImageView>
+									</children>
+								</Pane>
+								<Button fx:id="editDeliveryPersonBtn" layoutX="853.0" layoutY="111.0" mnemonicParsing="false" onAction="#setEditDeliveryPerson" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Save">
+									<graphic>
+										<ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../../icons/save-solid.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<Button fx:id="addDeliveryPersonBtn" layoutX="853.0" layoutY="52.0" mnemonicParsing="false" onAction="#addDeliveryPerson" prefHeight="38.0" prefWidth="131.0" styleClass="addBtns" stylesheets="@decoration.css" text="Add">
+									<graphic>
+										<ImageView fitHeight="22.5" fitWidth="22.5" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../../icons/plus-circle-solid.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<TextArea fx:id="messageToUserDeliveryPerson" editable="false" layoutX="814.0" layoutY="172.0" prefHeight="38.0" prefWidth="210.0" style="-fx-text-fill: Red;" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
 </AnchorPane>
