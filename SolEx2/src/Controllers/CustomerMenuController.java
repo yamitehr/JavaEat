@@ -175,7 +175,7 @@ public class CustomerMenuController extends ControllerWrapper{
 		
 		
 		compsLa.relocate(dishLa.getLayoutX(), dishLa.getLayoutY() +20);
-		priceLa.relocate(dishLa.getLayoutX()+252, dishLa.getLayoutY());
+		priceLa.relocate(dishLa.getLayoutX()+200, dishLa.getLayoutY());
 		addBtn.relocate(priceLa.getLayoutX() + 7, priceLa.getLayoutY()+50);
 		
 		return newMenuItem;
