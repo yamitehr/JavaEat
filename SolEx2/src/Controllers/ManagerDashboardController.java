@@ -5,11 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.math.BigInteger;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
-import java.nio.channels.OverlappingFileLockException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -247,7 +243,7 @@ public class ManagerDashboardController extends ControllerWrapper {
 			XWPFParagraph paragraph = header.createParagraph();
 			XWPFRun run = paragraph.createRun();  
 			run.setText("ProFit Relation JavaEat Restaurant");
-			paragraph.setIndentationLeft(4000);
+			paragraph.setIndentationLeft(3200);
 
 
 			paragraph = document.createParagraph();
@@ -272,13 +268,17 @@ public class ManagerDashboardController extends ControllerWrapper {
 			
 			//create table
 			XWPFTable table = document.createTable();
-			
+
 			//create first row of the table
 			XWPFTableRow tableRowOne = table.getRow(0);
 			tableRowOne.getCell(0).setText("Dish Name");
+			tableRowOne.getCell(0).getParagraphs().get(0).getRuns().get(0).setBold(true);
 			tableRowOne.addNewTableCell().setText("Time To Make");
+			tableRowOne.getCell(1).getParagraphs().get(0).getRuns().get(0).setBold(true);
 			tableRowOne.addNewTableCell().setText("Price");
+			tableRowOne.getCell(2).getParagraphs().get(0).getRuns().get(0).setBold(true);
 			tableRowOne.addNewTableCell().setText("Relation");
+			tableRowOne.getCell(3).getParagraphs().get(0).getRuns().get(0).setBold(true);
 			
 			//insert data to the table according to the amount of the data
 			for (int i = 0; i < profitRelationTable.getItems().size(); i++) {
@@ -291,6 +291,7 @@ public class ManagerDashboardController extends ControllerWrapper {
 				table.getRow(i).getCell(1).getCTTc().addNewTcPr().addNewTcW().setW(BigInteger.valueOf(2000));
 				table.getRow(i).getCell(2).getCTTc().addNewTcPr().addNewTcW().setW(BigInteger.valueOf(2000));
 				table.getRow(i).getCell(3).getCTTc().addNewTcPr().addNewTcW().setW(BigInteger.valueOf(2000));
+				
 			}
 
 			paragraph = document.createParagraph();
