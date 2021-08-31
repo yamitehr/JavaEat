@@ -67,7 +67,7 @@ public class ManagerStatisticsController extends ControllerWrapper {
 		@FXML
 		private TableColumn<Dish, String> componentsCol;
 		@FXML
-		private TableColumn<Dish, Double> priceCol;
+		private TableColumn<Dish, String> priceCol;
 		
 		//getCookByExpertise
 		@FXML
@@ -153,7 +153,7 @@ public class ManagerStatisticsController extends ControllerWrapper {
 					.map(d -> d.toString())
 					.reduce((a, b) -> a + ", " + b).get()
 					));
-			priceCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<Double>(dish.getValue().getPrice()));
+			priceCol.setCellValueFactory(dish -> new ReadOnlyObjectWrapper<String>(String.format("%.2f", dish.getValue().getPrice())));
 			
 			
 			List<Dish> relevantDishes = new ArrayList<Dish>();
