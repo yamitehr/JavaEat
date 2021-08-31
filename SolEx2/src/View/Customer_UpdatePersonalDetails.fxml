@@ -48,7 +48,7 @@
             <PasswordField fx:id="password" layoutX="577.0" layoutY="569.0" styleClass="customerUpdateDetailsTextFields" />
             <CheckBox fx:id="gluten" layoutX="570.0" layoutY="514.0" mnemonicParsing="false" styleClass="customerUpdateDetails" text="Gluten" />
             <CheckBox fx:id="lactose" layoutX="660.0" layoutY="514.0" mnemonicParsing="false" styleClass="customerUpdateDetails" text="Lactose" />
-            <Button fx:id="editBtn" layoutX="576.0" layoutY="647.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="90.0" styleClass="menuBtns" text="Edit mode" />
+            <Button fx:id="editBtn" layoutX="576.0" layoutY="647.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="130.0" styleClass="menuBtns" text="Edit mode" />
             <Button fx:id="saveBtn" layoutX="727.0" layoutY="647.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="72.0" styleClass="menuBtns" text="Save" />
             <Text fx:id="messageToUser" layoutX="576.0" layoutY="743.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="591.7367706298828" />
             <Label layoutX="400.0" layoutY="569.0" prefHeight="26.0" prefWidth="90.0" styleClass="customerUpdateDetails" text="Password" />

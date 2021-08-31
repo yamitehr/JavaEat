@@ -26,7 +26,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="addFoodbtn" alignment="CENTER" layoutX="3.0" layoutY="294.0" mnemonicParsing="false" onAction="#MoveToAddDishScene" prefHeight="47.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Food Items" wrapText="true">
+            <Button alignment="CENTER" layoutX="3.0" layoutY="294.0" mnemonicParsing="false" onAction="#MoveToAddDishScene" prefHeight="47.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Food Items" wrapText="true">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -36,17 +36,17 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="addEmployeeBtn" alignment="CENTER" layoutX="3.0" layoutY="364.0" mnemonicParsing="false" onAction="#MoveToAddCookScene" prefHeight="41.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Employees">
+            <Button alignment="CENTER" layoutX="3.0" layoutY="364.0" mnemonicParsing="false" onAction="#MoveToAddCookScene" prefHeight="41.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Employees">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <graphic>
                 <ImageView fitHeight="23.0" fitWidth="35.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../icons/users-solid%20white.png" />
+                  <Image url="@../../icons/users-solid-white.png" />
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="addOrderAndDeliveryBtn" alignment="CENTER" layoutX="3.0" layoutY="425.0" mnemonicParsing="false" onAction="#MoveToAddOrderScene" prefHeight="48.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Orders &amp; Deliveries">
+            <Button alignment="CENTER" layoutX="3.0" layoutY="425.0" mnemonicParsing="false" onAction="#MoveToAddOrderScene" prefHeight="48.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Orders &amp; Deliveries">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -56,17 +56,17 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="addCustomerBtn" alignment="CENTER" layoutX="6.0" layoutY="491.0" mnemonicParsing="false" onAction="#MoveToAddCustomerScene" prefHeight="41.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Customers">
+            <Button alignment="CENTER" layoutX="6.0" layoutY="491.0" mnemonicParsing="false" onAction="#MoveToAddCustomerScene" prefHeight="41.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Customers">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <graphic>
                 <ImageView fitHeight="23.0" fitWidth="35.0" layoutX="47.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../icons/users-solid white.png" />
+                  <Image url="@../../icons/users-solid-white.png" />
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="statisticsBtn" alignment="CENTER" layoutX="6.0" layoutY="551.0" mnemonicParsing="false" onAction="#moveToStatisticsScene" prefHeight="48.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Statistics">
+            <Button alignment="CENTER" layoutX="6.0" layoutY="551.0" mnemonicParsing="false" onAction="#moveToStatisticsScene" prefHeight="48.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Statistics">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -76,7 +76,7 @@
          	   </ImageView>
             </graphic>
             </Button>
-            <Button fx:id="statisticsBtn1" alignment="CENTER" layoutX="6.0" layoutY="611.0" mnemonicParsing="false" onAction="#moveToAIMachineScene" prefHeight="48.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="AI Machine">
+            <Button alignment="CENTER" layoutX="6.0" layoutY="611.0" mnemonicParsing="false" onAction="#moveToAIMachineScene" prefHeight="48.0" prefWidth="338.0" styleClass="menuBtns" stylesheets="@decoration.css" text="AI Machine">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

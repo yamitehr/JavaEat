@@ -27,7 +27,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../icons/users-solid%20white.png" />
+                              <Image url="@../../icons/users-solid-white.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -48,7 +48,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../icons/users-solid%20white.png" />
+                              <Image url="@../../icons/users-solid-white.png" />
                            </image>
                         </ImageView>
                      </graphic>

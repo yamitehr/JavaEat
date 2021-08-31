@@ -15,21 +15,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.Duration;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.TreeSet;
-import java.util.Map.Entry;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import Model.Delivery;
 import Model.DeliveryArea;
-import Model.DeliveryPerson;
 import Model.Order;
 import Model.OrderStatus;
 import Model.Restaurant;

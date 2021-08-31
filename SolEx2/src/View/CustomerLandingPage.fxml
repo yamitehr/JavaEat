@@ -90,7 +90,7 @@
                   <GridPane fx:id="componentGrid" layoutY="14.0">
                   </GridPane>
                </children></Pane>
-            <Button fx:id="addDishToOrder" layoutX="106.0" layoutY="468.0" mnemonicParsing="false" styleClass="addDishButton" stylesheets="@menu.css" text="Add dish" />
+            <Button fx:id="addDishToOrder" layoutX="50.0" layoutY="468.0" mnemonicParsing="false" styleClass="addDishButton" stylesheets="@menu.css" text="Add dish" />
             <Button fx:id="closeBtn" layoutX="2.0" layoutY="1.0" mnemonicParsing="false" styleClass="closeEditBtn" stylesheets="@menu.css" text="x" />
             </children>
         </AnchorPane>
@@ -109,7 +109,7 @@
       <Label fx:id="messageLbl" layoutX="616.0" layoutY="50.0" styleClass="labelHeader" text="Label" />
       <ScrollPane fx:id="cartScrollPane" layoutY="405.0" prefHeight="257.0" prefWidth="343.0">
          <content>
-            <VBox fx:id="cartVbox"/>
+            <VBox fx:id="cartVbox" />
          </content>
       </ScrollPane>
          <!-- NAV BAR -->
