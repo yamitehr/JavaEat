@@ -240,7 +240,7 @@ public class SignInController extends ControllerWrapper {
 	    }
 	    else if(getStrength(password.getText()) == WEEK )
 	    {
-	        tooltip.setText("Password is week!");
+	        tooltip.setText("Password is weak!");
 	        passwordMeter.setStyle("-fx-accent: red;");
 	    }
 	    else if(getStrength(password.getText()) == MEDIUM )

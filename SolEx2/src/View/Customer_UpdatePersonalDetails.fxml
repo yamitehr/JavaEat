@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -61,6 +62,7 @@
             <Label layoutX="400.0" layoutY="268.0" prefHeight="26.0" prefWidth="112.0" styleClass="customerUpdateDetails" text="Last name" />
             <CheckBox fx:id="showPassCheckBox" layoutX="773.0" layoutY="570.0" mnemonicParsing="false" styleClass="customerUpdateDetails" stylesheets="@decoration.css" text="show password" />
             <TextField fx:id="showPass" layoutX="577.0" layoutY="569.0" styleClass="customerUpdateDetailsTextFields" />
+            <TextArea fx:id="resultConcole" editable="false" layoutX="578.0" layoutY="711.0" prefHeight="36.0" prefWidth="298.0" style="-fx-text-fill: Red;" />
       
    		</children>
 	</AnchorPane>

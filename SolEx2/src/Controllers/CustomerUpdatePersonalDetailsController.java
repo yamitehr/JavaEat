@@ -1,11 +1,15 @@
 package Controllers;
 
+import java.time.LocalDate;
+
 import Exceptions.InvalidInputException;
 import Model.Customer;
 import Model.Restaurant;
 import Model.State;
 import Utils.Gender;
 import Utils.Neighberhood;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,14 +18,18 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
-public class CustomerUpdatePersonalDetailsController {
+public class CustomerUpdatePersonalDetailsController extends ControllerWrapper{
 	private ObservableList<Neighberhood> neighberhood = FXCollections.observableArrayList(Neighberhood.values());
 	@FXML
 	private ChoiceBox<Neighberhood> NeighberhoodBox;	
@@ -50,7 +58,7 @@ public class CustomerUpdatePersonalDetailsController {
 	@FXML
 	private TextField showPass;
 	@FXML
-	private Text messageToUser;
+	private TextArea resultConcole;
 	@FXML
 	private Button editBtn;
 	@FXML
@@ -61,6 +69,7 @@ public class CustomerUpdatePersonalDetailsController {
 	@FXML
 	private void initialize() {
 		initCustomerDetails();
+		initValidations();
 	}
 	
 	private void initCustomerDetails() {
@@ -121,7 +130,7 @@ public class CustomerUpdatePersonalDetailsController {
 				showPass.setDisable(false);
 				saveBtn.setDisable(false);
 				editBtn.setDisable(true);
-				messageToUser.setText("");
+				resultConcole.setText("");
 			});
 			
 			showPassCheckBox.setOnAction( e -> {
@@ -161,11 +170,20 @@ public class CustomerUpdatePersonalDetailsController {
 						currentCustomer.setUserName(userName.getText());
 					}
 					
-					if(!currentCustomer.getPassword().equals(password.getText())) {
-						if(password.getText().isEmpty())
-							throw new InvalidInputException("Password cannot be empty");
-						currentCustomer.setPassword(password.getText());
+					if(password.isVisible()) {
+						if(!currentCustomer.getPassword().equals(password.getText())) {
+							if(password.getText().isEmpty())
+								throw new InvalidInputException("Password cannot be empty");
+							currentCustomer.setPassword(password.getText());
+						}
+					} else if(showPass.isVisible()) {
+						if(!currentCustomer.getPassword().equals(showPass.getText())) {
+							if(password.getText().isEmpty())
+								throw new InvalidInputException("Password cannot be empty");
+							currentCustomer.setPassword(showPass.getText());
+						}
 					}
+					
 					
 					Gender selectedGender = null;
 					//get gender
@@ -196,7 +214,7 @@ public class CustomerUpdatePersonalDetailsController {
 					if(currentCustomer.isSensitiveToLactose() && !lactose.isSelected())
 						currentCustomer.setSensitiveToLactose(false);
 					
-					messageToUser.setText("details are edited successfully!");
+					resultConcole.setText("details are edited successfully!");
 					saveBtn.setDisable(true);
 					editBtn.setDisable(false);
 					
@@ -214,10 +232,43 @@ public class CustomerUpdatePersonalDetailsController {
 					showPass.setDisable(true);
 					
 					}catch(InvalidInputException inputE) {
-						messageToUser.setFill(Color.RED);
-						messageToUser.setText(inputE.getMessage());
+						soundOfButton("error.mp3");
+						resultConcole.setText(inputE.getMessage());
+					} catch(Exception exc) {
+						soundOfButton("error.mp3");
+						resultConcole.setText("an error has accured please try again");
 					}
 				});
 			}
 		}
+	
+	public void initValidations() {
+		firstName.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, 
+					String newValue) {
+				    	if (newValue != "") {
+				    		resultConcole.setText("");
+					    	if(!newValue.matches("[a-zA-Z\s]+")) {
+					    		firstName.setText(newValue.substring(0, newValue.length()-1));
+					    		resultConcole.setText("Letters Only!");
+					    	}
+				    	}
+				    }
+				});
+		
+		 lastName.textProperty().addListener(new ChangeListener<String>() {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, 
+						String newValue) {
+					    	if (newValue != "") {
+					    		resultConcole.setText("");
+						    	if(!newValue.matches("[a-zA-Z\s]+")) {
+						    		lastName.setText(newValue.substring(0, newValue.length()-1));
+						    		resultConcole.setText("Letters Only!");
+						    	}
+					    	}
+					    }
+					});
+	}
 }

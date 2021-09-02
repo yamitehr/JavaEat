@@ -98,7 +98,7 @@ public class DeliveryManager {
 	public void startDeliveriesTask() {
 		Runnable ordersTask = new Runnable() {
 		    public void run() {
-				Logger.Log("[startDeliveriesTask] starting new task");
+				Logger.Log("[startDeliveriesTask] starting to work on new deliveries");
 		    	HashMap<DeliveryArea, TreeSet<Order>> orderByDeliveryArea = getOrdersMapping();
 		    	Restaurant.getInstance().setOrderByDeliveryArea(orderByDeliveryArea);
 		    	

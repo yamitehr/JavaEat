@@ -42,7 +42,15 @@
                           </columns>
                         </TableView>
                         <Label layoutX="20.0" layoutY="0.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Recommended For You..." />
-                        <Button fx:id="addDishBtn" layoutX="265.0" layoutY="400.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="172.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Add to order" />
+                        <Button fx:id="addDishBtn" layoutX="265.0" layoutY="400.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="172.0" styleClass="menuBtns" stylesheets="@decoration.css" text="Add to order">
+                        <graphic>
+                  <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/plus-circle-solid.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               </Button>
                      </children>
                   </AnchorPane>
             </content>
