@@ -333,8 +333,9 @@ public class CustomerLandingPageController extends ControllerWrapper{
 			for(Dish d : dishes) {
 				totalTime += d.getTimeToMake(); 
 			}
-			
-			priceText.setText(String.valueOf(totalPrice) + " $");
+
+			String dishPriceStr = String.format("%.1f", totalPrice);
+			priceText.setText(dishPriceStr + " $");
 			totalTimeText.setText(String.valueOf(totalTime) + " minutes");
 		} else {
 			priceText.setText("0");
@@ -373,7 +374,7 @@ public class CustomerLandingPageController extends ControllerWrapper{
 		}
 		dishDescription = dishDescription.substring(0, dishDescription.length() -2);
 		Pane newMenuItem = new Pane();
-		Label dishLa = new Label("Dish: " + dishName + "\nPrice: " + String.valueOf(dishPrice) + "\nContains: " + dishDescription);
+		Label dishLa = new Label("Dish: " + dishName + "\nPrice: " + String.format("%.1f",dishPrice) + "\nContains: " + dishDescription);
 		dishLa.getStyleClass().add("dishInCart");
 		Button editBtn = new Button();
 		Button removeBtn = new Button();
