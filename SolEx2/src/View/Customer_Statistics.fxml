@@ -100,7 +100,7 @@
                               <TableColumn fx:id="isChefCol" prefWidth="78.0" text="isChef" />
                           </columns>
                         </TableView>
-                        <ComboBox fx:id="expertiseBox" layoutX="320.0" layoutY="0.0" prefWidth="150.0" styleClass="comboBoxDashCust" stylesheets="@decoration.css" />
+                        <ComboBox fx:id="expertiseBox" layoutX="320.0" layoutY="0.0" maxHeight="38.0" prefHeight="38.0" prefWidth="178.0" styleClass="comboBoxDashCust" stylesheets="@decoration.css" />
                         <Label layoutX="20.0" layoutY="0.0" styleClass="customerDashboardLabels" stylesheets="@decoration.css" text="Select expertise:" />
                      </children>
                   </AnchorPane>

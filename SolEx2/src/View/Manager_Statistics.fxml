@@ -86,8 +86,8 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="expertiseBox" layoutX="275.0" layoutY="136.0" prefWidth="150.0" styleClass="comboBox" />
-            <TableView fx:id="cookByExpertiseTable" layoutX="64.0" layoutY="232.0" prefHeight="238.0" prefWidth="462.0" visible="false">
+            <ComboBox fx:id="expertiseBox" layoutX="275.0" layoutY="136.0" prefWidth="160.0" styleClass="comboBox" />
+            <TableView fx:id="cookByExpertiseTable" layoutX="64.0" layoutY="232.0" prefHeight="238.0" prefWidth="462.0">
                <columns>
                   <TableColumn fx:id="cookIdCol" prefWidth="64.0" text="Cook ID" />
                   <TableColumn fx:id="cookNameCol" prefWidth="126.0" text="Cook Name" />
@@ -122,8 +122,8 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="customerBox" layoutX="275.0" layoutY="136.0" prefWidth="150.0" styleClass="comboBox" />
-            <TableView fx:id="relevantDishesTable" layoutX="62.0" layoutY="232.0" prefHeight="238.0" prefWidth="462.0" visible="false">
+            <ComboBox fx:id="customerBox" layoutX="275.0" layoutY="136.0" prefWidth="160.0" styleClass="comboBox" />
+            <TableView fx:id="relevantDishesTable" layoutX="62.0" layoutY="232.0" prefHeight="238.0" prefWidth="462.0">
                <columns>
                   <TableColumn fx:id="dishIdCol" prefWidth="75.0" text="Dish ID" />
                   <TableColumn fx:id="dishNameCol" prefWidth="99.0" text="Dish Name" />
