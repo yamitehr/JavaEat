@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import Exceptions.InvalidInputException;
+import Exceptions.NoComponentsExceptions;
 import Model.Component;
 import Model.Dish;
 import Model.Restaurant;
@@ -498,7 +499,6 @@ public class AddDishController extends ControllerWrapper {
 			Restaurant.getInstance().getComponenets().entrySet().stream().map(c -> c.getValue()).collect(Collectors.toList())));
 		}
 	}
-	
-	
 }
+	
 
